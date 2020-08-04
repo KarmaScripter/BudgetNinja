@@ -1,0 +1,134 @@
+﻿// // <copyright file="BudgetFiscalYear.cs" company="Terry D. Eppler">
+// // Copyright (c) Eppler. All rights reserved.
+// // </copyright>
+
+namespace BudgetExecution
+{
+    using System;
+
+    public class Year : IYear
+    {
+        // ***************************************************************************************************************************
+        // *********************************************   CONSTRUCTORS **************************************************************
+        // ***************************************************************************************************************************
+
+        public Year()
+        {
+            CalendarDate = DateTime.Today;
+            CalendarYear = CalendarDate.Year;
+            CalendarMonth = CalendarDate.Month;
+            CalendarDay = CalendarDate.Day;
+        }
+
+        // **********************************************************************************************************************
+        // *************************************************   PROPERTIES   *****************************************************
+        // **********************************************************************************************************************
+
+        /// <summary>
+        /// Gets the CalendarDate
+        /// </summary>
+        private DateTime CalendarDate { get; }
+
+        /// <summary>
+        /// Gets the CalendarMonth
+        /// </summary>
+        private int CalendarMonth { get; }
+
+        /// <summary>
+        /// Gets the CalendarDay
+        /// </summary>
+        private int CalendarDay { get; }
+
+        /// <summary>
+        /// Gets the calendar year.
+        /// </summary>
+        /// <value>
+        /// The calendar year.
+        /// </value>
+        private int CalendarYear { get; }
+
+        // ***************************************************************************************************************************
+        // ************************************************  METHODS   ***************************************************************
+        // ***************************************************************************************************************************
+
+        public DateTime GetCalendarDate()
+        {
+            try
+            {
+                return CalendarDate.Year != 2099
+                    ? CalendarDate
+                    : DateTime.Today;
+            }
+            catch(Exception ex)
+            {
+                using(var error = new Error(ex))
+                {
+                    error.SetText();
+                    error.ShowDialog();
+                }
+
+                return default;
+            }
+        }
+
+        public int GetCalendarMonth()
+        {
+            try
+            {
+                return CalendarDate.Year != 2099
+                    ? CalendarMonth
+                    : DateTime.Today.Month;
+            }
+            catch(Exception ex)
+            {
+                using(var error = new Error(ex))
+                {
+                    error.SetText();
+                    error.ShowDialog();
+                }
+
+                return default;
+            }
+        }
+
+        public int GetCalendarYear()
+        {
+            try
+            {
+                return CalendarDate.Year != 2099
+                    ? CalendarYear
+                    : DateTime.Today.Year;
+            }
+            catch(Exception ex)
+            {
+                using(var error = new Error(ex))
+                {
+                    error.SetText();
+                    error.ShowDialog();
+                }
+
+                return default;
+            }
+        }
+
+        public int GetCalendarDay()
+        {
+            try
+            {
+                return CalendarDate.Year != 2099
+                    ? CalendarDay
+                    : DateTime.Today.Day;
+            }
+            catch(Exception ex)
+            {
+                using(var error = new Error(ex))
+                {
+                    error.SetText();
+                    error.ShowDialog();
+                }
+
+                return default;
+            }
+        }
+    }
+}
