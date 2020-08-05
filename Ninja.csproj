@@ -130,7 +130,6 @@
     <Compile Include="outlay\pcb\workcode\WorkCodeBase.cs" />
     <Compile Include="static\Application.cs" />
     <Compile Include="excel\budget\IGrid.cs" />
-    <Compile Include="static\Resource.cs" />
     <Compile Include="static\Static.cs" />
     <Compile Include="data\adapter\AdapterBuilder.cs">
       <SubType>Component</SubType>
