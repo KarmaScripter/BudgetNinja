@@ -73,44 +73,17 @@
     <Reference Include="EPPlus">
       <HintPath>..\Ninja\lib\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="Expander">
-      <HintPath>..\Badger\lib\Expander.dll</HintPath>
-    </Reference>
     <Reference Include="LinqStatistics">
       <HintPath>..\Ninja\lib\LinqStatistics.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MetroSet UI">
-      <HintPath>..\Badger\lib\MetroSet UI.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Syncfusion.Chart.Base">
-      <HintPath>..\Badger\lib\Syncfusion.Chart.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Chart.Windows">
-      <HintPath>..\Badger\lib\Syncfusion.Chart.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Grid.Windows">
-      <HintPath>..\Badger\lib\Syncfusion.Grid.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.PdfViewer.Windows">
-      <HintPath>..\Badger\lib\Syncfusion.PdfViewer.Windows.dll</HintPath>
-    </Reference>
     <Reference Include="Syncfusion.Shared.Base">
       <HintPath>..\Badger\lib\Syncfusion.Shared.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Spreadsheet.Windows">
-      <HintPath>..\Badger\lib\Syncfusion.Spreadsheet.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Tools.Windows">
-      <HintPath>..\Badger\lib\Syncfusion.Tools.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.XlsIO.Base">
-      <HintPath>..\Badger\lib\Syncfusion.XlsIO.Base.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -136,6 +109,20 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="sys\path\DataPath.cs" />
+    <Compile Include="sys\reader\ExcelReader.cs" />
+    <Compile Include="sys\reader\FileReader.cs" />
+    <Compile Include="sys\watcher\FileWatcher.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="sys\writer\FileWriter.cs" />
+    <Compile Include="sys\folder\Folder.cs" />
+    <Compile Include="sys\folder\FolderBase.cs" />
+    <Compile Include="sys\folder\IFolder.cs" />
+    <Compile Include="sys\path\IPath.cs" />
+    <Compile Include="sys\file\DataFile.cs" />
+    <Compile Include="sys\file\FileBase.cs" />
+    <Compile Include="sys\file\IFile.cs" />
     <Compile Include="outlay\pcb\workcode\HumanResourceOrganization.cs" />
     <Compile Include="outlay\pcb\workcode\IHumanResourceOrganization.cs" />
     <Compile Include="outlay\pcb\workcode\IWorkCode.cs" />
@@ -145,31 +132,31 @@
     <Compile Include="excel\budget\IGrid.cs" />
     <Compile Include="static\Resource.cs" />
     <Compile Include="static\Static.cs" />
-    <Compile Include="access\adapter\AdapterBuilder.cs">
+    <Compile Include="data\adapter\AdapterBuilder.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="access\adapter\AdapterFactory.cs" />
-    <Compile Include="access\adapter\iadapter\IAdapter.cs" />
-    <Compile Include="access\builder\Builder.cs" />
-    <Compile Include="access\builder\BuilderBase.cs" />
-    <Compile Include="access\builder\DataAccess.cs" />
-    <Compile Include="access\builder\DataBuilder.cs" />
-    <Compile Include="access\builder\DataConfig.cs" />
-    <Compile Include="access\builder\ibuilder\IBuilder.cs" />
-    <Compile Include="access\builder\ibuilder\IDataAccess.cs" />
-    <Compile Include="access\builder\ibuilder\IDataBuilder.cs" />
-    <Compile Include="access\builder\ibuilder\IDataSchema.cs" />
-    <Compile Include="access\command\CommandBase.cs" />
-    <Compile Include="access\command\CommandBuilder.cs" />
-    <Compile Include="access\command\CommandFactory.cs" />
-    <Compile Include="access\command\icommand\ICommandBuilder.cs" />
-    <Compile Include="access\command\icommand\ICommandFactory.cs" />
-    <Compile Include="access\connection\ConnectionBase.cs" />
-    <Compile Include="access\connection\ConnectionBuilder.cs" />
-    <Compile Include="access\connection\ConnectionFactory.cs" />
-    <Compile Include="access\connection\iconnection\IConnectionBuilder.cs" />
-    <Compile Include="access\connection\iconnection\IConnectionFactory.cs" />
-    <Compile Include="access\connection\iconnection\IProvider.cs" />
+    <Compile Include="data\adapter\AdapterFactory.cs" />
+    <Compile Include="data\adapter\iadapter\IAdapter.cs" />
+    <Compile Include="data\builder\Builder.cs" />
+    <Compile Include="data\builder\BuilderBase.cs" />
+    <Compile Include="data\builder\DataAccess.cs" />
+    <Compile Include="data\builder\DataBuilder.cs" />
+    <Compile Include="data\builder\DataConfig.cs" />
+    <Compile Include="data\builder\ibuilder\IBuilder.cs" />
+    <Compile Include="data\builder\ibuilder\IDataAccess.cs" />
+    <Compile Include="data\builder\ibuilder\IDataBuilder.cs" />
+    <Compile Include="data\builder\ibuilder\IDataSchema.cs" />
+    <Compile Include="data\command\CommandBase.cs" />
+    <Compile Include="data\command\CommandBuilder.cs" />
+    <Compile Include="data\command\CommandFactory.cs" />
+    <Compile Include="data\command\icommand\ICommandBuilder.cs" />
+    <Compile Include="data\command\icommand\ICommandFactory.cs" />
+    <Compile Include="data\connection\ConnectionBase.cs" />
+    <Compile Include="data\connection\ConnectionBuilder.cs" />
+    <Compile Include="data\connection\ConnectionFactory.cs" />
+    <Compile Include="data\connection\iconnection\IConnectionBuilder.cs" />
+    <Compile Include="data\connection\iconnection\IConnectionFactory.cs" />
+    <Compile Include="data\connection\iconnection\IProvider.cs" />
     <Compile Include="conv\ColumnSchema.cs" />
     <Compile Include="conv\DatabaseSchema.cs" />
     <Compile Include="conv\ForeignKeySchema.cs" />
@@ -179,34 +166,34 @@
     <Compile Include="conv\TriggerBuilder.cs" />
     <Compile Include="conv\TriggerSchema.cs" />
     <Compile Include="conv\ViewSchema.cs" />
-    <Compile Include="access\map\Key.cs" />
-    <Compile Include="access\map\KeyBase.cs" />
-    <Compile Include="access\map\Arg.cs" />
-    <Compile Include="access\map\imap\IMap.cs" />
-    <Compile Include="access\map\Map.cs" />
-    <Compile Include="access\query\AccessQuery.cs" />
-    <Compile Include="access\query\CsvQuery.cs" />
-    <Compile Include="access\query\ExcelQuery.cs" />
-    <Compile Include="access\query\iquery\IQuery.cs" />
-    <Compile Include="access\query\Query.cs" />
-    <Compile Include="access\query\QueryBase.cs" />
-    <Compile Include="access\query\SqlCeQuery.cs" />
-    <Compile Include="access\query\SQLiteQuery.cs" />
-    <Compile Include="access\query\SqlServerQuery.cs" />
-    <Compile Include="access\schema\DataSchema.cs" />
-    <Compile Include="access\sql\isql\ISqlStatement.cs" />
-    <Compile Include="access\sql\SqlBase.cs" />
-    <Compile Include="access\sql\SqlConfig.cs" />
-    <Compile Include="access\sql\SqlFactory.cs" />
-    <Compile Include="access\sql\SqlStatement.cs" />
-    <Compile Include="access\worker\DataWorker.cs">
+    <Compile Include="data\map\Key.cs" />
+    <Compile Include="data\map\KeyBase.cs" />
+    <Compile Include="data\map\Arg.cs" />
+    <Compile Include="data\map\imap\IMap.cs" />
+    <Compile Include="data\map\Map.cs" />
+    <Compile Include="data\query\AccessQuery.cs" />
+    <Compile Include="data\query\CsvQuery.cs" />
+    <Compile Include="data\query\ExcelQuery.cs" />
+    <Compile Include="data\query\iquery\IQuery.cs" />
+    <Compile Include="data\query\Query.cs" />
+    <Compile Include="data\query\QueryBase.cs" />
+    <Compile Include="data\query\SqlCeQuery.cs" />
+    <Compile Include="data\query\SQLiteQuery.cs" />
+    <Compile Include="data\query\SqlServerQuery.cs" />
+    <Compile Include="data\schema\DataSchema.cs" />
+    <Compile Include="data\sql\isql\ISqlStatement.cs" />
+    <Compile Include="data\sql\SqlBase.cs" />
+    <Compile Include="data\sql\SqlConfig.cs" />
+    <Compile Include="data\sql\SqlFactory.cs" />
+    <Compile Include="data\sql\SqlStatement.cs" />
+    <Compile Include="data\worker\DataWorker.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="analysis\Computation.cs" />
     <Compile Include="analysis\DataMetric.cs" />
     <Compile Include="analysis\ianalysis\IDataFilter.cs" />
     <Compile Include="analysis\ianalysis\IDataMetric.cs" />
-    <Compile Include="access\map\imap\IKey.cs" />
+    <Compile Include="data\map\imap\IKey.cs" />
     <Compile Include="analysis\ianalysis\IMetric.cs" />
     <Compile Include="analysis\MetricBase.cs" />
     <Compile Include="analysis\Utilization.cs" />
@@ -217,9 +204,9 @@
     <Compile Include="budget\allocation\Allocation.cs" />
     <Compile Include="budget\allocation\AllocationData.cs" />
     <Compile Include="budget\allocation\iallocation\IAllocation.cs" />
-    <Compile Include="access\map\Amount.cs" />
-    <Compile Include="access\map\AmountBase.cs" />
-    <Compile Include="access\map\imap\IAmount.cs" />
+    <Compile Include="data\map\Amount.cs" />
+    <Compile Include="data\map\AmountBase.cs" />
+    <Compile Include="data\map\imap\IAmount.cs" />
     <Compile Include="budget\authority\Authority.cs" />
     <Compile Include="budget\authority\DivisionAuthority.cs" />
     <Compile Include="budget\authority\iauthority\IAuthority.cs" />
@@ -232,8 +219,8 @@
     <Compile Include="budget\program\AllowanceHolder.cs" />
     <Compile Include="budget\program\BudgetLevel.cs" />
     <Compile Include="budget\program\BudgetObjectClass.cs" />
-    <Compile Include="access\map\Element.cs" />
-    <Compile Include="access\map\ElementBase.cs" />
+    <Compile Include="data\map\Element.cs" />
+    <Compile Include="data\map\ElementBase.cs" />
     <Compile Include="budget\program\FinanceObjectClass.cs" />
     <Compile Include="budget\program\Fund.cs" />
     <Compile Include="budget\program\Goal.cs" />
@@ -243,7 +230,7 @@
     <Compile Include="budget\program\iprogram\IAllowanceHolder.cs" />
     <Compile Include="budget\program\iprogram\IBudgetLevel.cs" />
     <Compile Include="budget\program\iprogram\IBudgetObjectClass.cs" />
-    <Compile Include="access\map\imap\IElement.cs" />
+    <Compile Include="data\map\imap\IElement.cs" />
     <Compile Include="budget\program\iprogram\IFinanceObjectClass.cs" />
     <Compile Include="budget\program\iprogram\IFund.cs" />
     <Compile Include="budget\program\iprogram\IGoal.cs" />
@@ -256,7 +243,7 @@
     <Compile Include="budget\program\iprogram\IProgramProject.cs" />
     <Compile Include="budget\program\iprogram\IResourcePlanningOffice.cs" />
     <Compile Include="budget\program\iprogram\IResponsibilityCenter.cs" />
-    <Compile Include="access\map\imap\IUnit.cs" />
+    <Compile Include="data\map\imap\IUnit.cs" />
     <Compile Include="budget\program\NationalProgram.cs" />
     <Compile Include="budget\program\Objective.cs" />
     <Compile Include="budget\program\Organization.cs" />
@@ -265,8 +252,8 @@
     <Compile Include="budget\program\ProgramProject.cs" />
     <Compile Include="budget\program\ResourcePlanningOffice.cs" />
     <Compile Include="budget\program\ResponsibilityCenter.cs" />
-    <Compile Include="access\map\Unit.cs" />
-    <Compile Include="access\map\UnitBase.cs" />
+    <Compile Include="data\map\Unit.cs" />
+    <Compile Include="data\map\UnitBase.cs" />
     <Compile Include="budget\supplemental\Awards.cs" />
     <Compile Include="budget\supplemental\isupplemental\ISupplemental.cs" />
     <Compile Include="budget\supplemental\Overtime.cs" />
@@ -354,7 +341,7 @@
     <Compile Include="outlay\pcb\payroll\PayrollBase.cs" />
     <Compile Include="outlay\pcb\payroll\PayrollFactory.cs" />
     <Compile Include="outlay\pcb\payroll\PayrollHours.cs" />
-    <Compile Include="access\connection\iconnection\ISource.cs" />
+    <Compile Include="data\connection\iconnection\ISource.cs" />
     <Compile Include="static\Validate.cs" />
     <Compile Include="static\Verify.cs" />
     <Compile Include="transfer\DataOp.cs" />
@@ -369,8 +356,8 @@
     <None Include=".editorconfig" />
     <None Include="db\sqlite\R6.db" />
     <None Include="db\sqlite\UPDATE\R6.db" />
-    <None Include="etc\App.config" />
-    <None Include="etc\packages.config" />
+    <None Include="misc\App.config" />
+    <None Include="misc\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
