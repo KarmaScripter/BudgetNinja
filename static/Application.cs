@@ -113,52 +113,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     public delegate void DeleteDelegate( Source source, Provider provider, Dictionary<string, object> dict );
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name = "done" >
-    /// if set to
-    /// <c>
-    /// true
-    /// </c>
-    /// [done].
-    /// </param>
-    /// <param name = "success" >
-    /// if set to
-    /// <c>
-    /// true
-    /// </c>
-    /// [success].
-    /// </param>
-    /// <param name = "percent" >
-    /// The percent.
-    /// </param>
-    /// <param name = "msg" >
-    /// The MSG.
-    /// </param>
-    public delegate void SqlConversionHandler( bool done, bool success, int percent,
-        string msg );
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name = "schema" >
-    /// The schema.
-    /// </param>
-    /// <returns>
-    /// </returns>
-    public delegate List<TableSchema> SqlTableSelectionHandler( List<TableSchema> schema );
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name = "vs" >
-    /// The vs.
-    /// </param>
-    /// <returns>
-    /// </returns>
-    public delegate string FailedViewDefinitionHandler( ViewSchema vs );
-
     // ***************************************************************************************************************************
     // ***************************************       APPLICATION ENTRY POINT METHOD (MAIN)    ************************************
     // ***************************************************************************************************************************

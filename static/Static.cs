@@ -118,26 +118,6 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Executes the non query.
-        /// </summary>
-        /// <param name="connection">The connection.</param>
-        /// <param name="sql">The SQL.</param>
-        /// <returns></returns>
-        public static int ExecuteNonQuery( this IDbConnection connection, string sql )
-        {
-            try
-            {
-                using var command = connection.CreateCommand( sql );
-                return command.ExecuteNonQuery();
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default;
-            }
-        }
-
-        /// <summary>
         /// Converts to logstring.
         /// </summary>
         /// <param name="ex">The ex.</param>
