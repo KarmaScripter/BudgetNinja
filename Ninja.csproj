@@ -350,9 +350,9 @@
     <Compile Include="transfer\FundTransfer.cs" />
     <Compile Include="transfer\itransfer\IReprogramming.cs" />
     <Compile Include="transfer\Reprogramming.cs" />
+    <None Include="res\template\Control.xlsx" />
     <None Include="Ninja.DotSettings" />
     <None Include="packages.config" />
-    <None Include="res\template\Control.xlsx" />
     <None Include="res\template\Report.xlsx" />
     <None Include="fiscalyear\Year" />
     <None Include=".editorconfig" />
