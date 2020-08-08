@@ -66,7 +66,6 @@ namespace BudgetExecution
         /// The GetApplication
         /// </summary>
         /// <returns>
-        /// The <see cref = "Microsoft.Office.Interop.Excel.Application"/>
         /// </returns>
         ExcelPackage GetApplication();
 
@@ -74,7 +73,6 @@ namespace BudgetExecution
         /// The GetWorkbook
         /// </summary>
         /// <dict name = "excel" >
-        /// The excel <see cref = "Microsoft.Office.Interop.Excel.Application"/>
         /// </dict>
         /// <dict name = "filepath" >
         /// The filepath <see cref = "string"/>

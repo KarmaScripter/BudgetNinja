@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4D279836-2BB8-462E-A136-83275DEB9275}</ProjectGuid>
+    <ProjectGuid>{BFF464D3-8211-4DD9-A370-1EFDC2B8DD21}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>BudgetExecution</RootNamespace>
     <AssemblyName>BudgetNinja</AssemblyName>
@@ -56,9 +56,12 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>misc\logo.ico</ApplicationIcon>
+    <ApplicationIcon>etc\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BudgetBadger">
+      <HintPath>..\Badger\bin\Debug\BudgetBadger.dll</HintPath>
+    </Reference>
     <Reference Include="BudgetData">
       <HintPath>..\Data\bin\Debug\BudgetData.dll</HintPath>
     </Reference>
@@ -66,8 +69,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Enumerations\bin\Debug\BudgetEnumerations.dll</HintPath>
     </Reference>
-    <Reference Include="BudgetExtensions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BudgetExtensions">
       <HintPath>..\Extensions\bin\Debug\BudgetExtensions.dll</HintPath>
     </Reference>
     <Reference Include="BudgetStatic">
@@ -84,9 +86,6 @@
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Syncfusion.Shared.Base">
       <HintPath>..\Badger\lib\Syncfusion.Shared.Base.dll</HintPath>
@@ -288,12 +287,12 @@
     <None Include="res\template\Report.xlsx" />
     <None Include="fiscalyear\Year" />
     <None Include=".editorconfig" />
-    <None Include="misc\App.config" />
-    <None Include="misc\packages.config" />
+    <None Include="etc\App.config" />
+    <None Include="etc\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="misc\logo.ico" />
+    <Content Include="etc\logo.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
