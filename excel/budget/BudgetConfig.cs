@@ -1,165 +1,118 @@
-﻿// <copyright file="FormatConfig.cs" company="Terry D. Eppler">
+﻿// <copyright file="SectionConfig.cs" company="Terry D. Eppler">
 // Copyright (c) Terry Eppler. All rights reserved.
 // </copyright>
 
 namespace BudgetExecution
 {
     // **************************************************************************************************************************
-    // ******************************   ASSEMBLIES   ****************************************************************************
+    // ********************************************************   ASSEMBLIES   **************************************************
     // **************************************************************************************************************************
 
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using System.Linq;
     using System.Threading;
-    using OfficeOpenXml.Style;
+    using OfficeOpenXml;
 
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref = "SheetConfig"/>
-    /// <seealso cref = "System.IDisposable"/>
+    /// <seealso cref = "ExcelConfig"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
-    [ SuppressMessage( "ReSharper", "VirtualMemberNeverOverridden.Global" ) ]
-    [ SuppressMessage( "ReSharper", "UnusedParameter.Global" ) ]
-    [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
-    public abstract class BudgetConfig : SheetConfig
+    public abstract class BudgetConfig : ExcelConfig
     {
-        // **************************************************************************************************************************
-        // ******************************************************      FIELDS    ****************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>
-        /// The font color
-        /// </summary>
-        private protected readonly Color FontColor = Color.Black;
-
-        /// <summary>
-        /// The data font
-        /// </summary>
-        private protected readonly Font DataFont = new Font( "Consolas", 8, FontStyle.Regular );
-
-        /// <summary>
-        /// The header font
-        /// </summary>
-        private protected readonly Font HeaderFont = new Font( "Consolas", 10, FontStyle.Bold );
-
-        /// <summary>
-        /// The title font
-        /// </summary>
-        private protected readonly Font TitleFont = new Font( "Consolas", 12, FontStyle.Bold );
-
-        /// <summary>
-        /// The header image width
-        /// </summary>
-        private protected readonly double HeaderImageWidth = 1.75;
-
-        /// <summary>
-        /// The header image height
-        /// </summary>
-        private protected readonly double HeaderImageHeight = 0.85;
-
-        /// <summary>
-        /// The footer image width
-        /// </summary>
-        private protected readonly double FooterImageWidth = 2.04;
-
-        /// <summary>
-        /// The footer image height
-        /// </summary>
-        private protected readonly double FooterImageHeight = 0.70;
-
         // **************************************************************************************************************************
         // ******************************************************   PROPERTIES   ****************************************************
         // **************************************************************************************************************************
 
         /// <summary>
-        /// Gets or sets the header image.
+        /// Gets or sets the name.
         /// </summary>
         /// <value>
-        /// The header image.
+        /// The name.
         /// </value>
-        private protected Image HeaderImage { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the footer image.
+        /// Gets or sets the title.
         /// </summary>
         /// <value>
-        /// The footer image.
+        /// The title.
         /// </value>
-        private protected Image FooterImage { get; set; }
+        private protected Grid Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the control number.
+        /// </summary>
+        /// <value>
+        /// The control number.
+        /// </value>
+        private protected Grid ControlNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the PRC.
+        /// </summary>
+        /// <value>
+        /// The PRC.
+        /// </value>
+        private protected Grid PRC { get; set; }
+
+        /// <summary>
+        /// Gets or sets the fte.
+        /// </summary>
+        /// <value>
+        /// The fte.
+        /// </value>
+        private protected Grid FTE { get; set; }
+
+        /// <summary>
+        /// Gets or sets the awards.
+        /// </summary>
+        /// <value>
+        /// The awards.
+        /// </value>
+        private protected Grid Awards { get; set; }
+
+        /// <summary>
+        /// Gets or sets the overtime.
+        /// </summary>
+        /// <value>
+        /// The overtime.
+        /// </value>
+        private protected Grid Overtime { get; set; }
 
         // **************************************************************************************************************************
         // ******************************************************     METHODS   *****************************************************
         // **************************************************************************************************************************
 
         /// <summary>
-        /// Sets the table format.
+        /// Adds the comment.
         /// </summary>
         /// <param name = "grid" >
-        /// The grid.
         /// </param>
-        public void SetTableFormat( Grid grid )
-        {
-            if( Verify.Grid( grid ) )
-            {
-                try
-                {
-                    using var font = DataFont;
-                    SetFontColor( grid, FontColor );
-                    SetBackgroudColor( grid, PrimaryBackColor );
-                    SetHorizontalAligment( grid, Left );
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                }
-            }
-        }
-
-        /// <summary>
-        /// Sets the caption format.
-        /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
+        /// <param name = "text" >
+        /// The text.
         /// </param>
-        public void SetCaptionFormat( Grid grid )
+        public void AddComment( Grid grid, string text )
         {
-            if( Verify.Grid( grid ) )
-            {
-                try
-                {
-                    SetFontColor( grid, FontColor );
-                    SetBackgroudColor( grid, PrimaryBackColor );
-                    SetHorizontalAligment( grid, Left );
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                }
-            }
-        }
-
-        /// <summary>
-        /// Sets the dark row format.
-        /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
-        /// </param>
-        public void SetDarkRowFormat( Grid grid )
-        {
-            if( Verify.Grid( grid ) )
+            if( Verify.Grid( grid )
+                && Verify.Input( text ) )
             {
                 try
                 {
                     using var range = grid.GetRange();
-                    range.Style.Font.Color.SetColor( Color.Black );
-                    using var font = DataFont;
-                    range.Style.Font.SetFromFont( DataFont );
-                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
-                    range.Style.HorizontalAlignment = Center;
-                    range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                    var comment = range.AddComment( text, "Budget" );
+                    comment.From.Row = range.Start.Row;
+                    comment.From.Column = range.Start.Column;
+                    comment.To.Row = range.End.Row;
+                    comment.To.Column = range.End.Column;
+                    comment.BackgroundColor = PrimaryBackColor;
+                    comment.Font.FontName = "Consolas";
+                    comment.Font.Size = 8;
+                    comment.Font.Color = Color.Black;
+                    comment.Text = text;
                 }
                 catch( Exception ex )
                 {
@@ -169,62 +122,62 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Sets the light row format.
+        /// Sets the caption text.
         /// </summary>
         /// <param name = "grid" >
         /// The grid.
         /// </param>
-        public void SetLightRowFormat( Grid grid )
-        {
-            if( Verify.Grid( grid ) )
-            {
-                try
-                {
-                    using var range = grid.GetRange();
-                    range.Style.Font.Color.SetColor( FontColor );
-                    using var font = DataFont;
-                    range.Style.Font.SetFromFont( DataFont );
-                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor( Color.White );
-                    range.Style.HorizontalAlignment = Center;
-                    range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                }
-            }
-        }
-
-        /// <summary>
-        /// Sets the alternating color format.
-        /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
-        /// </param>
-        public void SetAlternatingColorFormat( Grid grid )
+        public void SetCaptionText( Grid grid )
         {
             if( Verify.Grid( grid ) )
             {
                 try
                 {
                     using var worksheet = grid.GetWorksheet();
-                    using var range = grid.GetRange();
+                    var row = grid.GetRange().Start.Row;
+                    var column = grid.GetRange().Start.Column;
+                    worksheet.Cells[ row, column ].Value = "Account";
+                    worksheet.Cells[ row, column + 1 ].Value = "Site";
+                    worksheet.Cells[ row, column + 2 ].Value = "Travel";
+                    worksheet.Cells[ row, column + 3 ].Value = "Expenses";
+                    worksheet.Cells[ row, column + 4 ].Value = "Contracts";
+                    worksheet.Cells[ row, column + 5 ].Value = "Grants";
+                    worksheet.Cells[ row, column + 6 ].Value = "Total";
+                }
+                catch( Exception ex )
+                {
+                    Fail( ex );
+                }
+            }
+        }
 
-                    for( var i = range.Start.Row; i < range.End.Row; i++ )
+        /// <summary>
+        /// Sets the text.
+        /// </summary>
+        /// <param name = "grid" >
+        /// The grid.
+        /// </param>
+        /// <param name = "text" >
+        /// The text.
+        /// </param>
+        public void SetText( Grid grid, IEnumerable<string> text )
+        {
+            if( Verify.Grid( grid )
+                && text?.Any() == true )
+            {
+                try
+                {
+                    foreach( var cell in grid.GetRange() )
                     {
-                        if( i % 2 == 0 )
+                        foreach( var caption in text )
                         {
-                            SetLightRowFormat( grid );
-                        }
-
-                        if( i % 2 != 0 )
-                        {
-                            SetDarkRowFormat( grid );
+                            if( cell != null
+                                && Verify.Input( caption ) )
+                            {
+                                cell.Value = caption;
+                            }
                         }
                     }
-
-                    SetNumericRowFormat( grid );
                 }
                 catch( Exception ex )
                 {
@@ -234,105 +187,56 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Sets the numeric row format.
+        /// Sets the worksheet properties.
         /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
+        /// <param name = "worksheet" >
+        /// The worksheet.
         /// </param>
-        public void SetNumericRowFormat( Grid grid )
+        public void SetWorksheetProperties( ExcelWorksheet worksheet )
         {
-            if( Verify.Grid( grid ) )
+            if( worksheet != null )
+            {
+                worksheet = Workbook.Worksheets[ 1 ];
+                worksheet.View.ShowGridLines = false;
+                worksheet.View.ZoomScale = ZoomLevel;
+                worksheet.View.PageLayoutView = true;
+                worksheet.View.ShowHeaders = true;
+                worksheet.DefaultRowHeight = RowHeight;
+                worksheet.DefaultColWidth = ColumnWidth;
+                worksheet.PrinterSettings.ShowHeaders = false;
+                worksheet.PrinterSettings.ShowGridLines = false;
+                worksheet.PrinterSettings.LeftMargin = LeftMargin;
+                worksheet.PrinterSettings.RightMargin = RightMargin;
+                worksheet.PrinterSettings.TopMargin = TopMargin;
+                worksheet.PrinterSettings.BottomMargin = BottomMarging;
+                worksheet.PrinterSettings.HorizontalCentered = true;
+                worksheet.PrinterSettings.VerticalCentered = true;
+                worksheet.PrinterSettings.FitToPage = true;
+                worksheet.HeaderFooter.AlignWithMargins = true;
+                worksheet.HeaderFooter.ScaleWithDocument = true;
+            }
+        }
+
+        /// <summary>
+        /// Sets the worksheet header text.
+        /// </summary>
+        /// <param name = "headertext" >
+        /// The headertext.
+        /// </param>
+        public void SetHeaderFooterText( string headertext )
+        {
+            if( Verify.Input( headertext ) )
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    range.Style.Numberformat.Format = "#,###";
+                    var header = Worksheet.HeaderFooter.FirstHeader;
+                    header.CenteredText = headertext;
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
                 }
             }
-        }
-
-        /// <summary>
-        /// Sets the table format.
-        /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
-        /// </param>
-        /// <param name = "font" >
-        /// The font.
-        /// </param>
-        /// <param name = "borderstyle" >
-        /// The borderstyle.
-        /// </param>
-        public void SetTableFormat( Grid grid, Font font,
-            ExcelBorderStyle borderstyle = ExcelBorderStyle.Thin )
-        {
-            if( Verify.Grid( grid ) )
-            {
-                try
-                {
-                    using var range = grid.GetRange();
-                    SetCaptionFormat( grid );
-                    using var titlefont = HeaderFont;
-                    range.Style.Font.SetFromFont( font );
-                    range.Style.Border.BorderAround( borderstyle );
-                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
-                    range.Style.HorizontalAlignment = Center;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                }
-            }
-        }
-
-        /// <summary>
-        /// Sets the total row format.
-        /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
-        /// </param>
-        public void SetTotalRowFormat( Grid grid )
-        {
-            if( Verify.Grid( grid ) )
-            {
-                try
-                {
-                    using var worksheet = grid.GetWorksheet();
-                    using var range = grid.GetRange();
-
-                    var total = worksheet.Cells[ range.Start.Row, range.Start.Column, range.Start.Row,
-                        range.Start.Column + 6 ];
-
-                    total.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    total?.Style?.Fill?.BackgroundColor?.SetColor( PrimaryBackColor );
-
-                    var data = worksheet.Cells[ range.Start.Row, range.Start.Column + 1, range.Start.Row,
-                        range.Start.Column + 6 ];
-
-                    data.Style.Border.Bottom.Style = ExcelBorderStyle.Double;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get Error Dialog.
-        /// </summary>
-        /// <param name="ex">The ex.</param>
-        private protected static void Fail( Exception ex )
-        {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
         }
     }
 }

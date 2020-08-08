@@ -109,6 +109,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="excel\budget\BudgetConfig.cs" />
+    <Compile Include="excel\budget\BudgetFactory.cs" />
+    <Compile Include="excel\budget\ExcelBase.cs" />
+    <Compile Include="excel\budget\ExcelBudget.cs" />
+    <Compile Include="excel\budget\ExcelConfig.cs" />
+    <Compile Include="excel\budget\ExcelSettings.cs" />
+    <Compile Include="excel\budget\Grid.cs" />
+    <Compile Include="excel\budget\Heading.cs" />
+    <Compile Include="excel\budget\IGrid.cs" />
+    <Compile Include="excel\budget\Section.cs" />
     <Compile Include="sys\path\DataPath.cs" />
     <Compile Include="sys\reader\ExcelReader.cs" />
     <Compile Include="sys\reader\FileReader.cs" />
@@ -129,7 +139,6 @@
     <Compile Include="outlay\pcb\workcode\WorkCode.cs" />
     <Compile Include="outlay\pcb\workcode\WorkCodeBase.cs" />
     <Compile Include="static\Application.cs" />
-    <Compile Include="excel\budget\IGrid.cs" />
     <Compile Include="static\Static.cs" />
     <Compile Include="data\adapter\AdapterBuilder.cs">
       <SubType>Component</SubType>
@@ -261,12 +270,6 @@
     <Compile Include="division\Division.cs" />
     <Compile Include="division\DivisionBase.cs" />
     <Compile Include="division\idivision\IDivision.cs" />
-    <Compile Include="excel\budget\BudgetConfig.cs" />
-    <Compile Include="excel\budget\BudgetFactory.cs" />
-    <Compile Include="excel\budget\ExcelBudget.cs" />
-    <Compile Include="excel\budget\Grid.cs" />
-    <Compile Include="excel\budget\SectionConfig.cs" />
-    <Compile Include="excel\budget\SheetConfig.cs" />
     <Compile Include="excel\iexcel\IExcelOp.cs" />
     <Compile Include="excel\number\BudgetNumber.cs" />
     <Compile Include="excel\number\ControlInfo.cs" />

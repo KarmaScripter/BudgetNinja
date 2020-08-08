@@ -22,10 +22,10 @@ namespace BudgetExecution
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref = "SectionConfig"/>
+    /// <seealso cref = "BudgetConfig"/>
     [ SuppressMessage( "ReSharper", "SuggestBaseTypeForParameter" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
-    public class ExcelBudget : SectionConfig
+    public class ExcelBudget : BudgetConfig
     {
         // ***************************************************************************************************************************
         // ****************************************************    FIELDS     ********************************************************

@@ -20,25 +20,6 @@ namespace BudgetExecution
     public class Grid : ExcelCellBase, IGrid
     {
         // **************************************************************************************************************************
-        // ********************************************      FIELDS     *************************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>
-        /// The range
-        /// </summary>
-        private readonly ExcelRange Range;
-
-        /// <summary>
-        /// The worksheet
-        /// </summary>
-        private readonly ExcelWorksheet Worksheet;
-
-        /// <summary>
-        /// The address
-        /// </summary>
-        private readonly ExcelAddress Address;
-
-        // **************************************************************************************************************************
         // ********************************************   CONSTRUCTORS     **********************************************************
         // **************************************************************************************************************************
 
@@ -123,7 +104,7 @@ namespace BudgetExecution
         {
             Worksheet = worksheet;
             Range = Worksheet.Cells[ cell[ 0 ], cell[ 1 ], cell[ 2 ], cell[ 3 ] ];
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row, Range.End.Row );
+            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row, Range.End.Column );
             From = ( Address.Start.Row, Address.Start.Column );
             To = ( Address.End.Row, Address.End.Column );
         }
@@ -152,10 +133,7 @@ namespace BudgetExecution
         {
             Worksheet = worksheet;
             Range = Worksheet.Cells[ from.Row, from.Column ];
-
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.Start.Row,
-                Range.Start.Column );
-
+            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.Start.Row, Range.Start.Column );
             From = from;
             To = From;
         }
@@ -163,6 +141,21 @@ namespace BudgetExecution
         // **************************************************************************************************************************
         // ********************************************      PROPERTIES    **********************************************************
         // **************************************************************************************************************************
+
+        /// <summary>
+        /// The range
+        /// </summary>
+        private protected ExcelRange Range { get; set; }
+
+        /// <summary>
+        /// The worksheet
+        /// </summary>
+        private protected ExcelWorksheet Worksheet { get; set; }
+
+        /// <summary>
+        /// The address
+        /// </summary>
+        private protected ExcelAddress Address { get; set; }
 
         /// <summary>
         /// Gets or sets from.
