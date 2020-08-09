@@ -70,7 +70,7 @@
       <HintPath>..\Enumerations\bin\Debug\BudgetEnumerations.dll</HintPath>
     </Reference>
     <Reference Include="BudgetExtensions">
-      <HintPath>..\Extensions\bin\Debug\BudgetExtensions.dll</HintPath>
+      <HintPath>..\..\Extensions\bin\Debug\BudgetExtensions.dll</HintPath>
     </Reference>
     <Reference Include="BudgetStatic">
       <HintPath>..\Static\bin\Debug\BudgetStatic.dll</HintPath>
@@ -124,20 +124,20 @@
     <Compile Include="excel\budget\Heading.cs" />
     <Compile Include="excel\budget\IGrid.cs" />
     <Compile Include="excel\budget\Section.cs" />
-    <Compile Include="sys\path\DataPath.cs" />
-    <Compile Include="sys\reader\ExcelReader.cs" />
-    <Compile Include="sys\reader\FileReader.cs" />
-    <Compile Include="sys\watcher\FileWatcher.cs">
+    <Compile Include="path\DataPath.cs" />
+    <Compile Include="reader\ExcelReader.cs" />
+    <Compile Include="reader\FileReader.cs" />
+    <Compile Include="watcher\FileWatcher.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="sys\writer\FileWriter.cs" />
-    <Compile Include="sys\folder\Folder.cs" />
-    <Compile Include="sys\folder\FolderBase.cs" />
-    <Compile Include="sys\folder\IFolder.cs" />
-    <Compile Include="sys\path\IPath.cs" />
-    <Compile Include="sys\file\DataFile.cs" />
-    <Compile Include="sys\file\FileBase.cs" />
-    <Compile Include="sys\file\IFile.cs" />
+    <Compile Include="writer\FileWriter.cs" />
+    <Compile Include="folder\Folder.cs" />
+    <Compile Include="folder\FolderBase.cs" />
+    <Compile Include="folder\IFolder.cs" />
+    <Compile Include="path\IPath.cs" />
+    <Compile Include="file\DataFile.cs" />
+    <Compile Include="file\FileBase.cs" />
+    <Compile Include="file\IFile.cs" />
     <Compile Include="outlay\workcode\HumanResourceOrganization.cs" />
     <Compile Include="outlay\workcode\IHumanResourceOrganization.cs" />
     <Compile Include="outlay\workcode\IWorkCode.cs" />
@@ -282,15 +282,16 @@
     <Compile Include="transfer\FundTransfer.cs" />
     <Compile Include="transfer\IReprogramming.cs" />
     <Compile Include="transfer\Reprogramming.cs" />
-    <None Include="res\template\Control.xlsx" />
+    <None Include="template\Control.xlsx" />
     <None Include="Ninja.DotSettings" />
-    <None Include="res\template\Report.xlsx" />
+    <None Include="template\Report.xlsx" />
     <None Include="fiscalyear\Year" />
     <None Include=".editorconfig" />
-    <None Include="etc\App.config" />
-    <None Include="etc\packages.config" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
     <Content Include="etc\logo.ico" />
   </ItemGroup>
