@@ -47,7 +47,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return string.Empty;
                 }
             }
@@ -82,7 +82,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return Date.NS.ToString();
                 }
             }
@@ -108,7 +108,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Static.Fail( ex );
+                Application.Fail( ex );
                 return Date.NS.ToString();
             }
         }
@@ -140,7 +140,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return Date.NS.ToString();
                 }
             }
@@ -171,7 +171,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return Date.NS;
                 }
             }
@@ -210,7 +210,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return Date.NS;
                 }
             }
@@ -247,7 +247,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return Date.NS;
                 }
             }
@@ -273,7 +273,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Static.Fail( ex );
+                Application.Fail( ex );
                 return default( DateTime );
             }
         }
@@ -306,7 +306,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return default( DateTime );
                 }
             }
@@ -340,7 +340,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return default( DateTime );
                 }
             }
@@ -366,7 +366,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Static.Fail( ex );
+                Application.Fail( ex );
                 return string.Empty;
             }
         }
@@ -399,7 +399,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return string.Empty;
                 }
             }
@@ -433,7 +433,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return string.Empty;
                 }
             }
@@ -447,7 +447,7 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
+            using var error = new StaticError( ex );
             error?.SetText();
             error?.ShowDialog();
         }

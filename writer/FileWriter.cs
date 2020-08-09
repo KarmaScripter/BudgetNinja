@@ -21,7 +21,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
-    public class FileReader
+    public class FileWriter
     {
         // ***************************************************************************************************************************
         // ****************************************************    FIELDS     ********************************************************
@@ -37,19 +37,20 @@ namespace BudgetExecution
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileReader"/> class.
+        /// Initializes a new instance of the <see cref="FileWriter"/> class.
         /// </summary>
-        public FileReader()
+        public FileWriter()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileReader"/> class.
+        /// Initializes a new instance of the <see cref="FileWriter"/> class.
         /// </summary>
-        /// <param name="file">The file.</param>
-        public FileReader( IFile file )
+        /// <param name="datafile">The file.</param>
+        public FileWriter( IFile datafile )
         {
-            DataFile = file;
+            DataFile = datafile;
+            FileStream = DataFile.GetBaseStream();
             FileInfo = DataFile.GetFileInfo();
         }
 
@@ -63,15 +64,9 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private protected FileInfo FileInfo { get; set; }
-
-        /// <summary>
-        /// Gets or sets the file stream.
-        /// </summary>
-        /// <value>
-        /// The file stream.
-        /// </value>
         private protected FileStream FileStream { get; set; }
+
+        private protected FileInfo FileInfo { get; set; }
 
         // ***************************************************************************************************************************
         // ****************************************************     METHODS   ********************************************************
@@ -80,64 +75,29 @@ namespace BudgetExecution
         /// <summary>
         /// Reads all text.
         /// </summary>
-        /// <returns></returns>
-        public string ReadAllText()
+        public void WriteAllText()
         {
             try
             {
-                var file = FileInfo?.FullName;
+                var path = FileInfo.FullName;
+                var writer = File.ReadAllText( path );
 
-                if( file != null )
+                if( Verify.Input( path )
+                    && Verify.Input( writer ) )
                 {
-                    var stream = File.ReadAllText( file );
-
-                    return Verify.Input( stream )
-                        ? stream
-                        : string.Empty;
+                    File.WriteAllText( FileInfo.FullName, writer );
                 }
-
-                return string.Empty;
             }
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
             }
         }
 
         /// <summary>
         /// Reads all lines.
         /// </summary>
-        /// <returns></returns>
-        public string[] ReadAllLines()
-        {
-            try
-            {
-                var file = FileInfo?.FullName;
-
-                if( file != null )
-                {
-                    var stream = File.ReadAllLines( file );
-
-                    return stream?.Any() == true
-                        ? stream
-                        : default;
-                }
-
-                return default;
-            }
-            catch( IOException ex )
-            {
-                Fail( ex );
-                return default;
-            }
-        }
-
-        /// <summary>
-        /// Reads all bytes.
-        /// </summary>
-        /// <returns></returns>
-        public byte[] ReadAllBytes()
+        public void WriteAllLines()
         {
             try
             {
@@ -145,55 +105,145 @@ namespace BudgetExecution
 
                 if( Verify.Input( file ) )
                 {
-                    var stream = File.ReadAllBytes( file );
+                    var text = File.ReadAllLines( file );
 
-                    return stream?.Any() == true
-                        ? stream
-                        : default;
+                    if( text?.Any() == true )
+                    {
+                        File.WriteAllLines( file, text );
+                    }
                 }
-
-                return default;
             }
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
             }
         }
 
         /// <summary>
-        /// Gets the text.
+        /// Reads all bytes.
         /// </summary>
-        /// <returns></returns>
-        public string ReadToEnd()
+        public void WriteAllBytes()
         {
             try
             {
-                using var streamreader = FileInfo?.OpenText();
-                var result = streamreader?.ReadToEnd();
+                var path = FileInfo?.FullName;
 
-                return Verify.Input( result )
-                    ? result
-                    : string.Empty;
+                if( Verify.Input( path ) )
+                {
+                    var stream = File.ReadAllBytes( path );
+
+                    if( stream?.Any() == true )
+                    {
+                        File.WriteAllBytes( path, stream );
+                    }
+                }
             }
             catch( IOException ex )
             {
                 Fail( ex );
-                return string.Empty;
             }
         }
 
         /// <summary>
-        /// Des the compress.
+        /// Overwrites the specified source.
         /// </summary>
-        public void DeCompress()
+        /// <param name="source">The source.</param>
+        /// <param name="destination">The destination.</param>
+        public static void Overwrite( string source, string destination )
+        {
+            if( Verify.Input( source )
+                && Verify.Input( destination ) )
+            {
+                if( File.Exists( destination ) )
+                {
+                    File.Delete( destination );
+                }
+
+                try
+                {
+                    File.Move( source, destination );
+                }
+                catch( IOException ex )
+                {
+                    Fail( ex );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Writes the binary.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        public void WriteData( ref byte[] data )
+        {
+            try
+            {
+                using var filestream = FileInfo?.Create();
+                filestream?.Write( data, 0, data.Length );
+            }
+            catch( IOException ex )
+            {
+                Fail( ex );
+            }
+        }
+
+        /// <summary>
+        /// Appends the text.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        public void AppendText( string text )
+        {
+            if( Verify.Input( text ) )
+            {
+                try
+                {
+                    using var streamwriter = FileInfo?.AppendText();
+                    streamwriter?.Write( text );
+                }
+                catch( IOException ex )
+                {
+                    Fail( ex );
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compresses this instance.
+        /// </summary>
+        public void Compress()
         {
             try
             {
                 var binarydata = File.ReadAllBytes( FileInfo.FullName );
-                var length = binarydata.Length;
-                using var zipper = new GZipStream( FileStream, CompressionMode.Decompress );
-                zipper?.Read( binarydata, 0, length );
+
+                if( binarydata?.Any() == true )
+                {
+                    var length = binarydata.Length;
+                    using var zipper = new GZipStream( FileStream, CompressionMode.Compress );
+                    zipper?.Write( binarydata, 0, length );
+                }
+            }
+            catch( IOException ex )
+            {
+                Fail( ex );
+            }
+        }
+
+        /// <summary>
+        /// Gets the memory stream.
+        /// </summary>
+        /// <returns></returns>
+        public void WriteToMemory()
+        {
+            try
+            {
+                var binarydata = File.ReadAllBytes( DataFile.GetFilePath() );
+
+                if( binarydata?.Any() == true )
+                {
+                    var stream = new MemoryStream( binarydata );
+                    stream?.Read( binarydata, 0, binarydata.Length );
+                }
             }
             catch( IOException ex )
             {
@@ -207,7 +257,7 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
+            using var error = new StaticError( ex );
             error?.SetText();
             error?.ShowDialog();
         }

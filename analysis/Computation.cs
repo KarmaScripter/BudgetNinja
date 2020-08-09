@@ -86,7 +86,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Static.Fail( ex );
+                    Application.Fail( ex );
                     return default;
                 }
             }

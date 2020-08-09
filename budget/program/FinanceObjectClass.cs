@@ -339,7 +339,7 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
+            using var error = new StaticError( ex );
             error?.SetText();
             error?.ShowDialog();
         }
