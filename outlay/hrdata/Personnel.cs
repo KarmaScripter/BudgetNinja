@@ -340,7 +340,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                using var error = new StaticError( ex );
+                using var error = new Error( ex );
                 error?.SetText();
                 error?.ShowDialog();
                 return default;

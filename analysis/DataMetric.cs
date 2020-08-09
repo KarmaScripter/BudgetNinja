@@ -144,7 +144,7 @@ namespace BudgetExecution
         public double CalculateDeviation( IEnumerable<DataRow> data, Numeric numeric )
         {
             if( data.Any()
-                && data?.HasNumeric()
+                && data.HasNumeric()
                 && GetCount( data, numeric ) > 30 )
             {
                 try

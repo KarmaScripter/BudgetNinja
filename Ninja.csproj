@@ -70,7 +70,7 @@
       <HintPath>..\Enumerations\bin\Debug\BudgetEnumerations.dll</HintPath>
     </Reference>
     <Reference Include="BudgetExtensions">
-      <HintPath>..\..\Extensions\bin\Debug\BudgetExtensions.dll</HintPath>
+      <HintPath>..\Extensions\bin\Debug\BudgetExtensions.dll</HintPath>
     </Reference>
     <Reference Include="BudgetStatic">
       <HintPath>..\Static\bin\Debug\BudgetStatic.dll</HintPath>
