@@ -73,7 +73,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                using var error = new Error( ex );
+                using var error = new StaticError( ex );
                 error?.SetText();
                 error?.ShowDialog();
                 return default;
@@ -96,7 +96,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                using var error = new Error( ex );
+                using var error = new StaticError( ex );
                 error?.SetText();
                 error?.ShowDialog();
             }
