@@ -85,7 +85,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                CostAccount.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -107,7 +107,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                CostAccount.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -127,7 +127,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                CostAccount.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -147,7 +147,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                CostAccount.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -167,7 +167,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                CostAccount.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -187,7 +187,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                CostAccount.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

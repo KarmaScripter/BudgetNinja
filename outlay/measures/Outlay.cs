@@ -177,7 +177,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Outlay.Fail( ex );
+                Fail( ex );
                 return Key.Default;
             }
         }
@@ -198,7 +198,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Outlay.Fail( ex );
+                Fail( ex );
                 return string.Empty;
             }
         }
@@ -218,7 +218,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Outlay.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

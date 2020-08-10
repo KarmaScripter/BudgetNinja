@@ -238,7 +238,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Authority.Fail( ex );
+                    Fail( ex );
                     return Source.NS;
                 }
             }
@@ -266,7 +266,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Authority.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -287,7 +287,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Authority.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -312,7 +312,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Authority.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -347,7 +347,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Authority.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -379,7 +379,7 @@ namespace BudgetExecution
                     }
                     catch( Exception ex )
                     {
-                        Authority.Fail( ex );
+                        Fail( ex );
                         return default;
                     }
                 }
@@ -388,7 +388,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Authority.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -419,7 +419,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Authority.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }

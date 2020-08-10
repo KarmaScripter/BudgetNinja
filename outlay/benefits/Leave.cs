@@ -143,7 +143,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -164,7 +164,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -185,7 +185,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -206,7 +206,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -227,7 +227,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -248,7 +248,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -269,7 +269,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -284,7 +284,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Leave.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -316,7 +316,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Leave.Fail( ex );
+                    Fail( ex );
                 }
             }
 
@@ -347,7 +347,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Leave.Fail( ex );
+                    Fail( ex );
                 }
             }
 
@@ -372,7 +372,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Leave.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -406,7 +406,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Leave.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }

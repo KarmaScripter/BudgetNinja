@@ -146,7 +146,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ProgramProject.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -169,7 +169,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -189,7 +189,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -209,7 +209,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -229,7 +229,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -249,7 +249,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -269,7 +269,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -290,7 +290,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return string.Empty;
             }
         }
@@ -310,7 +310,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -330,7 +330,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Key.Default;
             }
         }
@@ -350,7 +350,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -370,7 +370,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -400,7 +400,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProgramProject.Fail( ex );
+                Fail( ex );
                 return Source.NS;
             }
         }

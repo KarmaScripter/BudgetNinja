@@ -129,7 +129,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                UnliquidatedObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -149,7 +149,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                UnliquidatedObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -169,7 +169,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                UnliquidatedObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

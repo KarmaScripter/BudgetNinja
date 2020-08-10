@@ -142,7 +142,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Obligation.Fail( ex );
+                Fail( ex );
                 return Key.Default;
             }
         }
@@ -162,7 +162,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Obligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -182,7 +182,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Obligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

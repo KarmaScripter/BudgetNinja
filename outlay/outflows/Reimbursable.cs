@@ -139,7 +139,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Reimbursable.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -159,7 +159,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Reimbursable.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -179,7 +179,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Reimbursable.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

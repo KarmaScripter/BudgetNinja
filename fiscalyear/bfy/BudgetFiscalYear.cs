@@ -253,7 +253,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return Key.Default;
             }
         }
@@ -273,7 +273,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -293,7 +293,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -313,7 +313,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -359,7 +359,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -381,7 +381,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -399,7 +399,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return default( IBudgetFiscalYear );
             }
         }
@@ -419,7 +419,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BudgetFiscalYear.Fail( ex );
+                Fail( ex );
                 return default( Source );
             }
         }

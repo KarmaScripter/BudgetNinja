@@ -226,7 +226,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Key.Default;
             }
         }
@@ -246,7 +246,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -266,7 +266,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -286,7 +286,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Time.Default;
             }
         }
@@ -306,7 +306,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -326,7 +326,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -346,7 +346,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Time.Default;
             }
         }
@@ -366,7 +366,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -386,7 +386,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -406,7 +406,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -426,7 +426,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -446,7 +446,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -466,7 +466,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Payment.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

@@ -98,7 +98,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                DivisionAuthority.Fail( ex );
+                Fail( ex );
                 return -1D;
             }
         }

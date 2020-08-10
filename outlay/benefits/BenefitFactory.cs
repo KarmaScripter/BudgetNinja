@@ -87,7 +87,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -108,7 +108,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -129,7 +129,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -150,7 +150,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return default( HumanResourceOrganization );
             }
         }
@@ -171,7 +171,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return default( WorkCode );
             }
         }
@@ -192,7 +192,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -213,7 +213,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return default( ResourcePlanningOffice );
             }
         }
@@ -234,7 +234,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                BenefitFactory.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

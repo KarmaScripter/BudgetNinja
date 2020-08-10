@@ -236,7 +236,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkforceData.Fail( ex );
+                    Fail( ex );
                     return string.Empty;
                 }
             }
@@ -259,7 +259,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -279,7 +279,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return Key.Default;
             }
         }
@@ -305,7 +305,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return default( Employee );
             }
         }
@@ -331,7 +331,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return default( HumanResourceOrganization );
             }
         }
@@ -351,7 +351,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -371,7 +371,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -391,7 +391,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -411,7 +411,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -431,7 +431,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -451,7 +451,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -471,7 +471,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkforceData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

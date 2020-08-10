@@ -68,7 +68,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -88,7 +88,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -109,7 +109,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
             }
         }
 
@@ -139,7 +139,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -160,7 +160,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -182,7 +182,7 @@ namespace BudgetExecution
             }
             catch( IOException ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -209,7 +209,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
             }
         }
 
@@ -228,7 +228,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
             }
         }
 
@@ -248,7 +248,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Folder.Fail( ex );
+                Fail( ex );
             }
         }
 
@@ -266,7 +266,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Folder.Fail( ex );
+                    Fail( ex );
                 }
             }
         }

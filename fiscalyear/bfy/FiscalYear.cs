@@ -142,7 +142,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -162,7 +162,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -182,7 +182,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -202,7 +202,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -234,7 +234,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FiscalYear.Fail( ex );
+                Fail( ex );
             }
         }
 
@@ -259,7 +259,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -292,7 +292,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    FiscalYear.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -341,7 +341,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    FiscalYear.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -364,7 +364,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FiscalYear.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

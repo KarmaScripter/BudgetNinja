@@ -47,7 +47,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return string.Empty;
                 }
             }
@@ -82,7 +82,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return Date.NS.ToString();
                 }
             }
@@ -108,7 +108,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TimeBase.Fail( ex );
+                Fail( ex );
                 return Date.NS.ToString();
             }
         }
@@ -139,7 +139,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return Date.NS.ToString();
                 }
             }
@@ -170,7 +170,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return Date.NS;
                 }
             }
@@ -209,7 +209,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return Date.NS;
                 }
             }
@@ -246,7 +246,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return Date.NS;
                 }
             }
@@ -272,7 +272,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TimeBase.Fail( ex );
+                Fail( ex );
                 return default( DateTime );
             }
         }
@@ -305,7 +305,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return default( DateTime );
                 }
             }
@@ -339,7 +339,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return default( DateTime );
                 }
             }
@@ -365,7 +365,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TimeBase.Fail( ex );
+                Fail( ex );
                 return string.Empty;
             }
         }
@@ -398,7 +398,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return string.Empty;
                 }
             }
@@ -432,7 +432,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    TimeBase.Fail( ex );
+                    Fail( ex );
                     return string.Empty;
                 }
             }

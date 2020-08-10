@@ -116,7 +116,7 @@ namespace BudgetExecution
                 }
                 catch( SystemException ex )
                 {
-                    TimeOff.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -139,7 +139,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TimeOff.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

@@ -140,7 +140,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Deobligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -161,7 +161,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Deobligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

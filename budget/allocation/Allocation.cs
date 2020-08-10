@@ -78,7 +78,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Allocation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -112,7 +112,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Allocation.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -143,7 +143,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Allocation.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }

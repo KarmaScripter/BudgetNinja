@@ -158,7 +158,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -178,7 +178,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -198,7 +198,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -218,7 +218,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -238,7 +238,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -258,7 +258,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -278,7 +278,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -298,7 +298,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -318,7 +318,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -338,7 +338,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                TravelObligation.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

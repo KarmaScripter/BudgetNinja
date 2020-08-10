@@ -129,7 +129,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AllocationData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -153,7 +153,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AllocationData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -177,7 +177,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AllocationData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -201,7 +201,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AllocationData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -225,7 +225,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AllocationData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -259,7 +259,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AllocationData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -300,7 +300,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AllocationData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -335,7 +335,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    AllocationData.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -375,7 +375,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    AllocationData.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -415,7 +415,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    AllocationData.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }

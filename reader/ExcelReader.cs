@@ -111,7 +111,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ExcelReader.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ExcelReader.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -176,7 +176,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ExcelReader.Fail( ex );
+                    Fail( ex );
 
                     return default;
                 }
@@ -216,7 +216,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ExcelReader.Fail( ex );
+                Fail( ex );
 
                 return default;
             }
@@ -261,7 +261,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ExcelReader.Fail( ex );
+                    Fail( ex );
 
                     return default;
                 }
@@ -318,7 +318,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ExcelReader.Fail( ex );
+                    Fail( ex );
 
                     return default;
                 }
@@ -364,7 +364,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ExcelReader.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -403,7 +403,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ExcelReader.Fail( ex );
+                    Fail( ex );
                 }
             }
 

@@ -143,7 +143,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -163,7 +163,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -183,7 +183,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -203,7 +203,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -221,7 +221,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -241,7 +241,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -259,7 +259,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -277,7 +277,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -297,7 +297,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -317,7 +317,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -337,7 +337,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -357,7 +357,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -377,7 +377,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -397,7 +397,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Requisition.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

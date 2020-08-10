@@ -99,7 +99,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                RegionalAuthority.Fail( ex );
+                Fail( ex );
                 return -1D;
             }
         }

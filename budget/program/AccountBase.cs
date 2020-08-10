@@ -126,7 +126,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    AccountBase.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -149,7 +149,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                AccountBase.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -169,7 +169,7 @@ namespace BudgetExecution
             }
             catch( SystemException ex )
             {
-                AccountBase.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

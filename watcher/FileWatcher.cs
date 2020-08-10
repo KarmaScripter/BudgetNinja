@@ -73,7 +73,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FileWatcher.Fail( ex );
+                Fail( ex );
 
                 return default;
             }
@@ -106,7 +106,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                FileWatcher.Fail( ex );
+                Fail( ex );
             }
         }
     }

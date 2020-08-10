@@ -141,7 +141,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Commitment.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -161,7 +161,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Commitment.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -181,7 +181,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Commitment.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }

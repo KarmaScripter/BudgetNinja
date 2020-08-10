@@ -165,7 +165,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkCode.Fail( ex );
+                    Fail( ex );
                     return string.Empty;
                 }
             }
@@ -188,7 +188,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkCode.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -216,7 +216,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkCode.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -239,7 +239,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkCode.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -267,7 +267,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkCode.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -298,7 +298,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkCode.Fail( ex );
+                    Fail( ex );
                     return default( Account );
                 }
             }
@@ -329,7 +329,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkCode.Fail( ex );
+                    Fail( ex );
                     return default( ResponsibilityCenter );
                 }
             }
@@ -361,7 +361,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkCode.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }
@@ -385,7 +385,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    WorkCode.Fail( ex );
+                    Fail( ex );
                     return default( Division );
                 }
             }
@@ -408,7 +408,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkCode.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -432,7 +432,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkCode.Fail( ex );
+                Fail( ex );
                 return Source.NS;
             }
         }
@@ -452,7 +452,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkCode.Fail( ex );
+                Fail( ex );
                 return Key.Default;
             }
         }
@@ -472,7 +472,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkCode.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }
@@ -492,7 +492,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                WorkCode.Fail( ex );
+                Fail( ex );
                 return Element.Default;
             }
         }

@@ -212,7 +212,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProcurementData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -232,7 +232,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProcurementData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -252,7 +252,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProcurementData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -272,7 +272,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProcurementData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -292,7 +292,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProcurementData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -312,7 +312,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProcurementData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -332,7 +332,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ProcurementData.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
