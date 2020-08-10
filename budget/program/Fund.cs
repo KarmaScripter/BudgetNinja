@@ -1,6 +1,6 @@
-﻿// // <copyright file = "Fund.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "Fund.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -48,7 +48,7 @@ namespace BudgetExecution
         /// </param>
         public Fund( FundCode fundcode )
         {
-            Record = new DataBuilder( Fund.Source, GetArgs( fundcode ) )?.GetRecord();
+            Record = new DataBuilder( Source, GetArgs( fundcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.FundId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -65,7 +65,7 @@ namespace BudgetExecution
         /// </param>
         public Fund( string code )
         {
-            Record = new DataBuilder( Fund.Source, GetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.FundId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -435,8 +435,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Fund.Source )
-                    ? Fund.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

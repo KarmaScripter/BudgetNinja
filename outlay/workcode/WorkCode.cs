@@ -1,6 +1,6 @@
-﻿// // <copyright file = "WorkCode.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "WorkCode.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -426,8 +426,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( WorkCode.Source )
-                    ? WorkCode.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

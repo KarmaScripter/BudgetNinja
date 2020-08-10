@@ -1,6 +1,6 @@
-﻿// // <copyright file = "Objective.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "Objective.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -92,7 +92,7 @@ namespace BudgetExecution
         /// </param>
         public Objective( string code )
         {
-            Record = new DataBuilder( Objective.Source, SetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( Source, SetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.ObjectiveId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -309,8 +309,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Objective.Source )
-                    ? Objective.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

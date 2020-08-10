@@ -1,6 +1,6 @@
-﻿// // <copyright file = "AllowanceHolder.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "AllowanceHolder.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -127,7 +127,7 @@ namespace BudgetExecution
         /// </param>
         public AllowanceHolder( string ahcode )
         {
-            Record = new DataBuilder( AllowanceHolder.Source, SetArgs( ahcode ) )?.GetRecord();
+            Record = new DataBuilder( Source, SetArgs( ahcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.AllowanceHolderId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -343,8 +343,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( AllowanceHolder.Source )
-                    ? AllowanceHolder.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

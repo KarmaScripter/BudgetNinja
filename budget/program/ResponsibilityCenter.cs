@@ -1,6 +1,6 @@
-﻿// // <copyright file = "ResponsibilityCenter.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "ResponsibilityCenter.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -69,7 +69,7 @@ namespace BudgetExecution
         public ResponsibilityCenter( string rccode )
             : this()
         {
-            Record = new DataBuilder( ResponsibilityCenter.Source, SetArgs( rccode ) )?.GetRecord();
+            Record = new DataBuilder( Source, SetArgs( rccode ) )?.GetRecord();
             ResponsibilityCenterId = new Key( Record, PrimaryKey.ResponsibilityCenterId );
             Name = new Element( Record, Field.Name );
             RcCode = new Element( Record, Field.RcCode );
@@ -294,8 +294,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( ResponsibilityCenter.Source )
-                    ? ResponsibilityCenter.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

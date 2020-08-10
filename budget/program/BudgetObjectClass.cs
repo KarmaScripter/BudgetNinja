@@ -1,6 +1,6 @@
-﻿// // <copyright file = "BudgetObjectClass.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "BudgetObjectClass.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 // ReSharper disable All
 

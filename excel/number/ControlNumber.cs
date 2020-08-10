@@ -1,6 +1,6 @@
-﻿// // <copyright file = "ControlNumber.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "ControlNumber.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 // ReSharper disable UnusedMember.Global
 
@@ -133,7 +133,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ControlNumber.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -153,7 +153,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ControlNumber.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -175,7 +175,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ControlNumber.Fail( ex );
+                    Fail( ex );
                     return string.Empty;
                 }
             }
@@ -198,7 +198,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ControlNumber.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -218,7 +218,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                ControlNumber.Fail( ex );
+                Fail( ex );
                 return default;
             }
         }
@@ -249,7 +249,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ControlNumber.Fail( ex );
+                    Fail( ex );
                     return default;
                 }
             }

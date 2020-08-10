@@ -1,6 +1,6 @@
-﻿// // <copyright file = "Authority.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "Authority.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -338,7 +338,6 @@ namespace BudgetExecution
                 try
                 {
                     var data = new DataBuilder( Source, Data )?.GetData();
-
                     var filtered = data?.Filter( field.ToString(), filter );
 
                     return Verify.Rows( filtered )

@@ -1,6 +1,6 @@
-﻿// // <copyright file = "InformationTechnology.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "InformationTechnology.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -111,7 +111,7 @@ namespace BudgetExecution
         /// </param>
         public InformationTechnology( string itcode )
         {
-            Record = new DataBuilder( InformationTechnology.Source, GetArgs( itcode ) )?.GetRecord();
+            Record = new DataBuilder( Source, GetArgs( itcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.InformationTechnologyId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -428,8 +428,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( InformationTechnology.Source )
-                    ? InformationTechnology.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

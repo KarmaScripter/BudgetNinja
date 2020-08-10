@@ -1,6 +1,6 @@
-﻿// // <copyright file = "Time.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "Time.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -220,7 +220,7 @@ namespace BudgetExecution
         public bool IsEqual( ITime day )
         {
             if( day != null
-                && day != Time.Default )
+                && day != Default )
             {
                 try
                 {

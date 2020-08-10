@@ -1,5 +1,5 @@
-﻿// <copyright file="MetricBase.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
+﻿// <copyright file = "MetricBase.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
 namespace BudgetExecution
@@ -160,8 +160,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var query = Data
-                        ?.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
+                    var query = Data?.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
                         ?.Select( p => p );
 
                     return query?.Any() == true

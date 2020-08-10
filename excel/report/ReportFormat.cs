@@ -1,6 +1,6 @@
-﻿// // <copyright file = "ReportFormat.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "ReportFormat.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -150,7 +150,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -184,7 +184,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -215,7 +215,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -246,7 +246,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -287,7 +287,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -316,7 +316,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -344,7 +344,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }
@@ -377,7 +377,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    ReportFormat.Fail( ex );
+                    Fail( ex );
                 }
             }
         }

@@ -1,6 +1,6 @@
-﻿// // <copyright file = "BudgetFiscalYear.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "BudgetFiscalYear.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -54,8 +54,8 @@ namespace BudgetExecution
         /// </summary>
         public BudgetFiscalYear()
         {
-            Record = new DataBuilder( BudgetFiscalYear.Source, Provider.SQLite,
-                SetArgs( GetCurrentYear().ToString() ) )?.GetRecord();
+            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( GetCurrentYear().ToString() ) )
+                ?.GetRecord();
 
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
@@ -83,7 +83,7 @@ namespace BudgetExecution
         public BudgetFiscalYear( string bfy )
         {
             InputYear = new Element( Field.BFY, bfy );
-            Record = new DataBuilder( BudgetFiscalYear.Source, SetArgs( bfy ) )?.GetRecord();
+            Record = new DataBuilder( Source, SetArgs( bfy ) )?.GetRecord();
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
             EBFY = new Element( Record, Field.EBFY );
@@ -161,7 +161,7 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( BFY fy )
         {
-            Record = new DataBuilder( BudgetFiscalYear.Source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
+            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
             EBFY = new Element( Record, Field.EBFY );
@@ -413,8 +413,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( BudgetFiscalYear.Source )
-                    ? BudgetFiscalYear.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

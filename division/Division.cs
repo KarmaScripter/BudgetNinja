@@ -1,6 +1,6 @@
-﻿// // <copyright file = "Division.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "Division.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 // ReSharper disable All
 
@@ -272,7 +272,6 @@ namespace BudgetExecution
                     };
 
                     var data = new DataBuilder( Source.HumanResourceOrganizations, args )?.GetData();
-
                     var hrorg = data?.Select( r => new HumanResourceOrganization( r ) );
 
                     return hrorg?.Any() == true

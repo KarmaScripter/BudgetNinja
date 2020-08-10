@@ -1,6 +1,6 @@
-﻿// // <copyright file = "Organization.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "Organization.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -62,7 +62,7 @@ namespace BudgetExecution
         /// </param>
         public Organization( string org )
         {
-            Record = new DataBuilder( Organization.Source, GetArgs( org ) )?.GetRecord();
+            Record = new DataBuilder( Source, GetArgs( org ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.OrganizationId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -304,8 +304,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Organization.Source )
-                    ? Organization.Source
+                return Verify.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )
