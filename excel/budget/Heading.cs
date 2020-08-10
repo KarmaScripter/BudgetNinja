@@ -38,7 +38,7 @@ namespace BudgetExecution
         {
         }
 
-        public Heading( IGrid grid ) 
+        public Heading( IGrid grid )
         {
             Worksheet = grid.GetWorksheet();
             Range = grid.GetRange();
@@ -48,7 +48,7 @@ namespace BudgetExecution
             Anchor = ( From.Row, From.Column );
         }
 
-        public Heading( IGrid grid, IDictionary<int, string> caption ) 
+        public Heading( IGrid grid, IDictionary<int, string> caption )
             : this( grid )
         {
             Caption = caption;
@@ -65,7 +65,7 @@ namespace BudgetExecution
         /// <value>
         /// The span.
         /// </value>
-        private int Span { get; set; } 
+        private int Span { get; set; }
 
         /// <summary>
         /// Gets or sets from.
@@ -101,7 +101,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Heading.Fail( ex );
                 return 0;
             }
         }
@@ -114,14 +114,13 @@ namespace BudgetExecution
         {
             try
             {
-                return Anchor.Row > 0 
-                    && Anchor.Column > 0
-                        ? Anchor
-                        : ( 0, 0 );
+                return Anchor.Row > 0 && Anchor.Column > 0
+                    ? Anchor
+                    : ( 0, 0 );
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Heading.Fail( ex );
                 return ( 0, 0 );
             }
         }
@@ -140,7 +139,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Heading.Fail( ex );
                 return default;
             }
         }

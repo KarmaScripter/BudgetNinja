@@ -1,6 +1,6 @@
-﻿// <copyright file="UnitBase.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "AccountBase.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -126,7 +126,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    AccountBase.Fail( ex );
                     return default;
                 }
             }
@@ -149,7 +149,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                AccountBase.Fail( ex );
                 return default;
             }
         }
@@ -169,7 +169,7 @@ namespace BudgetExecution
             }
             catch( SystemException ex )
             {
-                Fail( ex );
+                AccountBase.Fail( ex );
                 return default;
             }
         }
@@ -181,8 +181,8 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            error.SetText();
+            error.ShowDialog();
         }
     }
 }

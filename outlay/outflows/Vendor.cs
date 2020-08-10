@@ -1,6 +1,6 @@
-﻿// <copyright file="Vendor.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Vendor.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -167,7 +167,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Key.Default;
             }
         }
@@ -187,7 +187,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Element.Default;
             }
         }
@@ -207,7 +207,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Element.Default;
             }
         }
@@ -228,7 +228,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return string.Empty;
             }
         }
@@ -248,7 +248,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Element.Default;
             }
         }
@@ -268,7 +268,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Element.Default;
             }
         }
@@ -288,7 +288,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Time.Default;
             }
         }
@@ -308,7 +308,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Time.Default;
             }
         }
@@ -328,7 +328,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return Time.Default;
             }
         }
@@ -348,7 +348,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return default;
             }
         }
@@ -368,7 +368,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return default;
             }
         }
@@ -388,7 +388,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Vendor.Fail( ex );
                 return default;
             }
         }

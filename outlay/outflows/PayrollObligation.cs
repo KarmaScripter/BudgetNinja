@@ -1,6 +1,6 @@
-﻿// <copyright file="PayrollObligation.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "PayrollObligation.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -13,7 +13,7 @@ namespace BudgetExecution
     using System.Data;
     using System.Threading;
 
-    public sealed class PayrollObligation : Obligation
+    public class PayrollObligation : Obligation
     {
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -259,7 +259,7 @@ namespace BudgetExecution
             }
             catch( SystemException ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -279,7 +279,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -299,7 +299,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -319,7 +319,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -339,7 +339,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -359,7 +359,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -379,7 +379,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -399,7 +399,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -419,7 +419,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -439,7 +439,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }
@@ -459,7 +459,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                PayrollObligation.Fail( ex );
                 return default;
             }
         }

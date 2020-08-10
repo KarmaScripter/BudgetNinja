@@ -1,8 +1,9 @@
-﻿// <copyright file="BudgetObjectClass.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "BudgetObjectClass.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 // ReSharper disable All
+
 namespace BudgetExecution
 {
     // ******************************************************************************************************************************
@@ -435,10 +436,9 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Name?.GetValue() )
-                    && Enum.IsDefined( typeof( BOC ), Name?.GetValue() )
-                        ? (BOC)Enum.Parse( typeof( BOC ), Name?.GetValue() )
-                        : BOC.NS;
+                return Verify.Input( Name?.GetValue() ) && Enum.IsDefined( typeof( BOC ), Name?.GetValue() )
+                    ? (BOC)Enum.Parse( typeof( BOC ), Name?.GetValue() )
+                    : BOC.NS;
             }
             catch( SystemException ex )
             {
@@ -473,9 +473,7 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            Fail( ex );
         }
     }
 }

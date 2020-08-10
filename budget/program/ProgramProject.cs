@@ -1,6 +1,6 @@
-﻿// <copyright file="ProgramProject.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "ProgramProject.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -15,7 +15,7 @@ namespace BudgetExecution
     using System.Threading;
 
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
-    public sealed class ProgramProject : ProgramBase, IProgramProject, IProgramElement, ISource
+    public class ProgramProject : ProgramBase, IProgramProject, IProgramElement, ISource
     {
         // ***************************************************************************************************************************
         // ****************************************************     FIELDS    ********************************************************
@@ -108,7 +108,7 @@ namespace BudgetExecution
         /// </param>
         public ProgramProject( string code )
         {
-            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( ProgramProject.Source, GetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.ProgramProjectId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -146,7 +146,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    ProgramProject.Fail( ex );
                     return default;
                 }
             }
@@ -169,7 +169,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -189,7 +189,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -209,7 +209,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -229,7 +229,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -249,7 +249,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -269,7 +269,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -290,7 +290,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return string.Empty;
             }
         }
@@ -310,7 +310,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return default;
             }
         }
@@ -330,7 +330,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Key.Default;
             }
         }
@@ -350,7 +350,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -370,7 +370,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Element.Default;
             }
         }
@@ -394,13 +394,13 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( ProgramProject.Source )
+                    ? ProgramProject.Source
                     : Source.NS;
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ProgramProject.Fail( ex );
                 return Source.NS;
             }
         }

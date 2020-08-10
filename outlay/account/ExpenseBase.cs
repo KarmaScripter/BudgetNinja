@@ -1,6 +1,6 @@
-﻿// <copyright file="ExpenseBase.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "ExpenseBase.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -136,7 +136,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -211,7 +211,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
             }
         }
 
@@ -230,7 +230,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return ExpenseType.NS;
             }
         }
@@ -250,7 +250,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -270,7 +270,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -290,7 +290,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -310,7 +310,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -330,7 +330,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -350,7 +350,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -370,7 +370,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return Amount.Default;
             }
         }
@@ -390,7 +390,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -410,7 +410,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }
@@ -430,7 +430,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                ExpenseBase.Fail( ex );
                 return default;
             }
         }

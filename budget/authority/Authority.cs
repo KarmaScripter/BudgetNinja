@@ -1,6 +1,6 @@
-﻿// <copyright file="Authority.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Authority.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -40,7 +40,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
     [ SuppressMessage( "ReSharper", "AccessToStaticMemberViaDerivedType" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
-    public class Authority : ProgramResultsCode, IAuthority, IDataFilter
+    public class Authority : ProgramResultsCode, IAuthority
     {
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -238,7 +238,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Authority.Fail( ex );
                     return Source.NS;
                 }
             }
@@ -266,7 +266,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Authority.Fail( ex );
                     return default;
                 }
             }
@@ -287,7 +287,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Authority.Fail( ex );
                 return default;
             }
         }
@@ -304,8 +304,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var data = new DataBuilder( Source, Data )
-                        ?.GetData();
+                    var data = new DataBuilder( Source, Data )?.GetData();
 
                     return Verify.Rows( data )
                         ? data
@@ -313,7 +312,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Authority.Fail( ex );
                     return default;
                 }
             }
@@ -333,16 +332,14 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<DataRow> FilterData( Field field, string filter )
         {
-            if( Verify.Field( field ) 
+            if( Verify.Field( field )
                 && Verify.Input( filter ) )
             {
                 try
                 {
-                    var data = new DataBuilder( Source, Data )
-                        ?.GetData();
+                    var data = new DataBuilder( Source, Data )?.GetData();
 
-                    var filtered = data
-                        ?.Filter( field.ToString(), filter );
+                    var filtered = data?.Filter( field.ToString(), filter );
 
                     return Verify.Rows( filtered )
                         ? filtered
@@ -350,7 +347,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Authority.Fail( ex );
                     return default;
                 }
             }
@@ -382,7 +379,7 @@ namespace BudgetExecution
                     }
                     catch( Exception ex )
                     {
-                        Fail( ex );
+                        Authority.Fail( ex );
                         return default;
                     }
                 }
@@ -391,7 +388,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Authority.Fail( ex );
                 return default;
             }
         }
@@ -422,7 +419,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Authority.Fail( ex );
                     return default;
                 }
             }

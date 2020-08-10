@@ -1,6 +1,6 @@
-﻿// <copyright file="ControlData.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "BudgetNumber.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -101,7 +101,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetNumber.Fail( ex );
                 return default;
             }
         }
@@ -130,7 +130,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    BudgetNumber.Fail( ex );
                     return Element.Default;
                 }
             }
@@ -156,7 +156,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetNumber.Fail( ex );
                 return Element.Default;
             }
         }
@@ -185,7 +185,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetNumber.Fail( ex );
                 return Element.Default;
             }
         }
@@ -208,7 +208,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetNumber.Fail( ex );
                 return Element.Default;
             }
         }
@@ -238,7 +238,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetNumber.Fail( ex );
                 return Element.Default;
             }
         }
@@ -260,7 +260,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetNumber.Fail( ex );
                 return Element.Default;
             }
         }
@@ -274,13 +274,13 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( BudgetNumber.Source )
+                    ? BudgetNumber.Source
                     : Source.NS;
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetNumber.Fail( ex );
                 return Source.NS;
             }
         }

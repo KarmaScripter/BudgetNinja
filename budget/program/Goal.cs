@@ -1,6 +1,6 @@
-﻿// <copyright file="Goal.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Goal.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -24,7 +24,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
-    public sealed class Goal : IGoal, IProgramElement, ISource
+    public class Goal : IGoal, IProgramElement, ISource
     {
         // **************************************************************************************************************************
         // ****************************************************     FIELDS    *******************************************************
@@ -99,7 +99,7 @@ namespace BudgetExecution
         /// </param>
         public Goal( string code )
         {
-            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( Goal.Source, GetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.GoalId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -341,8 +341,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( Goal.Source )
+                    ? Goal.Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -356,7 +356,7 @@ namespace BudgetExecution
         /// Get Error Dialog.
         /// </summary>
         /// <param name="ex">The ex.</param>
-        private static void Fail( Exception ex )
+        private protected static void Fail( Exception ex )
         {
             using var error = new Error( ex );
             error?.SetText();

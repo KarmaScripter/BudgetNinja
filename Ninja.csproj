@@ -282,8 +282,8 @@
     <Compile Include="transfer\FundTransfer.cs" />
     <Compile Include="transfer\IReprogramming.cs" />
     <Compile Include="transfer\Reprogramming.cs" />
+    <None Include="BudgetExecution.DotSettings" />
     <None Include="template\Control.xlsx" />
-    <None Include="Ninja.DotSettings" />
     <None Include="template\Report.xlsx" />
     <None Include="fiscalyear\Year" />
     <None Include=".editorconfig" />

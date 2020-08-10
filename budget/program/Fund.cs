@@ -1,6 +1,6 @@
-﻿// <copyright file="Fund.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Fund.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -18,7 +18,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Local" ) ]
-    public sealed class Fund : IFund, ISource
+    public class Fund : IFund, ISource
     {
         // **************************************************************************************************************************
         // ****************************************************     FIELDS    *******************************************************
@@ -48,7 +48,7 @@ namespace BudgetExecution
         /// </param>
         public Fund( FundCode fundcode )
         {
-            Record = new DataBuilder( Source, GetArgs( fundcode ) )?.GetRecord();
+            Record = new DataBuilder( Fund.Source, GetArgs( fundcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.FundId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -65,7 +65,7 @@ namespace BudgetExecution
         /// </param>
         public Fund( string code )
         {
-            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( Fund.Source, GetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.FundId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -435,8 +435,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( Fund.Source )
+                    ? Fund.Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -450,7 +450,7 @@ namespace BudgetExecution
         /// Get Error Dialog.
         /// </summary>
         /// <param name="ex">The ex.</param>
-        private static void Fail( Exception ex )
+        private protected static void Fail( Exception ex )
         {
             using var error = new Error( ex );
             error?.SetText();

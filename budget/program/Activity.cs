@@ -1,6 +1,6 @@
-﻿// <copyright file="Activity.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Activity.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -118,7 +118,7 @@ namespace BudgetExecution
         /// </param>
         public Activity( string code )
         {
-            Record = new DataBuilder( Source, SetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( Activity.Source, SetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.ActivityId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -334,8 +334,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( Activity.Source )
+                    ? Activity.Source
                     : Source.NS;
             }
             catch( Exception ex )

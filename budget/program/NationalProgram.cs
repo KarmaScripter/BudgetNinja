@@ -1,6 +1,6 @@
-﻿// <copyright file="NationalProgram.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "NationalProgram.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -23,7 +23,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
-    public sealed class NationalProgram : INationalProgram, ISource
+    public class NationalProgram : INationalProgram, ISource
     {
         // ***************************************************************************************************************************
         // ****************************************************     FIELDS    ********************************************************
@@ -107,7 +107,7 @@ namespace BudgetExecution
         /// </param>
         public NationalProgram( string npmcode )
         {
-            Record = new DataBuilder( Source, GetArgs( npmcode ) )?.GetRecord();
+            Record = new DataBuilder( NationalProgram.Source, GetArgs( npmcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.NationalProgramId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -406,8 +406,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( NationalProgram.Source )
+                    ? NationalProgram.Source
                     : Source.NS;
             }
             catch( Exception ex )

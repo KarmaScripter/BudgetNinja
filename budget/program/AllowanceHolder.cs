@@ -1,6 +1,6 @@
-﻿// <copyright file="AllowanceHolder.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "AllowanceHolder.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -50,7 +50,8 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "SuggestBaseTypeForParameter" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
-    public sealed class AllowanceHolder : IAllowanceHolder, IProgramElement, ISource
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Local" ) ]
+    public class AllowanceHolder : IAllowanceHolder, IProgramElement, ISource
     {
         // *************************************************************************************************************************
         // ****************************************************     FIELDS    ******************************************************
@@ -126,7 +127,7 @@ namespace BudgetExecution
         /// </param>
         public AllowanceHolder( string ahcode )
         {
-            Record = new DataBuilder( Source, SetArgs( ahcode ) )?.GetRecord();
+            Record = new DataBuilder( AllowanceHolder.Source, SetArgs( ahcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.AllowanceHolderId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -342,8 +343,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( AllowanceHolder.Source )
+                    ? AllowanceHolder.Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -357,7 +358,7 @@ namespace BudgetExecution
         /// Get Error Dialog.
         /// </summary>
         /// <param name="ex">The ex.</param>
-        private static void Fail( Exception ex )
+        private protected static void Fail( Exception ex )
         {
             using var error = new Error( ex );
             error?.SetText();

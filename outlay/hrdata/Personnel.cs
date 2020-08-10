@@ -1,6 +1,6 @@
-﻿// <copyright file="Personnel.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Personnel.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -173,7 +173,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Personnel.Fail( ex );
                     return string.Empty;
                 }
             }
@@ -213,7 +213,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Personnel.Fail( ex );
                     return default;
                 }
             }
@@ -247,7 +247,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Personnel.Fail( ex );
                     return default;
                 }
             }
@@ -277,7 +277,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Personnel.Fail( ex );
                 return default;
             }
         }
@@ -295,7 +295,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Personnel.Fail( ex );
                 return default;
             }
         }
@@ -322,7 +322,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Personnel.Fail( ex );
                 return default;
             }
         }
@@ -340,9 +340,8 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                using var error = new Error( ex );
-                error?.SetText();
-                error?.ShowDialog();
+                Personnel.Fail( ex );
+
                 return default;
             }
         }
@@ -369,7 +368,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Personnel.Fail( ex );
                 return default;
             }
         }
@@ -387,7 +386,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Personnel.Fail( ex );
                 return default;
             }
         }
@@ -405,7 +404,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Personnel.Fail( ex );
                 return default;
             }
         }
@@ -434,7 +433,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Personnel.Fail( ex );
                 return default;
             }
         }
@@ -463,7 +462,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Personnel.Fail( ex );
                     return default;
                 }
             }
@@ -481,7 +480,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Personnel.Fail( ex );
                     return default;
                 }
             }

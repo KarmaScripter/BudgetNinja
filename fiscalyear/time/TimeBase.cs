@@ -1,6 +1,6 @@
-﻿// <copyright file="TimeBase.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "TimeBase.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -47,7 +47,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return string.Empty;
                 }
             }
@@ -82,7 +82,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return Date.NS.ToString();
                 }
             }
@@ -108,7 +108,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                TimeBase.Fail( ex );
                 return Date.NS.ToString();
             }
         }
@@ -131,8 +131,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var names = datarow.Table
-                        ?.GetColumnNames();
+                    var names = datarow.Table?.GetColumnNames();
 
                     return names?.Contains( date.ToString() ) == true
                         ? date.ToString()
@@ -140,7 +139,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return Date.NS.ToString();
                 }
             }
@@ -171,7 +170,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return Date.NS;
                 }
             }
@@ -210,7 +209,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return Date.NS;
                 }
             }
@@ -247,7 +246,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return Date.NS;
                 }
             }
@@ -273,7 +272,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                TimeBase.Fail( ex );
                 return default( DateTime );
             }
         }
@@ -306,7 +305,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return default( DateTime );
                 }
             }
@@ -340,7 +339,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return default( DateTime );
                 }
             }
@@ -366,7 +365,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                TimeBase.Fail( ex );
                 return string.Empty;
             }
         }
@@ -399,7 +398,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return string.Empty;
                 }
             }
@@ -433,7 +432,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    TimeBase.Fail( ex );
                     return string.Empty;
                 }
             }

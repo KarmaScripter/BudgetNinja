@@ -1,6 +1,6 @@
-﻿// <copyright file="Folder.cs" company="Terry D. Eppler">
-// Copyright (c) Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Folder.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -68,7 +68,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
                 return default;
             }
         }
@@ -88,7 +88,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
                 return default;
             }
         }
@@ -109,7 +109,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
             }
         }
 
@@ -139,7 +139,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
                 return default;
             }
         }
@@ -160,7 +160,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
                 return default;
             }
         }
@@ -182,7 +182,7 @@ namespace BudgetExecution
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
                 return default;
             }
         }
@@ -209,7 +209,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
             }
         }
 
@@ -228,7 +228,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
             }
         }
 
@@ -248,7 +248,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Folder.Fail( ex );
             }
         }
 
@@ -266,7 +266,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Folder.Fail( ex );
                 }
             }
         }

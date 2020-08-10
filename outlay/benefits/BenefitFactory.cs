@@ -1,6 +1,6 @@
-﻿// <copyright file="BenefitFactory.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "BenefitFactory.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -87,7 +87,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return default;
             }
         }
@@ -108,7 +108,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return default;
             }
         }
@@ -129,7 +129,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return default;
             }
         }
@@ -150,7 +150,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return default( HumanResourceOrganization );
             }
         }
@@ -171,7 +171,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return default( WorkCode );
             }
         }
@@ -192,7 +192,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return Element.Default;
             }
         }
@@ -213,7 +213,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return default( ResourcePlanningOffice );
             }
         }
@@ -234,7 +234,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BenefitFactory.Fail( ex );
                 return default;
             }
         }

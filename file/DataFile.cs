@@ -1,6 +1,6 @@
-﻿// <copyright file="{ClassName}.cs" company="Terry D. Eppler">
-// Copyright (c) Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "DataFile.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -84,7 +84,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return default;
             }
         }
@@ -110,7 +110,7 @@ namespace BudgetExecution
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
             }
         }
 
@@ -152,7 +152,7 @@ namespace BudgetExecution
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return false;
             }
         }
@@ -188,7 +188,7 @@ namespace BudgetExecution
                 }
                 catch( IOException ex )
                 {
-                    Fail( ex );
+                    DataFile.Fail( ex );
                     return default;
                 }
             }
@@ -212,7 +212,7 @@ namespace BudgetExecution
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return string.Empty;
             }
         }
@@ -231,7 +231,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return default;
             }
         }
@@ -250,7 +250,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return default;
             }
         }
@@ -271,7 +271,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return default;
             }
         }
@@ -292,7 +292,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return default;
             }
         }
@@ -311,7 +311,7 @@ namespace BudgetExecution
             }
             catch( IOException ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return default;
             }
         }
@@ -335,7 +335,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                DataFile.Fail( ex );
                 return default;
             }
         }

@@ -1,6 +1,6 @@
-﻿// <copyright file="Supplemental.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Supplemental.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -73,7 +73,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Supplemental.Fail( ex );
                 return Element.Default;
             }
         }
@@ -93,7 +93,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Supplemental.Fail( ex );
                 return default;
             }
         }
@@ -112,7 +112,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Supplemental.Fail( ex );
                 return string.Empty;
             }
         }
@@ -132,7 +132,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Supplemental.Fail( ex );
                 return default;
             }
         }

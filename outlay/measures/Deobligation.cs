@@ -1,6 +1,6 @@
-﻿// <copyright file="Deobligation.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Deobligation.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -23,7 +23,7 @@ namespace BudgetExecution
     /// </summary>
     /// <seealso cref = "Outlay"/>
     /// <seealso cref = "IDeobligation"/>
-    public sealed class Deobligation : Obligation
+    public class Deobligation : Obligation
     {
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -140,7 +140,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Deobligation.Fail( ex );
                 return default;
             }
         }
@@ -161,7 +161,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Deobligation.Fail( ex );
                 return default;
             }
         }

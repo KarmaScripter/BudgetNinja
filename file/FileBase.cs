@@ -1,6 +1,6 @@
-﻿// <copyright file="{ClassName}.cs" company="Terry D. Eppler">
-// Copyright (c) Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "FileBase.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -304,8 +304,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FileInfo?.DirectoryName )
-                    && Directory.Exists( FileInfo?.DirectoryName );
+                return Verify.Input( FileInfo?.DirectoryName ) && Directory.Exists( FileInfo?.DirectoryName );
             }
             catch( Exception ex )
             {

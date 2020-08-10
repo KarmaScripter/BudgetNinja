@@ -1,6 +1,6 @@
-﻿// <copyright file="Division.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Division.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 // ReSharper disable All
 
@@ -196,8 +196,7 @@ namespace BudgetExecution
 
                     if( Verify.Rows( data ) )
                     {
-                        var controlnumber = data
-                            ?.Select( dr => new ControlNumber( dr ) );
+                        var controlnumber = data?.Select( dr => new ControlNumber( dr ) );
 
                         return controlnumber?.Any() == true
                             ? controlnumber
@@ -272,11 +271,9 @@ namespace BudgetExecution
                         [ $"{Field.RcCode}" ] = Code?.GetValue()
                     };
 
-                    var data = new DataBuilder( Source.HumanResourceOrganizations, args )
-                        ?.GetData();
+                    var data = new DataBuilder( Source.HumanResourceOrganizations, args )?.GetData();
 
-                    var hrorg = data
-                        ?.Select( r => new HumanResourceOrganization( r ) );
+                    var hrorg = data?.Select( r => new HumanResourceOrganization( r ) );
 
                     return hrorg?.Any() == true
                         ? hrorg
@@ -349,8 +346,7 @@ namespace BudgetExecution
         /// </returns>
         private IDictionary<string, object> GetArgs( IResponsibilityCenter rc )
         {
-            var code = rc?.GetCode()
-                ?.GetValue();
+            var code = rc?.GetCode()?.GetValue();
 
             if( Verify.Input( code )
                 && code.StartsWith( "06", StringComparison.Ordinal ) == true )

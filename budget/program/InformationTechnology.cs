@@ -1,6 +1,6 @@
-﻿// <copyright file="InformationTechnology.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "InformationTechnology.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -23,7 +23,7 @@ namespace BudgetExecution
     /// <seealso cref = "IInformationTechnology"/>
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
-    public sealed class InformationTechnology : IInformationTechnology, ISource
+    public class InformationTechnology : IInformationTechnology, ISource
     {
         // ***************************************************************************************************************************
         // ****************************************************     FIELDS    ********************************************************
@@ -111,7 +111,7 @@ namespace BudgetExecution
         /// </param>
         public InformationTechnology( string itcode )
         {
-            Record = new DataBuilder( Source, GetArgs( itcode ) )?.GetRecord();
+            Record = new DataBuilder( InformationTechnology.Source, GetArgs( itcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.InformationTechnologyId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -428,8 +428,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( InformationTechnology.Source )
+                    ? InformationTechnology.Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -447,7 +447,7 @@ namespace BudgetExecution
         /// </returns>
         public override string ToString()
         {
-            if( Code != null 
+            if( Code != null
                 && Verify.Input( Code.GetValue() ) )
             {
                 try
@@ -468,7 +468,7 @@ namespace BudgetExecution
         /// Get Error Dialog.
         /// </summary>
         /// <param name="ex">The ex.</param>
-        private static void Fail( Exception ex )
+        private protected static void Fail( Exception ex )
         {
             using var error = new Error( ex );
             error?.SetText();

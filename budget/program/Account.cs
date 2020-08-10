@@ -1,6 +1,6 @@
-﻿// <copyright file="Account.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Account.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -18,7 +18,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
-    public sealed class Account : AccountBase, IAccount, ISource
+    public class Account : AccountBase, IAccount, ISource
     {
         // *************************************************************************************************************************
         // ****************************************************     FIELDS    ******************************************************
@@ -108,7 +108,7 @@ namespace BudgetExecution
         /// </param>
         public Account( string code )
         {
-            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( Account.Source, GetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.AccountId );
             Code = new Element( Record, Field.Code );
             NpmCode = new Element( Record, Field.NpmCode );
@@ -137,7 +137,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }
@@ -165,7 +165,7 @@ namespace BudgetExecution
                 }
                 catch( SystemException ex )
                 {
-                    Fail( ex );
+                    Account.Fail( ex );
                     return default;
                 }
             }
@@ -194,7 +194,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }
@@ -220,7 +220,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }
@@ -246,7 +246,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }
@@ -272,7 +272,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }
@@ -298,7 +298,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }
@@ -319,7 +319,7 @@ namespace BudgetExecution
             }
             catch( SystemException ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return string.Empty;
             }
         }
@@ -339,7 +339,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }
@@ -353,13 +353,13 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( Account.Source )
+                    ? Account.Source
                     : Source.NS;
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return Source.NS;
             }
         }
@@ -381,7 +381,7 @@ namespace BudgetExecution
             }
             catch( SystemException ex )
             {
-                Fail( ex );
+                Account.Fail( ex );
                 return default;
             }
         }

@@ -1,6 +1,6 @@
-﻿// <copyright file="Overtime.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Overtime.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -134,7 +134,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    Fail( ex );
+                    Overtime.Fail( ex );
                     return default;
                 }
             }
@@ -157,7 +157,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Overtime.Fail( ex );
                 return default;
             }
         }
@@ -177,7 +177,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                Overtime.Fail( ex );
                 return default;
             }
         }

@@ -1,6 +1,6 @@
-﻿// <copyright file="UnliquidatedObligation.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "UnliquidatedObligation.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -129,7 +129,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                UnliquidatedObligation.Fail( ex );
                 return default;
             }
         }
@@ -149,7 +149,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                UnliquidatedObligation.Fail( ex );
                 return default;
             }
         }
@@ -169,7 +169,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                UnliquidatedObligation.Fail( ex );
                 return default;
             }
         }

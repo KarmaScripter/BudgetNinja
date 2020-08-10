@@ -1,6 +1,6 @@
-﻿// <copyright file="Grid.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "Grid.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -104,7 +104,10 @@ namespace BudgetExecution
         {
             Worksheet = worksheet;
             Range = Worksheet.Cells[ cell[ 0 ], cell[ 1 ], cell[ 2 ], cell[ 3 ] ];
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row, Range.End.Column );
+
+            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row,
+                Range.End.Column );
+
             From = ( Address.Start.Row, Address.Start.Column );
             To = ( Address.End.Row, Address.End.Column );
         }
@@ -133,7 +136,10 @@ namespace BudgetExecution
         {
             Worksheet = worksheet;
             Range = Worksheet.Cells[ from.Row, from.Column ];
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.Start.Row, Range.Start.Column );
+
+            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.Start.Row,
+                Range.Start.Column );
+
             From = from;
             To = From;
         }

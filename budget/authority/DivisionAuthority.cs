@@ -1,6 +1,6 @@
-﻿// <copyright file="DivisionAuthority.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "DivisionAuthority.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -98,7 +98,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                DivisionAuthority.Fail( ex );
                 return -1D;
             }
         }

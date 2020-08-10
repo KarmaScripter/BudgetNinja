@@ -1,6 +1,6 @@
-﻿// <copyright file="FullTimeEquivalent.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "FullTimeEquivalent.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 using System;
 
@@ -22,7 +22,7 @@ namespace BudgetExecution
     /// an FullTimeEquivalent of 0.5 signals half of a full work or school load.
     /// </summary>
     /// <seealso cref = "ProgramResultsCode"/>
-    public sealed class FullTimeEquivalent : ProgramResultsCode, IFullTimeEquivalent
+    public class FullTimeEquivalent : ProgramResultsCode, IFullTimeEquivalent
     {
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -119,7 +119,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                FullTimeEquivalent.Fail( ex );
                 return default;
             }
         }
@@ -139,7 +139,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                FullTimeEquivalent.Fail( ex );
                 return default;
             }
         }

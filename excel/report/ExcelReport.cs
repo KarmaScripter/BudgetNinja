@@ -1,6 +1,6 @@
-﻿// <copyright file="ExcelReport.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "ExcelReport.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -68,9 +68,8 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    using var error = new Error( ex );
-                    error?.SetText();
-                    error?.ShowDialog();
+                    ExcelReport.Fail( ex );
+
                     return false;
                 }
             }
@@ -105,9 +104,8 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    using var error = new Error( ex );
-                    error?.SetText();
-                    error?.ShowDialog();
+                    ExcelReport.Fail( ex );
+
                     return default;
                 }
             }
@@ -194,9 +192,8 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    using var error = new Error( ex );
-                    error?.SetText();
-                    error?.ShowDialog();
+                    ExcelReport.Fail( ex );
+
                     return default;
                 }
             }
@@ -228,9 +225,8 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                using var error = new Error( ex );
-                error?.SetText();
-                error?.ShowDialog();
+                ExcelReport.Fail( ex );
+
                 return default;
             }
         }
@@ -255,15 +251,13 @@ namespace BudgetExecution
         {
             try
             {
-                return type == typeof( string )
-                    || type.IsArray
-                    || type.IsGenericType && type.GetGenericTypeDefinition() == typeof( Nullable<> );
+                return type == typeof( string ) || type.IsArray || type.IsGenericType
+                    && type.GetGenericTypeDefinition() == typeof( Nullable<> );
             }
             catch( Exception ex )
             {
-                using var error = new Error( ex );
-                error?.SetText();
-                error?.ShowDialog();
+                ExcelReport.Fail( ex );
+
                 return false;
             }
         }
@@ -300,9 +294,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                using var error = new Error( ex );
-                error?.SetText();
-                error?.ShowDialog();
+                ExcelReport.Fail( ex );
             }
         }
 
@@ -341,9 +333,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    using var error = new Error( ex );
-                    error?.SetText();
-                    error?.ShowDialog();
+                    ExcelReport.Fail( ex );
                 }
             }
         }
@@ -371,9 +361,8 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                using var error = new Error( ex );
-                error?.SetText();
-                error?.ShowDialog();
+                ExcelReport.Fail( ex );
+
                 return default;
             }
         }
@@ -433,9 +422,7 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    using var error = new Error( ex );
-                    error?.SetText();
-                    error?.ShowDialog();
+                    ExcelReport.Fail( ex );
                 }
             }
         }
@@ -519,11 +506,20 @@ namespace BudgetExecution
                 }
                 catch( Exception ex )
                 {
-                    using var error = new Error( ex );
-                    error?.SetText();
-                    error?.ShowDialog();
+                    ExcelReport.Fail( ex );
                 }
             }
+        }
+
+        /// <summary>
+        /// Get Error Dialog.
+        /// </summary>
+        /// <param name="ex">The ex.</param>
+        private protected static void Fail( Exception ex )
+        {
+            using var error = new Error( ex );
+            error?.SetText();
+            error?.ShowDialog();
         }
     }
 }

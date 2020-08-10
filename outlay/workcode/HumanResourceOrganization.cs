@@ -1,6 +1,6 @@
-﻿// <copyright file="HumanResourceOrganization.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "HumanResourceOrganization.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -232,12 +232,10 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var pers = new Builder( Source, Args )
-                        ?.GetData()
+                    var pers = new Builder( HumanResourceOrganization.Source, Args )?.GetData()
                         ?.Select( r => r );
 
-                    var query = pers
-                        ?.Select( h => new HumanResourceOrganization( h ) );
+                    var query = pers?.Select( h => new HumanResourceOrganization( h ) );
 
                     return query?.Any() == true
                         ? query
@@ -332,8 +330,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( HumanResourceOrganization.Source )
+                    ? HumanResourceOrganization.Source
                     : Source.NS;
             }
             catch( Exception ex )

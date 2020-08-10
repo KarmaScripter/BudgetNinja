@@ -1,6 +1,6 @@
-﻿// <copyright file="BudgetFiscalYear.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "BudgetFiscalYear.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -34,7 +34,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
-    public sealed class BudgetFiscalYear : FiscalYear, IBudgetFiscalYear, ISource
+    public class BudgetFiscalYear : FiscalYear, IBudgetFiscalYear, ISource
     {
         // **************************************************************************************************************************
         // ****************************************************     FIELDS    *******************************************************
@@ -54,8 +54,8 @@ namespace BudgetExecution
         /// </summary>
         public BudgetFiscalYear()
         {
-            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( GetCurrentYear().ToString() ) )
-                ?.GetRecord();
+            Record = new DataBuilder( BudgetFiscalYear.Source, Provider.SQLite,
+                SetArgs( GetCurrentYear().ToString() ) )?.GetRecord();
 
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
@@ -83,7 +83,7 @@ namespace BudgetExecution
         public BudgetFiscalYear( string bfy )
         {
             InputYear = new Element( Field.BFY, bfy );
-            Record = new DataBuilder( Source, SetArgs( bfy ) )?.GetRecord();
+            Record = new DataBuilder( BudgetFiscalYear.Source, SetArgs( bfy ) )?.GetRecord();
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
             EBFY = new Element( Record, Field.EBFY );
@@ -161,7 +161,7 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( BFY fy )
         {
-            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
+            Record = new DataBuilder( BudgetFiscalYear.Source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
             EBFY = new Element( Record, Field.EBFY );
@@ -253,7 +253,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return Key.Default;
             }
         }
@@ -273,7 +273,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return Element.Default;
             }
         }
@@ -293,7 +293,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return Element.Default;
             }
         }
@@ -313,7 +313,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return Element.Default;
             }
         }
@@ -359,7 +359,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return default;
             }
         }
@@ -381,7 +381,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return default;
             }
         }
@@ -399,7 +399,7 @@ namespace BudgetExecution
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return default( IBudgetFiscalYear );
             }
         }
@@ -413,13 +413,13 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( BudgetFiscalYear.Source )
+                    ? BudgetFiscalYear.Source
                     : Source.NS;
             }
             catch( Exception ex )
             {
-                Fail( ex );
+                BudgetFiscalYear.Fail( ex );
                 return default( Source );
             }
         }

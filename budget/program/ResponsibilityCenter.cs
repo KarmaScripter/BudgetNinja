@@ -1,6 +1,6 @@
-﻿// <copyright file="ResponsibilityCenter.cs" company="Terry D. Eppler">
-// Copyright (c) Terry Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file = "ResponsibilityCenter.cs" company = "Terry D. Eppler">
+// // Copyright (c) Terry D. Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -18,7 +18,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Local" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
-    public sealed class ResponsibilityCenter : IResponsibilityCenter, IProgramElement, ISource
+    public class ResponsibilityCenter : IResponsibilityCenter, IProgramElement, ISource
     {
         // ***************************************************************************************************************************
         // ****************************************************     FIELDS    ********************************************************
@@ -69,7 +69,7 @@ namespace BudgetExecution
         public ResponsibilityCenter( string rccode )
             : this()
         {
-            Record = new DataBuilder( Source, SetArgs( rccode ) )?.GetRecord();
+            Record = new DataBuilder( ResponsibilityCenter.Source, SetArgs( rccode ) )?.GetRecord();
             ResponsibilityCenterId = new Key( Record, PrimaryKey.ResponsibilityCenterId );
             Name = new Element( Record, Field.Name );
             RcCode = new Element( Record, Field.RcCode );
@@ -172,8 +172,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( RcCode ) 
-                    ? RcCode.GetValue() 
+                return Verify.Element( RcCode )
+                    ? RcCode.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -294,8 +294,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Verify.Source( ResponsibilityCenter.Source )
+                    ? ResponsibilityCenter.Source
                     : Source.NS;
             }
             catch( Exception ex )
