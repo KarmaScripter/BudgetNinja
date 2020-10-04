@@ -290,12 +290,12 @@ namespace BudgetExecution
             {
                 return Verify.NPM( NPM )
                     ? NPM
-                    : NPM.None;
+                    : NPM.NS;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return NPM.None;
+                return NPM.NS;
             }
         }
 

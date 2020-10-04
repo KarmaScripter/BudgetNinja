@@ -738,7 +738,9 @@ namespace BudgetExecution
                             foreach( var p in code[ kvp.Key ] )
                             {
                                 worksheet.Cells[ row, col ].Value = p.Field<string>( $"{Field.AccountCode}" )
-                                    + " " + p.Field<string>( $"{Field.OrgCode}" ).Replace( "0600", "-" );
+                                    + " " 
+                                    + p.Field<string>( $"{Field.OrgCode}" )
+                                        ?.Replace( "0600", "-" );
 
                                 worksheet.Cells[ row, col + 1 ].Value = site;
                                 worksheet.Cells[ row, col + 2 ].Value = travel;
@@ -756,7 +758,8 @@ namespace BudgetExecution
                             foreach( var p in code[ kvp.Key ] )
                             {
                                 worksheet.Cells[ row, col ].Value = p.Field<string>( $"{Field.AccountCode}" )
-                                    + "- " + p.Field<string>( $"{Field.FundCode}" );
+                                    + "- "
+                                    + p.Field<string>( $"{Field.FundCode}" );
 
                                 worksheet.Cells[ row, col + 1 ].Value = site;
                                 worksheet.Cells[ row, col + 2 ].Value = travel;

@@ -160,7 +160,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( budgetlevel ) && int.Parse( budgetlevel ) < 9
+                return Verify.Input( budgetlevel )
+                    && int.Parse( budgetlevel ) < 9
                     && int.Parse( budgetlevel ) > 6
                     && !Enum.IsDefined( typeof( Level ), int.Parse( budgetlevel ) )
                         ? (Level)Enum.Parse( typeof( Level ), budgetlevel )

@@ -258,7 +258,6 @@ ServiceFabricBackup/
 
 # Budget Execution Files
 *.exe
-[Ll]ib/
 [Ee]tc/
 [Dd]b/
 [Dd]atabases/
