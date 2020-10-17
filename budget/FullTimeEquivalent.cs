@@ -13,7 +13,7 @@ namespace BudgetExecution
     using System.Threading;
 
     /// <summary>
-    /// Full-time equivalent (FullTimeEquivalent) or whole time equivalent (WTE) is a
+    /// Full-time equivalent (FTE) or whole time equivalent (WTE) is a
     /// unit that indicates the workload of an employed person (or student) in a way
     /// that makes workloads or class loads comparable across various contexts.
     /// FullTimeEquivalent is often used to measure a worker's or student's involvement
