@@ -40,7 +40,7 @@ namespace BudgetExecution
             OriginalActionDate = GetOriginalActionDate();
             Expenditures = GetExpenditures();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Expenditure;
+            Type = OutlayType.Expenditure;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace BudgetExecution
             OriginalActionDate = GetOriginalActionDate();
             Expenditures = GetExpenditures();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Expenditure;
+            Type = OutlayType.Expenditure;
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace BudgetExecution
             OriginalActionDate = GetOriginalActionDate();
             Expenditures = GetExpenditures();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Expenditure;
+            Type = OutlayType.Expenditure;
         }
 
         // ***************************************************************************************************************************

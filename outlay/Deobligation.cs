@@ -34,7 +34,7 @@ namespace BudgetExecution
         /// </summary>
         public Deobligation()
         {
-            Type = ExpenseType.Deobligation;
+            Type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace BudgetExecution
             OriginalActionDate = GetOriginalActionDate();
             Amount = GetDeobligations();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Deobligation;
+            Type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace BudgetExecution
             OriginalActionDate = GetOriginalActionDate();
             Amount = GetDeobligations();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Deobligation;
+            Type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace BudgetExecution
             OriginalActionDate = GetOriginalActionDate();
             Amount = GetDeobligations();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Deobligation;
+            Type = OutlayType.Deobligation;
         }
 
         // **********************************************************************************************************************

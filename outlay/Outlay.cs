@@ -72,7 +72,7 @@ namespace BudgetExecution
             ULO = new Amount( Record, Numeric.ULO );
             Balance = new Amount( Record, Numeric.Balance );
             Data = Record?.ToDictionary();
-            Type = ExpenseType.All;
+            Type = OutlayType.All;
             SetExpenseType( Type );
         }
 
@@ -94,7 +94,7 @@ namespace BudgetExecution
             ULO = new Amount( Record, Numeric.ULO );
             Balance = new Amount( Record, Numeric.Balance );
             Data = Record?.ToDictionary();
-            Type = ExpenseType.All;
+            Type = OutlayType.All;
             SetExpenseType( Type );
         }
 
@@ -117,7 +117,7 @@ namespace BudgetExecution
             ULO = new Amount( Record, Numeric.ULO );
             Balance = new Amount( Record, Numeric.Balance );
             Data = Record?.ToDictionary();
-            Type = ExpenseType.All;
+            Type = OutlayType.All;
             SetExpenseType( Type );
         }
 

@@ -273,19 +273,19 @@ namespace BudgetExecution
             var prc = Allocation.GetData();
             var funds = Allocation.GetFunds();
 
-            if( funds.Any( p => p.GetCode().Equals( $"{FundCode.Zl}" ) ) )
+            if( funds.Any( p => p.GetCode().Equals( $"{FundCode.ZL}" ) ) )
             {
                 try
                 {
                     var grid = new Grid( Worksheet, ( 10, 2 ) );
                     var i = grid.From.Row;
                     var hdr = i - 1;
-                    var fund = new Fund( $"{FundCode.Zl}" );
+                    var fund = new Fund( $"{FundCode.ZL}" );
                     Budget.SetWorksheetProperties( grid.GetWorksheet() );
                     Budget.SetBudgetHeaderFormat( grid, fund, Allocation.GetBudgetFiscalYear() );
 
                     var code = prc
-                        .Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.Zl}" ) )
+                        .Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.ZL}" ) )
                         .Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                         .Select( f => f )
                         .ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
@@ -307,7 +307,7 @@ namespace BudgetExecution
                 }
             }
 
-            if( !funds.Any( p => p.GetCode().Equals( $"{FundCode.Zl}" ) ) )
+            if( !funds.Any( p => p.GetCode().Equals( $"{FundCode.ZL}" ) ) )
             {
                 Budget.HideWorksheet();
             }

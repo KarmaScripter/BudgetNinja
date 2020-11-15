@@ -56,7 +56,7 @@ namespace BudgetExecution
             FocCode = new Element( Record, Field.FocCode );
             FocName = new Element( Record, Field.FocName );
             TransactionNumber = new Element( Record, Field.TransactionNumber );
-            OriginalActionDate = new Time( Record, Date.OriginalActionDate );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
             Commitments = new Amount( Record, Numeric.Commitments );
             OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
             Obligations = new Amount( Record, Numeric.Obligations );
@@ -91,7 +91,7 @@ namespace BudgetExecution
             FocCode = new Element( Record, Field.FocCode );
             FocName = new Element( Record, Field.FocName );
             TransactionNumber = new Element( Record, Field.TransactionNumber );
-            OriginalActionDate = new Time( Record, Date.OriginalActionDate );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
             Commitments = new Amount( Record, Numeric.Commitments );
             OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
             Obligations = new Amount( Record, Numeric.Obligations );
@@ -126,7 +126,7 @@ namespace BudgetExecution
             FocCode = new Element( Record, Field.FocCode );
             FocName = new Element( Record, Field.FocName );
             TransactionNumber = new Element( Record, Field.TransactionNumber );
-            OriginalActionDate = new Time( Record, Date.OriginalActionDate );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
             Commitments = new Amount( Record, Numeric.Commitments );
             OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
             Obligations = new Amount( Record, Numeric.Obligations );

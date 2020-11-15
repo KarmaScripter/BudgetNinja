@@ -56,9 +56,9 @@ namespace BudgetExecution
             ReportingCode = new Element( Record, Field.ReportingCode );
             ReportingCodeName = new Element( Record, Field.ReportingCodeName );
             WorkCode = new Element( Record, Field.WorkCode );
-            CalendarDate = new Time( Record, Date.CalendarDate );
-            StartDate = new Time( Record, Date.StartDate );
-            EndDate = new Time( Record, Date.EndDate );
+            CalendarDate = new Time( Record, EventDate.CalendarDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
             Hours = new Amount( Record, Numeric.Hours );
             Args = Record?.ToDictionary();
         }
@@ -83,9 +83,9 @@ namespace BudgetExecution
             ReportingCode = new Element( Record, Field.ReportingCode );
             ReportingCodeName = new Element( Record, Field.ReportingCodeName );
             WorkCode = new Element( Record, Field.WorkCode );
-            CalendarDate = new Time( Record, Date.CalendarDate );
-            StartDate = new Time( Record, Date.StartDate );
-            EndDate = new Time( Record, Date.EndDate );
+            CalendarDate = new Time( Record, EventDate.CalendarDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
             Hours = new Amount( Record, Numeric.Hours );
             Args = Record?.ToDictionary();
         }
@@ -111,9 +111,9 @@ namespace BudgetExecution
             ReportingCode = new Element( Record, Field.ReportingCode );
             ReportingCodeName = new Element( Record, Field.ReportingCodeName );
             WorkCode = new Element( Record, Field.WorkCode );
-            CalendarDate = new Time( Record, Date.CalendarDate );
-            StartDate = new Time( Record, Date.StartDate );
-            EndDate = new Time( Record, Date.EndDate );
+            CalendarDate = new Time( Record, EventDate.CalendarDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
             Hours = new Amount( Record, Numeric.Hours );
             Args = Record?.ToDictionary();
         }

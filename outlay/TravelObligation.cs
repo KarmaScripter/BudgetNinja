@@ -51,11 +51,11 @@ namespace BudgetExecution
             LastName = new Element( Record, Field.LastName );
             Email = new Element( Record, Field.Email );
             Destination = new Element( Record, Field.Destination );
-            StartDate = new Time( Record, Date.StartDate );
-            EndDate = new Time( Record, Date.EndDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
             Amount = new Amount( Record, Numeric.Amount );
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Obligation;
+            Type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -78,11 +78,11 @@ namespace BudgetExecution
             LastName = new Element( Record, Field.LastName );
             Email = new Element( Record, Field.Email );
             Destination = new Element( Record, Field.Destination );
-            StartDate = new Time( Record, Date.StartDate );
-            EndDate = new Time( Record, Date.EndDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
             Amount = new Amount( Record, Numeric.Amount );
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Obligation;
+            Type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -104,11 +104,11 @@ namespace BudgetExecution
             LastName = new Element( Record, Field.LastName );
             Email = new Element( Record, Field.Email );
             Destination = new Element( Record, Field.Destination );
-            StartDate = new Time( Record, Date.StartDate );
-            EndDate = new Time( Record, Date.EndDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
             Amount = new Amount( Record, Numeric.Amount );
             Data = Record?.ToDictionary();
-            Type = ExpenseType.Obligation;
+            Type = OutlayType.Obligation;
         }
 
         // ***************************************************************************************************************************

@@ -37,7 +37,7 @@ namespace BudgetExecution
         private protected string SetName( string name )
         {
             if( Verify.Input( name )
-                && Enum.GetNames( typeof( Date ) )?.Contains( name ) == true )
+                && Enum.GetNames( typeof( EventDate ) )?.Contains( name ) == true )
             {
                 try
                 {
@@ -70,7 +70,7 @@ namespace BudgetExecution
         {
             if( datarow != null
                 && Verify.Input( name )
-                && Enum.GetNames( typeof( Date ) )?.Contains( name ) == true )
+                && Enum.GetNames( typeof( EventDate ) )?.Contains( name ) == true )
             {
                 try
                 {
@@ -78,16 +78,16 @@ namespace BudgetExecution
 
                     return columns?.Contains( name ) == true
                         ? name
-                        : Date.NS.ToString();
+                        : EventDate.NS.ToString();
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return Date.NS.ToString();
+                    return EventDate.NS.ToString();
                 }
             }
 
-            return Date.NS.ToString();
+            return EventDate.NS.ToString();
         }
 
         /// <summary>
@@ -98,18 +98,18 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected string SetName( Date date )
+        private protected string SetName( EventDate date )
         {
             try
             {
                 return Verify.Date( date )
                     ? date.ToString()
-                    : Date.NS.ToString();
+                    : EventDate.NS.ToString();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return Date.NS.ToString();
+                return EventDate.NS.ToString();
             }
         }
 
@@ -124,7 +124,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected string SetName( DataRow datarow, Date date )
+        private protected string SetName( DataRow datarow, EventDate date )
         {
             if( Verify.Row( datarow )
                 && Verify.Date( date ) )
@@ -135,16 +135,16 @@ namespace BudgetExecution
 
                     return names?.Contains( date.ToString() ) == true
                         ? date.ToString()
-                        : Date.NS.ToString();
+                        : EventDate.NS.ToString();
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return Date.NS.ToString();
+                    return EventDate.NS.ToString();
                 }
             }
 
-            return Date.NS.ToString();
+            return EventDate.NS.ToString();
         }
 
         /// <summary>
@@ -155,27 +155,27 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected Date SetDate( string name )
+        private protected EventDate SetDate( string name )
         {
             if( Verify.Input( name )
-                && Enum.GetNames( typeof( Date ) )?.Contains( name ) == true )
+                && Enum.GetNames( typeof( EventDate ) )?.Contains( name ) == true )
             {
                 try
                 {
-                    var date = (Date)Enum.Parse( typeof( Date ), name );
+                    var date = (EventDate)Enum.Parse( typeof( EventDate ), name );
 
-                    return Enum.IsDefined( typeof( Date ), date )
+                    return Enum.IsDefined( typeof( EventDate ), date )
                         ? date
                         : default;
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return Date.NS;
+                    return EventDate.NS;
                 }
             }
 
-            return Date.NS;
+            return EventDate.NS;
         }
 
         /// <summary>
@@ -189,32 +189,32 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected Date SetDate( DataRow datarow, string name )
+        private protected EventDate SetDate( DataRow datarow, string name )
         {
             if( datarow != null
                 && Verify.Input( name ) )
             {
                 try
                 {
-                    var date = (Date)Enum.Parse( typeof( Date ), name );
+                    var date = (EventDate)Enum.Parse( typeof( EventDate ), name );
                     var columns = datarow.Table?.GetColumnNames();
 
                     if( columns?.Any() == true
                         && columns?.Contains( $"{date}" ) == true )
                     {
-                        return Enum.GetNames( typeof( Date ) )?.Contains( $"{date}" ) == true
+                        return Enum.GetNames( typeof( EventDate ) )?.Contains( $"{date}" ) == true
                             ? date
-                            : Date.NS;
+                            : EventDate.NS;
                     }
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return Date.NS;
+                    return EventDate.NS;
                 }
             }
 
-            return Date.NS;
+            return EventDate.NS;
         }
 
         /// <summary>
@@ -228,7 +228,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected Date SetDate( DataRow datarow, Date date )
+        private protected EventDate SetDate( DataRow datarow, EventDate date )
         {
             if( datarow != null
                 && Verify.Date( date ) )
@@ -241,17 +241,17 @@ namespace BudgetExecution
                     {
                         return names?.Contains( date.ToString() ) == true
                             ? date
-                            : Date.NS;
+                            : EventDate.NS;
                     }
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return Date.NS;
+                    return EventDate.NS;
                 }
             }
 
-            return Date.NS;
+            return EventDate.NS;
         }
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace BudgetExecution
         {
             if( datarow != null
                 && Verify.Input( column )
-                && Enum.GetNames( typeof( Date ) )?.Contains( column ) == true )
+                && Enum.GetNames( typeof( EventDate ) )?.Contains( column ) == true )
             {
                 try
                 {
@@ -324,7 +324,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected DateTime SetDay( DataRow datarow, Date date )
+        private protected DateTime SetDay( DataRow datarow, EventDate date )
         {
             if( datarow != null
                 && Verify.Date( date ) )
@@ -385,7 +385,7 @@ namespace BudgetExecution
         {
             if( datarow != null
                 && Verify.Input( column )
-                && Enum.GetNames( typeof( Date ) )?.Contains( column ) == true )
+                && Enum.GetNames( typeof( EventDate ) )?.Contains( column ) == true )
             {
                 try
                 {
@@ -417,7 +417,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected string SetValue( DataRow datarow, Date date )
+        private protected string SetValue( DataRow datarow, EventDate date )
         {
             if( datarow != null
                 && Verify.Date( date ) )

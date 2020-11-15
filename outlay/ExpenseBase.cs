@@ -51,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The type.
         /// </value>
-        private protected virtual ExpenseType Type { get; set; }
+        private protected virtual OutlayType Type { get; set; }
 
         /// <summary>
         /// Gets or sets the pay period.
@@ -150,45 +150,45 @@ namespace BudgetExecution
         /// <exception cref = "ArgumentOutOfRangeException" >
         /// expense - null
         /// </exception>
-        private protected virtual void SetExpenseType( ExpenseType expense )
+        private protected virtual void SetExpenseType( OutlayType expense )
         {
             try
             {
-                if( Enum.IsDefined( typeof( ExpenseType ), expense ) )
+                if( Enum.IsDefined( typeof( OutlayType ), expense ) )
                 {
                     switch( expense )
                     {
-                        case ExpenseType.Obligation:
+                        case OutlayType.Obligation:
                         {
                             Obligations = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
-                        case ExpenseType.Commitment:
+                        case OutlayType.Commitment:
                         {
                             Commitments = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
-                        case ExpenseType.OpenCommitment:
+                        case OutlayType.OpenCommitment:
                         {
                             OpenCommitments = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
-                        case ExpenseType.ULO:
+                        case OutlayType.ULO:
                         {
                             ULO = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
-                        case ExpenseType.Deobligation:
+                        case OutlayType.Deobligation:
                         {
                             Deobligations = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
-                        case ExpenseType.All:
+                        case OutlayType.All:
                         {
                             Obligations = new Amount( Record, Numeric.Obligations );
                             Deobligations = new Amount( Record, Numeric.Obligations );
@@ -198,10 +198,10 @@ namespace BudgetExecution
                             break;
                         }
 
-                        case ExpenseType.NS:
+                        case OutlayType.NS:
                             break;
 
-                        case ExpenseType.Expenditure:
+                        case OutlayType.Expenditure:
                             break;
 
                         default:
@@ -220,18 +220,18 @@ namespace BudgetExecution
         /// </summary>
         /// <returns>
         /// </returns>
-        public virtual ExpenseType GetExpenseType()
+        public virtual OutlayType GetExpenseType()
         {
             try
             {
-                return Enum.IsDefined( typeof( ExpenseType ), Type.ToString() )
+                return Enum.IsDefined( typeof( OutlayType ), Type.ToString() )
                     ? Type
-                    : ExpenseType.NS;
+                    : OutlayType.NS;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return ExpenseType.NS;
+                return OutlayType.NS;
             }
         }
 

@@ -25,7 +25,7 @@ namespace BudgetExecution
         /// <inheritdoc/>
         public UnliquidatedObligation()
         {
-            Type = ExpenseType.ULO;
+            Type = OutlayType.ULO;
         }
 
         /// <summary>

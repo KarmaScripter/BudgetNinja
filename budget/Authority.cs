@@ -359,7 +359,7 @@ namespace BudgetExecution
         /// </summary>
         /// <returns>
         /// </returns>
-        public Availability GetAvailability()
+        public FundAvailability GetAvailability()
         {
             try
             {
@@ -370,7 +370,7 @@ namespace BudgetExecution
                     try
                     {
                         var availability =
-                            (Availability)Enum.Parse( typeof( Availability ), bfy?.GetValue() );
+                            (FundAvailability)Enum.Parse( typeof( FundAvailability ), bfy?.GetValue() );
 
                         return Verify.Availability( availability )
                             ? availability

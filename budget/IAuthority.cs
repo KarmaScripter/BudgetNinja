@@ -120,7 +120,7 @@ namespace BudgetExecution
         /// </summary>
         /// <returns>
         /// </returns>
-        Availability GetAvailability();
+        FundAvailability GetAvailability();
 
         /// <summary>
         /// Gets the amount.

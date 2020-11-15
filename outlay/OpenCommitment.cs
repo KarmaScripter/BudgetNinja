@@ -48,7 +48,7 @@ namespace BudgetExecution
             ID = new Key( Record, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.OpenCommitment;
+            Type = OutlayType.OpenCommitment;
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace BudgetExecution
             ID = new Key( Record, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.OpenCommitment;
+            Type = OutlayType.OpenCommitment;
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace BudgetExecution
             ID = new Key( Record, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
             Data = Record?.ToDictionary();
-            Type = ExpenseType.OpenCommitment;
+            Type = OutlayType.OpenCommitment;
         }
 
         // **********************************************************************************************************************

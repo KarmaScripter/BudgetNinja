@@ -60,8 +60,8 @@ namespace BudgetExecution
             StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
             StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
             ZipCode = new Element( Record, Field.ZipCode );
-            OriginalActionDate = new Time( Record, Date.OriginalActionDate );
-            LastActionDate = new Time( Record, Date.LastActionDate );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( Record, EventDate.LastActionDate );
             Commitments = new Amount( Record, Numeric.Commitments );
             OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
             Obligations = new Amount( Record, Numeric.Obligations );
@@ -97,8 +97,8 @@ namespace BudgetExecution
             StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
             StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
             ZipCode = new Element( Record, Field.ZipCode );
-            OriginalActionDate = new Time( Record, Date.OriginalActionDate );
-            LastActionDate = new Time( Record, Date.LastActionDate );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( Record, EventDate.LastActionDate );
             Commitments = new Amount( Record, Numeric.Commitments );
             OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
             Obligations = new Amount( Record, Numeric.Obligations );
@@ -133,8 +133,8 @@ namespace BudgetExecution
             StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
             StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
             ZipCode = new Element( Record, Field.ZipCode );
-            OriginalActionDate = new Time( Record, Date.OriginalActionDate );
-            LastActionDate = new Time( Record, Date.LastActionDate );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( Record, EventDate.LastActionDate );
             Commitments = new Amount( Record, Numeric.Commitments );
             OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
             Obligations = new Amount( Record, Numeric.Obligations );

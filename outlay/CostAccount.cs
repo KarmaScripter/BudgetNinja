@@ -52,7 +52,7 @@ namespace BudgetExecution
             DocumentType = new Element( Record, Field.DocumentType );
             DocumentPrefix = new Element( Record, Field.DocumentPrefix );
             DCN = new Element( Record, Field.DocumentType );
-            OriginalActionDate = new Time( Record, Date.OriginalActionDate );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
             ObligatingDocumentNumber = new Element( Record, Field.ObligatingDocumentNumber );
             System = new Element( Record, Field.System );
             TransactionNumber = new Element( Record, Field.TransactionNumber );

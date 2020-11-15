@@ -297,7 +297,6 @@
     <Content Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="etc\" />
     <Folder Include="fiscalyear\bfy\" />
     <Folder Include="fiscalyear\time\" />
     <Folder Include="Properties\" />

@@ -63,11 +63,11 @@ namespace BudgetExecution
             AppointmentType = new Element( Record, Field.AppointmentType );
             BargainingUnit = new Element( Record, Field.BargainingUnit );
             RetirementPlan = new Element( Record, Field.RetirementPlan );
-            HireDate = new Time( Record, Date.HireDate );
-            ServiceDate = new Time( Record, Date.ServiceDate );
-            WigiDueDate = new Time( Record, Date.WigiDueDate );
-            GradeEntryDate = new Time( Record, Date.GradeEntryDate );
-            StepEntryDate = new Time( Record, Date.StepEntryDate );
+            HireDate = new Time( Record, EventDate.HireDate );
+            ServiceDate = new Time( Record, EventDate.ServiceDate );
+            WigiDueDate = new Time( Record, EventDate.WigiDueDate );
+            GradeEntryDate = new Time( Record, EventDate.GradeEntryDate );
+            StepEntryDate = new Time( Record, EventDate.StepEntryDate );
             CompensationRate = new Amount( Record, Numeric.CompensationRate );
             Args = Record.ToDictionary();
         }
@@ -96,11 +96,11 @@ namespace BudgetExecution
             AppointmentType = new Element( Record, Field.AppointmentType );
             BargainingUnit = new Element( Record, Field.BargainingUnit );
             RetirementPlan = new Element( Record, Field.RetirementPlan );
-            HireDate = new Time( Record, Date.HireDate );
-            ServiceDate = new Time( Record, Date.ServiceDate );
-            WigiDueDate = new Time( Record, Date.WigiDueDate );
-            GradeEntryDate = new Time( Record, Date.GradeEntryDate );
-            StepEntryDate = new Time( Record, Date.StepEntryDate );
+            HireDate = new Time( Record, EventDate.HireDate );
+            ServiceDate = new Time( Record, EventDate.ServiceDate );
+            WigiDueDate = new Time( Record, EventDate.WigiDueDate );
+            GradeEntryDate = new Time( Record, EventDate.GradeEntryDate );
+            StepEntryDate = new Time( Record, EventDate.StepEntryDate );
             CompensationRate = new Amount( Record, Numeric.CompensationRate );
             Args = Record.ToDictionary();
         }
@@ -130,11 +130,11 @@ namespace BudgetExecution
             AppointmentType = new Element( Record, Field.AppointmentType );
             BargainingUnit = new Element( Record, Field.BargainingUnit );
             RetirementPlan = new Element( Record, Field.RetirementPlan );
-            HireDate = new Time( Record, Date.HireDate );
-            ServiceDate = new Time( Record, Date.ServiceDate );
-            WigiDueDate = new Time( Record, Date.WigiDueDate );
-            GradeEntryDate = new Time( Record, Date.GradeEntryDate );
-            StepEntryDate = new Time( Record, Date.StepEntryDate );
+            HireDate = new Time( Record, EventDate.HireDate );
+            ServiceDate = new Time( Record, EventDate.ServiceDate );
+            WigiDueDate = new Time( Record, EventDate.WigiDueDate );
+            GradeEntryDate = new Time( Record, EventDate.GradeEntryDate );
+            StepEntryDate = new Time( Record, EventDate.StepEntryDate );
             CompensationRate = new Amount( Record, Numeric.CompensationRate );
             Args = Record.ToDictionary();
         }

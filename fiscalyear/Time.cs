@@ -30,7 +30,7 @@ namespace BudgetExecution
         /// <summary>
         /// The default
         /// </summary>
-        public static readonly Time Default = new Time( Date.NS );
+        public static readonly Time Default = new Time( EventDate.NS );
 
         // **************************************************************************************************************************
         // ********************************************   CONSTRUCTORS     **********************************************************
@@ -73,7 +73,7 @@ namespace BudgetExecution
         /// </summary>
         /// <param name="date">The date.</param>
         /// <param name="value">The value.</param>
-        public Time( Date date, string value = "" )
+        public Time( EventDate date, string value = "" )
         {
             Name = SetName( date );
             Date = SetDate( date.ToString() );
@@ -86,7 +86,7 @@ namespace BudgetExecution
         /// </summary>
         /// <param name="datarow">The data.</param>
         /// <param name="date">The date.</param>
-        public Time( DataRow datarow, Date date )
+        public Time( DataRow datarow, EventDate date )
         {
             Date = SetDate( datarow, date );
             Name = SetName( datarow, date );
@@ -130,7 +130,7 @@ namespace BudgetExecution
         /// <value>
         /// The date.
         /// </value>
-        private protected Date Date { get; set; }
+        private protected EventDate Date { get; set; }
 
         /// <summary>
         /// Gets the value.
@@ -167,18 +167,18 @@ namespace BudgetExecution
         /// Gets the date.
         /// </summary>
         /// <returns></returns>
-        public Date GetDate()
+        public EventDate GetDate()
         {
             try
             {
-                return Enum.IsDefined( typeof( Date ), Date )
+                return Enum.IsDefined( typeof( EventDate ), Date )
                     ? Date
-                    : Date.NS;
+                    : EventDate.NS;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return Date.NS;
+                return EventDate.NS;
             }
         }
 

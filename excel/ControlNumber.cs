@@ -48,7 +48,7 @@ namespace BudgetExecution
             RcCode = new Element( Record, Field.RcCode );
             BFY = new Element( Record, Field.BFY );
             DivisionName = new Element( Record, Field.DivisionName );
-            DateIssued = new Time( Record, Date.DateIssued );
+            DateIssued = new Time( Record, EventDate.DateIssued );
             RegionControlNumber = new Element( Record, Field.RegionControlNumber );
             FundControlNumber = new Element( Record, Field.FundControlNumber );
             DivisionControlNumber = new Element( Record, Field.DivisionControlNumber );
@@ -70,7 +70,7 @@ namespace BudgetExecution
             RcCode = new Element( Record, Field.RcCode );
             BFY = new Element( Record, Field.BFY );
             DivisionName = new Element( Record, Field.DivisionName );
-            DateIssued = new Time( Record, Date.DateIssued );
+            DateIssued = new Time( Record, EventDate.DateIssued );
             RegionControlNumber = new Element( Record, Field.RegionControlNumber );
             FundControlNumber = new Element( Record, Field.FundControlNumber );
             DivisionControlNumber = new Element( Record, Field.DivisionControlNumber );
@@ -93,7 +93,7 @@ namespace BudgetExecution
             RcCode = new Element( Record, Field.RcCode );
             BFY = new Element( Record, Field.BFY );
             DivisionName = new Element( Record, Field.DivisionName );
-            DateIssued = new Time( Record, Date.DateIssued );
+            DateIssued = new Time( Record, EventDate.DateIssued );
             RegionControlNumber = new Element( Record, Field.RegionControlNumber );
             FundControlNumber = new Element( Record, Field.FundControlNumber );
             DivisionControlNumber = new Element( Record, Field.DivisionControlNumber );

@@ -48,8 +48,8 @@ namespace BudgetExecution
             InvoiceNumber = new Element( Record, Field.InvoiceNumber );
             ContractNumber = new Element( Record, Field.ContractNumber );
             OrderNumber = new Element( Record, Field.OrderNumber );
-            CheckDate = new Time( Record, Date.CheckDate );
-            InvoiceDate = new Time( Record, Date.InvoiceDate );
+            CheckDate = new Time( Record, EventDate.CheckDate );
+            InvoiceDate = new Time( Record, EventDate.InvoiceDate );
             ModificationNumber = new Element( Record, Field.ModificationNumber );
             DocumentType = new Element( Record, Field.DocumentNumber );
             DCN = new Element( Record, Field.DCN );
@@ -75,8 +75,8 @@ namespace BudgetExecution
             InvoiceNumber = new Element( Record, Field.InvoiceNumber );
             ContractNumber = new Element( Record, Field.ContractNumber );
             OrderNumber = new Element( Record, Field.OrderNumber );
-            CheckDate = new Time( Record, Date.CheckDate );
-            InvoiceDate = new Time( Record, Date.InvoiceDate );
+            CheckDate = new Time( Record, EventDate.CheckDate );
+            InvoiceDate = new Time( Record, EventDate.InvoiceDate );
             ModificationNumber = new Element( Record, Field.ModificationNumber );
             DocumentType = new Element( Record, Field.DocumentNumber );
             DCN = new Element( Record, Field.DCN );
@@ -102,8 +102,8 @@ namespace BudgetExecution
             InvoiceNumber = new Element( Record, Field.InvoiceNumber );
             ContractNumber = new Element( Record, Field.ContractNumber );
             OrderNumber = new Element( Record, Field.OrderNumber );
-            CheckDate = new Time( Record, Date.CheckDate );
-            InvoiceDate = new Time( Record, Date.InvoiceDate );
+            CheckDate = new Time( Record, EventDate.CheckDate );
+            InvoiceDate = new Time( Record, EventDate.InvoiceDate );
             ModificationNumber = new Element( Record, Field.ModificationNumber );
             DocumentType = new Element( Record, Field.DocumentNumber );
             DCN = new Element( Record, Field.DCN );
