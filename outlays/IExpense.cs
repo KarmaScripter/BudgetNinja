@@ -1,4 +1,4 @@
-﻿// <copyright file = "ICostBase.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "IExpense.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -7,115 +7,101 @@ namespace BudgetExecution
     using System;
     using System.Threading;
 
-    public interface ICostBase
+    // ********************************************************************************************************************************
+    // *********************************************************  ASSEMBLIES   ********************************************************
+    // ********************************************************************************************************************************
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IExpense
     {
         // ***************************************************************************************************************************
         // ****************************************************     METHODS   ********************************************************
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Gets the foc code.
+        /// Gets the original action date.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetFocCode();
+        ITime GetOriginalActionDate();
 
         /// <summary>
-        /// Gets the name of the foc.
+        /// Gets the type of the expense.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetFocName();
+        OutlayType GetExpenseType();
 
         /// <summary>
-        /// Gets the program project code.
+        /// Gets the pay period.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetProgramProjectCode();
+        IElement GetPayPeriod();
 
         /// <summary>
-        /// Gets the program area code.
+        /// Gets the hr org code.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetProgramAreaCode();
+        IElement GetHrOrgCode();
 
         /// <summary>
-        /// Gets the national program code.
+        /// Gets the work code.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetNpmCode();
+        IElement GetWorkCode();
 
         /// <summary>
-        /// Gets the type of the document.
+        /// Gets the commitments.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetDocumentType();
+        IAmount GetCommitments();
 
         /// <summary>
-        /// Gets the document prefix.
+        /// Gets the open commitments.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetDocumentPrefix();
+        IAmount GetOpenCommitments();
 
         /// <summary>
-        /// Gets the reimbursable agreement number.
+        /// Gets the obligations.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetAgreementNumber();
+        IAmount GetObligations();
 
         /// <summary>
-        /// Gets the site project code.
+        /// Gets the obligations.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetSiteProjectCode();
+        IAmount GetDeobligations();
 
         /// <summary>
-        /// Gets the financial system.
+        /// Gets the unliquidated obligations.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetFinancialSystem();
+        IAmount GetUnliquidatedObligations();
 
         /// <summary>
-        /// Gets the purchase request.
+        /// Gets the expenditures.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetPurchaseRequest();
+        IAmount GetExpenditures();
 
         /// <summary>
-        /// Gets the document control number.
+        /// Gets the available balance.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetDocumentControlNumber();
-
-        /// <summary>
-        /// Gets the grant number.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        IElement GetGrantNumber();
-
-        /// <summary>
-        /// Gets the obligating document number.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        IElement GetObligatingDocumentNumber();
-
-        /// <summary>
-        /// Gets the transaction number.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        IElement GetTransactionNumber();
+        IAmount GetBalance();
     }
 }

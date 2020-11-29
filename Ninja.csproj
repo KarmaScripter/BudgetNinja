@@ -40,6 +40,7 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
     <CodeAnalysisRuleSet />
+    <DocumentationFile>bin\Debug\BudgetNinja.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,7 +58,7 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>DbNinja.ico</ApplicationIcon>
+    <ApplicationIcon>etc\DbNinja.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BudgetBadger">
@@ -214,65 +215,65 @@
     <Compile Include="fiscalyear\ITime.cs" />
     <Compile Include="fiscalyear\Time.cs" />
     <Compile Include="fiscalyear\TimeBase.cs" />
-    <Compile Include="outlay\CostAccount.cs" />
-    <Compile Include="outlay\CostBase.cs" />
-    <Compile Include="outlay\ExpenseBase.cs" />
-    <Compile Include="outlay\ICostAccount.cs" />
-    <Compile Include="outlay\ICostBase.cs" />
-    <Compile Include="outlay\IExpenseBase.cs" />
-    <Compile Include="outlay\BenefitFactory.cs" />
-    <Compile Include="outlay\ILeave.cs" />
-    <Compile Include="outlay\Leave.cs" />
-    <Compile Include="outlay\LeaveBase.cs" />
-    <Compile Include="outlay\Employee.cs" />
-    <Compile Include="outlay\EmployeeBase.cs" />
-    <Compile Include="outlay\IEmployee.cs" />
-    <Compile Include="outlay\IPerson.cs" />
-    <Compile Include="outlay\ContactFactory.cs" />
-    <Compile Include="outlay\EmploymentBase.cs" />
-    <Compile Include="outlay\IEmploymentInfo.cs" />
-    <Compile Include="outlay\IWorkforceData.cs" />
-    <Compile Include="outlay\Personnel.cs" />
-    <Compile Include="outlay\WorkforceData.cs" />
-    <Compile Include="outlay\Commitment.cs" />
-    <Compile Include="outlay\Deobligation.cs" />
-    <Compile Include="outlay\Expenditure.cs" />
-    <Compile Include="outlay\ICommitment.cs" />
-    <Compile Include="outlay\IDeobligation.cs" />
-    <Compile Include="outlay\IObligation.cs" />
-    <Compile Include="outlay\IOpenCommitment.cs" />
-    <Compile Include="outlay\IOutlay.cs" />
-    <Compile Include="outlay\IUnliquidatedObligation.cs" />
-    <Compile Include="outlay\Obligation.cs" />
-    <Compile Include="outlay\OpenCommitment.cs" />
-    <Compile Include="outlay\Outlay.cs" />
-    <Compile Include="outlay\UnliquidatedObligation.cs" />
-    <Compile Include="outlay\IPurchase.cs" />
-    <Compile Include="outlay\IVendor.cs" />
-    <Compile Include="outlay\Payment.cs" />
-    <Compile Include="outlay\PayrollObligation.cs" />
-    <Compile Include="outlay\Procurement.cs" />
-    <Compile Include="outlay\ProcurementData.cs" />
-    <Compile Include="outlay\Purchase.cs" />
-    <Compile Include="outlay\Reimbursable.cs" />
-    <Compile Include="outlay\Requisition.cs" />
-    <Compile Include="outlay\RequisitionData.cs" />
-    <Compile Include="outlay\Site.cs" />
-    <Compile Include="outlay\SiteData.cs" />
-    <Compile Include="outlay\TravelData.cs" />
-    <Compile Include="outlay\TravelObligation.cs" />
-    <Compile Include="outlay\Vendor.cs" />
-    <Compile Include="outlay\VendorData.cs" />
-    <Compile Include="outlay\IPayrollBase.cs" />
-    <Compile Include="outlay\IPayrollCostData.cs" />
-    <Compile Include="outlay\PayrollBase.cs" />
-    <Compile Include="outlay\PayrollFactory.cs" />
-    <Compile Include="outlay\PayrollHours.cs" />
-    <Compile Include="outlay\HumanResourceOrganization.cs" />
-    <Compile Include="outlay\IHumanResourceOrganization.cs" />
-    <Compile Include="outlay\IWorkCode.cs" />
-    <Compile Include="outlay\WorkCode.cs" />
-    <Compile Include="outlay\WorkCodeBase.cs" />
+    <Compile Include="outlays\CostAccount.cs" />
+    <Compile Include="outlays\Cost.cs" />
+    <Compile Include="outlays\Expense.cs" />
+    <Compile Include="outlays\ICostAccount.cs" />
+    <Compile Include="outlays\ICostBase.cs" />
+    <Compile Include="outlays\IExpense.cs" />
+    <Compile Include="outlays\BenefitFactory.cs" />
+    <Compile Include="outlays\ILeave.cs" />
+    <Compile Include="outlays\Leave.cs" />
+    <Compile Include="outlays\LeaveBase.cs" />
+    <Compile Include="outlays\Employee.cs" />
+    <Compile Include="outlays\EmployeeBase.cs" />
+    <Compile Include="outlays\IEmployee.cs" />
+    <Compile Include="outlays\IPerson.cs" />
+    <Compile Include="outlays\ContactFactory.cs" />
+    <Compile Include="outlays\EmploymentBase.cs" />
+    <Compile Include="outlays\IEmploymentInfo.cs" />
+    <Compile Include="outlays\IHumanResourceData.cs" />
+    <Compile Include="outlays\Personnel.cs" />
+    <Compile Include="outlays\HumanResourceData.cs" />
+    <Compile Include="outlays\Commitment.cs" />
+    <Compile Include="outlays\Deobligation.cs" />
+    <Compile Include="outlays\Expenditure.cs" />
+    <Compile Include="outlays\ICommitment.cs" />
+    <Compile Include="outlays\IDeobligation.cs" />
+    <Compile Include="outlays\IObligation.cs" />
+    <Compile Include="outlays\IOpenCommitment.cs" />
+    <Compile Include="outlays\IOutlay.cs" />
+    <Compile Include="outlays\IUnliquidatedObligation.cs" />
+    <Compile Include="outlays\Obligation.cs" />
+    <Compile Include="outlays\OpenCommitment.cs" />
+    <Compile Include="outlays\Outlay.cs" />
+    <Compile Include="outlays\UnliquidatedObligation.cs" />
+    <Compile Include="outlays\IPurchase.cs" />
+    <Compile Include="outlays\IVendor.cs" />
+    <Compile Include="outlays\Payment.cs" />
+    <Compile Include="outlays\PayrollObligation.cs" />
+    <Compile Include="outlays\Procurement.cs" />
+    <Compile Include="outlays\ProcurementData.cs" />
+    <Compile Include="outlays\Purchase.cs" />
+    <Compile Include="outlays\Reimbursable.cs" />
+    <Compile Include="outlays\Requisition.cs" />
+    <Compile Include="outlays\RequisitionData.cs" />
+    <Compile Include="outlays\Site.cs" />
+    <Compile Include="outlays\SiteData.cs" />
+    <Compile Include="outlays\TravelData.cs" />
+    <Compile Include="outlays\TravelObligation.cs" />
+    <Compile Include="outlays\Vendor.cs" />
+    <Compile Include="outlays\VendorData.cs" />
+    <Compile Include="outlays\IPayrollBase.cs" />
+    <Compile Include="outlays\IPayrollCostData.cs" />
+    <Compile Include="outlays\PayrollBase.cs" />
+    <Compile Include="outlays\PayrollFactory.cs" />
+    <Compile Include="outlays\PayrollHours.cs" />
+    <Compile Include="outlays\HumanResourceOrganization.cs" />
+    <Compile Include="outlays\IHumanResourceOrganization.cs" />
+    <Compile Include="outlays\IWorkCode.cs" />
+    <Compile Include="outlays\WorkCode.cs" />
+    <Compile Include="outlays\WorkCodeBase.cs" />
     <Compile Include="path\DataPath.cs" />
     <Compile Include="path\IPath.cs" />
     <Compile Include="reader\ExcelReader.cs" />
@@ -280,7 +281,7 @@
     <Compile Include="transfer\FundTransfer.cs" />
     <Compile Include="transfer\IReprogramming.cs" />
     <Compile Include="transfer\Reprogramming.cs" />
-    <Compile Include="watcher\FileWatcher.cs">
+    <Compile Include="watcher\BudgetFileWatcher.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="writer\FileWriter.cs" />
@@ -295,11 +296,9 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
-    <Content Include="DbNinja.ico" />
+    <Content Include="etc\DbNinja.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="fiscalyear\bfy\" />
-    <Folder Include="fiscalyear\time\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿// <copyright file = "CostBase.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "Cost.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -20,10 +20,10 @@ namespace BudgetExecution
     /// outlays; Costs are implemented in conjunction with the actual expenses
     /// incurred.
     /// </summary>
-    /// <seealso cref = "ExpenseBase"/>
+    /// <seealso cref = "Expense"/>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
-    public abstract class CostBase : ExpenseBase, ICostBase
+    public abstract class Cost : Expense, ICostBase
     {
         // **************************************************************************************************************************
         // ********************************************      PROPERTIES    **********************************************************

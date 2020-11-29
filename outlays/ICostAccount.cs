@@ -7,6 +7,9 @@ namespace BudgetExecution
     using System;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ICostAccount
     {
         // ***************************************************************************************************************************

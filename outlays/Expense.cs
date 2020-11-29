@@ -1,4 +1,4 @@
-﻿// <copyright file = "ExpenseBase.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "Expense.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -12,10 +12,15 @@ namespace BudgetExecution
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="BudgetExecution.PrcBase" />
+    /// <seealso cref="IExpense" />
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "VirtualMemberNeverOverridden.Global" ) ]
-    public abstract class ExpenseBase : PrcBase, IExpenseBase
+    public abstract class Expense : PrcBase, IExpense
     {
         // ***************************************************************************************************************************
         // ****************************************************  PROPERTIES   ********************************************************
@@ -420,7 +425,7 @@ namespace BudgetExecution
         /// </summary>
         /// <returns>
         /// </returns>
-        public virtual IAmount GetAvailableBalance()
+        public virtual IAmount GetBalance()
         {
             try
             {

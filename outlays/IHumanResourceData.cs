@@ -1,4 +1,4 @@
-﻿// <copyright file = "IWorkforceData.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "IHumanResourceData.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -14,7 +14,7 @@ namespace BudgetExecution
     /// <summary>
     /// 
     /// </summary>
-    public interface IWorkforceData
+    public interface IHumanResourceData
     {
         // ***************************************************************************************************************************
         // ************************************************  METHODS   ***************************************************************

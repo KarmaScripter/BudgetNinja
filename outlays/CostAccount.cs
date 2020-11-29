@@ -15,10 +15,10 @@ namespace BudgetExecution
 
     /// <summary>
     /// </summary>
-    /// <seealso cref = "CostBase"/>
+    /// <seealso cref = "Cost"/>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
-    public class CostAccount : CostBase, ICostAccount
+    public class CostAccount : Cost, ICostAccount
     {
         // ***************************************************************************************************************************
         // ****************************************************    FIELDS     ********************************************************

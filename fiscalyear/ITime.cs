@@ -11,6 +11,9 @@ namespace BudgetExecution
     using System;
     using System.Threading;
 
+    /// <summary>
+    /// Defines the interface for the budget time objects
+    /// </summary>
     public interface ITime
     {
         // ***************************************************************************************************************************
@@ -43,7 +46,7 @@ namespace BudgetExecution
         /// </summary>
         /// <returns>
         /// </returns>
-        EventDate GetDate();
+        EventDate GetEventDate();
 
         /// <summary>
         /// Converts to string.

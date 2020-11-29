@@ -1,4 +1,4 @@
-﻿// <copyright file = "RequisitionData.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "SiteData.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -9,138 +9,144 @@ namespace BudgetExecution
     // ********************************************************************************************************************************
 
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
-    public class RequisitionData : Commitment
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="BudgetExecution.Obligation" />
+    [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
+    public class SiteData : Obligation
     {
         // ***************************************************************************************************************************
         // ****************************************************  CONSTRUCTORS ********************************************************
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
+        /// Initializes a new instance of the <see cref="SiteData"/> class.
         /// </summary>
         /// <inheritdoc />
-        public RequisitionData()
+        public SiteData()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
+        /// Initializes a new instance of the <see cref="SiteData"/> class.
         /// </summary>
         /// <param name="query"></param>
-        public RequisitionData( IQuery query )
+        public SiteData( IQuery query )
             : base( query )
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
+        /// Initializes a new instance of the <see cref="SiteData"/> class.
         /// </summary>
         /// <param name="db">The database.</param>
-        public RequisitionData( IBuilder db )
+        public SiteData( IBuilder db )
             : base( db )
         {
         }
 
         // ***************************************************************************************************************************
-        // ******************************************************   PROPERTIES   *****************************************************
+        // *************************************************   PROPERTIES   **********************************************************
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Gets the request number.
+        /// Gets the epa site identifier.
         /// </summary>
         /// <value>
-        /// The request number.
+        /// The epa site identifier.
         /// </value>
-        private protected IElement RequestNumber { get; set; }
+        private protected IElement EpaSiteId { get; set; }
 
         /// <summary>
-        /// Gets the modified by.
+        /// Gets the name of the site.
         /// </summary>
         /// <value>
-        /// The modified by.
+        /// The name of the site.
         /// </value>
-        private protected IElement ModifiedBy { get; set; }
+        private protected IElement SiteName { get; set; }
 
         /// <summary>
-        /// Gets the request date.
+        /// Gets the name of the site project.
         /// </summary>
         /// <value>
-        /// The request date.
+        /// The name of the site project.
         /// </value>
-        private protected ITime RequestDate { get; set; }
+        private protected IElement SiteProjectName { get; set; }
 
         /// <summary>
-        /// Gets the created by.
+        /// Gets the state code.
         /// </summary>
         /// <value>
-        /// The created by.
+        /// The state code.
         /// </value>
-        private protected IElement CreatedBy { get; set; }
+        private protected IElement StateCode { get; set; }
 
         /// <summary>
-        /// Gets the document date.
+        /// Gets the name of the state.
         /// </summary>
         /// <value>
-        /// The document date.
+        /// The name of the state.
         /// </value>
-        private protected ITime DocumentDate { get; set; }
+        private protected IElement StateName { get; set; }
 
         /// <summary>
-        /// Gets the closed date.
+        /// Gets the city.
         /// </summary>
         /// <value>
-        /// The closed date.
+        /// The city.
         /// </value>
-        private protected ITime ClosedDate { get; set; }
+        private protected IElement City { get; set; }
 
         /// <summary>
-        /// Gets the project code.
+        /// Gets the district.
         /// </summary>
         /// <value>
-        /// The project code.
+        /// The district.
         /// </value>
-        private protected IElement ProjectCode { get; set; }
+        private protected IElement District { get; set; }
 
         /// <summary>
-        /// Gets the requested.
+        /// Gets the county.
         /// </summary>
         /// <value>
-        /// The requested.
+        /// The county.
         /// </value>
-        private protected IAmount Requested { get; set; }
+        private protected IElement County { get; set; }
 
         /// <summary>
-        /// Gets the closed.
+        /// Gets the street address line1.
         /// </summary>
         /// <value>
-        /// The closed.
+        /// The street address line1.
         /// </value>
-        private protected IAmount Closed { get; set; }
+        private protected IElement StreetAddressLine1 { get; set; }
 
         /// <summary>
-        /// Gets or sets the outstanding.
+        /// Gets the street address line2.
         /// </summary>
         /// <value>
-        /// The outstanding.
+        /// The street address line2.
         /// </value>
-        private protected IAmount Outstanding { get; set; }
+        private protected IElement StreetAddressLine2 { get; set; }
 
         /// <summary>
-        /// Gets or sets the expended.
+        /// Gets the zip code.
         /// </summary>
         /// <value>
-        /// The expended.
+        /// The zip code.
         /// </value>
-        private protected IAmount Expended { get; set; }
+        private protected IElement ZipCode { get; set; }
 
         /// <summary>
-        /// Gets or sets the reversed.
+        /// Gets the last action date.
         /// </summary>
         /// <value>
-        /// The reversed.
+        /// The last action date.
         /// </value>
-        private protected IAmount Reversed { get; set; }
+        private protected ITime LastActionDate { get; set; }
     }
 }

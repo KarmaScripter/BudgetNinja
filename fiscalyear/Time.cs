@@ -164,10 +164,48 @@ namespace BudgetExecution
         }
 
         /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <returns></returns>
+        public string GetName()
+        {
+            try
+            {
+                return Enum.IsDefined( typeof( EventDate ), Date )
+                    ? Date.ToString()
+                    : EventDate.NS.ToString();
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return EventDate.NS.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <returns></returns>
+        public string GetValue()
+        {
+            try
+            {
+                return Enum.IsDefined( typeof( EventDate ), Date ) && Verify.Date( Date )
+                    ? $"{Name} = {Day}"
+                    : string.Empty;
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
         /// Gets the date.
         /// </summary>
         /// <returns></returns>
-        public EventDate GetDate()
+        public EventDate GetEventDate()
         {
             try
             {

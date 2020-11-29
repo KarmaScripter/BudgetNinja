@@ -12,7 +12,11 @@ namespace BudgetExecution
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "PublicConstructorInAbstractClass" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public class TravelData : Obligation
     {
         // ***************************************************************************************************************************

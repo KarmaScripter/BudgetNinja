@@ -20,7 +20,7 @@ namespace BudgetExecution
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref = "System.IDisposable"/>
+    /// <seealso cref = "IDisposable"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class ReportFormat : ExcelBase, IDisposable
     {

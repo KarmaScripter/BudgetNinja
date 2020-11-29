@@ -274,6 +274,12 @@ namespace BudgetExecution
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>
+        /// Annual Vacation Hours as an IAmount object
+        /// </returns>
         public IAmount GetAnnualHours()
         {
             try

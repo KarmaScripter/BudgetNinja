@@ -1,104 +1,94 @@
-﻿// <copyright file = "IExpenseBase.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "IPayrollCostData.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
 namespace BudgetExecution
 {
-    using System;
-    using System.Threading;
-
     // ********************************************************************************************************************************
     // *********************************************************  ASSEMBLIES   ********************************************************
     // ********************************************************************************************************************************
 
-    public interface IExpenseBase
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IPayrollCostData
     {
         // ***************************************************************************************************************************
         // ****************************************************     METHODS   ********************************************************
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Gets the original action date.
+        /// Gets the approval date.
         /// </summary>
         /// <returns>
         /// </returns>
-        ITime GetOriginalActionDate();
+        DateTime GetApprovalDate();
 
         /// <summary>
-        /// Gets the type of the expense.
+        /// Gets the project code.
         /// </summary>
         /// <returns>
         /// </returns>
-        OutlayType GetExpenseType();
+        string GetProjectCode();
 
         /// <summary>
-        /// Gets the pay period.
+        /// Gets the name of the project code.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetPayPeriod();
+        string GetProjectCodeName();
 
         /// <summary>
-        /// Gets the hr org code.
+        /// Gets the budget fiscal year.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetHrOrgCode();
+        IBudgetFiscalYear GetBudgetFiscalYear();
 
         /// <summary>
-        /// Gets the work code.
+        /// Gets the allowance holder.
         /// </summary>
         /// <returns>
         /// </returns>
-        IElement GetWorkCode();
+        IFinanceObjectClass GetFinanceObjectClass();
 
         /// <summary>
-        /// Gets the commitments.
+        /// Gets the fund.
         /// </summary>
         /// <returns>
         /// </returns>
-        IAmount GetCommitments();
+        IFund GetFund();
 
         /// <summary>
-        /// Gets the open commitments.
+        /// Gets the organization.
         /// </summary>
         /// <returns>
         /// </returns>
-        IAmount GetOpenCommitments();
+        IOrganization GetOrganization();
 
         /// <summary>
-        /// Gets the obligations.
+        /// Gets the account.
         /// </summary>
         /// <returns>
         /// </returns>
-        IAmount GetObligations();
+        IAccount GetAccount();
 
         /// <summary>
-        /// Gets the obligations.
+        /// Gets the responsibility center.
         /// </summary>
         /// <returns>
         /// </returns>
-        IAmount GetDeobligations();
+        IResponsibilityCenter GetResponsibilityCenter();
 
         /// <summary>
-        /// Gets the unliquidated obligations.
+        /// Gets the work codes.
         /// </summary>
         /// <returns>
         /// </returns>
-        IAmount GetUnliquidatedObligations();
-
-        /// <summary>
-        /// Gets the expenditures.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        IAmount GetExpenditures();
-
-        /// <summary>
-        /// Gets the available balance.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        IAmount GetAvailableBalance();
+        IEnumerable<WorkCode> GetWorkCodes();
     }
 }

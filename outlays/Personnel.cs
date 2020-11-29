@@ -131,7 +131,7 @@ namespace BudgetExecution
         /// <value>
         /// The workforce data.
         /// </value>
-        private protected IWorkforceData HumanResourceData { get; set; }
+        private protected IHumanResourceData HumanResourceData { get; set; }
 
         /// <summary>
         /// Gets or sets the payroll data.
@@ -353,7 +353,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected IWorkforceData GetHumanResourceData( IPerson person )
+        private protected IHumanResourceData GetHumanResourceData( IPerson person )
         {
             try
             {
@@ -363,7 +363,7 @@ namespace BudgetExecution
                 var connection = new ConnectionBuilder( Source.WorkforceData, Provider.SQLite );
                 var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
                 using var query = new Query( connection, sqlstatement );
-                return new WorkforceData( query );
+                return new HumanResourceData( query );
             }
             catch( Exception ex )
             {
@@ -377,7 +377,7 @@ namespace BudgetExecution
         /// </summary>
         /// <returns>
         /// </returns>
-        public IWorkforceData GetHumanResourceData()
+        public IHumanResourceData GetHumanResourceData()
         {
             try
             {

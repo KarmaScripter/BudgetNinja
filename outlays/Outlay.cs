@@ -41,7 +41,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
-    public class Outlay : CostBase
+    public class Outlay : Cost
     {
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************

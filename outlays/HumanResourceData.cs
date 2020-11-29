@@ -1,4 +1,4 @@
-﻿// <copyright file = "WorkforceData.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "HumanResourceData.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -14,10 +14,16 @@ namespace BudgetExecution
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="EmploymentBase" />
+    /// <seealso cref="IHumanResourceData" />
+    /// <seealso cref="ISource" />
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
-    public class WorkforceData : EmploymentBase, IWorkforceData, ISource
+    public class HumanResourceData : EmploymentBase, IHumanResourceData, ISource
     {
         // ***************************************************************************************************************************
         // ****************************************************     FIELDS    ********************************************************
@@ -33,19 +39,19 @@ namespace BudgetExecution
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "WorkforceData"/> class.
+        /// Initializes a new instance of the <see cref = "HumanResourceData"/> class.
         /// </summary>
-        public WorkforceData()
+        public HumanResourceData()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "WorkforceData"/> class.
+        /// Initializes a new instance of the <see cref = "HumanResourceData"/> class.
         /// </summary>
         /// <param name = "query" >
         /// The query.
         /// </param>
-        public WorkforceData( IQuery query )
+        public HumanResourceData( IQuery query )
         {
             Record = new DataBuilder( query )?.GetRecord();
             ID = new Key( Record, PrimaryKey.WorkforceDataId );
@@ -73,12 +79,12 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "WorkforceData"/> class.
+        /// Initializes a new instance of the <see cref = "HumanResourceData"/> class.
         /// </summary>
         /// <param name = "builder" >
         /// The builder.
         /// </param>
-        public WorkforceData( IBuilder builder )
+        public HumanResourceData( IBuilder builder )
         {
             Record = builder?.GetRecord();
             ID = new Key( Record, PrimaryKey.WorkforceDataId );
@@ -106,12 +112,12 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "WorkforceData"/> class.
+        /// Initializes a new instance of the <see cref = "HumanResourceData"/> class.
         /// </summary>
         /// <param name = "data" >
         /// The data.
         /// </param>
-        public WorkforceData( DataRow data )
+        public HumanResourceData( DataRow data )
             : this()
         {
             Record = data;

@@ -20,7 +20,7 @@ namespace BudgetExecution
     /// <seealso cref = "UnitBase"/>
     /// <seealso cref = "IUnit"/>
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
-    public abstract class TimeBase : Unit
+    public abstract class TimeBase : UnitBase
     {
         // **************************************************************************************************************************
         // ********************************************      METHODS    *************************************************************

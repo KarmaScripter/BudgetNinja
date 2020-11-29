@@ -1,4 +1,4 @@
-﻿// <copyright file = "SiteData.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "RequisitionData.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -11,136 +11,139 @@ namespace BudgetExecution
     using System;
     using System.Threading;
 
-    public class SiteData : Obligation
+    /// <summary>
+    /// 
+    /// </summary>
+    public class RequisitionData : Commitment
     {
         // ***************************************************************************************************************************
         // ****************************************************  CONSTRUCTORS ********************************************************
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SiteData"/> class.
+        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
         /// </summary>
         /// <inheritdoc />
-        public SiteData()
+        public RequisitionData()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SiteData"/> class.
+        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
         /// </summary>
         /// <param name="query"></param>
-        public SiteData( IQuery query )
+        public RequisitionData( IQuery query )
             : base( query )
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SiteData"/> class.
+        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
         /// </summary>
         /// <param name="db">The database.</param>
-        public SiteData( IBuilder db )
+        public RequisitionData( IBuilder db )
             : base( db )
         {
         }
 
         // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
+        // ******************************************************   PROPERTIES   *****************************************************
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Gets the epa site identifier.
+        /// Gets the request number.
         /// </summary>
         /// <value>
-        /// The epa site identifier.
+        /// The request number.
         /// </value>
-        private protected IElement EpaSiteId { get; set; }
+        private protected IElement RequestNumber { get; set; }
 
         /// <summary>
-        /// Gets the name of the site.
+        /// Gets the modified by.
         /// </summary>
         /// <value>
-        /// The name of the site.
+        /// The modified by.
         /// </value>
-        private protected IElement SiteName { get; set; }
+        private protected IElement ModifiedBy { get; set; }
 
         /// <summary>
-        /// Gets the name of the site project.
+        /// Gets the request date.
         /// </summary>
         /// <value>
-        /// The name of the site project.
+        /// The request date.
         /// </value>
-        private protected IElement SiteProjectName { get; set; }
+        private protected ITime RequestDate { get; set; }
 
         /// <summary>
-        /// Gets the state code.
+        /// Gets the created by.
         /// </summary>
         /// <value>
-        /// The state code.
+        /// The created by.
         /// </value>
-        private protected IElement StateCode { get; set; }
+        private protected IElement CreatedBy { get; set; }
 
         /// <summary>
-        /// Gets the name of the state.
+        /// Gets the document date.
         /// </summary>
         /// <value>
-        /// The name of the state.
+        /// The document date.
         /// </value>
-        private protected IElement StateName { get; set; }
+        private protected ITime DocumentDate { get; set; }
 
         /// <summary>
-        /// Gets the city.
+        /// Gets the closed date.
         /// </summary>
         /// <value>
-        /// The city.
+        /// The closed date.
         /// </value>
-        private protected IElement City { get; set; }
+        private protected ITime ClosedDate { get; set; }
 
         /// <summary>
-        /// Gets the district.
+        /// Gets the project code.
         /// </summary>
         /// <value>
-        /// The district.
+        /// The project code.
         /// </value>
-        private protected IElement District { get; set; }
+        private protected IElement ProjectCode { get; set; }
 
         /// <summary>
-        /// Gets the county.
+        /// Gets the requested.
         /// </summary>
         /// <value>
-        /// The county.
+        /// The requested.
         /// </value>
-        private protected IElement County { get; set; }
+        private protected IAmount Requested { get; set; }
 
         /// <summary>
-        /// Gets the street address line1.
+        /// Gets the closed.
         /// </summary>
         /// <value>
-        /// The street address line1.
+        /// The closed.
         /// </value>
-        private protected IElement StreetAddressLine1 { get; set; }
+        private protected IAmount Closed { get; set; }
 
         /// <summary>
-        /// Gets the street address line2.
+        /// Gets or sets the outstanding.
         /// </summary>
         /// <value>
-        /// The street address line2.
+        /// The outstanding.
         /// </value>
-        private protected IElement StreetAddressLine2 { get; set; }
+        private protected IAmount Outstanding { get; set; }
 
         /// <summary>
-        /// Gets the zip code.
+        /// Gets or sets the expended.
         /// </summary>
         /// <value>
-        /// The zip code.
+        /// The expended.
         /// </value>
-        private protected IElement ZipCode { get; set; }
+        private protected IAmount Expended { get; set; }
 
         /// <summary>
-        /// Gets the last action date.
+        /// Gets or sets the reversed.
         /// </summary>
         /// <value>
-        /// The last action date.
+        /// The reversed.
         /// </value>
-        private protected ITime LastActionDate { get; set; }
+        private protected IAmount Reversed { get; set; }
     }
 }

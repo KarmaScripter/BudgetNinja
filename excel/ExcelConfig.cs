@@ -18,7 +18,7 @@ namespace BudgetExecution
     /// 
     /// </summary>
     /// <seealso cref = "ExcelBase"/>
-    /// <seealso cref = "System.IDisposable"/>
+    /// <seealso cref = "IDisposable"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "VirtualMemberNeverOverridden.Global" ) ]
     [ SuppressMessage( "ReSharper", "UnusedParameter.Global" ) ]

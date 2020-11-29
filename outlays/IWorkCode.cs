@@ -12,6 +12,9 @@ namespace BudgetExecution
     using System.Collections.Generic;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IWorkCode
     {
         // ***************************************************************************************************************************

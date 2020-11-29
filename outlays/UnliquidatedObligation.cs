@@ -13,6 +13,10 @@ namespace BudgetExecution
     using System.Data;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Obligation" />
     public class UnliquidatedObligation : Obligation
     {
         // ***************************************************************************************************************************
@@ -84,7 +88,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        protected override Source Source { get; set; } = Source.UnliquidatedObligations;
+        protected override Source Source { get; set; } = Source.ULO;
 
         /// <summary>
         /// Gets the unliquidated obligation identifier.

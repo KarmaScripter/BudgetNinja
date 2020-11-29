@@ -12,6 +12,10 @@ namespace BudgetExecution
     using System.Data;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Commitment" />
     public class ProcurementData : Commitment
     {
         // ***************************************************************************************************************************

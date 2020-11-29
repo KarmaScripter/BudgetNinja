@@ -8,6 +8,9 @@ namespace BudgetExecution
     using System.Collections.Generic;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ILeave
     {
         /// <summary>
@@ -66,6 +69,10 @@ namespace BudgetExecution
         /// </returns>
         IAmount GetAvailableHours();
 
+        /// <summary>
+        /// Gets the annual hours.
+        /// </summary>
+        /// <returns></returns>
         IAmount GetAnnualHours();
 
         /// <summary>
