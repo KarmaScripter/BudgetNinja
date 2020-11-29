@@ -15,6 +15,9 @@ namespace BudgetExecution
     using System.Linq;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class Allocation : AllocationData, IAllocation
     {

@@ -14,12 +14,20 @@ namespace BudgetExecution
     using System.Security.AccessControl;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IFolder
     {
         // ***************************************************************************************************************************
         // ****************************************************    MEMBERS    ********************************************************
         // ***************************************************************************************************************************
 
+        /// <summary>
+        /// Creates the sub directory.
+        /// </summary>
+        /// <param name="foldername">The foldername.</param>
+        /// <returns></returns>
         DirectoryInfo CreateSubDirectory( string foldername );
 
         /// <summary>

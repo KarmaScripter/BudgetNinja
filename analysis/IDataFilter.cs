@@ -12,6 +12,9 @@ namespace BudgetExecution
     using System.Data;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IDataFilter
     {
         // ***************************************************************************************************************************

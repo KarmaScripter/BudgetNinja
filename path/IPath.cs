@@ -7,6 +7,9 @@ namespace BudgetExecution
     using System;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IPath
     {
         /// <summary>
@@ -47,6 +50,11 @@ namespace BudgetExecution
         /// </returns>
         string ToString();
 
+        /// <summary>
+        /// Changes the extension.
+        /// </summary>
+        /// <param name="ext">The ext.</param>
+        /// <returns></returns>
         string ChangeExtension( string ext );
     }
 }

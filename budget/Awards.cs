@@ -19,6 +19,9 @@ namespace BudgetExecution
 
     #endregion
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class Awards : Supplemental
     {

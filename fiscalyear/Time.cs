@@ -190,9 +190,10 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( EventDate ), Date ) && Verify.Date( Date )
-                    ? $"{Name} = {Day}"
-                    : string.Empty;
+                return Enum.IsDefined( typeof( EventDate ), Date ) 
+                    && Verify.EventDate( Date )
+                        ? $"{Name} = {Day}"
+                        : string.Empty;
             }
             catch( Exception ex )
             {

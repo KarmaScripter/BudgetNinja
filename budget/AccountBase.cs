@@ -14,6 +14,9 @@ namespace BudgetExecution
     using System.Diagnostics.CodeAnalysis;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
     public abstract class AccountBase
     {

@@ -14,6 +14,9 @@ namespace BudgetExecution
     using System.Linq;
     using System.Threading;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Computation : Builder, IDataFilter
     {
         // **************************************************************************************************************************
