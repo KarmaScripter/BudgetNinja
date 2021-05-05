@@ -12,7 +12,6 @@ namespace BudgetExecution
     using System.Data;
     using System.Data.OleDb;
     using System.IO;
-    using System.Threading;
     using System.Windows.Forms;
     using OfficeOpenXml;
 

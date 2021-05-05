@@ -13,7 +13,6 @@ namespace BudgetExecution
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Text.RegularExpressions;
-    using System.Threading;
     using System.Windows.Forms;
 
     /// <summary>

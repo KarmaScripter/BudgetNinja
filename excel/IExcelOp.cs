@@ -9,7 +9,6 @@ namespace BudgetExecution
     // ******************************************************************************************************************************
     using System;
     using System.IO;
-    using System.Threading;
     using DocumentFormat.OpenXml.Spreadsheet;
     using OfficeOpenXml;
 

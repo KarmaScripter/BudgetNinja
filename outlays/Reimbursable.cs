@@ -11,7 +11,6 @@ namespace BudgetExecution
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Threading;
 
     /// <summary>
     /// A reimbursable is a sum (1) that is received by an agency as a payment for

@@ -10,7 +10,6 @@ namespace BudgetExecution
 
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Threading;
 
     /// <summary>
     /// Budget authority provided in an appropriations act in addition to regular or

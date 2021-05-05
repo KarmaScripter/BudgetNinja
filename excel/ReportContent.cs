@@ -8,7 +8,6 @@ namespace BudgetExecution
     // ********************************************************   ASSEMBLIES   **************************************************
     // **************************************************************************************************************************
     using System;
-    using System.Threading;
     using OfficeOpenXml;
 
     public class ReportContent : ReportFormat

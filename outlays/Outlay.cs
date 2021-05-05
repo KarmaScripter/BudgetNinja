@@ -12,7 +12,6 @@ namespace BudgetExecution
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
-    using System.Threading;
 
     /// <summary>
     /// The issuance of checks, disbursement of cash, or electronic transfer of funds

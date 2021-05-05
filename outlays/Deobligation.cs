@@ -11,7 +11,6 @@ namespace BudgetExecution
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Threading;
 
     /// <summary>
     /// An agency’s cancellation or downward adjustment of previously incurred

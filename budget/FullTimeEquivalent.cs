@@ -10,7 +10,6 @@ namespace BudgetExecution
     // ******************************************************   ASSEMBLIES   ********************************************************
     // ******************************************************************************************************************************
     using System.Data;
-    using System.Threading;
 
     /// <summary>
     /// Full-time equivalent (FTE) or whole time equivalent (WTE) is a

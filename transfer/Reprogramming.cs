@@ -10,7 +10,6 @@ namespace BudgetExecution
 
     using System;
     using System.Data;
-    using System.Threading;
 
     /// <summary>
     /// Shifting funds within an appropriation or fund account to use them for purposes

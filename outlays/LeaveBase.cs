@@ -9,7 +9,6 @@ namespace BudgetExecution
     // ********************************************************************************************************************************
 
     using System;
-    using System.Threading;
 
     /// <summary>
     /// Defines the <see cref = "LeaveBase"/> .

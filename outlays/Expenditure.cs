@@ -7,7 +7,6 @@ namespace BudgetExecution
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Threading;
 
     /// <summary>
     /// The United States federal budget consists of mandatory expenditures (which

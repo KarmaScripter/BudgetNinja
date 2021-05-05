@@ -13,7 +13,6 @@ namespace BudgetExecution
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
-    using System.Threading;
 
     /// <summary>
     /// Defines the leave projected for an EPA Employee. An employee may use annual

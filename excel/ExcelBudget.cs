@@ -15,7 +15,6 @@ namespace BudgetExecution
     using System.Drawing;
     using System.IO;
     using System.Linq;
-    using System.Threading;
     using OfficeOpenXml;
     using OfficeOpenXml.Style;
 

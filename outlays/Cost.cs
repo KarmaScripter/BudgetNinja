@@ -11,7 +11,6 @@ namespace BudgetExecution
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Threading;
 
     /// <summary>
     /// The Cost class is the abstract representation of appropriated resources used in
