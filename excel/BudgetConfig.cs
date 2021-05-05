@@ -1,6 +1,6 @@
-﻿// <copyright file = "BudgetConfig.cs" company = "Terry D. Eppler">
-// Copyright (c) Terry D. Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file=" <File Name> .cs" company="Terry D. Eppler">
+// // Copyright (c) Terry Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
@@ -15,9 +15,7 @@ namespace BudgetExecution
     using System.Linq;
     using OfficeOpenXml;
 
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary/>
     /// <seealso cref = "ExcelConfig"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public abstract class BudgetConfig : ExcelConfig
@@ -26,74 +24,41 @@ namespace BudgetExecution
         // ******************************************************   PROPERTIES   ****************************************************
         // **************************************************************************************************************************
 
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
+        /// <summary> Gets or sets the name. </summary>
+        /// <value> The name. </value>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        /// <value>
-        /// The title.
-        /// </value>
+        /// <summary> Gets or sets the title. </summary>
+        /// <value> The title. </value>
         private protected Grid Title { get; set; }
 
-        /// <summary>
-        /// Gets or sets the control number.
-        /// </summary>
-        /// <value>
-        /// The control number.
-        /// </value>
+        /// <summary> Gets or sets the control number. </summary>
+        /// <value> The control number. </value>
         private protected Grid ControlNumber { get; set; }
 
-        /// <summary>
-        /// Gets or sets the PRC.
-        /// </summary>
-        /// <value>
-        /// The PRC.
-        /// </value>
+        /// <summary> Gets or sets the PRC. </summary>
+        /// <value> The PRC. </value>
         private protected Grid PRC { get; set; }
 
-        /// <summary>
-        /// Gets or sets the fte.
-        /// </summary>
-        /// <value>
-        /// The fte.
-        /// </value>
+        /// <summary> Gets or sets the fte. </summary>
+        /// <value> The fte. </value>
         private protected Grid FTE { get; set; }
 
-        /// <summary>
-        /// Gets or sets the awards.
-        /// </summary>
-        /// <value>
-        /// The awards.
-        /// </value>
+        /// <summary> Gets or sets the awards. </summary>
+        /// <value> The awards. </value>
         private protected Grid Awards { get; set; }
 
-        /// <summary>
-        /// Gets or sets the overtime.
-        /// </summary>
-        /// <value>
-        /// The overtime.
-        /// </value>
+        /// <summary> Gets or sets the overtime. </summary>
+        /// <value> The overtime. </value>
         private protected Grid Overtime { get; set; }
 
         // **************************************************************************************************************************
         // ******************************************************     METHODS   *****************************************************
         // **************************************************************************************************************************
 
-        /// <summary>
-        /// Adds the comment.
-        /// </summary>
-        /// <param name = "grid" >
-        /// </param>
-        /// <param name = "text" >
-        /// The text.
-        /// </param>
+        /// <summary> Adds the comment. </summary>
+        /// <param name = "grid" > </param>
+        /// <param name = "text" > The text. </param>
         public void AddComment( Grid grid, string text )
         {
             if( Verify.Grid( grid )
@@ -101,17 +66,21 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    var comment = range.AddComment( text, "Budget" );
-                    comment.From.Row = range.Start.Row;
-                    comment.From.Column = range.Start.Column;
-                    comment.To.Row = range.End.Row;
-                    comment.To.Column = range.End.Column;
-                    comment.BackgroundColor = PrimaryBackColor;
-                    comment.Font.FontName = "Consolas";
-                    comment.Font.Size = 8;
-                    comment.Font.Color = Color.Black;
-                    comment.Text = text;
+                    using var range = grid?.GetRange();
+                    var comment = range?.AddComment( text, "Budget" );
+
+                    if( comment != null )
+                    {
+                        comment.From.Row = range.Start.Row;
+                        comment.From.Column = range.Start.Column;
+                        comment.To.Row = range.End.Row;
+                        comment.To.Column = range.End.Column;
+                        comment.BackgroundColor = PrimaryBackColor;
+                        comment.Font.FontName = "Consolas";
+                        comment.Font.Size = 8;
+                        comment.Font.Color = Color.Black;
+                        comment.Text = text;
+                    }
                 }
                 catch( Exception ex )
                 {
@@ -120,28 +89,28 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>
-        /// Sets the caption text.
-        /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
-        /// </param>
+        /// <summary> Sets the caption text. </summary>
+        /// <param name = "grid" > The grid. </param>
         public void SetCaptionText( Grid grid )
         {
             if( Verify.Grid( grid ) )
             {
                 try
                 {
-                    using var worksheet = grid.GetWorksheet();
-                    var row = grid.GetRange().Start.Row;
-                    var column = grid.GetRange().Start.Column;
-                    worksheet.Cells[ row, column ].Value = "Account";
-                    worksheet.Cells[ row, column + 1 ].Value = "Site";
-                    worksheet.Cells[ row, column + 2 ].Value = "Travel";
-                    worksheet.Cells[ row, column + 3 ].Value = "Expenses";
-                    worksheet.Cells[ row, column + 4 ].Value = "Contracts";
-                    worksheet.Cells[ row, column + 5 ].Value = "Grants";
-                    worksheet.Cells[ row, column + 6 ].Value = "Total";
+                    using var worksheet = grid?.GetWorksheet();
+
+                    if( grid != null )
+                    {
+                        var row = grid.GetRange().Start.Row;
+                        var column = grid.GetRange().Start.Column;
+                        worksheet.Cells[ row, column ].Value = "Account";
+                        worksheet.Cells[ row, column + 1 ].Value = "Site";
+                        worksheet.Cells[ row, column + 2 ].Value = "Travel";
+                        worksheet.Cells[ row, column + 3 ].Value = "Expenses";
+                        worksheet.Cells[ row, column + 4 ].Value = "Contracts";
+                        worksheet.Cells[ row, column + 5 ].Value = "Grants";
+                        worksheet.Cells[ row, column + 6 ].Value = "Total";
+                    }
                 }
                 catch( Exception ex )
                 {
@@ -150,15 +119,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>
-        /// Sets the text.
-        /// </summary>
-        /// <param name = "grid" >
-        /// The grid.
-        /// </param>
-        /// <param name = "text" >
-        /// The text.
-        /// </param>
+        /// <summary> Sets the text. </summary>
+        /// <param name = "grid" > The grid. </param>
+        /// <param name = "text" > The text. </param>
         public void SetText( Grid grid, IEnumerable<string> text )
         {
             if( Verify.Grid( grid )
@@ -166,7 +129,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    foreach( var cell in grid.GetRange() )
+                    foreach( var cell in grid?.GetRange() )
                     {
                         foreach( var caption in text )
                         {
@@ -185,12 +148,8 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>
-        /// Sets the worksheet properties.
-        /// </summary>
-        /// <param name = "worksheet" >
-        /// The worksheet.
-        /// </param>
+        /// <summary> Sets the worksheet properties. </summary>
+        /// <param name = "worksheet" > The worksheet. </param>
         public void SetWorksheetProperties( ExcelWorksheet worksheet )
         {
             if( worksheet != null )
@@ -216,12 +175,8 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>
-        /// Sets the worksheet header text.
-        /// </summary>
-        /// <param name = "headertext" >
-        /// The headertext.
-        /// </param>
+        /// <summary> Sets the worksheet header text. </summary>
+        /// <param name = "headertext" > The headertext. </param>
         public void SetHeaderFooterText( string headertext )
         {
             if( Verify.Input( headertext ) )
