@@ -39,7 +39,7 @@ namespace BudgetExecution
         /// <param name="file">The file.</param>
         public Folder( IFile file )
         {
-            DataFile = file;
+            _dataFile = file;
             DirectoryInfo = GetBaseDirectory();
             FolderName = DirectoryInfo.Name;
             FolderPath = DirectoryInfo.FullName;
@@ -68,7 +68,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( string );
             }
         }
 
@@ -83,12 +83,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( fullname ) && !Directory.Exists( fullname )
                     ? Directory.CreateDirectory( fullname )
-                    : default;
+                    : default( DirectoryInfo );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( DirectoryInfo );
             }
         }
 
@@ -121,7 +121,7 @@ namespace BudgetExecution
         {
             if( string.IsNullOrEmpty( foldername ) )
             {
-                return default;
+                return default( DirectoryInfo );
             }
 
             if( Verify.Input( foldername )
@@ -134,12 +134,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( foldername ) && !Directory.Exists( foldername )
                     ? DirectoryInfo?.CreateSubdirectory( foldername )
-                    : default;
+                    : default( DirectoryInfo );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( DirectoryInfo );
             }
         }
 
@@ -155,12 +155,12 @@ namespace BudgetExecution
 
                 return paths?.Any() == true
                     ? paths
-                    : default;
+                    : default( DataPath[ ] );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IEnumerable<IPath> );
             }
         }
 
@@ -177,12 +177,12 @@ namespace BudgetExecution
 
                 return Verify.Input( data )
                     ? data
-                    : default;
+                    : default( DataFile[ ] );
             }
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( IEnumerable<IFile> );
             }
         }
 

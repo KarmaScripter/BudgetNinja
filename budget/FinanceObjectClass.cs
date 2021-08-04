@@ -31,7 +31,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.FinanceObjectClass;
+        private static readonly Source _source = Source.FinanceObjectClass;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -97,7 +97,7 @@ namespace BudgetExecution
         /// </param>
         public FinanceObjectClass( string foccode )
         {
-            Record = new DataBuilder( Source, GetArgs( foccode ) )?.GetRecord();
+            Record = new DataBuilder( _source, GetArgs( foccode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.FinanceObjectClassId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -182,11 +182,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -221,12 +221,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Args )
                     ? Args
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -321,8 +321,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( SystemException ex )

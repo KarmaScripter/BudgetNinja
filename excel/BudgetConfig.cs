@@ -61,7 +61,7 @@ namespace BudgetExecution
         /// <param name = "text" > The text. </param>
         public void AddComment( Grid grid, string text )
         {
-            if( Verify.Grid( grid )
+            if( Validate.Grid( grid )
                 && Verify.Input( text ) )
             {
                 try
@@ -75,7 +75,7 @@ namespace BudgetExecution
                         comment.From.Column = range.Start.Column;
                         comment.To.Row = range.End.Row;
                         comment.To.Column = range.End.Column;
-                        comment.BackgroundColor = PrimaryBackColor;
+                        comment.BackgroundColor = _primaryBackColor;
                         comment.Font.FontName = "Consolas";
                         comment.Font.Size = 8;
                         comment.Font.Color = Color.Black;
@@ -93,7 +93,7 @@ namespace BudgetExecution
         /// <param name = "grid" > The grid. </param>
         public void SetCaptionText( Grid grid )
         {
-            if( Verify.Grid( grid ) )
+            if( Validate.Grid( grid ) )
             {
                 try
                 {
@@ -124,7 +124,7 @@ namespace BudgetExecution
         /// <param name = "text" > The text. </param>
         public void SetText( Grid grid, IEnumerable<string> text )
         {
-            if( Verify.Grid( grid )
+            if( Validate.Grid( grid )
                 && text?.Any() == true )
             {
                 try
@@ -156,17 +156,17 @@ namespace BudgetExecution
             {
                 worksheet = Workbook.Worksheets[ 1 ];
                 worksheet.View.ShowGridLines = false;
-                worksheet.View.ZoomScale = ZoomLevel;
+                worksheet.View.ZoomScale = _zoomLevel;
                 worksheet.View.PageLayoutView = true;
                 worksheet.View.ShowHeaders = true;
-                worksheet.DefaultRowHeight = RowHeight;
-                worksheet.DefaultColWidth = ColumnWidth;
+                worksheet.DefaultRowHeight = _rowHeight;
+                worksheet.DefaultColWidth = _columnWidth;
                 worksheet.PrinterSettings.ShowHeaders = false;
                 worksheet.PrinterSettings.ShowGridLines = false;
-                worksheet.PrinterSettings.LeftMargin = LeftMargin;
-                worksheet.PrinterSettings.RightMargin = RightMargin;
-                worksheet.PrinterSettings.TopMargin = TopMargin;
-                worksheet.PrinterSettings.BottomMargin = BottomMarging;
+                worksheet.PrinterSettings.LeftMargin = _leftMargin;
+                worksheet.PrinterSettings.RightMargin = _rightMargin;
+                worksheet.PrinterSettings.TopMargin = _topMargin;
+                worksheet.PrinterSettings.BottomMargin = _bottomMarging;
                 worksheet.PrinterSettings.HorizontalCentered = true;
                 worksheet.PrinterSettings.VerticalCentered = true;
                 worksheet.PrinterSettings.FitToPage = true;

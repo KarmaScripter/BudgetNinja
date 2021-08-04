@@ -16,7 +16,7 @@ namespace BudgetExecution
     /// <summary>
     /// 
     /// </summary>
-    /// <seealso cref = "Employee"/>
+    /// <seealso cref = "_employee"/>
     /// <seealso cref = "IEmployee"/>
     /// <seealso cref = "IDataBuilder"/>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
@@ -33,7 +33,7 @@ namespace BudgetExecution
         /// <summary>
         /// The employee
         /// </summary>
-        private readonly IEmployee Employee;
+        private readonly IEmployee _employee;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -55,11 +55,11 @@ namespace BudgetExecution
         public Personnel( IQuery query )
             : base( query )
         {
-            Employee = new Employee( query );
-            ContactData = GetContactData( Employee );
-            HumanResourceData = GetHumanResourceData( Employee );
-            PayrollData = GetPayrollData( Employee );
-            LeaveData = GetLeaveData( Employee );
+            _employee = new Employee( query );
+            ContactData = GetContactData( _employee );
+            HumanResourceData = GetHumanResourceData( _employee );
+            PayrollData = GetPayrollData( _employee );
+            LeaveData = GetLeaveData( _employee );
         }
 
         /// <summary>
@@ -71,11 +71,11 @@ namespace BudgetExecution
         public Personnel( IBuilder builder )
             : base( builder )
         {
-            Employee = new Employee( builder );
-            ContactData = new ContactFactory( Employee );
-            HumanResourceData = GetHumanResourceData( Employee );
-            PayrollData = GetPayrollData( Employee );
-            LeaveData = GetLeaveData( Employee );
+            _employee = new Employee( builder );
+            ContactData = new ContactFactory( _employee );
+            HumanResourceData = GetHumanResourceData( _employee );
+            PayrollData = GetPayrollData( _employee );
+            LeaveData = GetLeaveData( _employee );
         }
 
         /// <inheritdoc/>
@@ -89,11 +89,11 @@ namespace BudgetExecution
         public Personnel( DataRow data )
             : base( data )
         {
-            Employee = new Employee( data );
-            ContactData = new ContactFactory( Employee );
-            HumanResourceData = GetHumanResourceData( Employee );
-            PayrollData = GetPayrollData( Employee );
-            LeaveData = GetLeaveData( Employee );
+            _employee = new Employee( data );
+            ContactData = new ContactFactory( _employee );
+            HumanResourceData = GetHumanResourceData( _employee );
+            PayrollData = GetPayrollData( _employee );
+            LeaveData = GetLeaveData( _employee );
         }
 
         /// <summary>
@@ -105,11 +105,11 @@ namespace BudgetExecution
         public Personnel( string epanumber )
             : base( epanumber )
         {
-            Employee = new Employee( epanumber );
-            ContactData = new ContactFactory( Employee );
-            HumanResourceData = GetHumanResourceData( Employee );
-            PayrollData = GetPayrollData( Employee );
-            LeaveData = GetLeaveData( Employee );
+            _employee = new Employee( epanumber );
+            ContactData = new ContactFactory( _employee );
+            HumanResourceData = GetHumanResourceData( _employee );
+            PayrollData = GetPayrollData( _employee );
+            LeaveData = GetLeaveData( _employee );
         }
 
         // **********************************************************************************************************************
@@ -164,11 +164,11 @@ namespace BudgetExecution
         /// </inheritdoc>
         public override string ToString()
         {
-            if( Record != null )
+            if( _record != null )
             {
                 try
                 {
-                    return $"{FirstName} {LastName}";
+                    return $"{_firstName} {_lastName}";
                 }
                 catch( Exception ex )
                 {
@@ -187,37 +187,37 @@ namespace BudgetExecution
         /// </returns>
         public new IDictionary<string, object> ToDictionary()
         {
-            if( ID.GetIndex() > -1
-                && Verify.Input( Section.GetValue() )
-                && Verify.Input( FirstName.GetValue() )
-                && Verify.Input( LastName.GetValue() )
-                && Verify.Input( Office.GetValue() )
-                && Verify.Input( PhoneNumber.GetValue() )
-                && Verify.Input( CellNumber.GetValue() )
-                && Verify.Input( Email.GetValue() ) )
+            if( _id.GetIndex() > -1
+                && Verify.Input( _section.GetValue() )
+                && Verify.Input( _firstName.GetValue() )
+                && Verify.Input( _lastName.GetValue() )
+                && Verify.Input( _office.GetValue() )
+                && Verify.Input( _phoneNumber.GetValue() )
+                && Verify.Input( _cellNumber.GetValue() )
+                && Verify.Input( _email.GetValue() ) )
             {
                 try
                 {
                     return new Dictionary<string, object>
                     {
-                        [ PrimaryKey.EmployeeId.ToString() ] = ID,
-                        [ Field.Section.ToString() ] = Section.GetValue(),
-                        [ Field.LastName.ToString() ] = LastName.GetValue(),
-                        [ Field.FirstName.ToString() ] = FirstName.GetValue(),
-                        [ Field.Office.ToString() ] = Office.GetValue(),
-                        [ Field.PhoneNumber.ToString() ] = PhoneNumber.GetValue(),
-                        [ Field.CellNumber.ToString() ] = CellNumber.GetValue(),
-                        [ Field.Email.ToString() ] = Email.GetValue()
+                        [ PrimaryKey.EmployeeId.ToString() ] = _id,
+                        [ Field.Section.ToString() ] = _section.GetValue(),
+                        [ Field.LastName.ToString() ] = _lastName.GetValue(),
+                        [ Field.FirstName.ToString() ] = _firstName.GetValue(),
+                        [ Field.Office.ToString() ] = _office.GetValue(),
+                        [ Field.PhoneNumber.ToString() ] = _phoneNumber.GetValue(),
+                        [ Field.CellNumber.ToString() ] = _cellNumber.GetValue(),
+                        [ Field.Email.ToString() ] = _email.GetValue()
                     };
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -247,11 +247,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IEmployee );
             }
         }
 
@@ -290,12 +290,12 @@ namespace BudgetExecution
         {
             try
             {
-                return ContactData ?? default;
+                return ContactData ?? default( IEmployee );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IEmployee );
             }
         }
 
@@ -322,7 +322,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ILeave );
             }
         }
 
@@ -335,12 +335,12 @@ namespace BudgetExecution
         {
             try
             {
-                return LeaveData ?? default;
+                return LeaveData ?? default( ILeave );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ILeave );
             }
         }
 
@@ -367,7 +367,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IHumanResourceData );
             }
         }
 
@@ -380,12 +380,12 @@ namespace BudgetExecution
         {
             try
             {
-                return HumanResourceData ?? default;
+                return HumanResourceData ?? default( IHumanResourceData );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IHumanResourceData );
             }
         }
 
@@ -398,12 +398,12 @@ namespace BudgetExecution
         {
             try
             {
-                return PayrollData ?? default;
+                return PayrollData ?? default( IPayrollBase );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IPayrollBase );
             }
         }
 
@@ -432,7 +432,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IPayrollBase );
             }
         }
 
@@ -447,7 +447,7 @@ namespace BudgetExecution
         private protected IDictionary<string, object> GetArgs( string code )
         {
             if( Verify.Input( code )
-                && Verify.Input( Record[ $"{Field.RcCode}" ].ToString() )
+                && Verify.Input( _record[ $"{Field.RcCode}" ].ToString() )
                 && code.StartsWith( "06", StringComparison.Ordinal )
                 && code.Length <= 3 )
             {
@@ -461,7 +461,7 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
@@ -479,11 +479,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
     }
 }

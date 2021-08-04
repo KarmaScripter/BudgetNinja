@@ -24,7 +24,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.Objectives;
+        private static readonly Source _source = Source.Objectives;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -91,7 +91,7 @@ namespace BudgetExecution
         /// </param>
         public Objective( string code )
         {
-            Record = new DataBuilder( Source, SetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( _source, SetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.ObjectiveId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -168,11 +168,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -212,12 +212,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -295,7 +295,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IObjective );
             }
         }
 
@@ -308,8 +308,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

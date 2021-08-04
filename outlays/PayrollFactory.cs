@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -21,19 +17,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class PayrollFactory : PayrollHours
     {
-        // ***************************************************************************************************************************
-        // *********************************************    FIELDS      **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The payroll
         /// </summary>
-        private readonly IPayrollBase Payroll;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly IPayrollBase _payroll;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "PayrollFactory"/> class.
         /// </summary>
@@ -42,7 +30,7 @@ namespace BudgetExecution
         /// </param>
         public PayrollFactory( IQuery query )
         {
-            Payroll = new PayrollHours( query );
+            _payroll = new PayrollHours( query );
         }
 
         /// <summary>
@@ -53,7 +41,7 @@ namespace BudgetExecution
         /// </param>
         public PayrollFactory( IBuilder builder )
         {
-            Payroll = new PayrollHours( builder );
+            _payroll = new PayrollHours( builder );
         }
 
         /// <summary>
@@ -64,7 +52,7 @@ namespace BudgetExecution
         /// </param>
         public PayrollFactory( DataRow data )
         {
-            Payroll = new PayrollHours( data );
+            _payroll = new PayrollHours( data );
         }
 
         // ***************************************************************************************************************************
@@ -80,12 +68,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetId();
+                return _payroll?.GetId();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -98,12 +86,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetRpioCode();
+                return _payroll?.GetRpioCode();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -116,12 +104,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetPayPeriod();
+                return _payroll?.GetPayPeriod();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -134,12 +122,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll.GetCalendarDate();
+                return _payroll.GetCalendarDate();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -152,12 +140,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll.GetStartDate();
+                return _payroll.GetStartDate();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -170,12 +158,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll.GetEndDate();
+                return _payroll.GetEndDate();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -188,12 +176,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetEmployeeNumber();
+                return _payroll?.GetEmployeeNumber();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -206,12 +194,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetHrOrgCode();
+                return _payroll?.GetHrOrgCode();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -225,12 +213,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetHrOrgName();
+                return _payroll?.GetHrOrgName();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -243,12 +231,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetWorkCode();
+                return _payroll?.GetWorkCode();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -261,12 +249,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetReportingCode();
+                return _payroll?.GetReportingCode();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -279,12 +267,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetReportingCodeName();
+                return _payroll?.GetReportingCodeName();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -297,12 +285,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Payroll?.GetHours();
+                return _payroll?.GetHours();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }

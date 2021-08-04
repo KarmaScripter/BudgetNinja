@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
 
@@ -18,9 +14,13 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "SuggestBaseTypeForParameter" ) ]
     public class RegionalAuthority : Authority
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private protected readonly new Source _source = Source.RegionAuthority;
 
         /// <summary>
         /// Initializes a new instance of the <see/> class.
@@ -44,9 +44,9 @@ namespace BudgetExecution
         public RegionalAuthority( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _budgetFiscalYear = new BudgetFiscalYear( _record.GetField( Field.BFY ) );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -58,27 +58,11 @@ namespace BudgetExecution
         public RegionalAuthority( IBuilder builder )
             : base( builder )
         {
-            Record = builder?.GetRecord();
-            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _budgetFiscalYear = new BudgetFiscalYear( _record.GetField( Field.BFY ) );
+            _data = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.RegionAuthority;
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Calculates the percentage.
         /// </summary>

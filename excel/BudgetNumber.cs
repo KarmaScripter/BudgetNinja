@@ -101,7 +101,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -134,7 +134,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( IElement );
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
+                return Validate.Source( Source )
                     ? Source
                     : Source.NS;
             }

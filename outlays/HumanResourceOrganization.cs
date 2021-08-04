@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -25,19 +21,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     public class HumanResourceOrganization : IHumanResourceOrganization, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************     FIELDS    ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.HumanResourceOrganizations;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly static Source _source = Source.HumanResourceOrganizations;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "HumanResourceOrganization"/>
         /// class.
@@ -55,11 +43,11 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( IQuery query )
         {
-            Record = new Builder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.HumanResourceOrganizationId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Args = Record?.ToDictionary();
+            _record = new Builder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.HumanResourceOrganizationId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -71,11 +59,11 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.HumanResourceOrganizationId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Args = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.HumanResourceOrganizationId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -87,16 +75,12 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( DataRow data )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.HumanResourceOrganizationId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Args = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.HumanResourceOrganizationId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _args = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
 
         /// <summary>
         /// Gets the data.
@@ -104,7 +88,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private DataRow Record { get; }
+        private readonly DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -112,7 +96,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private IDictionary<string, object> Args { get; }
+        private readonly IDictionary<string, object> _args;
 
         /// <summary>
         /// Gets the code.
@@ -120,7 +104,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private IElement Code { get; }
+        private readonly IElement _code;
 
         /// <summary>
         /// Gets the human resource organization identifier.
@@ -128,7 +112,7 @@ namespace BudgetExecution
         /// <value>
         /// The human resource organization identifier.
         /// </value>
-        private IKey ID { get; }
+        private readonly IKey _id;
 
         /// <summary>
         /// Gets the name.
@@ -136,12 +120,8 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private IElement Name { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly IElement _name;
+        
         /// <summary>
         /// Gets the human resource organization identifier.
         /// </summary>
@@ -151,8 +131,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -171,8 +151,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -191,8 +171,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -227,25 +207,29 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<IHumanResourceOrganization> GetHumanResourceOrganizations()
         {
-            if( Verify.Map( Args ) )
+            if( Verify.Map( _args ) )
             {
                 try
                 {
-                    var pers = new Builder( Source, Args )?.GetData()?.Select( r => r );
-                    var query = pers?.Select( h => new HumanResourceOrganization( h ) );
+                    var _rows = new Builder( _source, _args )
+                        ?.GetData()
+                        ?.Select( r => r );
 
-                    return query?.Any() == true
-                        ? query
-                        : default;
+                    var _select = _rows
+                        ?.Select( h => new HumanResourceOrganization( h ) );
+
+                    return _select?.Any() == true
+                        ? _select
+                        : default( IEnumerable<HumanResourceOrganization> );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<IHumanResourceOrganization> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<IHumanResourceOrganization> );
         }
 
         /// <summary>
@@ -258,8 +242,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code.GetValue()
+                return Verify.Element( _code )
+                    ? _code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -278,44 +262,44 @@ namespace BudgetExecution
         {
             try
             {
-                return Args.Any()
-                    ? Args
-                    : default;
+                return _args.Any()
+                    ? _args
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
         /// <summary>
         /// Sets the arguments.
         /// </summary>
-        /// <param name = "hrorgcode" >
-        /// The hrorgcode.
+        /// <param name = "hrOrgCode" >
+        /// The hrOrgCode.
         /// </param>
         /// <returns>
         /// </returns>
-        private IDictionary<string, object> SetArgs( string hrorgcode )
+        private IDictionary<string, object> SetArgs( string hrOrgCode )
         {
-            if( Verify.Input( hrorgcode ) )
+            if( Verify.Input( hrOrgCode ) )
             {
                 try
                 {
                     return new Dictionary<string, object>
                     {
-                        [ $"{Field.Code}" ] = hrorgcode
+                        [ $"{Field.Code}" ] = hrOrgCode
                     };
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -327,8 +311,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -344,9 +328,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

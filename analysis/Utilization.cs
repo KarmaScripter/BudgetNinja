@@ -384,16 +384,16 @@ namespace BudgetExecution
                 {
                     return Record.ToDictionary().Any()
                         ? Record.ToDictionary()
-                        : default;
+                        : default( IDictionary<string, object> );
                 }
                 catch( SystemException ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>

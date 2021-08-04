@@ -20,7 +20,7 @@ namespace BudgetExecution
         // ****************************************************    FIELDS     ********************************************************
         // ***************************************************************************************************************************
 
-        private readonly IGrid Grid;
+        private readonly IGrid _grid;
 
         // **************************************************************************************************************************
         // ********************************************   CONSTRUCTORS     **********************************************************
@@ -40,10 +40,10 @@ namespace BudgetExecution
         public Section( IGrid grid )
 
         {
-            Grid = grid;
-            Worksheet = Grid.GetWorksheet();
-            Range = Grid.GetRange();
-            Address = Grid.GetAddress();
+            _grid = grid;
+            Worksheet = _grid.GetWorksheet();
+            Range = _grid.GetRange();
+            Address = _grid.GetAddress();
             From = ( Range.Start.Row, Range.Start.Column );
             To = ( Range.End.Row, Range.End.Column );
             Span = Range.Columns;
@@ -99,7 +99,7 @@ namespace BudgetExecution
         {
             try
             {
-                return default;
+                return default( (int Row, int Column) );
             }
             catch( Exception ex )
             {
@@ -116,7 +116,7 @@ namespace BudgetExecution
         {
             try
             {
-                return default;
+                return default( int );
             }
             catch( Exception ex )
             {
@@ -133,7 +133,7 @@ namespace BudgetExecution
         {
             try
             {
-                return default;
+                return default( int );
             }
             catch( Exception ex )
             {
@@ -150,7 +150,7 @@ namespace BudgetExecution
         {
             try
             {
-                return default;
+                return default( (int Depth, int Span) );
             }
             catch( Exception ex )
             {

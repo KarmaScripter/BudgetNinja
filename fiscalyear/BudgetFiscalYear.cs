@@ -42,7 +42,7 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the source.
         /// </summary>
-        private static readonly Source Source = Source.FiscalYears;
+        private static readonly Source _source = Source.FiscalYears;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -53,7 +53,7 @@ namespace BudgetExecution
         /// </summary>
         public BudgetFiscalYear()
         {
-            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( GetCurrentYear().ToString() ) )
+            Record = new DataBuilder( _source, Provider.SQLite, SetArgs( GetCurrentYear().ToString() ) )
                 ?.GetRecord();
 
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
@@ -82,7 +82,7 @@ namespace BudgetExecution
         public BudgetFiscalYear( string bfy )
         {
             InputYear = new Element( Field.BFY, bfy );
-            Record = new DataBuilder( Source, SetArgs( bfy ) )?.GetRecord();
+            Record = new DataBuilder( _source, SetArgs( bfy ) )?.GetRecord();
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
             EBFY = new Element( Record, Field.EBFY );
@@ -160,7 +160,7 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( BFY fy )
         {
-            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
+            Record = new DataBuilder( _source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
             FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
             BBFY = new Element( Record, Field.BBFY );
             EBFY = new Element( Record, Field.EBFY );
@@ -354,12 +354,12 @@ namespace BudgetExecution
 
                 return holidays.Any()
                     ? holidays
-                    : default;
+                    : default( Dictionary<Field, DateTime> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<Field, DateTime> );
             }
         }
 
@@ -376,12 +376,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( FirstYear?.GetValue() )
                     ? FirstYear?.GetValue()
-                    : default;
+                    : default( string );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( string );
             }
         }
 
@@ -412,8 +412,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

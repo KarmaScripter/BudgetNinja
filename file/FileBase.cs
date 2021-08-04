@@ -28,7 +28,7 @@ namespace BudgetExecution
         /// <summary>
         /// The path
         /// </summary>
-        private protected IPath Path;
+        private protected IPath _path;
 
         /// <summary>
         /// Gets or sets the name of the file.
@@ -112,7 +112,7 @@ namespace BudgetExecution
         /// <returns></returns>
         public string GetInput()
         {
-            var input = Path?.GetFullPath();
+            var input = _path?.GetFullPath();
 
             if( Verify.Input( input ) )
             {
@@ -140,7 +140,7 @@ namespace BudgetExecution
         {
             try
             {
-                var root = Path?.GetPathRoot();
+                var root = _path?.GetPathRoot();
 
                 return Verify.Input( root )
                     ? root
@@ -161,7 +161,7 @@ namespace BudgetExecution
         {
             try
             {
-                var name = Path?.GetFileName();
+                var name = _path?.GetFileName();
 
                 return Verify.Input( name )
                     ? name
@@ -182,11 +182,11 @@ namespace BudgetExecution
         {
             try
             {
-                var ext = Path?.GetFileExtension();
+                var ext = _path?.GetFileExtension();
 
                 return Verify.Input( ext )
                     ? (EXT)Enum.Parse( typeof( EXT ), ext )
-                    : default;
+                    : default( EXT );
             }
             catch( IOException ex )
             {
@@ -260,7 +260,7 @@ namespace BudgetExecution
         {
             try
             {
-                var file = Path?.GetFullName();
+                var file = _path?.GetFullName();
 
                 if( Verify.Input( file )
                     && File.Exists( file ) )
@@ -284,12 +284,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( FileInfo?.Name ) && File.Exists( FileInfo?.FullName )
                     ? FileInfo
-                    : default;
+                    : default( FileInfo );
             }
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( FileInfo );
             }
         }
 
@@ -325,7 +325,7 @@ namespace BudgetExecution
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( FileSecurity );
             }
         }
 
@@ -342,7 +342,7 @@ namespace BudgetExecution
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( FileAttributes );
             }
         }
 
@@ -359,7 +359,7 @@ namespace BudgetExecution
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( DateTime );
             }
         }
 
@@ -376,7 +376,7 @@ namespace BudgetExecution
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( DateTime );
             }
         }
 
@@ -388,16 +388,16 @@ namespace BudgetExecution
         {
             try
             {
-                var file = Path?.GetFullPath();
+                var file = _path?.GetFullPath();
 
                 return Verify.Input( file ) && File.Exists( file )
                     ? new FileInfo( file )?.Create()
-                    : default;
+                    : default( FileStream );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( FileStream );
             }
         }
 

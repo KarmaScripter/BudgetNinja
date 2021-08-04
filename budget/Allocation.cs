@@ -40,8 +40,8 @@ namespace BudgetExecution
         public Allocation( IAuthority authority )
         {
             Authority = authority;
-            BudgetFiscalYear = Authority?.GetBudgetFiscalYear();
-            Data = Authority?.ToDictionary();
+            _budgetFiscalYear = Authority?.GetBudgetFiscalYear();
+            _data = Authority?.ToDictionary();
             Funds = GetFunds();
             ProgramResultCodes = GetProgramResultsCodes();
             FullTimeEquivalents = GetFullTimeEquivalents();
@@ -81,7 +81,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAuthority );
             }
         }
 
@@ -98,7 +98,7 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<DataRow> FilterData( Numeric numeric, string filter )
         {
-            if( Data.Any()
+            if( _data.Any()
                 && Enum.IsDefined( typeof( Numeric ), numeric )
                 && Verify.Input( filter ) )
             {
@@ -110,16 +110,16 @@ namespace BudgetExecution
 
                     return query?.Any() == true
                         ? query
-                        : default;
+                        : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<DataRow> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<DataRow> );
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( double );
                 }
             }
 

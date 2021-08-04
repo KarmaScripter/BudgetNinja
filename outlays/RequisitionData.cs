@@ -4,21 +4,11 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
-    using System;
-
     /// <summary>
     /// 
     /// </summary>
     public class RequisitionData : Commitment
     {
-        // ***************************************************************************************************************************
-        // ****************************************************  CONSTRUCTORS ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RequisitionData"/> class.
         /// </summary>
@@ -45,17 +35,13 @@ namespace BudgetExecution
         {
         }
 
-        // ***************************************************************************************************************************
-        // ******************************************************   PROPERTIES   *****************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Gets the request number.
         /// </summary>
         /// <value>
         /// The request number.
         /// </value>
-        private protected IElement RequestNumber { get; set; }
+        private protected IElement _requestNumber;
 
         /// <summary>
         /// Gets the modified by.
@@ -63,7 +49,7 @@ namespace BudgetExecution
         /// <value>
         /// The modified by.
         /// </value>
-        private protected IElement ModifiedBy { get; set; }
+        private protected IElement _modifiedBy;
 
         /// <summary>
         /// Gets the request date.
@@ -71,7 +57,7 @@ namespace BudgetExecution
         /// <value>
         /// The request date.
         /// </value>
-        private protected ITime RequestDate { get; set; }
+        private protected ITime _requestDate;
 
         /// <summary>
         /// Gets the created by.
@@ -79,7 +65,7 @@ namespace BudgetExecution
         /// <value>
         /// The created by.
         /// </value>
-        private protected IElement CreatedBy { get; set; }
+        private protected IElement _createdBy;
 
         /// <summary>
         /// Gets the document date.
@@ -87,7 +73,7 @@ namespace BudgetExecution
         /// <value>
         /// The document date.
         /// </value>
-        private protected ITime DocumentDate { get; set; }
+        private protected ITime _documentDate;
 
         /// <summary>
         /// Gets the closed date.
@@ -95,7 +81,7 @@ namespace BudgetExecution
         /// <value>
         /// The closed date.
         /// </value>
-        private protected ITime ClosedDate { get; set; }
+        private protected ITime _closedDate;
 
         /// <summary>
         /// Gets the project code.
@@ -103,7 +89,7 @@ namespace BudgetExecution
         /// <value>
         /// The project code.
         /// </value>
-        private protected IElement ProjectCode { get; set; }
+        private protected IElement _projectCode;
 
         /// <summary>
         /// Gets the requested.
@@ -111,7 +97,7 @@ namespace BudgetExecution
         /// <value>
         /// The requested.
         /// </value>
-        private protected IAmount Requested { get; set; }
+        private protected IAmount _requested;
 
         /// <summary>
         /// Gets the closed.
@@ -119,7 +105,7 @@ namespace BudgetExecution
         /// <value>
         /// The closed.
         /// </value>
-        private protected IAmount Closed { get; set; }
+        private protected IAmount _closed;
 
         /// <summary>
         /// Gets or sets the outstanding.
@@ -127,7 +113,7 @@ namespace BudgetExecution
         /// <value>
         /// The outstanding.
         /// </value>
-        private protected IAmount Outstanding { get; set; }
+        private protected IAmount _outstanding;
 
         /// <summary>
         /// Gets or sets the expended.
@@ -135,7 +121,7 @@ namespace BudgetExecution
         /// <value>
         /// The expended.
         /// </value>
-        private protected IAmount Expended { get; set; }
+        private protected IAmount _expended;
 
         /// <summary>
         /// Gets or sets the reversed.
@@ -143,6 +129,6 @@ namespace BudgetExecution
         /// <value>
         /// The reversed.
         /// </value>
-        private protected IAmount Reversed { get; set; }
+        private protected IAmount _reversed;
     }
 }

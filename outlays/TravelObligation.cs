@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -17,11 +13,16 @@ namespace BudgetExecution
     /// </summary>
     /// <seealso cref = "Obligation"/>
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class TravelObligation : TravelData
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private protected new  Source _source = Source.TravelObligations;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "TravelObligation"/> class.
@@ -39,21 +40,21 @@ namespace BudgetExecution
         public TravelObligation( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.TravelObligationId );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            FocCode = new Element( Record, Field.FocCode );
-            FocName = new Element( Record, Field.FocName );
-            DCN = new Element( Record, Field.DCN );
-            FirstName = new Element( Record, Field.FirstName );
-            MiddleName = new Element( Record, Field.MiddleName );
-            LastName = new Element( Record, Field.LastName );
-            Email = new Element( Record, Field.Email );
-            Destination = new Element( Record, Field.Destination );
-            StartDate = new Time( Record, EventDate.StartDate );
-            EndDate = new Time( Record, EventDate.EndDate );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.TravelObligationId );
+            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
+            FocCode = new Element( _record, Field.FocCode );
+            FocName = new Element( _record, Field.FocName );
+            DCN = new Element( _record, Field.DCN );
+            _firstName = new Element( _record, Field.FirstName );
+            _middleName = new Element( _record, Field.MiddleName );
+            _lastName = new Element( _record, Field.LastName );
+            _email = new Element( _record, Field.Email );
+            _destination = new Element( _record, Field.Destination );
+            _startDate = new Time( _record, EventDate.StartDate );
+            _endDate = new Time( _record, EventDate.EndDate );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -66,21 +67,21 @@ namespace BudgetExecution
         public TravelObligation( IBuilder builder )
             : base( builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.TravelObligationId );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            FocCode = new Element( Record, Field.FocCode );
-            FocName = new Element( Record, Field.FocName );
-            DCN = new Element( Record, Field.DCN );
-            FirstName = new Element( Record, Field.FirstName );
-            MiddleName = new Element( Record, Field.MiddleName );
-            LastName = new Element( Record, Field.LastName );
-            Email = new Element( Record, Field.Email );
-            Destination = new Element( Record, Field.Destination );
-            StartDate = new Time( Record, EventDate.StartDate );
-            EndDate = new Time( Record, EventDate.EndDate );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.TravelObligationId );
+            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
+            FocCode = new Element( _record, Field.FocCode );
+            FocName = new Element( _record, Field.FocName );
+            DCN = new Element( _record, Field.DCN );
+            _firstName = new Element( _record, Field.FirstName );
+            _middleName = new Element( _record, Field.MiddleName );
+            _lastName = new Element( _record, Field.LastName );
+            _email = new Element( _record, Field.Email );
+            _destination = new Element( _record, Field.Destination );
+            _startDate = new Time( _record, EventDate.StartDate );
+            _endDate = new Time( _record, EventDate.EndDate );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -92,56 +93,24 @@ namespace BudgetExecution
         /// </param>
         public TravelObligation( DataRow datarow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.TravelObligationId );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            FocCode = new Element( Record, Field.FocCode );
-            FocName = new Element( Record, Field.FocName );
-            DCN = new Element( Record, Field.DCN );
-            FirstName = new Element( Record, Field.FirstName );
-            MiddleName = new Element( Record, Field.MiddleName );
-            LastName = new Element( Record, Field.LastName );
-            Email = new Element( Record, Field.Email );
-            Destination = new Element( Record, Field.Destination );
-            StartDate = new Time( Record, EventDate.StartDate );
-            EndDate = new Time( Record, EventDate.EndDate );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
+            _record = datarow;
+            _id = new Key( _record, PrimaryKey.TravelObligationId );
+            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
+            FocCode = new Element( _record, Field.FocCode );
+            FocName = new Element( _record, Field.FocName );
+            DCN = new Element( _record, Field.DCN );
+            _firstName = new Element( _record, Field.FirstName );
+            _middleName = new Element( _record, Field.MiddleName );
+            _lastName = new Element( _record, Field.LastName );
+            _email = new Element( _record, Field.Email );
+            _destination = new Element( _record, Field.Destination );
+            _startDate = new Time( _record, EventDate.StartDate );
+            _endDate = new Time( _record, EventDate.EndDate );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
             Type = OutlayType.Obligation;
         }
-
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.TravelObligations;
-
-        /// <summary>
-        /// Gets or sets the PRC identifier.
-        /// </summary>
-        /// <value>
-        /// The PRC identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        private protected override IAmount Amount { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the travel obligation identifier.
         /// </summary>
@@ -151,14 +120,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -171,14 +140,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( BFY?.GetValue() )
-                    ? BFY
-                    : default;
+                return Verify.Input( _bfy?.GetValue() )
+                    ? _bfy
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -191,14 +160,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Destination?.GetName() )
-                    ? Destination
-                    : default;
+                return Verify.Input( _destination?.GetName() )
+                    ? _destination
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -211,14 +180,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FirstName?.GetValue() )
-                    ? FirstName
-                    : default;
+                return Verify.Input( _firstName?.GetValue() )
+                    ? _firstName
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -231,14 +200,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( MiddleName.GetValue() )
-                    ? MiddleName
-                    : default;
+                return Verify.Input( _middleName.GetValue() )
+                    ? _middleName
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -251,14 +220,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( LastName?.GetValue() )
-                    ? LastName
-                    : default;
+                return Verify.Input( _lastName?.GetValue() )
+                    ? _lastName
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -271,14 +240,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Email?.GetValue() )
-                    ? Email
-                    : default;
+                return Verify.Input( _email?.GetValue() )
+                    ? _email
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -291,14 +260,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( StartDate?.GetValue() )
-                    ? StartDate
-                    : default;
+                return Verify.Input( _startDate?.GetValue() )
+                    ? _startDate
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -311,14 +280,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( EndDate?.GetValue() )
-                    ? EndDate
-                    : default;
+                return Verify.Input( _endDate?.GetValue() )
+                    ? _endDate
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -331,14 +300,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Amount?.GetFunding() > -1.0
-                    ? Amount
-                    : default;
+                return _amount?.GetFunding() > -1.0
+                    ? _amount
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }

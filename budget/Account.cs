@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.Accounts;
+        private static readonly Source _source = Source.Accounts;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -110,7 +110,7 @@ namespace BudgetExecution
         /// </param>
         public Account( string code )
         {
-            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.AccountId );
             Code = new Element( Record, Field.Code );
             NpmCode = new Element( Record, Field.NpmCode );
@@ -140,7 +140,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAccount );
             }
         }
 
@@ -163,16 +163,16 @@ namespace BudgetExecution
                     var connection = new ConnectionBuilder( Source.Activity, Provider.SQLite );
                     var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
                     using var query = new Query( connection, sqlstatement );
-                    return new Activity( query ) ?? default;
+                    return new Activity( query ) ?? default( Activity );
                 }
                 catch( SystemException ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IActivity );
                 }
             }
 
-            return default;
+            return default( IActivity );
         }
 
         /// <summary>
@@ -192,12 +192,12 @@ namespace BudgetExecution
                 var connection = new ConnectionBuilder( Source.NationalPrograms, Provider.SQLite );
                 var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
                 using var query = new Query( connection, sqlstatement );
-                return new NationalProgram( query ) ?? default;
+                return new NationalProgram( query ) ?? default( NationalProgram );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( INationalProgram );
             }
         }
 
@@ -218,12 +218,12 @@ namespace BudgetExecution
                 var connection = new ConnectionBuilder( Source.Goals, Provider.SQLite );
                 var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
                 using var query = new Query( connection, sqlstatement );
-                return new Goal( query ) ?? default;
+                return new Goal( query ) ?? default( Goal );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IGoal );
             }
         }
 
@@ -244,12 +244,12 @@ namespace BudgetExecution
                 var connection = new ConnectionBuilder( Source.Objectives, Provider.SQLite );
                 var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
                 using var query = new Query( connection, sqlstatement );
-                return new Objective( query ) ?? default;
+                return new Objective( query ) ?? default( Objective );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IObjective );
             }
         }
 
@@ -270,12 +270,12 @@ namespace BudgetExecution
                 var connection = new ConnectionBuilder( Source.ProgramProjects, Provider.SQLite );
                 var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
                 using var query = new Query( connection, sqlstatement );
-                return new ProgramProject( query ) ?? default;
+                return new ProgramProject( query ) ?? default( ProgramProject );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramProject );
             }
         }
 
@@ -296,12 +296,12 @@ namespace BudgetExecution
                 var connection = new ConnectionBuilder( Source.ProgramAreas, Provider.SQLite );
                 var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
                 using var query = new Query( connection, sqlstatement );
-                return new ProgramArea( query ) ?? default;
+                return new ProgramArea( query ) ?? default( ProgramArea );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramArea );
             }
         }
 
@@ -337,12 +337,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -355,8 +355,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -379,12 +379,12 @@ namespace BudgetExecution
 
                 return Verify.Input( name?.GetValue() )
                     ? name
-                    : default;
+                    : default( IElement );
             }
             catch( SystemException ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
     }

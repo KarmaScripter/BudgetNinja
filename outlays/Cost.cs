@@ -171,12 +171,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -191,12 +191,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( FocCode?.GetValue() )
                     ? FocCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -211,12 +211,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( FocName?.GetValue() )
                     ? FocName
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -231,12 +231,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( ProgramProjectCode?.GetValue() )
                     ? ProgramProjectCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -251,12 +251,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( ProgramAreaCode?.GetValue() )
                     ? ProgramAreaCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -271,12 +271,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( NpmCode?.GetValue() )
                     ? NpmCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -291,12 +291,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( DocumentType?.GetValue() )
                     ? DocumentType
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -311,12 +311,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( DocumentPrefix?.GetValue() )
                     ? DocumentPrefix
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -331,12 +331,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( AgreementNumber?.GetValue() )
                     ? AgreementNumber
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -351,12 +351,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( SiteProjectCode?.GetValue() )
                     ? SiteProjectCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -371,12 +371,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( System?.GetValue() )
                     ? System
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -391,12 +391,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( PurchaseRequest?.GetValue() )
                     ? PurchaseRequest
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -411,12 +411,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( DCN?.GetValue() )
                     ? DCN
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -431,12 +431,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( GrantNumber?.GetValue() )
                     ? GrantNumber
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -451,12 +451,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( ObligatingDocumentNumber?.GetValue() )
                     ? ObligatingDocumentNumber
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -471,12 +471,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( TransactionNumber?.GetValue() )
                     ? TransactionNumber
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
     }

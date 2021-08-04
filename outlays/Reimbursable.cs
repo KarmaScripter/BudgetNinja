@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -27,9 +23,13 @@ namespace BudgetExecution
     /// </summary>
     public class Reimbursable : Obligation
     {
-        // ***************************************************************************************************************************
-        // ******************************************************  CONSTRUCTORS  *****************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// The source
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        protected new  Source _source = Source.Reimbursables;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reimbursable"/> class.
@@ -46,13 +46,13 @@ namespace BudgetExecution
         public Reimbursable( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ReimbursableId );
-            AgreementNumber = new Element( Record, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            ULO = new Amount( Record, Numeric.ULO );
-            Expenditures = new Amount( Record, Numeric.Expenditures );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ReimbursableId );
+            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            ULO = new Amount( _record, Numeric.ULO );
+            Expenditures = new Amount( _record, Numeric.Expenditures );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace BudgetExecution
         public Reimbursable( IBuilder builder )
             : base( builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ReimbursableId );
-            AgreementNumber = new Element( Record, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            ULO = new Amount( Record, Numeric.ULO );
-            Expenditures = new Amount( Record, Numeric.Expenditures );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ReimbursableId );
+            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            ULO = new Amount( _record, Numeric.ULO );
+            Expenditures = new Amount( _record, Numeric.Expenditures );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -82,47 +82,15 @@ namespace BudgetExecution
         public Reimbursable( DataRow data )
             : base( data )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.ReimbursableId );
-            AgreementNumber = new Element( Record, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            ULO = new Amount( Record, Numeric.ULO );
-            Expenditures = new Amount( Record, Numeric.Expenditures );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.ReimbursableId );
+            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            ULO = new Amount( _record, Numeric.ULO );
+            Expenditures = new Amount( _record, Numeric.Expenditures );
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // ******************************************************   PROPERTIES   *****************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// The source
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.Reimbursables;
-
-        /// <summary>
-        /// Gets the reimbursable identifier.
-        /// </summary>
-        /// <value>
-        /// The reimbursable identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private protected override IDictionary<string, object> Data { get; set; }
-
-        // ***************************************************************************************************************************
-        // *******************************************************      METHODS        ***********************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the reimbursable identifier.
         /// </summary>
@@ -132,14 +100,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -152,14 +120,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( BFY?.GetValue() )
-                    ? BFY
-                    : default;
+                return Verify.Input( _bfy?.GetValue() )
+                    ? _bfy
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -172,14 +140,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ? _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
     }

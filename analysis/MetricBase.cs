@@ -67,7 +67,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( Field );
             }
         }
 
@@ -82,7 +82,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( Numeric );
             }
         }
 
@@ -94,12 +94,12 @@ namespace BudgetExecution
             {
                 return Verify.Rows( Data )
                     ? Data
-                    : default;
+                    : default( IEnumerable<DataRow> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IEnumerable<DataRow> );
             }
         }
 
@@ -109,7 +109,7 @@ namespace BudgetExecution
         /// <returns> </returns>
         public IEnumerable<DataRow> FilterData( Field field, string filter )
         {
-            if( Verify.Field( field )
+            if( Validate.Field( field )
                 && Verify.Input( filter ) )
             {
                 try
@@ -119,16 +119,16 @@ namespace BudgetExecution
 
                     return query?.Any() == true
                         ? query
-                        : default;
+                        : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<DataRow> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<DataRow> );
         }
 
         /// <summary> Gets the codes. </summary>
@@ -146,16 +146,16 @@ namespace BudgetExecution
 
                     return query.Length > 0
                         ? query
-                        : default;
+                        : default( string[ ] );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<string> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<string> );
         }
 
         /// <summary> Gets the count. </summary>
@@ -172,7 +172,7 @@ namespace BudgetExecution
 
                     return query.Any()
                         ? query.Count()
-                        : default;
+                        : default( int );
                 }
                 catch( Exception ex )
                 {
@@ -206,7 +206,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( double );
         }
 
         /// <summary> Calculates the totals. </summary>
@@ -241,17 +241,17 @@ namespace BudgetExecution
 
                         return dict.Any()
                             ? dict
-                            : default;
+                            : default( Dictionary<string, double> );
                     }
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, double> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, double> );
         }
 
         /// <summary> Calculates the average. </summary>
@@ -320,17 +320,17 @@ namespace BudgetExecution
 
                         return dict.Any()
                             ? dict
-                            : default;
+                            : default( Dictionary<string, double> );
                     }
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, double> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, double> );
         }
 
         /// <summary> Get Error Dialog. </summary>

@@ -34,11 +34,11 @@ namespace BudgetExecution
         public Expenditure( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ExpenditureId );
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ExpenditureId );
             OriginalActionDate = GetOriginalActionDate();
             Expenditures = GetExpenditures();
-            Data = Record?.ToDictionary();
+            _data = _record?.ToDictionary();
             Type = OutlayType.Expenditure;
         }
 
@@ -51,70 +51,38 @@ namespace BudgetExecution
         public Expenditure( IBuilder builder )
             : base( builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ExpenditureId );
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ExpenditureId );
             OriginalActionDate = GetOriginalActionDate();
             Expenditures = GetExpenditures();
-            Data = Record?.ToDictionary();
+            _data = _record?.ToDictionary();
             Type = OutlayType.Expenditure;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Expenditure"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow<see cref = "DataRow"/>.
+        /// <param name = "dataRow" >
+        /// The dataRow<see cref = "DataRow"/>.
         /// </param>
-        public Expenditure( DataRow datarow )
-            : base( datarow )
+        public Expenditure( DataRow dataRow )
+            : base( dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.ExpenditureId );
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.ExpenditureId );
             OriginalActionDate = GetOriginalActionDate();
             Expenditures = GetExpenditures();
-            Data = Record?.ToDictionary();
+            _data = _record?.ToDictionary();
             Type = OutlayType.Expenditure;
         }
-
-        // ***************************************************************************************************************************
-        // ****************************************************  PROPERTIES   ********************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
-        /// Gets or sets the Source.
+        /// Gets or sets the _source.
         /// </summary>
         /// <value>
         /// The source.
         /// </value>
-        protected override Source Source { get; set; } = Source.Expenditures;
-
-        /// <summary>
-        /// Gets the ExpenditureId.
-        /// </summary>
-        /// <value>
-        /// The PRC identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private protected override IDictionary<string, object> Data { get; set; }
-
-        /// <summary>
-        /// Gets or sets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        private protected override IAmount Amount { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
+        protected new Source _source = Source.Expenditures;
 
         /// <summary>
         /// Gets the outlay identifier.
@@ -125,14 +93,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -148,12 +116,12 @@ namespace BudgetExecution
             {
                 return Expenditures?.GetFunding() > -1
                     ? Expenditures
-                    : default;
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -166,14 +134,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ?  _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
     }

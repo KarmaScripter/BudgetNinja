@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        protected virtual Source Source { get; set; }
+        protected  Source _source;
 
         /// <summary>
         /// Gets or sets the data.
@@ -37,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private protected virtual DataRow Record { get; set; }
+        private protected  DataRow _record;
 
         /// <summary>
         /// Gets or sets the PRC identifier.
@@ -45,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The PRC identifier.
         /// </value>
-        private protected virtual IKey ID { get; set; }
+        private protected  IKey _id;
 
         /// <summary>
         /// Gets or sets the budget level.
@@ -53,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The budget level.
         /// </value>
-        private protected virtual IElement Level { get; set; }
+        private protected  IElement _level;
 
         /// <summary>
         /// Gets or sets the bfy.
@@ -61,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The bfy.
         /// </value>
-        private protected virtual IElement BFY { get; set; }
+        private protected  IElement _bfy;
 
         /// <summary>
         /// Gets or sets the rpio code.
@@ -69,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The rpio code.
         /// </value>
-        private protected virtual IElement RpioCode { get; set; }
+        private protected  IElement _rpioCode;
 
         /// <summary>
         /// Gets or sets the fund code.
@@ -77,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The fund code.
         /// </value>
-        private protected virtual IElement FundCode { get; set; }
+        private protected  IElement _fundCode;
 
         /// <summary>
         /// Gets or sets the ah code.
@@ -85,7 +85,7 @@ namespace BudgetExecution
         /// <value>
         /// The ah code.
         /// </value>
-        private protected virtual IElement AhCode { get; set; }
+        private protected  IElement _ahCode;
 
         /// <summary>
         /// Gets or sets the org code.
@@ -93,7 +93,7 @@ namespace BudgetExecution
         /// <value>
         /// The org code.
         /// </value>
-        private protected virtual IElement OrgCode { get; set; }
+        private protected  IElement _orgCode;
 
         /// <summary>
         /// Gets or sets the account code.
@@ -101,7 +101,7 @@ namespace BudgetExecution
         /// <value>
         /// The account code.
         /// </value>
-        private protected virtual IElement AccountCode { get; set; }
+        private protected  IElement _accountCode;
 
         /// <summary>
         /// Gets or sets the boc code.
@@ -109,7 +109,7 @@ namespace BudgetExecution
         /// <value>
         /// The boc code.
         /// </value>
-        private protected virtual IElement BocCode { get; set; }
+        private protected  IElement _bocCode;
 
         /// <summary>
         /// Gets or sets the rc code.
@@ -117,7 +117,7 @@ namespace BudgetExecution
         /// <value>
         /// The rc code.
         /// </value>
-        private protected virtual IElement RcCode { get; set; }
+        private protected  IElement _rcCode;
 
         /// <summary>
         /// Gets or sets the activity code.
@@ -125,12 +125,8 @@ namespace BudgetExecution
         /// <value>
         /// The activity code.
         /// </value>
-        private protected virtual IElement ActivityCode { get; set; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        private protected  IElement _activityCode;
+        
         /// <summary>
         /// Sets the field.
         /// </summary>
@@ -145,7 +141,7 @@ namespace BudgetExecution
         public string GetField( DataRow data, Field field )
         {
             if( data != null
-                && Verify.Field( field ) )
+                && Validate.Field( field ) )
             {
                 try
                 {
@@ -154,11 +150,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( string );
                 }
             }
 
-            return default;
+            return default( string );
         }
 
         /// <summary>
@@ -170,14 +166,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -190,14 +186,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Level?.GetValue() )
-                    ? Level
-                    : default;
+                return Verify.Input( _level?.GetValue() )
+                    ? _level
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -210,14 +206,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( BFY?.GetValue() )
-                    ? BFY
-                    : default;
+                return Verify.Input( _bfy?.GetValue() )
+                    ? _bfy
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -230,14 +226,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( RpioCode?.GetValue() )
-                    ? RpioCode
-                    : default;
+                return Verify.Input( _rpioCode?.GetValue() )
+                    ? _rpioCode
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -250,8 +246,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( AhCode )
-                    ? AhCode
+                return Verify.Element( _ahCode )
+                    ? _ahCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -270,8 +266,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( FundCode )
-                    ? FundCode
+                return Verify.Element( _fundCode )
+                    ? _fundCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -290,8 +286,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( OrgCode )
-                    ? OrgCode
+                return Verify.Element( _orgCode )
+                    ? _orgCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -310,8 +306,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( AccountCode )
-                    ? AccountCode
+                return Verify.Element( _accountCode )
+                    ? _accountCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -330,8 +326,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( RcCode )
-                    ? RcCode
+                return Verify.Element( _rcCode )
+                    ? _rcCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -350,8 +346,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( BocCode )
-                    ? BocCode
+                return Verify.Element( _bocCode )
+                    ? _bocCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -370,8 +366,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ActivityCode )
-                    ? ActivityCode
+                return Verify.Element( _activityCode )
+                    ? _activityCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -390,8 +386,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

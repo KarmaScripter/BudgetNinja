@@ -1,97 +1,67 @@
-﻿// <copyright file = "FileReader.cs" company = "Terry D. Eppler">
-// Copyright (c) Terry D. Eppler. All rights reserved.
-// </copyright>
+﻿// // <copyright file=" <File Name> .cs" company="Terry D. Eppler">
+// // Copyright (c) Terry Eppler. All rights reserved.
+// // </copyright>
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
 
-    /// <summary>
-    /// 
-    /// </summary>
+    /// <summary> </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     public class FileReader
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
+        /// <summary> The file </summary>
+        private protected readonly IFile _dataFile;
+        
+        /// <summary> Gets or sets the data. </summary>
+        /// <value> The data. </value>
+        private protected readonly FileInfo _fileInfo;
+
+        /// <summary> Gets or sets the file stream. </summary>
+        /// <value> The file stream. </value>
+        private protected FileStream _fileStream;
 
         /// <summary>
-        /// The file
-        /// </summary>
-        private readonly IFile DataFile;
-
-        // ***************************************************************************************************************************
-        // ****************************************************  CONSTRUCTORS ********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FileReader"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "FileReader"/>
+        /// class.
         /// </summary>
         public FileReader()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileReader"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "FileReader"/>
+        /// class.
         /// </summary>
-        /// <param name="file">The file.</param>
+        /// <param name = "file" > The file. </param>
         public FileReader( IFile file )
         {
-            DataFile = file;
-            FileInfo = DataFile.GetFileInfo();
+            _dataFile = file;
+            _fileInfo = _dataFile.GetFileInfo();
         }
 
-        // ***************************************************************************************************************************
-        // ****************************************************  PROPERTIES   ********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private protected FileInfo FileInfo { get; set; }
-
-        /// <summary>
-        /// Gets or sets the file stream.
-        /// </summary>
-        /// <value>
-        /// The file stream.
-        /// </value>
-        private protected FileStream FileStream { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Reads all text.
-        /// </summary>
-        /// <returns></returns>
+        /// <summary> Reads all text. </summary>
+        /// <returns> </returns>
         public string ReadAllText()
         {
             try
             {
-                var file = FileInfo?.FullName;
+                var _file = _fileInfo?.FullName;
 
-                if( file != null )
+                if( _file != null )
                 {
-                    var stream = File.ReadAllText( file );
+                    var _stream = File.ReadAllText( _file );
 
-                    return Verify.Input( stream )
-                        ? stream
+                    return Verify.Input( _stream )
+                        ? _stream
                         : string.Empty;
                 }
 
@@ -100,79 +70,73 @@ namespace BudgetExecution
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( string );
             }
         }
 
-        /// <summary>
-        /// Reads all lines.
-        /// </summary>
-        /// <returns></returns>
-        public string[] ReadAllLines()
+        /// <summary> Reads all lines. </summary>
+        /// <returns> </returns>
+        public string[ ] ReadAllLines()
         {
             try
             {
-                var file = FileInfo?.FullName;
+                var _file = _fileInfo?.FullName;
 
-                if( file != null )
+                if( _file != null )
                 {
-                    var stream = File.ReadAllLines( file );
+                    var _stream = File.ReadAllLines( _file );
 
-                    return stream?.Any() == true
-                        ? stream
-                        : default;
+                    return _stream?.Any() == true
+                        ? _stream
+                        : default( string[ ] );
                 }
 
-                return default;
+                return default( string[ ] );
             }
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( string[ ] );
             }
         }
 
-        /// <summary>
-        /// Reads all bytes.
-        /// </summary>
-        /// <returns></returns>
-        public byte[] ReadAllBytes()
+        /// <summary> Reads all bytes. </summary>
+        /// <returns> </returns>
+        public byte[ ] ReadAllBytes()
         {
             try
             {
-                var file = FileInfo?.FullName;
+                var _file = _fileInfo?.FullName;
 
-                if( Verify.Input( file ) )
+                if( Verify.Input( _file ) )
                 {
-                    var stream = File.ReadAllBytes( file );
+                    var _stream = File.ReadAllBytes( _file );
 
-                    return stream?.Any() == true
-                        ? stream
-                        : default;
+                    return _stream?.Any() == true
+                        ? _stream
+                        : default( byte[ ] );
                 }
 
-                return default;
+                return default( byte[ ] );
             }
             catch( IOException ex )
             {
                 Fail( ex );
-                return default;
+                return default( byte[ ] );
             }
         }
 
-        /// <summary>
-        /// Gets the text.
-        /// </summary>
-        /// <returns></returns>
+        /// <summary> Gets the text. </summary>
+        /// <returns> </returns>
         public string ReadToEnd()
         {
             try
             {
-                using var streamreader = FileInfo?.OpenText();
-                var result = streamreader?.ReadToEnd();
+                using var _reader = _fileInfo?.OpenText();
+                var _result = _reader?.ReadToEnd();
 
-                return Verify.Input( result )
-                    ? result
+                return Verify.Input( _result )
+                    ? _result
                     : string.Empty;
             }
             catch( IOException ex )
@@ -182,17 +146,15 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>
-        /// Des the compress.
-        /// </summary>
+        /// <summary> Des the compress. </summary>
         public void DeCompress()
         {
             try
             {
-                var binarydata = File.ReadAllBytes( FileInfo.FullName );
-                var length = binarydata.Length;
-                using var zipper = new GZipStream( FileStream, CompressionMode.Decompress );
-                zipper?.Read( binarydata, 0, length );
+                var _bytes = File.ReadAllBytes( _fileInfo.FullName );
+                var _length = _bytes.Length;
+                using var _stream = new GZipStream( _fileStream, CompressionMode.Decompress );
+                _stream?.Read( _bytes, 0, _length );
             }
             catch( IOException ex )
             {
@@ -200,15 +162,13 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>
-        /// Fails the specified ex.
-        /// </summary>
-        /// <param name="ex">The ex.</param>
+        /// <summary> Fails the specified ex. </summary>
+        /// <param name = "ex" > The ex. </param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

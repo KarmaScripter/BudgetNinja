@@ -10,6 +10,7 @@ namespace BudgetExecution
     // ******************************************************   ASSEMBLIES   ********************************************************
     // ******************************************************************************************************************************
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Full-time equivalent (FTE) or whole time equivalent (WTE) is a
@@ -21,6 +22,7 @@ namespace BudgetExecution
     /// an FullTimeEquivalent of 0.5 signals half of a full work or school load.
     /// </summary>
     /// <seealso cref = "ProgramResultsCode"/>
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class FullTimeEquivalent : ProgramResultsCode, IFullTimeEquivalent
     {
         // ***************************************************************************************************************************
@@ -44,8 +46,8 @@ namespace BudgetExecution
         public FullTimeEquivalent( IQuery query )
             : base( query )
         {
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Amount = new Amount( Record, Numeric.Amount );
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _amount = new Amount( _record, Numeric.Amount );
         }
 
         /// <summary>
@@ -57,31 +59,27 @@ namespace BudgetExecution
         public FullTimeEquivalent( IBuilder builder )
             : base( builder )
         {
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Amount = new Amount( Record, Numeric.Amount );
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _amount = new Amount( _record, Numeric.Amount );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "FullTimeEquivalent"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public FullTimeEquivalent( DataRow datarow )
-            : base( datarow )
+        public FullTimeEquivalent( DataRow dataRow )
+            : base( dataRow )
         {
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Amount = new Amount( Record, Numeric.Amount );
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _amount = new Amount( _record, Numeric.Amount );
         }
-
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// The source
         /// </summary>
-        protected override Source Source { get; set; } = Source.FTE;
+        protected new Source _source = Source.FTE;
 
         /// <summary>
         /// Gets the fte identifier.
@@ -89,7 +87,7 @@ namespace BudgetExecution
         /// <value>
         /// The fte identifier.
         /// </value>
-        private protected override IKey ID { get; set; }
+        private protected  IKey _id;
 
         /// <summary>
         /// Gets the fte identifier.
@@ -97,12 +95,8 @@ namespace BudgetExecution
         /// <value>
         /// The fte identifier.
         /// </value>
-        protected override IAmount Amount { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private protected readonly IAmount _amount;
+        
         /// <summary>
         /// Gets the PRC identifier.
         /// </summary>
@@ -112,14 +106,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -132,14 +126,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Amount.GetFunding() > -1.0
-                    ? Amount
-                    : default;
+                return _amount.GetFunding() > -1.0
+                    ? _amount
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }

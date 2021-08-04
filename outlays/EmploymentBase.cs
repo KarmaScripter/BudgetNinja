@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
 
@@ -18,17 +14,13 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public abstract class EmploymentBase : IEmploymentInfo
     {
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the employee number.
         /// </summary>
         /// <value>
         /// The employee number.
         /// </value>
-        private protected IElement EmployeeNumber { get; set; }
+        private protected IElement _employeeNumber;
 
         /// <summary>
         /// Gets or sets the first name.
@@ -36,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The first name.
         /// </value>
-        private protected IElement FirstName { get; set; }
+        private protected IElement _firstName;
 
         /// <summary>
         /// Gets or sets the last name.
@@ -44,7 +36,7 @@ namespace BudgetExecution
         /// <value>
         /// The last name.
         /// </value>
-        private protected IElement LastName { get; set; }
+        private protected IElement _lastName;
 
         /// <summary>
         /// Gets or sets the human resource organization code.
@@ -52,7 +44,7 @@ namespace BudgetExecution
         /// <value>
         /// The human resource organization code.
         /// </value>
-        private protected IElement HumanResourceOrganizationCode { get; set; }
+        private protected IElement _humanResourceOrganizationCode;
 
         /// <summary>
         /// Gets or sets the name of the human resource organization.
@@ -60,7 +52,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the human resource organization.
         /// </value>
-        private protected IElement HumanResourceOrganizationName { get; set; }
+        private protected IElement _humanResourceOrganizationName;
 
         /// <summary>
         /// Gets or sets the appointment authority.
@@ -68,7 +60,7 @@ namespace BudgetExecution
         /// <value>
         /// The appointment authority.
         /// </value>
-        private protected IElement AppointmentAuthority { get; set; }
+        private protected IElement _appointmentAuthority;
 
         /// <summary>
         /// Gets or sets the type of the appointment.
@@ -76,7 +68,7 @@ namespace BudgetExecution
         /// <value>
         /// The type of the appointment.
         /// </value>
-        private protected IElement AppointmentType { get; set; }
+        private protected IElement _appointmentType;
 
         /// <summary>
         /// Gets or sets the bargaining unit.
@@ -84,7 +76,7 @@ namespace BudgetExecution
         /// <value>
         /// The bargaining unit.
         /// </value>
-        private protected IElement BargainingUnit { get; set; }
+        private protected IElement _bargainingUnit;
 
         /// <summary>
         /// Gets or sets the retirement plan.
@@ -92,7 +84,7 @@ namespace BudgetExecution
         /// <value>
         /// The retirement plan.
         /// </value>
-        private protected IElement RetirementPlan { get; set; }
+        private protected IElement _retirementPlan;
 
         /// <summary>
         /// Gets or sets the hire date.
@@ -100,7 +92,7 @@ namespace BudgetExecution
         /// <value>
         /// The hire date.
         /// </value>
-        private protected ITime HireDate { get; set; }
+        private protected ITime _hireDate;
 
         /// <summary>
         /// Gets or sets the service date.
@@ -108,7 +100,7 @@ namespace BudgetExecution
         /// <value>
         /// The service date.
         /// </value>
-        private protected ITime ServiceDate { get; set; }
+        private protected ITime _serviceDate;
 
         /// <summary>
         /// Gets or sets the grade entry date.
@@ -116,7 +108,7 @@ namespace BudgetExecution
         /// <value>
         /// The grade entry date.
         /// </value>
-        private protected ITime GradeEntryDate { get; set; }
+        private protected ITime _gradeEntryDate;
 
         /// <summary>
         /// Gets or sets the step entry date.
@@ -124,7 +116,7 @@ namespace BudgetExecution
         /// <value>
         /// The step entry date.
         /// </value>
-        private protected ITime StepEntryDate { get; set; }
+        private protected ITime _stepEntryDate;
 
         /// <summary>
         /// Gets or sets the wigi due date.
@@ -132,12 +124,8 @@ namespace BudgetExecution
         /// <value>
         /// The wigi due date.
         /// </value>
-        private protected ITime WigiDueDate { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        private protected ITime _wigiDueDate;
+        
         /// <summary>
         /// Gets the employee number.
         /// </summary>
@@ -147,14 +135,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( EmployeeNumber.GetValue() )
-                    ? EmployeeNumber
-                    : default;
+                return Verify.Input( _employeeNumber.GetValue() )
+                    ? _employeeNumber
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -167,14 +155,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FirstName.GetValue() )
-                    ? FirstName
-                    : default;
+                return Verify.Input( _firstName.GetValue() )
+                    ? _firstName
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -187,14 +175,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( LastName.GetValue() )
-                    ? LastName
-                    : default;
+                return Verify.Input( _lastName.GetValue() )
+                    ? _lastName
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -207,14 +195,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( HumanResourceOrganizationCode.GetValue() )
-                    ? HumanResourceOrganizationCode
-                    : default;
+                return Verify.Input( _humanResourceOrganizationCode.GetValue() )
+                    ? _humanResourceOrganizationCode
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -227,14 +215,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( HumanResourceOrganizationName.GetValue() )
-                    ? HumanResourceOrganizationName
-                    : default;
+                return Verify.Input( _humanResourceOrganizationName.GetValue() )
+                    ? _humanResourceOrganizationName
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -247,14 +235,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( HireDate?.GetValue() )
-                    ? HireDate
-                    : default;
+                return Verify.Input( _hireDate?.GetValue() )
+                    ? _hireDate
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -267,14 +255,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( ServiceDate?.GetValue() )
-                    ? ServiceDate
-                    : default;
+                return Verify.Input( _serviceDate?.GetValue() )
+                    ? _serviceDate
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -287,14 +275,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( GradeEntryDate?.GetValue() )
-                    ? GradeEntryDate
-                    : default;
+                return Verify.Input( _gradeEntryDate?.GetValue() )
+                    ? _gradeEntryDate
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -307,14 +295,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( StepEntryDate?.GetValue() )
-                    ? StepEntryDate
-                    : default;
+                return Verify.Input( _stepEntryDate?.GetValue() )
+                    ? _stepEntryDate
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -327,14 +315,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( WigiDueDate?.GetValue() )
-                    ? WigiDueDate
-                    : default;
+                return Verify.Input( _wigiDueDate?.GetValue() )
+                    ? _wigiDueDate
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -347,14 +335,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( AppointmentAuthority.GetValue() )
-                    ? AppointmentAuthority
-                    : default;
+                return Verify.Input( _appointmentAuthority.GetValue() )
+                    ? _appointmentAuthority
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -367,14 +355,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( AppointmentType.GetValue() )
-                    ? AppointmentType
-                    : default;
+                return Verify.Input( _appointmentType.GetValue() )
+                    ? _appointmentType
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -387,14 +375,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( BargainingUnit.GetValue() )
-                    ? BargainingUnit
-                    : default;
+                return Verify.Input( _bargainingUnit.GetValue() )
+                    ? _bargainingUnit
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -407,14 +395,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( RetirementPlan.GetValue() )
-                    ? RetirementPlan
-                    : default;
+                return Verify.Input( _retirementPlan.GetValue() )
+                    ? _retirementPlan
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 

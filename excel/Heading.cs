@@ -25,7 +25,7 @@ namespace BudgetExecution
         /// <summary>
         /// The depth
         /// </summary>
-        private readonly int Depth = 1;
+        private readonly int _depth = 1;
 
         // **************************************************************************************************************************
         // ********************************************   CONSTRUCTORS     **********************************************************
@@ -135,12 +135,12 @@ namespace BudgetExecution
             {
                 return Caption?.Any() == true
                     ? Caption
-                    : default;
+                    : default( IDictionary<int, string> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<int, string> );
             }
         }
     }

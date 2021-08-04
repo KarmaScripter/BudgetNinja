@@ -84,16 +84,16 @@ namespace BudgetExecution
 
                     return query.Any()
                         ? query.ToArray()
-                        : default;
+                        : default( DataRow[ ] );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<DataRow> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<DataRow> );
         }
 
         /// <summary>

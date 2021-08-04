@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -21,11 +17,32 @@ namespace BudgetExecution
     /// <seealso cref = "T:BudgetExecution.IObligation"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public class Obligation : Outlay
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        protected new Source _source = Source.Obligations;
+
+        /// <summary>
+        /// Gets or sets the PRC identifier.
+        /// </summary>
+        /// <value>
+        /// The PRC identifier.
+        /// </value>
+        private protected  IKey _id;
+        
+        /// <summary>
+        /// Gets or sets the amount.
+        /// </summary>
+        /// <value>
+        /// The amount.
+        /// </value>
+        private protected  IAmount _amount;
 
         /// <inheritdoc/>
         /// <summary>
@@ -44,11 +61,11 @@ namespace BudgetExecution
         public Obligation( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ObligationId );
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            Amount = new Amount( Record, Numeric.Obligations );
-            Data = Record?.ToDictionary();
+            _amount = new Amount( _record, Numeric.Obligations );
+            _data = _record?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -60,11 +77,11 @@ namespace BudgetExecution
         /// </param>
         public Obligation( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ObligationId );
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            Amount = new Amount( Record, Numeric.Obligations );
-            Data = Record?.ToDictionary();
+            _amount = new Amount( _record, Numeric.Obligations );
+            _data = _record?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -72,60 +89,20 @@ namespace BudgetExecution
         /// Initializes a new instance of the <see cref = "T:BudgetExecution.Obligation"/>
         /// class.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The dr.
         /// </param>
-        public Obligation( DataRow datarow )
-            : base( datarow )
+        public Obligation( DataRow dataRow )
+            : base( dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.ObligationId );
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.ObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            Amount = new Amount( Record, Numeric.Obligations );
-            Data = Record?.ToDictionary();
+            _amount = new Amount( _record, Numeric.Obligations );
+            _data = _record?.ToDictionary();
             Type = OutlayType.Obligation;
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.Obligations;
-
-        /// <summary>
-        /// Gets or sets the PRC identifier.
-        /// </summary>
-        /// <value>
-        /// The PRC identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private protected override IDictionary<string, object> Data { get; set; }
-
-        /// <summary>
-        /// Gets or sets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        private protected virtual IAmount Amount { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the outlay identifier.
         /// </summary>
@@ -135,8 +112,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -155,14 +132,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ? _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -175,14 +152,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Amount( Amount )
-                    ? Amount
-                    : default;
+                return Verify.Amount( _amount )
+                    ? _amount
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }

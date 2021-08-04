@@ -23,7 +23,7 @@ namespace BudgetExecution
         // ****************************************************     FIELDS    ********************************************************
         // ***************************************************************************************************************************
 
-        private static readonly Source Source = Source.ResponsibilityCenters;
+        private static readonly Source _source = Source.ResponsibilityCenters;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -68,7 +68,7 @@ namespace BudgetExecution
         public ResponsibilityCenter( string rccode )
             : this()
         {
-            Record = new DataBuilder( Source, SetArgs( rccode ) )?.GetRecord();
+            Record = new DataBuilder( _source, SetArgs( rccode ) )?.GetRecord();
             ResponsibilityCenterId = new Key( Record, PrimaryKey.ResponsibilityCenterId );
             Name = new Element( Record, Field.Name );
             RcCode = new Element( Record, Field.RcCode );
@@ -154,11 +154,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -193,12 +193,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -280,7 +280,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IResponsibilityCenter );
             }
         }
 
@@ -293,8 +293,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

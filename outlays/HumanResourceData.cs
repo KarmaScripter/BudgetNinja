@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -24,19 +20,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     public class HumanResourceData : EmploymentBase, IHumanResourceData, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************     FIELDS    ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.WorkforceData;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly static Source _source = Source.WorkforceData;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "HumanResourceData"/> class.
         /// </summary>
@@ -52,29 +40,29 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceData( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.WorkforceDataId );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            Status = new Element( Record, Field.Status );
-            JobTitle = new Element( Record, Field.JobTitle );
-            OccupationalSeries = new Element( Record, Field.OccupationalSeries );
-            HumanResourceOrganizationCode = new Element( Record, Field.HumanResourceOrganizationCode );
-            HumanResourceOrganizationName = new Element( Record, Field.HumanResourceOrganizationName );
-            Grade = new Element( Record, Field.Grade );
-            Step = new Element( Record, Field.Step );
-            AppointmentAuthority = new Element( Record, Field.AppointmentAuthority );
-            AppointmentType = new Element( Record, Field.AppointmentType );
-            BargainingUnit = new Element( Record, Field.BargainingUnit );
-            RetirementPlan = new Element( Record, Field.RetirementPlan );
-            HireDate = new Time( Record, EventDate.HireDate );
-            ServiceDate = new Time( Record, EventDate.ServiceDate );
-            WigiDueDate = new Time( Record, EventDate.WigiDueDate );
-            GradeEntryDate = new Time( Record, EventDate.GradeEntryDate );
-            StepEntryDate = new Time( Record, EventDate.StepEntryDate );
-            CompensationRate = new Amount( Record, Numeric.CompensationRate );
-            Args = Record.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.WorkforceDataId );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _status = new Element( _record, Field.Status );
+            _jobTitle = new Element( _record, Field.JobTitle );
+            _occupationalSeries = new Element( _record, Field.OccupationalSeries );
+            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
+            _grade = new Element( _record, Field.Grade );
+            _step = new Element( _record, Field.Step );
+            _appointmentAuthority = new Element( _record, Field.AppointmentAuthority );
+            _appointmentType = new Element( _record, Field.AppointmentType );
+            _bargainingUnit = new Element( _record, Field.BargainingUnit );
+            _retirementPlan = new Element( _record, Field.RetirementPlan );
+            _hireDate = new Time( _record, EventDate.HireDate );
+            _serviceDate = new Time( _record, EventDate.ServiceDate );
+            _wigiDueDate = new Time( _record, EventDate.WigiDueDate );
+            _gradeEntryDate = new Time( _record, EventDate.GradeEntryDate );
+            _stepEntryDate = new Time( _record, EventDate.StepEntryDate );
+            _compensationRate = new Amount( _record, Numeric.CompensationRate );
+            _args = _record.ToDictionary();
         }
 
         /// <summary>
@@ -85,29 +73,29 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceData( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.WorkforceDataId );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            Status = new Element( Record, Field.Status );
-            JobTitle = new Element( Record, Field.JobTitle );
-            OccupationalSeries = new Element( Record, Field.OccupationalSeries );
-            HumanResourceOrganizationCode = new Element( Record, Field.HumanResourceOrganizationCode );
-            HumanResourceOrganizationName = new Element( Record, Field.HumanResourceOrganizationName );
-            Grade = new Element( Record, Field.Grade );
-            Step = new Element( Record, Field.Step );
-            AppointmentAuthority = new Element( Record, Field.AppointmentAuthority );
-            AppointmentType = new Element( Record, Field.AppointmentType );
-            BargainingUnit = new Element( Record, Field.BargainingUnit );
-            RetirementPlan = new Element( Record, Field.RetirementPlan );
-            HireDate = new Time( Record, EventDate.HireDate );
-            ServiceDate = new Time( Record, EventDate.ServiceDate );
-            WigiDueDate = new Time( Record, EventDate.WigiDueDate );
-            GradeEntryDate = new Time( Record, EventDate.GradeEntryDate );
-            StepEntryDate = new Time( Record, EventDate.StepEntryDate );
-            CompensationRate = new Amount( Record, Numeric.CompensationRate );
-            Args = Record.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.WorkforceDataId );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _status = new Element( _record, Field.Status );
+            _jobTitle = new Element( _record, Field.JobTitle );
+            _occupationalSeries = new Element( _record, Field.OccupationalSeries );
+            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
+            _grade = new Element( _record, Field.Grade );
+            _step = new Element( _record, Field.Step );
+            _appointmentAuthority = new Element( _record, Field.AppointmentAuthority );
+            _appointmentType = new Element( _record, Field.AppointmentType );
+            _bargainingUnit = new Element( _record, Field.BargainingUnit );
+            _retirementPlan = new Element( _record, Field.RetirementPlan );
+            _hireDate = new Time( _record, EventDate.HireDate );
+            _serviceDate = new Time( _record, EventDate.ServiceDate );
+            _wigiDueDate = new Time( _record, EventDate.WigiDueDate );
+            _gradeEntryDate = new Time( _record, EventDate.GradeEntryDate );
+            _stepEntryDate = new Time( _record, EventDate.StepEntryDate );
+            _compensationRate = new Amount( _record, Numeric.CompensationRate );
+            _args = _record.ToDictionary();
         }
 
         /// <summary>
@@ -119,29 +107,29 @@ namespace BudgetExecution
         public HumanResourceData( DataRow data )
             : this()
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.WorkforceDataId );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            Status = new Element( Record, Field.Status );
-            JobTitle = new Element( Record, Field.JobTitle );
-            OccupationalSeries = new Element( Record, Field.OccupationalSeries );
-            HumanResourceOrganizationCode = new Element( Record, Field.HumanResourceOrganizationCode );
-            HumanResourceOrganizationName = new Element( Record, Field.HumanResourceOrganizationName );
-            Grade = new Element( Record, Field.Grade );
-            Step = new Element( Record, Field.Step );
-            AppointmentAuthority = new Element( Record, Field.AppointmentAuthority );
-            AppointmentType = new Element( Record, Field.AppointmentType );
-            BargainingUnit = new Element( Record, Field.BargainingUnit );
-            RetirementPlan = new Element( Record, Field.RetirementPlan );
-            HireDate = new Time( Record, EventDate.HireDate );
-            ServiceDate = new Time( Record, EventDate.ServiceDate );
-            WigiDueDate = new Time( Record, EventDate.WigiDueDate );
-            GradeEntryDate = new Time( Record, EventDate.GradeEntryDate );
-            StepEntryDate = new Time( Record, EventDate.StepEntryDate );
-            CompensationRate = new Amount( Record, Numeric.CompensationRate );
-            Args = Record.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.WorkforceDataId );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _status = new Element( _record, Field.Status );
+            _jobTitle = new Element( _record, Field.JobTitle );
+            _occupationalSeries = new Element( _record, Field.OccupationalSeries );
+            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
+            _grade = new Element( _record, Field.Grade );
+            _step = new Element( _record, Field.Step );
+            _appointmentAuthority = new Element( _record, Field.AppointmentAuthority );
+            _appointmentType = new Element( _record, Field.AppointmentType );
+            _bargainingUnit = new Element( _record, Field.BargainingUnit );
+            _retirementPlan = new Element( _record, Field.RetirementPlan );
+            _hireDate = new Time( _record, EventDate.HireDate );
+            _serviceDate = new Time( _record, EventDate.ServiceDate );
+            _wigiDueDate = new Time( _record, EventDate.WigiDueDate );
+            _gradeEntryDate = new Time( _record, EventDate.GradeEntryDate );
+            _stepEntryDate = new Time( _record, EventDate.StepEntryDate );
+            _compensationRate = new Amount( _record, Numeric.CompensationRate );
+            _args = _record.ToDictionary();
         }
 
         // **********************************************************************************************************************
@@ -154,7 +142,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private DataRow Record { get; }
+        private readonly DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -162,7 +150,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private IDictionary<string, object> Args { get; }
+        private readonly IDictionary<string, object> _args;
 
         /// <summary>
         /// Gets the workforce data identifier.
@@ -170,7 +158,7 @@ namespace BudgetExecution
         /// <value>
         /// The workforce data identifier.
         /// </value>
-        private IKey ID { get; }
+        private readonly IKey _id;
 
         /// <summary>
         /// Gets the status.
@@ -178,7 +166,7 @@ namespace BudgetExecution
         /// <value>
         /// The status.
         /// </value>
-        private IElement Status { get; }
+        private readonly IElement _status;
 
         /// <summary>
         /// Gets the job title.
@@ -186,7 +174,7 @@ namespace BudgetExecution
         /// <value>
         /// The job title.
         /// </value>
-        private IElement JobTitle { get; }
+        private readonly IElement _jobTitle;
 
         /// <summary>
         /// Gets the occupational series.
@@ -194,7 +182,7 @@ namespace BudgetExecution
         /// <value>
         /// The occupational series.
         /// </value>
-        private IElement OccupationalSeries { get; }
+        private readonly IElement _occupationalSeries;
 
         /// <summary>
         /// Gets the grade.
@@ -202,7 +190,7 @@ namespace BudgetExecution
         /// <value>
         /// The grade.
         /// </value>
-        private IElement Grade { get; }
+        private readonly IElement _grade;
 
         /// <summary>
         /// Gets the step.
@@ -210,7 +198,7 @@ namespace BudgetExecution
         /// <value>
         /// The step.
         /// </value>
-        private IElement Step { get; }
+        private readonly IElement _step;
 
         /// <summary>
         /// Gets the compensation rate.
@@ -218,12 +206,8 @@ namespace BudgetExecution
         /// <value>
         /// The compensation rate.
         /// </value>
-        private IAmount CompensationRate { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly IAmount _compensationRate;
+        
         /// <summary>
         /// Converts to string.
         /// </summary>
@@ -232,12 +216,12 @@ namespace BudgetExecution
         /// </returns>
         public override string ToString()
         {
-            if( Verify.Element( FirstName )
-                && Verify.Element( LastName ) )
+            if( Verify.Element( _firstName )
+                && Verify.Element( _lastName ) )
             {
                 try
                 {
-                    return FirstName.GetValue() + " " + LastName.GetValue();
+                    return _firstName.GetValue() + " " + _lastName.GetValue();
                 }
                 catch( Exception ex )
                 {
@@ -258,14 +242,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
-                    : default;
+                return Verify.Map( _args )
+                    ? _args
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -278,8 +262,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -300,7 +284,7 @@ namespace BudgetExecution
             {
                 var args = new Dictionary<string, object>
                 {
-                    [ $"{Field.EmployeeNumber}" ] = EmployeeNumber
+                    [ $"{Field.EmployeeNumber}" ] = _employeeNumber
                 };
 
                 var connection = new ConnectionBuilder( Source.Employees, Provider.SQLite );
@@ -326,7 +310,7 @@ namespace BudgetExecution
             {
                 var args = new Dictionary<string, object>
                 {
-                    [ $"{Field.HumanResourceOrganizationCode}" ] = HumanResourceOrganizationCode
+                    [ $"{Field.HumanResourceOrganizationCode}" ] = _humanResourceOrganizationCode
                 };
 
                 var connection = new ConnectionBuilder( Source.HumanResourceOrganizations, Provider.SQLite );
@@ -350,8 +334,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( JobTitle )
-                    ? JobTitle
+                return Verify.Element( _jobTitle )
+                    ? _jobTitle
                     : Element.Default;
             }
             catch( Exception ex )
@@ -370,8 +354,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( OccupationalSeries )
-                    ? OccupationalSeries
+                return Verify.Element( _occupationalSeries )
+                    ? _occupationalSeries
                     : Element.Default;
             }
             catch( Exception ex )
@@ -390,8 +374,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Status )
-                    ? Status
+                return Verify.Element( _status )
+                    ? _status
                     : Element.Default;
             }
             catch( Exception ex )
@@ -410,8 +394,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Grade )
-                    ? Grade
+                return Verify.Element( _grade )
+                    ? _grade
                     : Element.Default;
             }
             catch( Exception ex )
@@ -430,8 +414,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Step )
-                    ? Step
+                return Verify.Element( _step )
+                    ? _step
                     : Element.Default;
             }
             catch( Exception ex )
@@ -450,14 +434,14 @@ namespace BudgetExecution
         {
             try
             {
-                return CompensationRate.GetFunding() > -1.0
-                    ? CompensationRate
-                    : default;
+                return _compensationRate.GetFunding() > -1.0
+                    ? _compensationRate
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -470,14 +454,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( Source );
             }
         }
     }

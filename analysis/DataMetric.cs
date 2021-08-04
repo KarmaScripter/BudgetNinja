@@ -125,7 +125,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( Source );
             }
         }
 
@@ -162,7 +162,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( double );
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( double );
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( double );
         }
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, IEnumerable<double>> );
             }
         }
 
@@ -310,7 +310,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( double );
         }
 
         /// <summary>
@@ -343,16 +343,16 @@ namespace BudgetExecution
 
                     return metrics.Any()
                         ? metrics
-                        : default;
+                        : default( double[ ] );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<double> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<double> );
         }
 
         /// <summary>
@@ -396,17 +396,17 @@ namespace BudgetExecution
 
                         return info?.Count > 0.0
                             ? info
-                            : default;
+                            : default( Dictionary<string, IEnumerable<double>> );
                     }
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, IEnumerable<double>> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, IEnumerable<double>> );
         }
     }
 }

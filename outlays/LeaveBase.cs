@@ -4,12 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
-    using System;
-
     /// <summary>
     /// Defines the <see cref = "LeaveBase"/> .
     /// </summary>
@@ -17,36 +11,18 @@ namespace BudgetExecution
     /// <seealso cref = "ILeave"/>
     public abstract class LeaveBase : Employee
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source.
         /// </summary>
-        private protected override Source Source { get; set; } = Source.LeaveProjections;
-
-        // ***************************************************************************************************************************
-        // ****************************************************  PROPERTIES   ********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the LeaveProjectionId Gets the LeaveProjectionId Gets the
-        /// LeaveProjectionId Gets or sets the PrimaryKey of the LeaveProjections
-        /// DataTable..
-        /// </summary>
-        /// <value>
-        /// The identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
+        private protected Source _source = Source.LeaveProjections;
+        
         /// <summary>
         /// Gets or sets the RpioCode Gets the RpioCode Gets the RpioCode.
         /// </summary>
         /// <value>
         /// The rpio code.
         /// </value>
-        private protected IElement RpioCode { get; set; }
+        private protected IElement _rpioCode;
 
         /// <summary>
         /// Gets or sets the HumanResourceOrganizationCode Gets the
@@ -55,7 +31,7 @@ namespace BudgetExecution
         /// <value>
         /// The human resource organization code.
         /// </value>
-        private protected IElement HumanResourceOrganizationCode { get; set; }
+        private protected IElement _humanResourceOrganizationCode;
 
         /// <summary>
         /// Gets or sets the HumanResourceOrganizationName Gets the
@@ -64,7 +40,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the human resource organization.
         /// </value>
-        private protected IElement HumanResourceOrganizationName { get; set; }
+        private protected IElement _humanResourceOrganizationName;
 
         /// <summary>
         /// Gets or sets the YearToDateEarned Gets the YearToDateEarned.
@@ -72,7 +48,7 @@ namespace BudgetExecution
         /// <value>
         /// The year to date earned.
         /// </value>
-        private protected IAmount YearToDateEarned { get; set; }
+        private protected IAmount _yearToDateEarned;
 
         /// <summary>
         /// Gets or sets the WorkCode Gets the WorkCode Gets the WorkCode.
@@ -80,7 +56,7 @@ namespace BudgetExecution
         /// <value>
         /// The work code.
         /// </value>
-        private protected IElement WorkCode { get; set; }
+        private protected IElement _workCode;
 
         /// <summary>
         /// Gets or sets the YearToDateUsed Gets the YearToDateUsed Gets or sets the
@@ -89,7 +65,7 @@ namespace BudgetExecution
         /// <value>
         /// The year to date used.
         /// </value>
-        private protected IAmount YearToDateUsed { get; set; }
+        private protected IAmount _yearToDateUsed;
 
         /// <summary>
         /// Gets or sets the MaxLeaveCarryover Gets the MaxLeaveCarryover Gets the
@@ -98,7 +74,7 @@ namespace BudgetExecution
         /// <value>
         /// The maximum leave carryover.
         /// </value>
-        private protected IAmount MaxLeaveCarryover { get; set; }
+        private protected IAmount _maxLeaveCarryover;
 
         /// <summary>
         /// Gets or sets the UseOrLose Gets the UseOrLose Gets or sets the UseOrLose.
@@ -114,25 +90,25 @@ namespace BudgetExecution
         /// <value>
         /// The projected pay period.
         /// </value>
-        private protected IAmount ProjectedPayPeriod { get; set; }
+        private protected IAmount _projectedPayPeriod;
 
         /// <summary>
         /// Gets or sets the ProjectedAnnual Gets the ProjectedAnnual
-        /// <see cref = "ProjectedAnnual"/> .
+        /// <see cref = "_projectedAnnual"/> .
         /// </summary>
         /// <value>
         /// The projected annual.
         /// </value>
-        private protected IAmount ProjectedAnnual { get; set; }
+        private protected IAmount _projectedAnnual;
 
         /// <summary>
         /// Gets or sets the AvailableHours Gets the AvailableHours Gets the AvailableHours
-        /// Gets or sets the <see cref = "AvailableHours"/> .
+        /// Gets or sets the <see cref = "_availableHours"/> .
         /// </summary>
         /// <value>
         /// The available hours.
         /// </value>
-        private protected IAmount AvailableHours { get; set; }
+        private protected IAmount _availableHours;
 
         /// <summary>
         /// Gets or sets the annual hours.
@@ -140,6 +116,6 @@ namespace BudgetExecution
         /// <value>
         /// The annual hours.
         /// </value>
-        private protected IAmount AnnualHours { get; set; }
+        private protected IAmount _annualHours;
     }
 }

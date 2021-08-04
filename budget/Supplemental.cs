@@ -23,19 +23,16 @@ namespace BudgetExecution
     /// <seealso cref = "ISupplemental"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public abstract class Supplemental : ProgramResultsCode, ISupplemental
     {
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Gets the source.
         /// </summary>
         /// <value>
         /// The source.
         /// </value>
-        protected override Source Source { get; set; } = Source.Supplemental;
+        private protected readonly new Source _source = Source.Supplemental;
 
         /// <summary>
         /// Gets or sets the type.
@@ -43,7 +40,7 @@ namespace BudgetExecution
         /// <value>
         /// The type.
         /// </value>
-        private protected virtual IElement Type { get; set; }
+        private protected IElement _type;
 
         /// <summary>
         /// Gets or sets the boc.
@@ -51,12 +48,8 @@ namespace BudgetExecution
         /// <value>
         /// The boc.
         /// </value>
-        private protected IElement BOC { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        private protected IElement _boc;
+        
         /// <summary>
         /// Gets the type of the supplemental.
         /// </summary>
@@ -66,8 +59,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Type?.GetValue() )
-                    ? Type
+                return Verify.Input( _type?.GetValue() )
+                    ? _type
                     : Element.Default;
             }
             catch( Exception ex )
@@ -86,14 +79,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? new Builder( Source, Data )
-                    : default;
+                return Verify.Map( _data )
+                    ? new Builder( _source, _data )
+                    : default( Builder );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IBuilder );
             }
         }
 
@@ -107,7 +100,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Type + Amount?.GetFunding().ToString( "c" );
+                return _type + _amount?.GetFunding().ToString( "c" );
             }
             catch( Exception ex )
             {
@@ -125,14 +118,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( AwardType ), Type )
-                    ? new Element( Record, Field.Type )
-                    : default;
+                return Enum.IsDefined( typeof( AwardType ), _type )
+                    ? new Element( _record, Field.Type )
+                    : default( Element );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
     }

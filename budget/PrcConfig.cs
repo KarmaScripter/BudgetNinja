@@ -32,23 +32,23 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "PrcConfig"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public PrcConfig( DataRow datarow )
+        public PrcConfig( DataRow dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
         }
 
         /// <summary>
@@ -59,18 +59,18 @@ namespace BudgetExecution
         /// </param>
         public PrcConfig( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
         }
 
         /// <summary>
@@ -81,18 +81,18 @@ namespace BudgetExecution
         /// </param>
         public PrcConfig( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
         }
 
         /// <summary>
@@ -102,18 +102,18 @@ namespace BudgetExecution
         /// </param>
         public PrcConfig( IDictionary<string, object> dict )
         {
-            Record = new DataBuilder( Source, dict )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
+            _record = new DataBuilder( _source, dict )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
         }
 
         // **************************************************************************************************************************
@@ -129,8 +129,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -149,14 +149,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Level )
-                    ? new BudgetLevel( Level?.GetValue() )
-                    : default;
+                return Verify.Element( _level )
+                    ? new BudgetLevel( _level?.GetValue() )
+                    : default( BudgetLevel );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IBudgetLevel );
             }
         }
 
@@ -169,14 +169,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( BFY )
-                    ? new BudgetFiscalYear( BFY?.GetValue() )
-                    : default;
+                return Verify.Element( _bfy )
+                    ? new BudgetFiscalYear( _bfy?.GetValue() )
+                    : default( BudgetFiscalYear );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IBudgetFiscalYear );
             }
         }
 
@@ -191,7 +191,7 @@ namespace BudgetExecution
             {
                 var dict = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = RpioCode?.GetValue()
+                    [ $"{Field.Code}" ] = _rpioCode?.GetValue()
                 };
 
                 var connection = new ConnectionBuilder( Source.ResourcePlanningOffices );
@@ -202,7 +202,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IResourcePlanningOffice );
             }
         }
 
@@ -217,7 +217,7 @@ namespace BudgetExecution
             {
                 var dict = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = AhCode?.GetValue()
+                    [ $"{Field.Code}" ] = _ahCode?.GetValue()
                 };
 
                 var connectbuilder = new ConnectionBuilder( Source.AllowanceHolders );
@@ -228,7 +228,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAllowanceHolder );
             }
         }
 
@@ -241,14 +241,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( FundCode )
-                    ? new Fund( FundCode?.GetValue() )
-                    : default;
+                return Verify.Element( _fundCode )
+                    ? new Fund( _fundCode?.GetValue() )
+                    : default( Fund );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IFund );
             }
         }
 
@@ -263,7 +263,7 @@ namespace BudgetExecution
             {
                 var args = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = OrgCode?.GetValue()
+                    [ $"{Field.Code}" ] = _orgCode?.GetValue()
                 };
 
                 var connection = new ConnectionBuilder( Source.Organizations );
@@ -274,7 +274,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IOrganization );
             }
         }
 
@@ -289,7 +289,7 @@ namespace BudgetExecution
             {
                 var args = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = AccountCode?.GetValue()
+                    [ $"{Field.Code}" ] = _accountCode?.GetValue()
                 };
 
                 var connection = new ConnectionBuilder( Source.Accounts );
@@ -300,7 +300,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAccount );
             }
         }
 
@@ -315,7 +315,7 @@ namespace BudgetExecution
             {
                 var args = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = BocCode?.GetValue()
+                    [ $"{Field.Code}" ] = _bocCode?.GetValue()
                 };
 
                 var connection = new ConnectionBuilder( Source.BudgetObjectClass );
@@ -326,7 +326,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IBudgetObjectClass );
             }
         }
 
@@ -341,7 +341,7 @@ namespace BudgetExecution
             {
                 var args = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = RcCode?.GetValue()
+                    [ $"{Field.Code}" ] = _rcCode?.GetValue()
                 };
 
                 var connection = new ConnectionBuilder( Source.ResponsibilityCenters );
@@ -352,7 +352,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IResponsibilityCenter );
             }
         }
     }

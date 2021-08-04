@@ -25,7 +25,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.ProgramAreas;
+        private static readonly Source _source = Source.ProgramAreas;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -92,7 +92,7 @@ namespace BudgetExecution
         /// </param>
         public ProgramArea( string code )
         {
-            Record = new DataBuilder( Source, SetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( _source, SetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.ProgramAreaId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -169,11 +169,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -208,12 +208,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -304,8 +304,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

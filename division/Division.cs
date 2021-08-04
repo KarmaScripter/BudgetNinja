@@ -84,7 +84,7 @@ namespace BudgetExecution
         public Division( IResponsibilityCenter rc )
             : this()
         {
-            Record = new DataBuilder( Source, GetArgs( rc ) )?.GetRecord();
+            Record = new DataBuilder( _source, GetArgs( rc ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.DivisionId );
             Title = new Element( Record, Field.Title );
             Code = new Element( Record, Field.Code );
@@ -122,7 +122,7 @@ namespace BudgetExecution
         public Division( string rccode )
             : this()
         {
-            Record = new DataBuilder( Source, GetArgs( rccode ) )?.GetRecord();
+            Record = new DataBuilder( _source, GetArgs( rccode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.DivisionId );
             Title = new Element( Record, Field.Title );
             Code = new Element( Record, Field.Code );
@@ -170,7 +170,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IResponsibilityCenter );
             }
         }
 
@@ -200,17 +200,17 @@ namespace BudgetExecution
 
                         return controlnumber?.Any() == true
                             ? controlnumber
-                            : default;
+                            : default( IEnumerable<ControlNumber> );
                     }
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<IControlNumber> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<IControlNumber> );
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace BudgetExecution
         {
             if( bfy != null
                 && Verify.Input( Code?.GetValue() )
-                && Resource.DivisionSources?.Contains( Source ) == true )
+                && Resource.DivisionSources?.Contains( _source ) == true )
             {
                 try
                 {
@@ -239,16 +239,16 @@ namespace BudgetExecution
 
                     return workcodes?.Any() == true
                         ? workcodes.ToList()
-                        : default;
+                        : default( List<WorkCode> );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<IWorkCode> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<IWorkCode> );
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace BudgetExecution
         {
             if( bfy != null
                 && Verify.Input( Code?.GetValue() )
-                && Resource.DivisionSources?.Contains( Source ) == true )
+                && Resource.DivisionSources?.Contains( _source ) == true )
             {
                 try
                 {
@@ -276,16 +276,16 @@ namespace BudgetExecution
 
                     return hrorg?.Any() == true
                         ? hrorg
-                        : default;
+                        : default( IEnumerable<HumanResourceOrganization> );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<IHumanResourceOrganization> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<IHumanResourceOrganization> );
         }
 
         /// <summary>
@@ -328,11 +328,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -360,11 +360,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>

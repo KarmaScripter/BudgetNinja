@@ -27,7 +27,7 @@ namespace BudgetExecution
         /// <summary>
         /// The employee
         /// </summary>
-        private readonly IEmployee Employee;
+        private readonly IEmployee _employee;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -41,7 +41,7 @@ namespace BudgetExecution
         /// </param>
         public ContactFactory( IEmployee employee )
         {
-            Employee = employee;
+            _employee = employee;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace BudgetExecution
         /// </param>
         public ContactFactory( IQuery query )
         {
-            Employee = new Employee( query );
+            _employee = new Employee( query );
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace BudgetExecution
         /// </param>
         public ContactFactory( IBuilder builder )
         {
-            Employee = new Employee( builder );
+            _employee = new Employee( builder );
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace BudgetExecution
         /// </param>
         public ContactFactory( DataRow datarow )
         {
-            Employee = new Employee( datarow );
+            _employee = new Employee( datarow );
         }
 
         // ***************************************************************************************************************************
@@ -90,7 +90,7 @@ namespace BudgetExecution
         {
             try
             {
-                var id = Employee?.GetId();
+                var id = _employee?.GetId();
 
                 return id?.GetIndex() > 0
                     ? id
@@ -99,7 +99,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -112,7 +112,7 @@ namespace BudgetExecution
         {
             try
             {
-                var lastname = Employee?.GetFirstName();
+                var lastname = _employee?.GetFirstName();
 
                 return Verify.Input( lastname?.GetValue() )
                     ? lastname
@@ -121,7 +121,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -134,7 +134,7 @@ namespace BudgetExecution
         {
             try
             {
-                var lastname = Employee?.GetLastName();
+                var lastname = _employee?.GetLastName();
 
                 return Verify.Input( lastname?.GetValue() )
                     ? lastname
@@ -143,7 +143,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -156,12 +156,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Employee?.GetSection();
+                return _employee?.GetSection();
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -174,7 +174,7 @@ namespace BudgetExecution
         {
             try
             {
-                var eid = Employee?.GetEmployeeNumber();
+                var eid = _employee?.GetEmployeeNumber();
 
                 return Verify.Input( eid?.GetValue() )
                     ? eid
@@ -183,7 +183,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -196,7 +196,7 @@ namespace BudgetExecution
         {
             try
             {
-                var office = Employee?.GetOffice();
+                var office = _employee?.GetOffice();
 
                 return Verify.Input( office?.GetValue() )
                     ? office
@@ -205,7 +205,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -218,7 +218,7 @@ namespace BudgetExecution
         {
             try
             {
-                var number = Employee?.GetPhoneNumber();
+                var number = _employee?.GetPhoneNumber();
 
                 return Verify.Input( number?.GetValue() )
                     ? number
@@ -227,7 +227,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -240,7 +240,7 @@ namespace BudgetExecution
         {
             try
             {
-                var cell = Employee?.GetCellNumber();
+                var cell = _employee?.GetCellNumber();
 
                 return Verify.Input( cell?.GetValue() )
                     ? cell
@@ -249,7 +249,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -262,7 +262,7 @@ namespace BudgetExecution
         {
             try
             {
-                var email = Employee?.GetEmail();
+                var email = _employee?.GetEmail();
 
                 return Verify.Input( email?.GetValue() )
                     ? email
@@ -271,7 +271,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -284,7 +284,7 @@ namespace BudgetExecution
         {
             try
             {
-                var status = Employee?.GetEmployementStatus();
+                var status = _employee?.GetEmployementStatus();
 
                 return Verify.Input( status?.GetValue() )
                     ? status
@@ -293,7 +293,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 

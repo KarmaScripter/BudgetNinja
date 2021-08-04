@@ -4,9 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
@@ -22,11 +19,19 @@ namespace BudgetExecution
     /// 
     /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public class Awards : Supplemental
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private protected readonly new Source _source = Source.Awards;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Awards"/> class.
@@ -43,12 +48,12 @@ namespace BudgetExecution
         /// </param>
         public Awards( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AwardsId );
-            FundCode = new Element( Record, Field.FundCode );
-            BOC = new Element( Record, Field.BocCode );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AwardsId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _boc = new Element( _record, Field.BocCode );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -59,12 +64,12 @@ namespace BudgetExecution
         /// </param>
         public Awards( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AwardsId );
-            FundCode = new Element( Record, Field.FundCode );
-            BOC = new Element( Record, Field.BocCode );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AwardsId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _boc = new Element( _record, Field.BocCode );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -75,46 +80,14 @@ namespace BudgetExecution
         /// </param>
         public Awards( DataRow data )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.AwardsId );
-            FundCode = new Element( Record, Field.FundCode );
-            BOC = new Element( Record, Field.BocCode );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.AwardsId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _boc = new Element( _record, Field.BocCode );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets the awards identifier.
-        /// </summary>
-        /// <value>
-        /// The awards identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.Awards;
-
-        /// <summary>
-        /// Gets or sets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        private protected override IElement Type { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Converts to string.
         /// </summary>
@@ -125,7 +98,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Type + Amount?.GetFunding().ToString( "c" );
+                return _type + _amount?.GetFunding().ToString( "c" );
             }
             catch( Exception ex )
             {
@@ -141,24 +114,24 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<DataRow> GetData()
         {
-            if( Verify.Map( Data ) )
+            if( Verify.Map( _data ) )
             {
                 try
                 {
-                    var query = new Builder( Source, Data )?.GetData();
+                    var query = new Builder( _source, _data )?.GetData();
 
                     return query?.Any() == true
                         ? query
-                        : default;
+                        : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<DataRow> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<DataRow> );
         }
 
         /// <summary>
@@ -170,14 +143,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -190,14 +163,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( AwardType ), Type )
-                    ? Type
-                    : default;
+                return Enum.IsDefined( typeof( AwardType ), _type )
+                    ? _type
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
     }

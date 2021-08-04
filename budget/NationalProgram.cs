@@ -31,7 +31,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.NationalPrograms;
+        private static readonly Source _source = Source.NationalPrograms;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -106,7 +106,7 @@ namespace BudgetExecution
         /// </param>
         public NationalProgram( string npmcode )
         {
-            Record = new DataBuilder( Source, GetArgs( npmcode ) )?.GetRecord();
+            Record = new DataBuilder( _source, GetArgs( npmcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.NationalProgramId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -210,11 +210,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -269,12 +269,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -287,7 +287,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.NPM( NPM )
+                return Validate.NPM( NPM )
                     ? NPM
                     : NPM.NS;
             }
@@ -392,7 +392,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( INationalProgram );
             }
         }
 
@@ -405,8 +405,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

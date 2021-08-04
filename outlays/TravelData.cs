@@ -4,11 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
-    using System;
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
@@ -18,10 +13,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public class TravelData : Obligation
     {
-        // ***************************************************************************************************************************
-        // ****************************************************  CONSTRUCTORS ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TravelData"/> class.
         /// </summary>
@@ -48,17 +39,13 @@ namespace BudgetExecution
         {
         }
 
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Gets the destination.
         /// </summary>
         /// <value>
         /// The destination.
         /// </value>
-        private protected IElement Destination { get; set; }
+        private protected IElement _destination;
 
         /// <summary>
         /// Gets the first name.
@@ -66,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The first name.
         /// </value>
-        private protected IElement FirstName { get; set; }
+        private protected IElement _firstName;
 
         /// <summary>
         /// Gets the name of the middle.
@@ -74,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the middle.
         /// </value>
-        private protected IElement MiddleName { get; set; }
+        private protected IElement _middleName;
 
         /// <summary>
         /// Gets the last name.
@@ -82,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The last name.
         /// </value>
-        private protected IElement LastName { get; set; }
+        private protected IElement _lastName;
 
         /// <summary>
         /// Gets the email.
@@ -90,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The email.
         /// </value>
-        private protected IElement Email { get; set; }
+        private protected IElement _email;
 
         /// <summary>
         /// Gets the start date.
@@ -98,7 +85,7 @@ namespace BudgetExecution
         /// <value>
         /// The start date.
         /// </value>
-        private protected ITime StartDate { get; set; }
+        private protected ITime _startDate;
 
         /// <summary>
         /// Gets the end date.
@@ -106,6 +93,6 @@ namespace BudgetExecution
         /// <value>
         /// The end date.
         /// </value>
-        private protected ITime EndDate { get; set; }
+        private protected ITime _endDate;
     }
 }

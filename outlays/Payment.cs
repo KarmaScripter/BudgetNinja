@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -21,9 +17,77 @@ namespace BudgetExecution
     /// <seealso cref = "IProgramElement"/>
     public class Payment : Obligation
     {
-        // ***************************************************************************************************************************
-        // ******************************************************  CONSTRUCTORS  *****************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the invoice number.
+        /// </summary>
+        /// <value>
+        /// The invoice number.
+        /// </value>
+        private readonly IElement _invoiceNumber;
+
+        /// <summary>
+        /// Gets or sets the invoice date.
+        /// </summary>
+        /// <value>
+        /// The invoice date.
+        /// </value>
+        private readonly ITime _invoiceDate;
+
+        /// <summary>
+        /// Gets the contract number.
+        /// </summary>
+        /// <value>
+        /// The contract number.
+        /// </value>
+        private readonly IElement _contractNumber;
+
+        /// <summary>
+        /// Gets the order number.
+        /// </summary>
+        /// <value>
+        /// The order number.
+        /// </value>
+        private readonly IElement _orderNumber;
+
+        /// <summary>
+        /// Gets the check date.
+        /// </summary>
+        /// <value>
+        /// The check date.
+        /// </value>
+        private readonly ITime _checkDate;
+
+        /// <summary>
+        /// Gets the modification number.
+        /// </summary>
+        /// <value>
+        /// The modification number.
+        /// </value>
+        private readonly IElement _modificationNumber;
+
+        /// <summary>
+        /// Gets the project code.
+        /// </summary>
+        /// <value>
+        /// The project code.
+        /// </value>
+        private readonly IElement _projectCode;
+
+        /// <summary>
+        /// Gets the cost org code.
+        /// </summary>
+        /// <value>
+        /// The cost org code.
+        /// </value>
+        private readonly IElement _costOrgCode;
+        
+        /// <summary>
+        /// Gets the disbursed.
+        /// </summary>
+        /// <value>
+        /// The disbursed.
+        /// </value>
+        private readonly IAmount _disbursed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Payment"/> class.
@@ -42,22 +106,22 @@ namespace BudgetExecution
         public Payment( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PaymentId );
-            InvoiceNumber = new Element( Record, Field.InvoiceNumber );
-            ContractNumber = new Element( Record, Field.ContractNumber );
-            OrderNumber = new Element( Record, Field.OrderNumber );
-            CheckDate = new Time( Record, EventDate.CheckDate );
-            InvoiceDate = new Time( Record, EventDate.InvoiceDate );
-            ModificationNumber = new Element( Record, Field.ModificationNumber );
-            DocumentType = new Element( Record, Field.DocumentNumber );
-            DCN = new Element( Record, Field.DCN );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            CostOrgCode = new Element( Record, Field.CostOrgCode );
-            Amount = new Amount( Record, Numeric.Payment );
-            Disbursed = new Amount( Record, Numeric.Disbursed );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PaymentId );
+            _invoiceNumber = new Element( _record, Field.InvoiceNumber );
+            _contractNumber = new Element( _record, Field.ContractNumber );
+            _orderNumber = new Element( _record, Field.OrderNumber );
+            _checkDate = new Time( _record, EventDate.CheckDate );
+            _invoiceDate = new Time( _record, EventDate.InvoiceDate );
+            _modificationNumber = new Element( _record, Field.ModificationNumber );
+            DocumentType = new Element( _record, Field.DocumentNumber );
+            DCN = new Element( _record, Field.DCN );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            _costOrgCode = new Element( _record, Field.CostOrgCode );
+            _amount = new Amount( _record, Numeric.Payment );
+            _disbursed = new Amount( _record, Numeric.Disbursed );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -69,147 +133,51 @@ namespace BudgetExecution
         public Payment( IBuilder databuilder )
             : base( databuilder )
         {
-            Record = databuilder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PaymentId );
-            InvoiceNumber = new Element( Record, Field.InvoiceNumber );
-            ContractNumber = new Element( Record, Field.ContractNumber );
-            OrderNumber = new Element( Record, Field.OrderNumber );
-            CheckDate = new Time( Record, EventDate.CheckDate );
-            InvoiceDate = new Time( Record, EventDate.InvoiceDate );
-            ModificationNumber = new Element( Record, Field.ModificationNumber );
-            DocumentType = new Element( Record, Field.DocumentNumber );
-            DCN = new Element( Record, Field.DCN );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            CostOrgCode = new Element( Record, Field.CostOrgCode );
-            Amount = new Amount( Record, Numeric.Payment );
-            Disbursed = new Amount( Record, Numeric.Disbursed );
-            Data = Record?.ToDictionary();
+            _record = databuilder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PaymentId );
+            _invoiceNumber = new Element( _record, Field.InvoiceNumber );
+            _contractNumber = new Element( _record, Field.ContractNumber );
+            _orderNumber = new Element( _record, Field.OrderNumber );
+            _checkDate = new Time( _record, EventDate.CheckDate );
+            _invoiceDate = new Time( _record, EventDate.InvoiceDate );
+            _modificationNumber = new Element( _record, Field.ModificationNumber );
+            DocumentType = new Element( _record, Field.DocumentNumber );
+            DCN = new Element( _record, Field.DCN );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            _costOrgCode = new Element( _record, Field.CostOrgCode );
+            _amount = new Amount( _record, Numeric.Payment );
+            _disbursed = new Amount( _record, Numeric.Disbursed );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Payment"/> class.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The data.
         /// </param>
-        public Payment( DataRow datarow )
-            : base( datarow )
+        public Payment( DataRow dataRow )
+            : base( dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.PaymentId );
-            InvoiceNumber = new Element( Record, Field.InvoiceNumber );
-            ContractNumber = new Element( Record, Field.ContractNumber );
-            OrderNumber = new Element( Record, Field.OrderNumber );
-            CheckDate = new Time( Record, EventDate.CheckDate );
-            InvoiceDate = new Time( Record, EventDate.InvoiceDate );
-            ModificationNumber = new Element( Record, Field.ModificationNumber );
-            DocumentType = new Element( Record, Field.DocumentNumber );
-            DCN = new Element( Record, Field.DCN );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            CostOrgCode = new Element( Record, Field.CostOrgCode );
-            Amount = new Amount( Record, Numeric.Payment );
-            Disbursed = new Amount( Record, Numeric.Disbursed );
-            Data = Record?.ToDictionary();
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.PaymentId );
+            _invoiceNumber = new Element( _record, Field.InvoiceNumber );
+            _contractNumber = new Element( _record, Field.ContractNumber );
+            _orderNumber = new Element( _record, Field.OrderNumber );
+            _checkDate = new Time( _record, EventDate.CheckDate );
+            _invoiceDate = new Time( _record, EventDate.InvoiceDate );
+            _modificationNumber = new Element( _record, Field.ModificationNumber );
+            DocumentType = new Element( _record, Field.DocumentNumber );
+            DCN = new Element( _record, Field.DCN );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            _costOrgCode = new Element( _record, Field.CostOrgCode );
+            _amount = new Amount( _record, Numeric.Payment );
+            _disbursed = new Amount( _record, Numeric.Disbursed );
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // ******************************************************   PROPERTIES   *****************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets the payment identifier.
-        /// </summary>
-        /// <value>
-        /// The payment identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets the invoice number.
-        /// </summary>
-        /// <value>
-        /// The invoice number.
-        /// </value>
-        private IElement InvoiceNumber { get; }
-
-        /// <summary>
-        /// Gets or sets the invoice date.
-        /// </summary>
-        /// <value>
-        /// The invoice date.
-        /// </value>
-        private ITime InvoiceDate { get; }
-
-        /// <summary>
-        /// Gets the contract number.
-        /// </summary>
-        /// <value>
-        /// The contract number.
-        /// </value>
-        private IElement ContractNumber { get; }
-
-        /// <summary>
-        /// Gets the order number.
-        /// </summary>
-        /// <value>
-        /// The order number.
-        /// </value>
-        private IElement OrderNumber { get; }
-
-        /// <summary>
-        /// Gets the check date.
-        /// </summary>
-        /// <value>
-        /// The check date.
-        /// </value>
-        private ITime CheckDate { get; }
-
-        /// <summary>
-        /// Gets the modification number.
-        /// </summary>
-        /// <value>
-        /// The modification number.
-        /// </value>
-        private IElement ModificationNumber { get; }
-
-        /// <summary>
-        /// Gets the project code.
-        /// </summary>
-        /// <value>
-        /// The project code.
-        /// </value>
-        private IElement ProjectCode { get; }
-
-        /// <summary>
-        /// Gets the cost org code.
-        /// </summary>
-        /// <value>
-        /// The cost org code.
-        /// </value>
-        private IElement CostOrgCode { get; }
-
-        /// <summary>
-        /// Gets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        private protected override IAmount Amount { get; set; }
-
-        /// <summary>
-        /// Gets the disbursed.
-        /// </summary>
-        /// <value>
-        /// The disbursed.
-        /// </value>
-        private IAmount Disbursed { get; }
-
-        // ***************************************************************************************************************************
-        // *******************************************************      METHODS        ***********************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the payment identifier.
         /// </summary>
@@ -219,8 +187,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -259,8 +227,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( InvoiceNumber )
-                    ? InvoiceNumber
+                return Verify.Element( _invoiceNumber )
+                    ? _invoiceNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -279,8 +247,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( InvoiceDate )
-                    ? InvoiceDate
+                return Verify.Time( _invoiceDate )
+                    ? _invoiceDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -299,8 +267,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ContractNumber )
-                    ? ContractNumber
+                return Verify.Element( _contractNumber )
+                    ? _contractNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -319,8 +287,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( OrderNumber )
-                    ? OrderNumber
+                return Verify.Element( _orderNumber )
+                    ? _orderNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -339,8 +307,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( CheckDate )
-                    ? CheckDate
+                return Verify.Time( _checkDate )
+                    ? _checkDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -359,8 +327,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ModificationNumber )
-                    ? ModificationNumber
+                return Verify.Element( _modificationNumber )
+                    ? _modificationNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -379,8 +347,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ProjectCode )
-                    ? ProjectCode
+                return Verify.Element( _projectCode )
+                    ? _projectCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -399,8 +367,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( CostOrgCode )
-                    ? CostOrgCode
+                return Verify.Element( _costOrgCode )
+                    ? _costOrgCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -419,14 +387,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Amount( Amount )
-                    ? Amount
-                    : default;
+                return Verify.Amount( _amount )
+                    ? _amount
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -439,14 +407,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Amount( Disbursed )
-                    ? Disbursed
-                    : default;
+                return Verify.Amount( _disbursed )
+                    ? _disbursed
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -459,14 +427,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ? _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
     }

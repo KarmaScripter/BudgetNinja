@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -17,17 +13,13 @@ namespace BudgetExecution
     /// </summary>
     public abstract class EmployeeBase
     {
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the record.
         /// </summary>
         /// <value>
         /// The record.
         /// </value>
-        private protected DataRow Record { get; set; }
+        private protected DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -35,7 +27,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> Args { get; set; }
+        private protected IDictionary<string, object> _args;
 
         /// <summary>
         /// Gets or sets the employee identifier.
@@ -43,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The employee identifier.
         /// </value>
-        private protected virtual IKey ID { get; set; }
+        private protected IKey _id;
 
         /// <summary>
         /// Gets or sets the employee number.
@@ -51,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The employee number.
         /// </value>
-        private protected IElement EmployeeNumber { get; set; }
+        private protected IElement _employeeNumber;
 
         /// <summary>
         /// Gets or sets the section.
@@ -59,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The section.
         /// </value>
-        private protected IElement Section { get; set; }
+        private protected IElement _section;
 
         /// <summary>
         /// Gets or sets the status.
@@ -67,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The status.
         /// </value>
-        private protected IElement Status { get; set; }
+        private protected IElement _status;
 
         /// <summary>
         /// Gets or sets the first name.
@@ -75,7 +67,7 @@ namespace BudgetExecution
         /// <value>
         /// The first name.
         /// </value>
-        private protected IElement FirstName { get; set; }
+        private protected IElement _firstName;
 
         /// <summary>
         /// Gets or sets the last name.
@@ -83,7 +75,7 @@ namespace BudgetExecution
         /// <value>
         /// The last name.
         /// </value>
-        private protected IElement LastName { get; set; }
+        private protected IElement _lastName;
 
         /// <summary>
         /// Gets or sets the office.
@@ -91,7 +83,7 @@ namespace BudgetExecution
         /// <value>
         /// The office.
         /// </value>
-        private protected IElement Office { get; set; }
+        private protected IElement _office;
 
         /// <summary>
         /// Gets or sets the phone number.
@@ -99,7 +91,7 @@ namespace BudgetExecution
         /// <value>
         /// The phone number.
         /// </value>
-        private protected IElement PhoneNumber { get; set; }
+        private protected IElement _phoneNumber;
 
         /// <summary>
         /// Gets or sets the cell number.
@@ -107,7 +99,7 @@ namespace BudgetExecution
         /// <value>
         /// The cell number.
         /// </value>
-        private protected IElement CellNumber { get; set; }
+        private protected IElement _cellNumber;
 
         /// <summary>
         /// Gets or sets the email.
@@ -115,21 +107,17 @@ namespace BudgetExecution
         /// <value>
         /// The email.
         /// </value>
-        private protected IElement Email { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        private protected IElement _email;
+        
         /// <summary>
         /// Get Error Dialog.
         /// </summary>
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

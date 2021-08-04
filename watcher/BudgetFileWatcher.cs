@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
@@ -19,10 +15,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "UnusedParameter.Global" ) ]
     public class BudgetFileWatcher : FileSystemWatcher
     {
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BudgetFileWatcher"/> class.
         /// </summary>
@@ -36,8 +28,8 @@ namespace BudgetExecution
         /// <param name="filepath">The filepath.</param>
         public BudgetFileWatcher( string filepath )
         {
-            FilePath = new DataPath( filepath );
-            FileName = FilePath.GetFileName();
+            _filePath = new DataPath( filepath );
+            _fileName = _filePath.GetFileName();
         }
 
         // **************************************************************************************************************************
@@ -50,7 +42,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private string FileName { get; }
+        private readonly string _fileName;
 
         /// <summary>
         /// Gets the data path.
@@ -58,12 +50,8 @@ namespace BudgetExecution
         /// <value>
         /// The data path.
         /// </value>
-        private IPath FilePath { get; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        private readonly IPath _filePath;
+        
         /// <summary>
         /// Gets the name of the file.
         /// </summary>
@@ -72,14 +60,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FileName )
-                    ? FileName
+                return Verify.Input( _fileName )
+                    ? _fileName
                     : string.Empty;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( string );
             }
         }
 
@@ -91,14 +79,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FilePath?.GetFullPath() )
-                    ? FilePath?.GetFullPath()
+                return Verify.Input( _filePath?.GetFullPath() )
+                    ? _filePath?.GetFullPath()
                     : string.Empty;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( string );
             }
         }
 
@@ -110,14 +98,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FilePath?.GetFileExtension() )
-                    ? FilePath?.GetFileExtension()
+                return Verify.Input( _filePath?.GetFileExtension() )
+                    ? _filePath?.GetFileExtension()
                     : string.Empty;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( string );
             }
         }
 
@@ -127,15 +115,11 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
-
-        // **************************************************************************************************************************
-        // ********************************************      EVENT HANDLERS   *******************************************************
-        // **************************************************************************************************************************
-
+        
         /// <summary>
         /// Called when [file changed].
         /// </summary>
@@ -145,8 +129,8 @@ namespace BudgetExecution
         {
             try
             {
-                using var message = new Message( "NOT YET IMPLEMENTED" );
-                message.ShowDialog();
+                using var _message = new Message( "NOT YET IMPLEMENTED" );
+                _message.ShowDialog();
             }
             catch( Exception ex )
             {
@@ -163,8 +147,8 @@ namespace BudgetExecution
         {
             try
             {
-                using var message = new Message( "NOT YET IMPLEMENTED" );
-                message.ShowDialog();
+                using var _message = new Message( "NOT YET IMPLEMENTED" );
+                _message.ShowDialog();
             }
             catch( Exception ex )
             {
@@ -181,8 +165,8 @@ namespace BudgetExecution
         {
             try
             {
-                using var message = new Message( "NOT YET IMPLEMENTED" );
-                message.ShowDialog();
+                using var _message = new Message( "NOT YET IMPLEMENTED" );
+                _message.ShowDialog();
             }
             catch( Exception ex )
             {
@@ -199,8 +183,8 @@ namespace BudgetExecution
         {
             try
             {
-                using var message = new Message( "NOT YET IMPLEMENTED" );
-                message.ShowDialog();
+                using var _message = new Message( "NOT YET IMPLEMENTED" );
+                _message.ShowDialog();
             }
             catch( Exception ex )
             {
@@ -217,8 +201,8 @@ namespace BudgetExecution
         {
             try
             {
-                using var message = new Message( "NOT YET IMPLEMENTED" );
-                message.ShowDialog();
+                using var _message = new Message( "NOT YET IMPLEMENTED" );
+                _message.ShowDialog();
             }
             catch( Exception ex )
             {

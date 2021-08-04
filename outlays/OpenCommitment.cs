@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -24,10 +20,6 @@ namespace BudgetExecution
     /// <seealso cref = "IOpenCommitment"/>
     public class OpenCommitment : Commitment
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "OpenCommitment"/> class.
         /// </summary>
@@ -43,10 +35,10 @@ namespace BudgetExecution
         public OpenCommitment( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.OpenCommitmentId );
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            Data = Record?.ToDictionary();
+            _data = _record?.ToDictionary();
             Type = OutlayType.OpenCommitment;
         }
 
@@ -59,69 +51,29 @@ namespace BudgetExecution
         public OpenCommitment( IBuilder db )
             : base( db )
         {
-            Record = db?.GetRecord();
-            ID = new Key( Record, PrimaryKey.OpenCommitmentId );
+            _record = db?.GetRecord();
+            _id = new Key( _record, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            Data = Record?.ToDictionary();
+            _data = _record?.ToDictionary();
             Type = OutlayType.OpenCommitment;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "OpenCommitment"/> class.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The dr.
         /// </param>
-        public OpenCommitment( DataRow datarow )
-            : base( datarow )
+        public OpenCommitment( DataRow dataRow )
+            : base( dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.OpenCommitmentId );
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            Data = Record?.ToDictionary();
+            _data = _record?.ToDictionary();
             Type = OutlayType.OpenCommitment;
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.OpenCommitments;
-
-        /// <summary>
-        /// Gets the open commitment identifier.
-        /// </summary>
-        /// <value>
-        /// The open commitment identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private protected override IDictionary<string, object> Data { get; set; }
-
-        /// <summary>
-        /// Gets or sets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        private protected override IAmount Amount { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the OpenCommitment identifier.
         /// </summary>
@@ -131,14 +83,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -151,14 +103,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ? _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -173,12 +125,12 @@ namespace BudgetExecution
             {
                 return OpenCommitments.GetFunding() > -1
                     ? OpenCommitments
-                    : default;
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }

@@ -48,23 +48,23 @@ namespace BudgetExecution
         /// </param>
         public Leave( IQuery query )
         {
-            Record = new Builder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.LeaveProjectionId );
-            RpioCode = new Element( Record, Field.RpioCode );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            HumanResourceOrganizationCode = new Element( Record, Field.HumanResourceOrganizationCode );
-            HumanResourceOrganizationName = new Element( Record, Field.HumanResourceOrganizationName );
-            WorkCode = new Element( Record, Field.WorkCode );
-            YearToDateEarned = new Amount( Record, Numeric.YearToDateEarned );
-            YearToDateUsed = new Amount( Record, Numeric.YearToDateUsed );
-            MaxLeaveCarryover = new Amount( Record, Numeric.MaxLeaveCarryover );
-            ProjectedPayPeriod = new Amount( Record, Numeric.ProjectedPayPeriod );
-            ProjectedAnnual = new Amount( Record, Numeric.ProjectedAnnual );
-            UseOrLose = new Amount( Record, Numeric.UseOrLose );
-            AvailableHours = new Amount( Record, Numeric.AvailableHours );
-            Args = Record.ToDictionary();
+            _record = new Builder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.LeaveProjectionId );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
+            _workCode = new Element( _record, Field.WorkCode );
+            _yearToDateEarned = new Amount( _record, Numeric.YearToDateEarned );
+            _yearToDateUsed = new Amount( _record, Numeric.YearToDateUsed );
+            _maxLeaveCarryover = new Amount( _record, Numeric.MaxLeaveCarryover );
+            _projectedPayPeriod = new Amount( _record, Numeric.ProjectedPayPeriod );
+            _projectedAnnual = new Amount( _record, Numeric.ProjectedAnnual );
+            UseOrLose = new Amount( _record, Numeric.UseOrLose );
+            _availableHours = new Amount( _record, Numeric.AvailableHours );
+            _args = _record.ToDictionary();
         }
 
         /// <summary>
@@ -75,23 +75,23 @@ namespace BudgetExecution
         /// </param>
         public Leave( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.LeaveProjectionId );
-            RpioCode = new Element( Record, Field.RpioCode );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            HumanResourceOrganizationCode = new Element( Record, Field.HumanResourceOrganizationCode );
-            HumanResourceOrganizationName = new Element( Record, Field.HumanResourceOrganizationName );
-            WorkCode = new Element( Record, Field.WorkCode );
-            YearToDateEarned = new Amount( Record, Numeric.YearToDateEarned );
-            YearToDateUsed = new Amount( Record, Numeric.YearToDateUsed );
-            MaxLeaveCarryover = new Amount( Record, Numeric.MaxLeaveCarryover );
-            ProjectedPayPeriod = new Amount( Record, Numeric.ProjectedPayPeriod );
-            ProjectedAnnual = new Amount( Record, Numeric.ProjectedAnnual );
-            UseOrLose = new Amount( Record, Numeric.UseOrLose );
-            AvailableHours = new Amount( Record, Numeric.AvailableHours );
-            Args = Record.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.LeaveProjectionId );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
+            _workCode = new Element( _record, Field.WorkCode );
+            _yearToDateEarned = new Amount( _record, Numeric.YearToDateEarned );
+            _yearToDateUsed = new Amount( _record, Numeric.YearToDateUsed );
+            _maxLeaveCarryover = new Amount( _record, Numeric.MaxLeaveCarryover );
+            _projectedPayPeriod = new Amount( _record, Numeric.ProjectedPayPeriod );
+            _projectedAnnual = new Amount( _record, Numeric.ProjectedAnnual );
+            UseOrLose = new Amount( _record, Numeric.UseOrLose );
+            _availableHours = new Amount( _record, Numeric.AvailableHours );
+            _args = _record.ToDictionary();
         }
 
         /// <summary>
@@ -103,23 +103,23 @@ namespace BudgetExecution
         public Leave( DataRow datarow )
             : this()
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.LeaveProjectionId );
-            RpioCode = new Element( Record, Field.RpioCode );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            HumanResourceOrganizationCode = new Element( Record, Field.HumanResourceOrganizationCode );
-            HumanResourceOrganizationName = new Element( Record, Field.HumanResourceOrganizationName );
-            WorkCode = new Element( Record, Field.WorkCode );
-            YearToDateEarned = new Amount( Record, Numeric.YearToDateEarned );
-            YearToDateUsed = new Amount( Record, Numeric.YearToDateUsed );
-            MaxLeaveCarryover = new Amount( Record, Numeric.MaxLeaveCarryover );
-            ProjectedPayPeriod = new Amount( Record, Numeric.ProjectedPayPeriod );
-            ProjectedAnnual = new Amount( Record, Numeric.ProjectedAnnual );
-            UseOrLose = new Amount( Record, Numeric.UseOrLose );
-            AvailableHours = new Amount( Record, Numeric.AvailableHours );
-            Args = Record.ToDictionary();
+            _record = datarow;
+            _id = new Key( _record, PrimaryKey.LeaveProjectionId );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
+            _workCode = new Element( _record, Field.WorkCode );
+            _yearToDateEarned = new Amount( _record, Numeric.YearToDateEarned );
+            _yearToDateUsed = new Amount( _record, Numeric.YearToDateUsed );
+            _maxLeaveCarryover = new Amount( _record, Numeric.MaxLeaveCarryover );
+            _projectedPayPeriod = new Amount( _record, Numeric.ProjectedPayPeriod );
+            _projectedAnnual = new Amount( _record, Numeric.ProjectedAnnual );
+            UseOrLose = new Amount( _record, Numeric.UseOrLose );
+            _availableHours = new Amount( _record, Numeric.AvailableHours );
+            _args = _record.ToDictionary();
         }
 
         // ***************************************************************************************************************************
@@ -136,14 +136,14 @@ namespace BudgetExecution
         {
             try
             {
-                return YearToDateEarned?.GetFunding() > -1.0
-                    ? YearToDateEarned
-                    : default;
+                return _yearToDateEarned?.GetFunding() > -1.0
+                    ? _yearToDateEarned
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -157,14 +157,14 @@ namespace BudgetExecution
         {
             try
             {
-                return YearToDateUsed?.GetFunding() > -1.0
-                    ? YearToDateUsed
-                    : default;
+                return _yearToDateUsed?.GetFunding() > -1.0
+                    ? _yearToDateUsed
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -178,14 +178,14 @@ namespace BudgetExecution
         {
             try
             {
-                return MaxLeaveCarryover?.GetFunding() > -1.0
-                    ? MaxLeaveCarryover
-                    : default;
+                return _maxLeaveCarryover?.GetFunding() > -1.0
+                    ? _maxLeaveCarryover
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -201,12 +201,12 @@ namespace BudgetExecution
             {
                 return UseOrLose?.GetFunding() > -1.0
                     ? UseOrLose
-                    : default;
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -220,14 +220,14 @@ namespace BudgetExecution
         {
             try
             {
-                return ProjectedPayPeriod?.GetFunding() > -1.0
-                    ? ProjectedPayPeriod
-                    : default;
+                return _projectedPayPeriod?.GetFunding() > -1.0
+                    ? _projectedPayPeriod
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -241,14 +241,14 @@ namespace BudgetExecution
         {
             try
             {
-                return ProjectedAnnual?.GetFunding() > -1.0D
-                    ? ProjectedAnnual
-                    : default;
+                return _projectedAnnual?.GetFunding() > -1.0D
+                    ? _projectedAnnual
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -262,14 +262,14 @@ namespace BudgetExecution
         {
             try
             {
-                return AvailableHours?.GetFunding() > -1.0
-                    ? AvailableHours
-                    : default;
+                return _availableHours?.GetFunding() > -1.0
+                    ? _availableHours
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -283,14 +283,14 @@ namespace BudgetExecution
         {
             try
             {
-                return AnnualHours?.GetFunding() > -1.0
-                    ? AnnualHours
-                    : default;
+                return _annualHours?.GetFunding() > -1.0
+                    ? _annualHours
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -302,14 +302,14 @@ namespace BudgetExecution
         /// </returns>
         public IHumanResourceOrganization GetHumanResourceOrganization()
         {
-            if( Verify.Input( HumanResourceOrganizationCode?.GetValue() ) )
+            if( Verify.Input( _humanResourceOrganizationCode?.GetValue() ) )
             {
                 try
                 {
                     var args = new Dictionary<string, object>
                     {
                         [ $"{Field.HumanResourceOrganizationCode}" ] =
-                            HumanResourceOrganizationCode?.GetValue()
+                            _humanResourceOrganizationCode?.GetValue()
                     };
 
                     var connection = new ConnectionBuilder( Source.HumanResourceOrganizations,
@@ -325,7 +325,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( IHumanResourceOrganization );
         }
 
         /// <summary>
@@ -336,13 +336,13 @@ namespace BudgetExecution
         /// </returns>
         public IWorkCode GetWorkCode()
         {
-            if( Verify.Input( WorkCode?.GetValue() ) )
+            if( Verify.Input( _workCode?.GetValue() ) )
             {
                 try
                 {
                     var args = new Dictionary<string, object>
                     {
-                        [ $"{Field.WorkCode}" ] = WorkCode?.GetValue()
+                        [ $"{Field.WorkCode}" ] = _workCode?.GetValue()
                     };
 
                     var connection = new ConnectionBuilder( Source.WorkCodes, Provider.SQLite );
@@ -356,7 +356,7 @@ namespace BudgetExecution
                 }
             }
 
-            return default;
+            return default( IWorkCode );
         }
 
         /// <summary>
@@ -367,22 +367,22 @@ namespace BudgetExecution
         /// </returns>
         public IElement GetRpioCode()
         {
-            if( Verify.Input( RpioCode?.GetValue() ) )
+            if( Verify.Input( _rpioCode?.GetValue() ) )
             {
                 try
                 {
-                    return Verify.Input( RpioCode?.GetValue() )
-                        ? RpioCode
-                        : default;
+                    return Verify.Input( _rpioCode?.GetValue() )
+                        ? _rpioCode
+                        : default( IElement );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IElement );
                 }
             }
 
-            return default;
+            return default( IElement );
         }
 
         /// <summary>
@@ -393,13 +393,13 @@ namespace BudgetExecution
         /// </returns>
         public IResourcePlanningOffice GetResourcePlanningOffice()
         {
-            if( Verify.Input( RpioCode?.GetValue() ) )
+            if( Verify.Input( _rpioCode?.GetValue() ) )
             {
                 try
                 {
                     var dict = new Dictionary<string, object>
                     {
-                        [ $"{Field.RpioCode}" ] = RpioCode?.GetValue()
+                        [ $"{Field.RpioCode}" ] = _rpioCode?.GetValue()
                     };
 
                     var connectbuilder =
@@ -412,11 +412,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IResourcePlanningOffice );
                 }
             }
 
-            return default;
+            return default( IResourcePlanningOffice );
         }
     }
 }

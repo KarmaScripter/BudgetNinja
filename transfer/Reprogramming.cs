@@ -4,12 +4,9 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Shifting funds within an appropriation or fund account to use them for purposes
@@ -33,24 +30,18 @@ namespace BudgetExecution
     /// <seealso cref = "IProgramElement"/>
     /// <seealso cref = "IReprogramming"/>
     /// <seealso cref = "ISource"/>
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public class Reprogramming : ProgramResultsCode, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************     FIELDS    ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
         /// <value>
         /// The source.
         /// </value>
-        protected override Source Source { get; set; } = Source.Transfers;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        private protected readonly new Source _source = Source.Transfers;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
         /// </summary>
@@ -67,15 +58,15 @@ namespace BudgetExecution
         public Reprogramming( IQuery query )
             : base( query )
         {
-            Record = new Builder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.TransferId );
-            DocType = new Element( Record, Field.DocType );
-            DocumentNumber = new Element( Record, Field.DocumentNumber );
-            Purpose = new Element( Record, Field.Purpose );
-            FromTo = new Element( Record, Field.FromTo );
-            Date = DateTime.Parse( Record[ $"{Field.DocumentNumber}" ].ToString() );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = new Builder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.TransferId );
+            _docType = new Element( _record, Field.DocType );
+            _documentNumber = new Element( _record, Field.DocumentNumber );
+            _purpose = new Element( _record, Field.Purpose );
+            _fromTo = new Element( _record, Field.FromTo );
+            _date = DateTime.Parse( _record[ $"{Field.DocumentNumber}" ].ToString() );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -87,56 +78,44 @@ namespace BudgetExecution
         public Reprogramming( IBuilder builder )
             : base( builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.TransferId );
-            DocType = new Element( Record, Field.DocType );
-            DocumentNumber = new Element( Record, Field.DocumentNumber );
-            Purpose = new Element( Record, Field.Purpose );
-            FromTo = new Element( Record, Field.FromTo );
-            Date = DateTime.Parse( Record?[ $"{Field.DocumentNumber}" ].ToString() );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.TransferId );
+            _docType = new Element( _record, Field.DocType );
+            _documentNumber = new Element( _record, Field.DocumentNumber );
+            _purpose = new Element( _record, Field.Purpose );
+            _fromTo = new Element( _record, Field.FromTo );
+            _date = DateTime.Parse( _record?[ $"{Field.DocumentNumber}" ].ToString() );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The dr.
         /// </param>
-        public Reprogramming( DataRow datarow )
-            : base( datarow )
+        public Reprogramming( DataRow dataRow )
+            : base( dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.TransferId );
-            DocType = new Element( Record, Field.DocType );
-            DocumentNumber = new Element( Record, Field.DocumentNumber );
-            Purpose = new Element( Record, Field.Purpose );
-            FromTo = new Element( Record, Field.FromTo );
-            Date = DateTime.Parse( Record[ $"{Field.DocumentNumber}" ].ToString() );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.TransferId );
+            _docType = new Element( _record, Field.DocType );
+            _documentNumber = new Element( _record, Field.DocumentNumber );
+            _purpose = new Element( _record, Field.Purpose );
+            _fromTo = new Element( _record, Field.FromTo );
+            _date = DateTime.Parse( _record[ $"{Field.DocumentNumber}" ].ToString() );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets the transfer identifier.
-        /// </summary>
-        /// <value>
-        /// The transfer identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
+        
         /// <summary>
         /// Gets the date.
         /// </summary>
         /// <value>
         /// The date.
         /// </value>
-        private DateTime Date { get; }
+        private readonly DateTime _date;
 
         /// <summary>
         /// Gets the type of the document.
@@ -144,7 +123,7 @@ namespace BudgetExecution
         /// <value>
         /// The type of the document.
         /// </value>
-        private IElement DocType { get; }
+        private readonly IElement _docType;
 
         /// <summary>
         /// Gets from to.
@@ -152,7 +131,7 @@ namespace BudgetExecution
         /// <value>
         /// From to.
         /// </value>
-        private IElement FromTo { get; }
+        private readonly IElement _fromTo;
 
         /// <summary>
         /// Gets the document number.
@@ -160,7 +139,7 @@ namespace BudgetExecution
         /// <value>
         /// The document number.
         /// </value>
-        private IElement DocumentNumber { get; }
+        private readonly IElement _documentNumber;
 
         /// <summary>
         /// Gets the purpose.
@@ -168,12 +147,8 @@ namespace BudgetExecution
         /// <value>
         /// The purpose.
         /// </value>
-        private IElement Purpose { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly IElement _purpose;
+        
         /// <summary>
         /// Gets the transfer identifier.
         /// </summary>
@@ -183,8 +158,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -204,8 +179,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( DocumentNumber )
-                    ? DocumentNumber.GetValue()
+                return Verify.Element( _documentNumber )
+                    ? _documentNumber.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -224,14 +199,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.DateTime( Date )
-                    ? Date
-                    : default;
+                return Verify.DateTime( _date )
+                    ? _date
+                    : default( DateTime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( DateTime );
             }
         }
 
@@ -244,8 +219,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( DocType )
-                    ? DocType
+                return Verify.Element( _docType )
+                    ? _docType
                     : Element.Default;
             }
             catch( Exception ex )
@@ -264,14 +239,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FromTo.GetValue() )
-                    ? (FromTo)Enum.Parse( typeof( FromTo ), FromTo.GetValue() )
-                    : default;
+                return Verify.Input( _fromTo.GetValue() )
+                    ? (FromTo)Enum.Parse( typeof( FromTo ), _fromTo.GetValue() )
+                    : default( FromTo );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( FromTo );
             }
         }
 
@@ -284,8 +259,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( DocumentNumber )
-                    ? DocumentNumber
+                return Verify.Element( _documentNumber )
+                    ? _documentNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -304,8 +279,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Purpose )
-                    ? Purpose
+                return Verify.Element( _purpose )
+                    ? _purpose
                     : Element.Default;
             }
             catch( Exception ex )
@@ -324,8 +299,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( SystemException ex )

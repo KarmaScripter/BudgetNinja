@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -35,9 +31,37 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     public class ProgramResultsCode : PrcConfig, IProgramResultsCode
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// The source
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private protected  new Source _source = Source.PRC;
+
+        /// <summary>
+        /// Gets the amount.
+        /// </summary>
+        /// <value>
+        /// The amount.
+        /// </value>
+        private protected IAmount _amount;
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        private protected IDictionary<string, object> _data;
+
+        /// <summary>
+        /// Gets or sets the data elements.
+        /// </summary>
+        /// <value>
+        /// The data elements.
+        /// </value>
+        private protected IEnumerable<IElement> _elements;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramResultsCode"/> class.
@@ -55,21 +79,21 @@ namespace BudgetExecution
         public ProgramResultsCode( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
-            Elements = GetElements();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
+            _elements = GetElements();
         }
 
         /// <summary>
@@ -81,47 +105,47 @@ namespace BudgetExecution
         public ProgramResultsCode( IBuilder builder )
             : base( builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
-            Elements = GetElements();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
+            _elements = GetElements();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramResultsCode"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public ProgramResultsCode( DataRow datarow )
-            : base( datarow )
+        public ProgramResultsCode( DataRow dataRow )
+            : base( dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
-            Elements = GetElements();
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
+            _elements = GetElements();
         }
 
         /// <summary>
@@ -132,63 +156,23 @@ namespace BudgetExecution
         public ProgramResultsCode( IDictionary<string, object> dict )
             : base( dict )
         {
-            Record = new DataBuilder( Source, dict )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.PrcId );
-            Level = new Element( Record, Field.BudgetLevel );
-            BFY = new Element( Record, Field.BFY );
-            RpioCode = new Element( Record, Field.RpioCode );
-            AhCode = new Element( Record, Field.AhCode );
-            FundCode = new Element( Record, Field.FundCode );
-            OrgCode = new Element( Record, Field.OrgCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BocCode = new Element( Record, Field.BocCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
-            Elements = GetElements();
+            _record = new DataBuilder( _source, dict )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.PrcId );
+            _level = new Element( _record, Field.BudgetLevel );
+            _bfy = new Element( _record, Field.BFY );
+            _rpioCode = new Element( _record, Field.RpioCode );
+            _ahCode = new Element( _record, Field.AhCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _orgCode = new Element( _record, Field.OrgCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bocCode = new Element( _record, Field.BocCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
+            _elements = GetElements();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// The source
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.PRC;
-
-        /// <summary>
-        /// Gets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        protected virtual IAmount Amount { get; set; }
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private protected IDictionary<string, object> Data { get; set; }
-
-        /// <summary>
-        /// Gets or sets the data elements.
-        /// </summary>
-        /// <value>
-        /// The data elements.
-        /// </value>
-        private protected IEnumerable<IElement> Elements { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the PRC identifier.
         /// </summary>
@@ -198,14 +182,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -227,7 +211,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( string );
             }
         }
 
@@ -246,7 +230,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IActivity );
             }
         }
 
@@ -269,12 +253,12 @@ namespace BudgetExecution
                 var connectbuilder = new ConnectionBuilder( Source.ProgramProjects, Provider.SQLite );
                 var sqlstatement = new SqlStatement( connectbuilder, dict, SQL.SELECT );
                 using var query = new Query( connectbuilder, sqlstatement );
-                return new ProgramProject( query ) ?? default;
+                return new ProgramProject( query ) ?? default( ProgramProject );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramProject );
             }
         }
 
@@ -289,12 +273,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( GetAccount().ToString() )
                     ? GetAccount().GetProgramArea()
-                    : default;
+                    : default( IProgramArea );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramArea );
             }
         }
 
@@ -312,7 +296,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramResultsCode );
             }
         }
 
@@ -326,8 +310,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( AccountCode.GetValue() )
-                    ? AccountCode.GetValue()
+                return Verify.Input( _accountCode.GetValue() )
+                    ? _accountCode.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -348,26 +332,26 @@ namespace BudgetExecution
             {
                 var elements = new List<IElement>
                 {
-                    Level,
-                    BFY,
-                    RpioCode,
-                    FundCode,
-                    AhCode,
-                    OrgCode,
-                    AccountCode,
-                    BocCode,
-                    RcCode,
-                    ActivityCode
+                    _level,
+                    _bfy,
+                    _rpioCode,
+                    _fundCode,
+                    _ahCode,
+                    _orgCode,
+                    _accountCode,
+                    _bocCode,
+                    _rcCode,
+                    _activityCode
                 };
 
                 return elements?.Any() == true
                     ? elements
-                    : default;
+                    : default( List<IElement> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IEnumerable<IElement> );
             }
         }
 
@@ -380,14 +364,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ? _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -400,14 +384,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Amount?.GetFunding() > -1
-                    ? Amount
-                    : default;
+                return _amount?.GetFunding() > -1
+                    ? _amount
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }

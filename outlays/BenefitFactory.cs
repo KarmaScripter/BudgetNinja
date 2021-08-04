@@ -27,7 +27,7 @@ namespace BudgetExecution
         /// <summary>
         /// The vacation
         /// </summary>
-        private readonly ILeave Vacation;
+        private readonly ILeave _vacation;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -41,7 +41,7 @@ namespace BudgetExecution
         /// </param>
         public BenefitFactory( IQuery query )
         {
-            Vacation = new Leave( query );
+            _vacation = new Leave( query );
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace BudgetExecution
         /// </param>
         public BenefitFactory( IBuilder builder )
         {
-            Vacation = new Leave( builder );
+            _vacation = new Leave( builder );
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace BudgetExecution
         /// </param>
         public BenefitFactory( DataRow datarow )
         {
-            Vacation = new Leave( datarow );
+            _vacation = new Leave( datarow );
         }
 
         // ***************************************************************************************************************************
@@ -80,14 +80,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Ref( Vacation )
-                    ? Vacation.GetProjectedPayPeriod()
-                    : default;
+                return Verify.Ref( _vacation )
+                    ? _vacation.GetProjectedPayPeriod()
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -101,14 +101,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Ref( Vacation )
-                    ? Vacation.GetProjectedAnnual()
-                    : default;
+                return Verify.Ref( _vacation )
+                    ? _vacation.GetProjectedAnnual()
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -122,14 +122,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Ref( Vacation )
-                    ? Vacation.GetAnnualHours()
-                    : default;
+                return Verify.Ref( _vacation )
+                    ? _vacation.GetAnnualHours()
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -143,8 +143,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Ref( Vacation )
-                    ? Vacation.GetHumanResourceOrganization()
+                return Verify.Ref( _vacation )
+                    ? _vacation.GetHumanResourceOrganization()
                     : default( HumanResourceOrganization );
             }
             catch( Exception ex )
@@ -164,8 +164,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Ref( Vacation )
-                    ? Vacation.GetWorkCode()
+                return Verify.Ref( _vacation )
+                    ? _vacation.GetWorkCode()
                     : default( WorkCode );
             }
             catch( Exception ex )
@@ -185,8 +185,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Ref( Vacation )
-                    ? Vacation.GetRpioCode()
+                return Verify.Ref( _vacation )
+                    ? _vacation.GetRpioCode()
                     : Element.Default;
             }
             catch( Exception ex )
@@ -206,8 +206,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Ref( Vacation )
-                    ? Vacation.GetResourcePlanningOffice()
+                return Verify.Ref( _vacation )
+                    ? _vacation.GetResourcePlanningOffice()
                     : default( ResourcePlanningOffice );
             }
             catch( Exception ex )
@@ -227,14 +227,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
-                    : default;
+                return Verify.Map( _args )
+                    ? _args
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
     }

@@ -59,7 +59,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.AllowanceHolders;
+        private static readonly Source _source = Source.AllowanceHolders;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -126,7 +126,7 @@ namespace BudgetExecution
         /// </param>
         public AllowanceHolder( string ahcode )
         {
-            Record = new DataBuilder( Source, SetArgs( ahcode ) )?.GetRecord();
+            Record = new DataBuilder( _source, SetArgs( ahcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.AllowanceHolderId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -203,11 +203,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <inheritdoc/>
@@ -246,12 +246,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -266,12 +266,12 @@ namespace BudgetExecution
             {
                 return Verify.Key( ID )
                     ? ID
-                    : default;
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -286,12 +286,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( Code.GetValue() )
                     ? Code
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -306,12 +306,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( Name.GetValue() )
                     ? Name
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -329,7 +329,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAllowanceHolder );
             }
         }
 
@@ -342,8 +342,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

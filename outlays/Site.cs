@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -21,10 +17,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     public class Site : SiteData
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "Site"/> class.
         /// </summary>
@@ -42,32 +34,32 @@ namespace BudgetExecution
         public Site( IQuery query )
             : base( query )
         {
-            Record = new Builder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.SiteId );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            DCN = new Element( Record, Field.DCN );
-            EpaSiteId = new Element( Record, Field.EpaSiteId );
-            SiteName = new Element( Record, Field.SiteName );
-            SiteProjectCode = new Element( Record, Field.SiteProjectCode );
-            SiteProjectName = new Element( Record, Field.SiteProjectName );
-            City = new Element( Record, Field.City );
-            District = new Element( Record, Field.District );
-            County = new Element( Record, Field.County );
-            StateCode = new Element( Record, Field.StateCode );
-            StateName = new Element( Record, Field.StateName );
-            StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
-            ZipCode = new Element( Record, Field.ZipCode );
-            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
-            LastActionDate = new Time( Record, EventDate.LastActionDate );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Deobligations = new Amount( Record, Numeric.Deobligations );
-            Expenditures = new Amount( Record, Numeric.Expenditures );
-            Data = Record?.ToDictionary();
+            _record = new Builder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.SiteId );
+            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            DCN = new Element( _record, Field.DCN );
+            EpaSiteId = new Element( _record, Field.EpaSiteId );
+            SiteName = new Element( _record, Field.SiteName );
+            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
+            SiteProjectName = new Element( _record, Field.SiteProjectName );
+            City = new Element( _record, Field.City );
+            District = new Element( _record, Field.District );
+            County = new Element( _record, Field.County );
+            StateCode = new Element( _record, Field.StateCode );
+            StateName = new Element( _record, Field.StateName );
+            StreetAddressLine1 = new Element( _record, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( _record, Field.StreetAddressLine2 );
+            ZipCode = new Element( _record, Field.ZipCode );
+            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( _record, EventDate.LastActionDate );
+            Commitments = new Amount( _record, Numeric.Commitments );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            Obligations = new Amount( _record, Numeric.Obligations );
+            ULO = new Amount( _record, Numeric.ULO );
+            Deobligations = new Amount( _record, Numeric.Deobligations );
+            Expenditures = new Amount( _record, Numeric.Expenditures );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -79,32 +71,32 @@ namespace BudgetExecution
         public Site( IBuilder db )
             : base( db )
         {
-            Record = db?.GetRecord();
-            ID = new Key( Record, PrimaryKey.SiteId );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            DCN = new Element( Record, Field.DCN );
-            EpaSiteId = new Element( Record, Field.EpaSiteId );
-            SiteName = new Element( Record, Field.SiteName );
-            SiteProjectCode = new Element( Record, Field.SiteProjectCode );
-            SiteProjectName = new Element( Record, Field.SiteProjectName );
-            City = new Element( Record, Field.City );
-            District = new Element( Record, Field.District );
-            County = new Element( Record, Field.County );
-            StateCode = new Element( Record, Field.StateCode );
-            StateName = new Element( Record, Field.StateName );
-            StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
-            ZipCode = new Element( Record, Field.ZipCode );
-            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
-            LastActionDate = new Time( Record, EventDate.LastActionDate );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Deobligations = new Amount( Record, Numeric.Deobligations );
-            Expenditures = new Amount( Record, Numeric.Expenditures );
-            Data = Record?.ToDictionary();
+            _record = db?.GetRecord();
+            _id = new Key( _record, PrimaryKey.SiteId );
+            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            DCN = new Element( _record, Field.DCN );
+            EpaSiteId = new Element( _record, Field.EpaSiteId );
+            SiteName = new Element( _record, Field.SiteName );
+            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
+            SiteProjectName = new Element( _record, Field.SiteProjectName );
+            City = new Element( _record, Field.City );
+            District = new Element( _record, Field.District );
+            County = new Element( _record, Field.County );
+            StateCode = new Element( _record, Field.StateCode );
+            StateName = new Element( _record, Field.StateName );
+            StreetAddressLine1 = new Element( _record, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( _record, Field.StreetAddressLine2 );
+            ZipCode = new Element( _record, Field.ZipCode );
+            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( _record, EventDate.LastActionDate );
+            Commitments = new Amount( _record, Numeric.Commitments );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            Obligations = new Amount( _record, Numeric.Obligations );
+            ULO = new Amount( _record, Numeric.ULO );
+            Deobligations = new Amount( _record, Numeric.Deobligations );
+            Expenditures = new Amount( _record, Numeric.Expenditures );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -115,32 +107,32 @@ namespace BudgetExecution
         /// </param>
         public Site( DataRow datarow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.SiteId );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            DCN = new Element( Record, Field.DCN );
-            EpaSiteId = new Element( Record, Field.EpaSiteId );
-            SiteName = new Element( Record, Field.SiteName );
-            SiteProjectCode = new Element( Record, Field.SiteProjectCode );
-            SiteProjectName = new Element( Record, Field.SiteProjectName );
-            City = new Element( Record, Field.City );
-            District = new Element( Record, Field.District );
-            County = new Element( Record, Field.County );
-            StateCode = new Element( Record, Field.StateCode );
-            StateName = new Element( Record, Field.StateName );
-            StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
-            ZipCode = new Element( Record, Field.ZipCode );
-            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
-            LastActionDate = new Time( Record, EventDate.LastActionDate );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Deobligations = new Amount( Record, Numeric.Deobligations );
-            Expenditures = new Amount( Record, Numeric.Expenditures );
-            Data = Record?.ToDictionary();
+            _record = datarow;
+            _id = new Key( _record, PrimaryKey.SiteId );
+            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            DCN = new Element( _record, Field.DCN );
+            EpaSiteId = new Element( _record, Field.EpaSiteId );
+            SiteName = new Element( _record, Field.SiteName );
+            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
+            SiteProjectName = new Element( _record, Field.SiteProjectName );
+            City = new Element( _record, Field.City );
+            District = new Element( _record, Field.District );
+            County = new Element( _record, Field.County );
+            StateCode = new Element( _record, Field.StateCode );
+            StateName = new Element( _record, Field.StateName );
+            StreetAddressLine1 = new Element( _record, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( _record, Field.StreetAddressLine2 );
+            ZipCode = new Element( _record, Field.ZipCode );
+            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( _record, EventDate.LastActionDate );
+            Commitments = new Amount( _record, Numeric.Commitments );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            Obligations = new Amount( _record, Numeric.Obligations );
+            ULO = new Amount( _record, Numeric.ULO );
+            Deobligations = new Amount( _record, Numeric.Deobligations );
+            Expenditures = new Amount( _record, Numeric.Expenditures );
+            _data = _record?.ToDictionary();
         }
 
         // ***************************************************************************************************************************
@@ -153,28 +145,8 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        protected override Source Source { get; set; } = Source.Sites;
-
-        /// <summary>
-        /// Gets the site identifier.
-        /// </summary>
-        /// <value>
-        /// The site identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        private protected override IAmount Amount { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        protected new  Source _source = Source.Sites;
+        
         /// <summary>
         /// Gets the Superfund identifier.
         /// </summary>
@@ -184,14 +156,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -206,12 +178,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( EpaSiteId?.GetValue() )
                     ? EpaSiteId
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -226,12 +198,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( SiteName?.GetValue() )
                     ? SiteName
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -246,12 +218,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( SiteProjectName?.GetValue() )
                     ? SiteProjectName
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -266,12 +238,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( City?.GetValue() )
                     ? City
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -286,12 +258,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( District?.GetValue() )
                     ? District
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -306,12 +278,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( County?.GetValue() )
                     ? County
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -326,12 +298,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( StateCode?.GetName() )
                     ? StateCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -346,12 +318,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( StateName?.GetValue() )
                     ? StateName
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -366,12 +338,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( StreetAddressLine1?.GetName() )
                     ? StreetAddressLine1
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -386,12 +358,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( District?.GetValue() )
                     ? District
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -406,12 +378,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( LastActionDate?.GetValue() )
                     ? LastActionDate
-                    : default;
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -424,14 +396,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ? _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
     }

@@ -4,23 +4,25 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// 
     /// </summary>
     /// <seealso cref = "Commitment"/>
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class Requisition : RequisitionData
     {
-        // ***************************************************************************************************************************
-        // ******************************************************  CONSTRUCTORS  *****************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// The source
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private protected readonly new Source _source = Source.Requisitions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Requisition"/> class.
@@ -38,20 +40,20 @@ namespace BudgetExecution
         public Requisition( IQuery query )
             : base( query )
         {
-            Record = new Builder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.RequisitionId );
-            DCN = new Element( Record, Field.DCN );
-            RequestNumber = new Element( Record, Field.RequestNumber );
-            ModifiedBy = new Element( Record, Field.ModifiedBy );
-            CreatedBy = new Element( Record, Field.CreatedBy );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            RequestDate = new Time( Record, EventDate.RequestDate );
-            DocumentDate = new Time( Record, EventDate.DocumentDate );
-            ClosedDate = new Time( Record, EventDate.ClosedDate );
-            Requested = new Amount( Record, Numeric.Requested );
-            Closed = new Amount( Record, Numeric.Closed );
-            Data = Record?.ToDictionary();
+            _record = new Builder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.RequisitionId );
+            DCN = new Element( _record, Field.DCN );
+            _requestNumber = new Element( _record, Field.RequestNumber );
+            _modifiedBy = new Element( _record, Field.ModifiedBy );
+            _createdBy = new Element( _record, Field.CreatedBy );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            _requestDate = new Time( _record, EventDate.RequestDate );
+            _documentDate = new Time( _record, EventDate.DocumentDate );
+            _closedDate = new Time( _record, EventDate.ClosedDate );
+            _requested = new Amount( _record, Numeric.Requested );
+            _closed = new Amount( _record, Numeric.Closed );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -63,20 +65,20 @@ namespace BudgetExecution
         public Requisition( IBuilder db )
             : base( db )
         {
-            Record = db.GetRecord();
-            ID = new Key( Record, PrimaryKey.RequisitionId );
-            DCN = new Element( Record, Field.DCN );
-            RequestNumber = new Element( Record, Field.RequestNumber );
-            ModifiedBy = new Element( Record, Field.ModifiedBy );
-            CreatedBy = new Element( Record, Field.CreatedBy );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            RequestDate = new Time( Record, EventDate.RequestDate );
-            DocumentDate = new Time( Record, EventDate.DocumentDate );
-            ClosedDate = new Time( Record, EventDate.ClosedDate );
-            Requested = new Amount( Record, Numeric.Requested );
-            Closed = new Amount( Record, Numeric.Closed );
-            Data = Record?.ToDictionary();
+            _record = db.GetRecord();
+            _id = new Key( _record, PrimaryKey.RequisitionId );
+            DCN = new Element( _record, Field.DCN );
+            _requestNumber = new Element( _record, Field.RequestNumber );
+            _modifiedBy = new Element( _record, Field.ModifiedBy );
+            _createdBy = new Element( _record, Field.CreatedBy );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            _requestDate = new Time( _record, EventDate.RequestDate );
+            _documentDate = new Time( _record, EventDate.DocumentDate );
+            _closedDate = new Time( _record, EventDate.ClosedDate );
+            _requested = new Amount( _record, Numeric.Requested );
+            _closed = new Amount( _record, Numeric.Closed );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -87,46 +89,22 @@ namespace BudgetExecution
         /// </param>
         public Requisition( DataRow data )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.RequisitionId );
-            DCN = new Element( Record, Field.DCN );
-            RequestNumber = new Element( Record, Field.RequestNumber );
-            ModifiedBy = new Element( Record, Field.ModifiedBy );
-            CreatedBy = new Element( Record, Field.CreatedBy );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            FocCode = new Element( Record, Field.FocCode );
-            RequestDate = new Time( Record, EventDate.RequestDate );
-            DocumentDate = new Time( Record, EventDate.DocumentDate );
-            ClosedDate = new Time( Record, EventDate.ClosedDate );
-            Requested = new Amount( Record, Numeric.Requested );
-            Closed = new Amount( Record, Numeric.Closed );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.RequisitionId );
+            DCN = new Element( _record, Field.DCN );
+            _requestNumber = new Element( _record, Field.RequestNumber );
+            _modifiedBy = new Element( _record, Field.ModifiedBy );
+            _createdBy = new Element( _record, Field.CreatedBy );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            FocCode = new Element( _record, Field.FocCode );
+            _requestDate = new Time( _record, EventDate.RequestDate );
+            _documentDate = new Time( _record, EventDate.DocumentDate );
+            _closedDate = new Time( _record, EventDate.ClosedDate );
+            _requested = new Amount( _record, Numeric.Requested );
+            _closed = new Amount( _record, Numeric.Closed );
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // ******************************************************   PROPERTIES   *****************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// The source
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.Requisitions;
-
-        /// <summary>
-        /// Gets the requisition identifier.
-        /// </summary>
-        /// <value>
-        /// The requisition identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        // ***************************************************************************************************************************
-        // *******************************************************      METHODS        ***********************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the requisition identifier.
         /// </summary>
@@ -136,14 +114,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -156,14 +134,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( AccountCode.GetValue() )
-                    ? AccountCode
-                    : default;
+                return Verify.Input( _accountCode.GetValue() )
+                    ? _accountCode
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -176,14 +154,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( ModifiedBy.GetValue() )
-                    ? ModifiedBy
-                    : default;
+                return Verify.Input( _modifiedBy.GetValue() )
+                    ? _modifiedBy
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -196,14 +174,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( ProjectCode.GetValue() )
-                    ? ProjectCode
-                    : default;
+                return Verify.Input( _projectCode.GetValue() )
+                    ? _projectCode
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -216,12 +194,12 @@ namespace BudgetExecution
         {
             try
             {
-                return RequestDate;
+                return _requestDate;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -234,14 +212,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( CreatedBy.GetValue() )
-                    ? CreatedBy
-                    : default;
+                return Verify.Input( _createdBy.GetValue() )
+                    ? _createdBy
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -254,12 +232,12 @@ namespace BudgetExecution
         {
             try
             {
-                return DocumentDate;
+                return _documentDate;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -272,12 +250,12 @@ namespace BudgetExecution
         {
             try
             {
-                return ClosedDate;
+                return _closedDate;
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -290,14 +268,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Requested.GetFunding() > -1
-                    ? Requested
-                    : default;
+                return _requested.GetFunding() > -1
+                    ? _requested
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -310,14 +288,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Closed.GetFunding() > -1
-                    ? Closed
-                    : default;
+                return _closed.GetFunding() > -1
+                    ? _closed
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -330,14 +308,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Outstanding.GetFunding() > -1
-                    ? Outstanding
-                    : default;
+                return _outstanding.GetFunding() > -1
+                    ? _outstanding
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -350,14 +328,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Expended.GetFunding() > -1
-                    ? Expended
-                    : default;
+                return _expended.GetFunding() > -1
+                    ? _expended
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -370,14 +348,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Reversed.GetFunding() > -1
-                    ? Reversed
-                    : default;
+                return _reversed.GetFunding() > -1
+                    ? _reversed
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -390,14 +368,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
-                    : default;
+                return Verify.Map( _data )
+                    ? _data
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
     }

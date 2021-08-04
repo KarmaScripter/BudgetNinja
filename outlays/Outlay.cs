@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -40,12 +36,10 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
+    [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public class Outlay : Cost
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "Outlay"/> class.
         /// </summary>
@@ -60,17 +54,17 @@ namespace BudgetExecution
         /// </param>
         public Outlay( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.OutlayId );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            Deobligations = new Amount( Record, Numeric.Deobligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Balance = new Amount( Record, Numeric.Balance );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.OutlayId );
+            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
+            Commitments = new Amount( _record, Numeric.Commitments );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            Obligations = new Amount( _record, Numeric.Obligations );
+            Deobligations = new Amount( _record, Numeric.Deobligations );
+            ULO = new Amount( _record, Numeric.ULO );
+            Balance = new Amount( _record, Numeric.Balance );
+            _data = _record?.ToDictionary();
             Type = OutlayType.All;
             SetExpenseType( Type );
         }
@@ -82,17 +76,17 @@ namespace BudgetExecution
         /// </param>
         public Outlay( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.OutlayId );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            Deobligations = new Amount( Record, Numeric.Deobligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Balance = new Amount( Record, Numeric.Balance );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.OutlayId );
+            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
+            Commitments = new Amount( _record, Numeric.Commitments );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            Obligations = new Amount( _record, Numeric.Obligations );
+            Deobligations = new Amount( _record, Numeric.Deobligations );
+            ULO = new Amount( _record, Numeric.ULO );
+            Balance = new Amount( _record, Numeric.Balance );
+            _data = _record?.ToDictionary();
             Type = OutlayType.All;
             SetExpenseType( Type );
         }
@@ -100,46 +94,33 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Outlay"/> class.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The dr.
         /// </param>
-        public Outlay( DataRow datarow )
+        public Outlay( DataRow dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.OutlayId );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            Deobligations = new Amount( Record, Numeric.Deobligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Balance = new Amount( Record, Numeric.Balance );
-            Data = Record?.ToDictionary();
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.OutlayId );
+            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
+            Commitments = new Amount( _record, Numeric.Commitments );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            Obligations = new Amount( _record, Numeric.Obligations );
+            Deobligations = new Amount( _record, Numeric.Deobligations );
+            ULO = new Amount( _record, Numeric.ULO );
+            Balance = new Amount( _record, Numeric.Balance );
+            _data = _record?.ToDictionary();
             Type = OutlayType.All;
             SetExpenseType( Type );
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the PRC identifier.
-        /// </summary>
-        /// <value>
-        /// The PRC identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
+        
         /// <summary>
         /// Gets or sets the source.
         /// </summary>
         /// <value>
         /// The source.
         /// </value>
-        [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
-        protected override Source Source { get; set; } = Source.Outlays;
+        private protected readonly Source _source = Source.Outlays;
 
         /// <summary>
         /// Gets or sets the authority data.
@@ -147,7 +128,7 @@ namespace BudgetExecution
         /// <value>
         /// The authority data.
         /// </value>
-        private protected CostAccount PRC { get; set; }
+        private protected CostAccount _prc;
 
         /// <summary>
         /// Gets or sets the arguments.
@@ -155,12 +136,8 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected override IDictionary<string, object> Data { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private protected IDictionary<string, object> _data;
+        
         /// <summary>
         /// Gets the outlay identifier.
         /// </summary>
@@ -170,8 +147,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -191,8 +168,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( AccountCode?.GetValue() )
-                    ? AccountCode?.GetValue()
+                return Verify.Input( _accountCode?.GetValue() )
+                    ? _accountCode?.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -211,14 +188,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? new Builder( Source, Data )
-                    : default;
+                return Verify.Map( _data )
+                    ? new Builder( _source, _data )
+                    : default( Builder );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IBuilder );
             }
         }
     }

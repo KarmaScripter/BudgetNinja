@@ -4,22 +4,19 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public class TimeOff : Supplemental
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "TimeOff"/> class.
         /// </summary>
@@ -35,11 +32,11 @@ namespace BudgetExecution
         /// </param>
         public TimeOff( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.TimeOffId );
-            FundCode = new Element( Record, Field.FundCode );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.TimeOffId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -50,11 +47,11 @@ namespace BudgetExecution
         /// </param>
         public TimeOff( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.TimeOffId );
-            FundCode = new Element( Record, Field.FundCode );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.TimeOffId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -65,37 +62,21 @@ namespace BudgetExecution
         /// </param>
         public TimeOff( DataRow data )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.TimeOffId );
-            FundCode = new Element( Record, Field.FundCode );
-            Amount = new Amount( Record, Numeric.Amount );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.TimeOffId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _amount = new Amount( _record, Numeric.Amount );
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        private protected override IElement Type { get; set; }
-
+        
         /// <summary>
         /// Gets the source.
         /// </summary>
         /// <value>
         /// The source.
         /// </value>
-        protected override Source Source { get; set; } = Source.TimeOff;
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private protected readonly new Source _source = Source.TimeOff;
+        
         /// <summary>
         /// Gets the data.
         /// </summary>
@@ -103,24 +84,24 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<DataRow> GetData()
         {
-            if( Verify.Map( Data ) )
+            if( Verify.Map( _data ) )
             {
                 try
                 {
-                    var data = new DataBuilder( Source, Data )?.GetData();
+                    var data = new DataBuilder( _source, _data )?.GetData();
 
                     return Verify.Input( data )
                         ? data
-                        : default;
+                        : default( IEnumerable<DataRow> );
                 }
                 catch( SystemException ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<DataRow> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<DataRow> );
         }
 
         /// <summary>
@@ -132,14 +113,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Type?.GetValue() )
-                    ? Type
-                    : default;
+                return Verify.Input( _type?.GetValue() )
+                    ? _type
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
     }

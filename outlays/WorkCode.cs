@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -24,14 +20,10 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     public class WorkCode : WorkCodeBase, ISource, IWorkCode
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.WorkCodes;
+        private readonly static Source _source = Source.WorkCodes;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -53,25 +45,25 @@ namespace BudgetExecution
         public WorkCode( IQuery query )
             : this()
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.WorkCodeId );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            ShortName = new Element( Record, Field.ShortName );
-            Notifications = new Element( Record, Field.Notifications );
-            Status = new Element( Record, Field.Status );
-            PayPeriod = new Element( Record, Field.PayPeriod );
-            BBFY = new Element( Record, Field.BBFY );
-            FundCode = new Element( Record, Field.FundCode );
-            FocCode = new Element( Record, Field.FocCode );
-            CostOrgCode = new Element( Record, Field.CostOrgCode );
-            CostOrgName = new Element( Record, Field.CostOrgName );
-            RcCode = new Element( Record, Field.RcCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            ProjectCodeName = new Element( Record, Field.ProjectName );
-            ApprovalDate = DateTime.Parse( Record[ $"{Field.ApprovalDate}" ].ToString() );
-            Args = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.WorkCodeId );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _shortName = new Element( _record, Field.ShortName );
+            _notifications = new Element( _record, Field.Notifications );
+            _status = new Element( _record, Field.Status );
+            _payPeriod = new Element( _record, Field.PayPeriod );
+            _bbfy = new Element( _record, Field.BBFY );
+            _fundCode = new Element( _record, Field.FundCode );
+            _focCode = new Element( _record, Field.FocCode );
+            _costOrgCode = new Element( _record, Field.CostOrgCode );
+            _costOrgName = new Element( _record, Field.CostOrgName );
+            _rcCode = new Element( _record, Field.RcCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            _projectCodeName = new Element( _record, Field.ProjectName );
+            _approvalDate = DateTime.Parse( _record[ $"{Field.ApprovalDate}" ].ToString() );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -82,25 +74,25 @@ namespace BudgetExecution
         /// </param>
         public WorkCode( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.WorkCodeId );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            ShortName = new Element( Record, Field.ShortName );
-            Notifications = new Element( Record, Field.Notifications );
-            Status = new Element( Record, Field.Status );
-            PayPeriod = new Element( Record, Field.PayPeriod );
-            BBFY = new Element( Record, Field.BBFY );
-            FundCode = new Element( Record, Field.FundCode );
-            FocCode = new Element( Record, Field.FocCode );
-            CostOrgCode = new Element( Record, Field.CostOrgCode );
-            CostOrgName = new Element( Record, Field.CostOrgName );
-            RcCode = new Element( Record, Field.RcCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            ProjectCodeName = new Element( Record, Field.ProjectName );
-            ApprovalDate = DateTime.Parse( Record?[ $"{Field.ApprovalDate}" ].ToString() );
-            Args = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.WorkCodeId );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _shortName = new Element( _record, Field.ShortName );
+            _notifications = new Element( _record, Field.Notifications );
+            _status = new Element( _record, Field.Status );
+            _payPeriod = new Element( _record, Field.PayPeriod );
+            _bbfy = new Element( _record, Field.BBFY );
+            _fundCode = new Element( _record, Field.FundCode );
+            _focCode = new Element( _record, Field.FocCode );
+            _costOrgCode = new Element( _record, Field.CostOrgCode );
+            _costOrgName = new Element( _record, Field.CostOrgName );
+            _rcCode = new Element( _record, Field.RcCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            _projectCodeName = new Element( _record, Field.ProjectName );
+            _approvalDate = DateTime.Parse( _record?[ $"{Field.ApprovalDate}" ].ToString() );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -111,30 +103,26 @@ namespace BudgetExecution
         /// </param>
         public WorkCode( DataRow data )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.WorkCodeId );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            ShortName = new Element( Record, Field.ShortName );
-            Notifications = new Element( Record, Field.Notifications );
-            Status = new Element( Record, Field.Status );
-            PayPeriod = new Element( Record, Field.PayPeriod );
-            BBFY = new Element( Record, Field.BBFY );
-            FundCode = new Element( Record, Field.FundCode );
-            FocCode = new Element( Record, Field.FocCode );
-            CostOrgCode = new Element( Record, Field.CostOrgCode );
-            CostOrgName = new Element( Record, Field.CostOrgName );
-            RcCode = new Element( Record, Field.RcCode );
-            AccountCode = new Element( Record, Field.AccountCode );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            ProjectCodeName = new Element( Record, Field.ProjectName );
-            ApprovalDate = DateTime.Parse( Record[ $"{Field.ApprovalDate}" ].ToString() );
-            Args = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.WorkCodeId );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _shortName = new Element( _record, Field.ShortName );
+            _notifications = new Element( _record, Field.Notifications );
+            _status = new Element( _record, Field.Status );
+            _payPeriod = new Element( _record, Field.PayPeriod );
+            _bbfy = new Element( _record, Field.BBFY );
+            _fundCode = new Element( _record, Field.FundCode );
+            _focCode = new Element( _record, Field.FocCode );
+            _costOrgCode = new Element( _record, Field.CostOrgCode );
+            _costOrgName = new Element( _record, Field.CostOrgName );
+            _rcCode = new Element( _record, Field.RcCode );
+            _accountCode = new Element( _record, Field.AccountCode );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            _projectCodeName = new Element( _record, Field.ProjectName );
+            _approvalDate = DateTime.Parse( _record[ $"{Field.ApprovalDate}" ].ToString() );
+            _args = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Gets the arguments.
@@ -142,12 +130,8 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private IDictionary<string, object> Args { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly IDictionary<string, object> _args;
+        
         /// <summary>
         /// Converts to string.
         /// </summary>
@@ -156,11 +140,11 @@ namespace BudgetExecution
         /// </returns>
         public override string ToString()
         {
-            if( Verify.Element( Code ) )
+            if( Verify.Element( _code ) )
             {
                 try
                 {
-                    return Code.GetValue();
+                    return _code.GetValue();
                 }
                 catch( Exception ex )
                 {
@@ -181,14 +165,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( BBFY )
-                    ? new BudgetFiscalYear( BBFY?.GetValue() )
-                    : default;
+                return Verify.Element( _bbfy )
+                    ? new BudgetFiscalYear( _bbfy?.GetValue() )
+                    : default( BudgetFiscalYear );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IBudgetFiscalYear );
             }
         }
 
@@ -199,28 +183,28 @@ namespace BudgetExecution
         /// </returns>
         public IFinanceObjectClass GetFinanceObjectClass()
         {
-            if( Verify.Element( FocCode ) )
+            if( Verify.Element( _focCode ) )
             {
                 try
                 {
-                    var dict = new Dictionary<string, object>
+                    var _dict = new Dictionary<string, object>
                     {
-                        [ $"{Field.FocCode}" ] = FocCode?.GetValue()
+                        [ $"{Field.FocCode}" ] = _focCode?.GetValue()
                     };
 
-                    var connectbuilder = new ConnectionBuilder( Source.FinanceObjectClass );
-                    var sqlstatement = new SqlStatement( connectbuilder, dict, SQL.SELECT );
-                    using var query = new Query( connectbuilder, sqlstatement );
-                    return new FinanceObjectClass( query );
+                    var _builder = new ConnectionBuilder( Source.FinanceObjectClass );
+                    var _statement = new SqlStatement( _builder, _dict, SQL.SELECT );
+                    using var _query = new Query( _builder, _statement );
+                    return new FinanceObjectClass( _query );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IFinanceObjectClass );
                 }
             }
 
-            return default;
+            return default( IFinanceObjectClass );
         }
 
         /// <summary>
@@ -232,14 +216,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( FundCode )
-                    ? new Fund( FundCode?.GetValue() )
-                    : default;
+                return Verify.Element( _fundCode )
+                    ? new Fund( _fundCode?.GetValue() )
+                    : default( Fund );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IFund );
             }
         }
 
@@ -250,28 +234,28 @@ namespace BudgetExecution
         /// </returns>
         public IOrganization GetOrganization()
         {
-            if( Verify.Element( CostOrgCode ) )
+            if( Verify.Element( _costOrgCode ) )
             {
                 try
                 {
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.CostOrgCode}" ] = CostOrgCode?.GetValue()
+                        [ $"{Field.CostOrgCode}" ] = _costOrgCode?.GetValue()
                     };
 
-                    var connection = new ConnectionBuilder( Source.Organizations );
-                    var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                    using var query = new Query( connection, sqlstatement );
-                    return new Organization( query );
+                    var _builder = new ConnectionBuilder( Source.Organizations );
+                    var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                    using var _query = new Query( _builder, _statement );
+                    return new Organization( _query );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IOrganization );
                 }
             }
 
-            return default;
+            return default( IOrganization );
         }
 
         /// <summary>
@@ -281,19 +265,19 @@ namespace BudgetExecution
         /// </returns>
         public IAccount GetAccount()
         {
-            if( Verify.Element( AccountCode ) )
+            if( Verify.Element( _accountCode ) )
             {
                 try
                 {
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.Code}" ] = AccountCode?.GetValue()
+                        [ $"{Field.Code}" ] = _accountCode?.GetValue()
                     };
 
-                    var connection = new ConnectionBuilder( Source.Accounts );
-                    var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                    using var query = new Query( connection, sqlstatement );
-                    return new Account( query );
+                    var _builder = new ConnectionBuilder( Source.Accounts );
+                    var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                    using var _query = new Query( _builder, _statement );
+                    return new Account( _query );
                 }
                 catch( Exception ex )
                 {
@@ -312,19 +296,19 @@ namespace BudgetExecution
         /// </returns>
         public IResponsibilityCenter GetResponsibilityCenter()
         {
-            if( Verify.Element( RcCode ) )
+            if( Verify.Element( _rcCode ) )
             {
                 try
                 {
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.Code}" ] = RcCode?.GetValue()
+                        [ $"{Field.Code}" ] = _rcCode?.GetValue()
                     };
 
-                    var connection = new ConnectionBuilder( Source.ResponsibilityCenters );
-                    var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                    using var query = new Query( connection, sqlstatement );
-                    return new ResponsibilityCenter( query );
+                    var _builder = new ConnectionBuilder( Source.ResponsibilityCenters );
+                    var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                    using var _query = new Query( _builder, _statement );
+                    return new ResponsibilityCenter( _query );
                 }
                 catch( Exception ex )
                 {
@@ -343,29 +327,29 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<IWorkCode> GetWorkCodes()
         {
-            if( Verify.Map( Args ) )
+            if( Verify.Map( _args ) )
             {
                 try
                 {
-                    var data = new Builder( Source.WorkCodes, Args )?.GetData()?.Select( h => h );
+                    var _data = new Builder( Source.WorkCodes, _args )
+                        ?.GetData()
+                        ?.Select( h => h );
 
-                    if( data != null )
-                    {
-                        var query = data.Select( h => new WorkCode( h ) );
+                    var _query = _data
+                        ?.Select( h => new WorkCode( h ) );
 
-                        return query.Any()
-                            ? query.ToArray()
-                            : default;
-                    }
+                    return _query?.Any() == true
+                        ? _query.ToArray()
+                        : default( WorkCode[ ] );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<IWorkCode> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<IWorkCode> );
         }
 
         /// <summary>
@@ -375,12 +359,12 @@ namespace BudgetExecution
         /// </returns>
         public IDivision GetDivision()
         {
-            if( Verify.Element( RcCode ) )
+            if( Verify.Element( _rcCode ) )
             {
                 try
                 {
-                    var rc = RcCode.GetValue();
-                    return new Division( rc );
+                    var _rc = _rcCode.GetValue();
+                    return new Division( _rc );
                 }
                 catch( Exception ex )
                 {
@@ -401,21 +385,17 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
-                    : default;
+                return Verify.Map( _args )
+                    ? _args
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
-
-        // ***************************************************************************************************************************
-        // ******************************************* INTERFACE IMPLIMENTATIONS *****************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the source.
         /// </summary>
@@ -425,8 +405,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -445,8 +425,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -465,8 +445,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -485,8 +465,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )

@@ -26,7 +26,7 @@ namespace BudgetExecution
         /// <summary>
         /// The PRC
         /// </summary>
-        private protected readonly IProgramResultsCode PRC;
+        private protected readonly IProgramResultsCode _prc;
 
         // **************************************************************************************************************************
         // ********************************************   CONSTRUCTORS     **********************************************************
@@ -40,29 +40,29 @@ namespace BudgetExecution
         /// </param>
         public CostAccount( DataRow data )
         {
-            Record = data;
-            PRC = new ProgramResultsCode( data );
-            ID = new Key( Record, PrimaryKey.PrcId );
-            NpmCode = new Element( Record, Field.NpmCode );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            FocCode = new Element( Record, Field.FocCode );
-            FocName = new Element( Record, Field.FocName );
-            DocumentType = new Element( Record, Field.DocumentType );
-            DocumentPrefix = new Element( Record, Field.DocumentPrefix );
-            DCN = new Element( Record, Field.DocumentType );
-            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
-            ObligatingDocumentNumber = new Element( Record, Field.ObligatingDocumentNumber );
-            System = new Element( Record, Field.System );
-            TransactionNumber = new Element( Record, Field.TransactionNumber );
-            GrantNumber = new Element( Record, Field.GrantNumber );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            Deobligations = new Amount( Record, Numeric.Deobligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Balance = new Amount( Record, Numeric.Balance );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _prc = new ProgramResultsCode( data );
+            _id = new Key( _record, PrimaryKey.PrcId );
+            NpmCode = new Element( _record, Field.NpmCode );
+            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
+            FocCode = new Element( _record, Field.FocCode );
+            FocName = new Element( _record, Field.FocName );
+            DocumentType = new Element( _record, Field.DocumentType );
+            DocumentPrefix = new Element( _record, Field.DocumentPrefix );
+            DCN = new Element( _record, Field.DocumentType );
+            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
+            ObligatingDocumentNumber = new Element( _record, Field.ObligatingDocumentNumber );
+            System = new Element( _record, Field.System );
+            TransactionNumber = new Element( _record, Field.TransactionNumber );
+            GrantNumber = new Element( _record, Field.GrantNumber );
+            Commitments = new Amount( _record, Numeric.Commitments );
+            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
+            Obligations = new Amount( _record, Numeric.Obligations );
+            Deobligations = new Amount( _record, Numeric.Deobligations );
+            ULO = new Amount( _record, Numeric.ULO );
+            Balance = new Amount( _record, Numeric.Balance );
+            Data = _record?.ToDictionary();
         }
 
         // **************************************************************************************************************************
@@ -78,14 +78,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -102,12 +102,12 @@ namespace BudgetExecution
 
                 return Verify.Input( code )
                     ? new FinanceObjectClass( code )
-                    : default;
+                    : default( FinanceObjectClass );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IFinanceObjectClass );
             }
         }
 
@@ -122,12 +122,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( NpmCode?.GetValue() )
                     ? new NationalProgram( NpmCode?.GetValue() )
-                    : default;
+                    : default( NationalProgram );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( INationalProgram );
             }
         }
 
@@ -140,14 +140,14 @@ namespace BudgetExecution
         {
             try
             {
-                return PRC?.GetAmount()?.GetFunding() > 0.0
-                    ? PRC
-                    : default;
+                return _prc?.GetAmount()?.GetFunding() > 0.0
+                    ? _prc
+                    : default( IProgramResultsCode );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramResultsCode );
             }
         }
 
@@ -162,12 +162,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( ProgramProjectCode?.GetValue() )
                     ? new ProgramProject( ProgramProjectCode?.GetValue() )
-                    : default;
+                    : default( ProgramProject );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramProject );
             }
         }
 
@@ -182,12 +182,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( ProgramAreaCode?.GetValue() )
                     ? new ProgramArea( ProgramAreaCode?.GetValue() )
-                    : default;
+                    : default( ProgramArea );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IProgramArea );
             }
         }
     }

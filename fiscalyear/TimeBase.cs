@@ -165,7 +165,7 @@ namespace BudgetExecution
 
                     return Enum.IsDefined( typeof( EventDate ), date )
                         ? date
-                        : default;
+                        : default( EventDate );
                 }
                 catch( Exception ex )
                 {

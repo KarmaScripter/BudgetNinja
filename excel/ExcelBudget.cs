@@ -33,7 +33,7 @@ namespace BudgetExecution
         /// <summary>
         /// The sheet count
         /// </summary>
-        private readonly int SheetCount;
+        private readonly int _sheetCount;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -54,9 +54,9 @@ namespace BudgetExecution
         /// </param>
         public ExcelBudget( IAuthority authority )
         {
-            Excel = new ExcelPackage( new FileInfo( FilePath ) );
+            Excel = new ExcelPackage( new FileInfo( _filePath ) );
             Workbook = Excel.Workbook;
-            SheetCount = Workbook.Worksheets.Count;
+            _sheetCount = Workbook.Worksheets.Count;
             Authority = authority;
             Allocation = Authority.GetAllocation();
             Data = Allocation.GetData();
@@ -191,11 +191,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IControlNumber );
                 }
             }
 
-            return default;
+            return default( IControlNumber );
         }
 
         /// <summary>
@@ -207,12 +207,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Allocation ?? default;
+                return Allocation ?? default( IAllocation );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAllocation );
             }
         }
 
@@ -282,12 +282,12 @@ namespace BudgetExecution
         {
             try
             {
-                return Worksheet ?? default;
+                return Worksheet ?? default( ExcelWorksheet );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ExcelWorksheet );
             }
         }
 
@@ -305,9 +305,9 @@ namespace BudgetExecution
                 {
                     using var rng = grid.GetRange();
                     rng.Style.Font.Color.SetColor( Color.Black );
-                    rng.Style.Font.SetFromFont( DataFont );
+                    rng.Style.Font.SetFromFont( _dataFont );
                     rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    rng.Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
+                    rng.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
                     rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
                 }
                 catch( Exception ex )
@@ -382,7 +382,7 @@ namespace BudgetExecution
                         ExcelFillStyle.Solid;
 
                     worksheet.Cells[ row - 1, col, row - 1, col + 6 ]
-                        .Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
+                        .Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
 
                     worksheet.Cells[ row - 1, col, row - 1, col + 6 ].Style.HorizontalAlignment =
                         ExcelHorizontalAlignment.Left;
@@ -395,11 +395,11 @@ namespace BudgetExecution
                     worksheet.Cells[ row, col + 5 ].Value = "Total";
                     using var hdr = worksheet.Cells[ row, col, row, col + 6 ];
                     hdr.Style.Font.Bold = true;
-                    hdr.Style.Font.Color.SetColor( FontColor );
-                    hdr.Style.Font.SetFromFont( DataFont );
+                    hdr.Style.Font.Color.SetColor( _fontColor );
+                    hdr.Style.Font.SetFromFont( _dataFont );
                     hdr.Style.Border.BorderAround( ExcelBorderStyle.Thin );
                     hdr.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    hdr.Style.Fill.BackgroundColor.SetColor( SecondaryBackColor );
+                    hdr.Style.Fill.BackgroundColor.SetColor( _secondaryBackColor );
                     hdr.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }
                 catch( Exception ex )
@@ -449,7 +449,7 @@ namespace BudgetExecution
                         ExcelFillStyle.Solid;
 
                     worksheet.Cells[ row - 1, col, row - 1, col + 6 ]
-                        .Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
+                        .Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
 
                     worksheet.Cells[ row - 1, col, row - 1, col + 6 ].Style.HorizontalAlignment =
                         ExcelHorizontalAlignment.Left;
@@ -464,7 +464,7 @@ namespace BudgetExecution
                     using var hdr = worksheet.Cells[ row, col, row, col + 6 ];
                     hdr.Style.Font.Bold = true;
                     hdr.Style.Font.Color.SetColor( Color.Black );
-                    hdr.Style.Font.SetFromFont( DataFont );
+                    hdr.Style.Font.SetFromFont( _dataFont );
                     hdr.Style.Border.BorderAround( ExcelBorderStyle.Thin );
                     hdr.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     hdr.Style.Fill.BackgroundColor.SetColor( Color.FromArgb( 255, 221, 235, 247 ) );
@@ -500,7 +500,7 @@ namespace BudgetExecution
                         ExcelFillStyle.Solid;
 
                     worksheet.Cells[ row - 1, col, row - 1, col + 1 ]
-                        .Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
+                        .Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
 
                     worksheet.Cells[ row - 1, col, row - 1, col + 1 ].Style.HorizontalAlignment =
                         ExcelHorizontalAlignment.Left;
@@ -510,7 +510,7 @@ namespace BudgetExecution
                     using var hdr = worksheet.Cells[ row, col, row, col + 1 ];
                     hdr.Style.Font.Bold = true;
                     hdr.Style.Font.Color.SetColor( Color.Black );
-                    hdr.Style.Font.SetFromFont( DataFont );
+                    hdr.Style.Font.SetFromFont( _dataFont );
                     hdr.Style.Border.BorderAround( ExcelBorderStyle.Thin );
                     hdr.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     hdr.Style.Fill.BackgroundColor.SetColor( Color.FromArgb( 255, 221, 235, 247 ) );
@@ -595,12 +595,12 @@ namespace BudgetExecution
                     worksheet.Cells[ row, col ].Value = "Authority";
                     worksheet.Cells[ row, col ].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                     worksheet.Cells[ row, col ].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    worksheet.Cells[ row, col + 1 ].Formula = $"=SUM(C{Index}:C{row - 1})";
-                    worksheet.Cells[ row, col + 2 ].Formula = $"=SUM(D{Index}:D{row - 1})";
-                    worksheet.Cells[ row, col + 3 ].Formula = $"=SUM(E{Index}:E{row - 1})";
-                    worksheet.Cells[ row, col + 4 ].Formula = $"=SUM(F{Index}:F{row - 1})";
-                    worksheet.Cells[ row, col + 5 ].Formula = $"=SUM(G{Index}:G{row - 1})";
-                    worksheet.Cells[ row, col + 6 ].Formula = $"=SUM(H{Index}:H{row - 1})";
+                    worksheet.Cells[ row, col + 1 ].Formula = $"=SUM(C{_index}:C{row - 1})";
+                    worksheet.Cells[ row, col + 2 ].Formula = $"=SUM(D{_index}:D{row - 1})";
+                    worksheet.Cells[ row, col + 3 ].Formula = $"=SUM(E{_index}:E{row - 1})";
+                    worksheet.Cells[ row, col + 4 ].Formula = $"=SUM(F{_index}:F{row - 1})";
+                    worksheet.Cells[ row, col + 5 ].Formula = $"=SUM(G{_index}:G{row - 1})";
+                    worksheet.Cells[ row, col + 6 ].Formula = $"=SUM(H{_index}:H{row - 1})";
                     worksheet.Cells[ row, col, row, col + 6 ].Style.Font.Bold = true;
                     worksheet.Cells[ row, col + 1, row, col + 6 ].Style.Numberformat.Format = "#,###";
 
@@ -692,10 +692,10 @@ namespace BudgetExecution
 
                 return sum > 0
                     ? (double)sum
-                    : default;
+                    : default( double );
             }
 
-            return default;
+            return default( double );
         }
 
         /// <summary>

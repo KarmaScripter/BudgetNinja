@@ -6,18 +6,13 @@ namespace BudgetExecution
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "SuggestBaseTypeForParameter" ) ]
     public class DivisionAuthority : Authority
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the  class.
         /// </summary>
@@ -27,9 +22,9 @@ namespace BudgetExecution
         public DivisionAuthority( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _budgetFiscalYear = new BudgetFiscalYear( _record.GetField( Field.BFY ) );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -41,22 +36,18 @@ namespace BudgetExecution
         public DivisionAuthority( IBuilder builder )
             : base( builder )
         {
-            Record = builder?.GetRecord();
-            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _budgetFiscalYear = new BudgetFiscalYear( _record.GetField( Field.BFY ) );
+            _data = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
+        
         /// <summary>
         /// Gets or sets the source.
         /// </summary>
         /// <value>
         /// The source.
         /// </value>
-        protected override Source Source { get; set; } = Source.DivisionAuthority;
+        private protected readonly new Source _source = Source.DivisionAuthority;
 
         /// <summary>
         /// Gets or sets the total.
@@ -64,7 +55,7 @@ namespace BudgetExecution
         /// <value>
         /// The total.
         /// </value>
-        public double Total { get; set; }
+        public double _total;
 
         /// <summary>
         /// Gets or sets the average.
@@ -72,7 +63,7 @@ namespace BudgetExecution
         /// <value>
         /// The average.
         /// </value>
-        public double Average { get; set; }
+        public double _average;
 
         // ***************************************************************************************************************************
         // ************************************************  METHODS   ***************************************************************

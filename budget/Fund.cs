@@ -26,7 +26,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source Source = Source.Funds;
+        private static readonly Source _source = Source.Funds;
 
         // ***************************************************************************************************************************
         // *********************************************   CONSTRUCTORS **************************************************************
@@ -47,7 +47,7 @@ namespace BudgetExecution
         /// </param>
         public Fund( FundCode fundcode )
         {
-            Record = new DataBuilder( Source, GetArgs( fundcode ) )?.GetRecord();
+            Record = new DataBuilder( _source, GetArgs( fundcode ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.FundId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -64,7 +64,7 @@ namespace BudgetExecution
         /// </param>
         public Fund( string code )
         {
-            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            Record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
             ID = new Key( Record, PrimaryKey.FundId );
             Name = new Element( Record, Field.Name );
             Code = new Element( Record, Field.Code );
@@ -200,12 +200,12 @@ namespace BudgetExecution
             {
                 return Verify.Map( Data )
                     ? Data
-                    : default;
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -274,11 +274,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -293,17 +293,17 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.FundCode( fundcode )
+                return Validate.FundCode( fundcode )
                     ? new Dictionary<string, object>
                     {
                         [ "FundCode" ] = fundcode.ToString()
                     }
-                    : default;
+                    : default( Dictionary<string, object> );
             }
             catch( SystemException ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
@@ -421,7 +421,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IFund );
             }
         }
 
@@ -434,8 +434,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

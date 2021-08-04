@@ -4,15 +4,12 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     #region
 
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     #endregion
@@ -34,12 +31,21 @@ namespace BudgetExecution
     /// pay period in which the wages were earned.
     /// 
     /// </summary>
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public class Overtime : Supplemental
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private protected readonly new Source _source = Source.Overtime;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Overtime()
         {
         }
@@ -52,12 +58,12 @@ namespace BudgetExecution
         /// </param>
         public Overtime( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.OvertimeId );
-            FundCode = new Element( Record, Field.FundCode );
-            BOC = new Element( Record, Field.BocCode );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.OvertimeId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _boc = new Element( _record, Field.BocCode );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -68,12 +74,12 @@ namespace BudgetExecution
         /// </param>
         public Overtime( IBuilder databuilder )
         {
-            Record = databuilder.GetRecord();
-            ID = new Key( Record, PrimaryKey.OvertimeId );
-            FundCode = new Element( Record, Field.FundCode );
-            BOC = new Element( Record, Field.BocCode );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = databuilder.GetRecord();
+            _id = new Key( _record, PrimaryKey.OvertimeId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _boc = new Element( _record, Field.BocCode );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -84,61 +90,42 @@ namespace BudgetExecution
         /// </param>
         public Overtime( DataRow data )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.OvertimeId );
-            FundCode = new Element( Record, Field.FundCode );
-            Amount = GetAmount();
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.OvertimeId );
+            _fundCode = new Element( _record, Field.FundCode );
+            _amount = GetAmount();
+            _data = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
+        
         /// <summary>
-        /// Gets the overtime identifier.
+        /// 
         /// </summary>
-        /// <value>
-        /// The overtime identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.Overtime;
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        /// <returns></returns>
         public IEnumerable<DataRow> GetData()
         {
-            if( Verify.Map( Data ) )
+            if( Verify.Map( _data ) )
             {
                 try
                 {
-                    var query = new Builder( Source, Data ).GetDataTable()
-                        .AsEnumerable()
-                        .Where( a => a.Field<string>( $"{Field.Type}" ).Equals( $"{Source.Overtime}" ) )
-                        .Where( a => a.Field<double>( $"{Numeric.Amount}" ) != 0.0 )
-                        .Select( a => a );
+                    var _select = new Builder( _source, _data )
+                        ?.GetDataTable()
+                        ?.AsEnumerable()
+                        ?.Where( a => a.Field<string>( $"{Field.Type}" ).Equals( $"{Source.Overtime}" ) )
+                        ?.Where( a => a.Field<double>( $"{Numeric.Amount}" ) != 0.0 )
+                        ?.Select( a => a );
 
-                    return query?.Any() == true
-                        ? query
-                        : default;
+                    return _select?.Any() == true
+                        ? _select
+                        : default( EnumerableRowCollection<DataRow> );
                 }
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IEnumerable<DataRow> );
                 }
             }
 
-            return default;
+            return default( IEnumerable<DataRow> );
         }
 
         /// <summary>
@@ -150,14 +137,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -170,14 +157,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Type?.GetValue() )
-                    ? Type
-                    : default;
+                return Verify.Input( _type?.GetValue() )
+                    ? _type
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
     }

@@ -136,12 +136,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( OriginalActionDate.GetValue() )
                     ? OriginalActionDate
-                    : default;
+                    : default( ITime );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( ITime );
             }
         }
 
@@ -164,41 +164,41 @@ namespace BudgetExecution
                     {
                         case OutlayType.Obligation:
                         {
-                            Obligations = new Amount( Record, Numeric.Obligations );
+                            Obligations = new Amount( _record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.Commitment:
                         {
-                            Commitments = new Amount( Record, Numeric.Obligations );
+                            Commitments = new Amount( _record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.OpenCommitment:
                         {
-                            OpenCommitments = new Amount( Record, Numeric.Obligations );
+                            OpenCommitments = new Amount( _record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.ULO:
                         {
-                            ULO = new Amount( Record, Numeric.Obligations );
+                            ULO = new Amount( _record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.Deobligation:
                         {
-                            Deobligations = new Amount( Record, Numeric.Obligations );
+                            Deobligations = new Amount( _record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.All:
                         {
-                            Obligations = new Amount( Record, Numeric.Obligations );
-                            Deobligations = new Amount( Record, Numeric.Obligations );
-                            Commitments = new Amount( Record, Numeric.Obligations );
-                            OpenCommitments = new Amount( Record, Numeric.Obligations );
-                            ULO = new Amount( Record, Numeric.Obligations );
+                            Obligations = new Amount( _record, Numeric.Obligations );
+                            Deobligations = new Amount( _record, Numeric.Obligations );
+                            Commitments = new Amount( _record, Numeric.Obligations );
+                            OpenCommitments = new Amount( _record, Numeric.Obligations );
+                            ULO = new Amount( _record, Numeric.Obligations );
                             break;
                         }
 
@@ -250,12 +250,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( PayPeriod?.GetValue() )
                     ? PayPeriod
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -270,12 +270,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( HrOrgCode?.GetValue() )
                     ? HrOrgCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -290,12 +290,12 @@ namespace BudgetExecution
             {
                 return Verify.Input( WorkCode?.GetValue() )
                     ? WorkCode
-                    : default;
+                    : default( IElement );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IElement );
             }
         }
 
@@ -310,12 +310,12 @@ namespace BudgetExecution
             {
                 return Commitments?.GetFunding() > -1
                     ? Commitments
-                    : default;
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -335,7 +335,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -355,7 +355,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -395,7 +395,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -415,7 +415,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
 
@@ -435,7 +435,7 @@ namespace BudgetExecution
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }

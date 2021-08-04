@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -22,24 +18,18 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public class Employee : EmployeeBase, IEmployee, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the source.
         /// </summary>
         /// <value>
         /// The source.
         /// </value>
-        private protected virtual Source Source { get; set; } = Source.Employees;
-
-        // ***************************************************************************************************************************
-        // ******************************************************  CONSTRUCTORS  *****************************************************
-        // ***************************************************************************************************************************
-
+        private protected readonly Source _source = Source.Employees;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "Employee"/> class.
         /// </summary>
@@ -55,18 +45,18 @@ namespace BudgetExecution
         /// </param>
         public Employee( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.EmployeeId );
-            Section = new Element( Record, Field.Section );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            Office = new Element( Record, Field.Office );
-            PhoneNumber = new Element( Record, Field.PhoneNumber );
-            CellNumber = new Element( Record, Field.CellNumber );
-            Email = new Element( Record, Field.Email );
-            Status = new Element( Record, Field.Status );
-            Args = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.EmployeeId );
+            _section = new Element( _record, Field.Section );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _office = new Element( _record, Field.Office );
+            _phoneNumber = new Element( _record, Field.PhoneNumber );
+            _cellNumber = new Element( _record, Field.CellNumber );
+            _email = new Element( _record, Field.Email );
+            _status = new Element( _record, Field.Status );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -77,18 +67,18 @@ namespace BudgetExecution
         /// </param>
         public Employee( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.EmployeeId );
-            Section = new Element( Record, Field.Section );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            Office = new Element( Record, Field.Office );
-            PhoneNumber = new Element( Record, Field.PhoneNumber );
-            CellNumber = new Element( Record, Field.CellNumber );
-            Email = new Element( Record, Field.Email );
-            Status = new Element( Record, Field.Status );
-            Args = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.EmployeeId );
+            _section = new Element( _record, Field.Section );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _office = new Element( _record, Field.Office );
+            _phoneNumber = new Element( _record, Field.PhoneNumber );
+            _cellNumber = new Element( _record, Field.CellNumber );
+            _email = new Element( _record, Field.Email );
+            _status = new Element( _record, Field.Status );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -99,18 +89,18 @@ namespace BudgetExecution
         /// </param>
         public Employee( DataRow datarow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.EmployeeId );
-            Section = new Element( Record, Field.Section );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            Office = new Element( Record, Field.Office );
-            PhoneNumber = new Element( Record, Field.PhoneNumber );
-            CellNumber = new Element( Record, Field.CellNumber );
-            Email = new Element( Record, Field.Email );
-            Status = new Element( Record, Field.Status );
-            Args = Record?.ToDictionary();
+            _record = datarow;
+            _id = new Key( _record, PrimaryKey.EmployeeId );
+            _section = new Element( _record, Field.Section );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _office = new Element( _record, Field.Office );
+            _phoneNumber = new Element( _record, Field.PhoneNumber );
+            _cellNumber = new Element( _record, Field.CellNumber );
+            _email = new Element( _record, Field.Email );
+            _status = new Element( _record, Field.Status );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -121,24 +111,20 @@ namespace BudgetExecution
         /// </param>
         public Employee( string epanumber )
         {
-            Record = new DataBuilder( Source, SetArgs( epanumber ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.EmployeeId );
-            Section = new Element( Record, Field.Section );
-            FirstName = new Element( Record, Field.FirstName );
-            LastName = new Element( Record, Field.LastName );
-            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
-            Office = new Element( Record, Field.Office );
-            PhoneNumber = new Element( Record, Field.PhoneNumber );
-            CellNumber = new Element( Record, Field.CellNumber );
-            Email = new Element( Record, Field.Email );
-            Status = new Element( Record, Field.Status );
-            Args = Record?.ToDictionary();
+            _record = new DataBuilder( _source, SetArgs( epanumber ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.EmployeeId );
+            _section = new Element( _record, Field.Section );
+            _firstName = new Element( _record, Field.FirstName );
+            _lastName = new Element( _record, Field.LastName );
+            _employeeNumber = new Element( _record, Field.EmployeeNumber );
+            _office = new Element( _record, Field.Office );
+            _phoneNumber = new Element( _record, Field.PhoneNumber );
+            _cellNumber = new Element( _record, Field.CellNumber );
+            _email = new Element( _record, Field.Email );
+            _status = new Element( _record, Field.Status );
+            _args = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Sets the arguments.
         /// </summary>
@@ -161,11 +147,11 @@ namespace BudgetExecution
                 catch( Exception ex )
                 {
                     Fail( ex );
-                    return default;
+                    return default( IDictionary<string, object> );
                 }
             }
 
-            return default;
+            return default( IDictionary<string, object> );
         }
 
         /// <summary>
@@ -177,8 +163,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( FirstName )
-                    ? FirstName
+                return Verify.Element( _firstName )
+                    ? _firstName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -197,8 +183,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( LastName )
-                    ? LastName
+                return Verify.Element( _lastName )
+                    ? _lastName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -217,8 +203,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -237,8 +223,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Section )
-                    ? Section
+                return Verify.Element( _section )
+                    ? _section
                     : Element.Default;
             }
             catch( Exception ex )
@@ -257,8 +243,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( EmployeeNumber )
-                    ? EmployeeNumber
+                return Verify.Element( _employeeNumber )
+                    ? _employeeNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -277,8 +263,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Office )
-                    ? Office
+                return Verify.Element( _office )
+                    ? _office
                     : Element.Default;
             }
             catch( Exception ex )
@@ -297,8 +283,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( PhoneNumber )
-                    ? PhoneNumber
+                return Verify.Element( _phoneNumber )
+                    ? _phoneNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -317,8 +303,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( CellNumber )
-                    ? CellNumber
+                return Verify.Element( _cellNumber )
+                    ? _cellNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -337,8 +323,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Email )
-                    ? Email
+                return Verify.Element( _email )
+                    ? _email
                     : Element.Default;
             }
             catch( Exception ex )
@@ -357,8 +343,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Status )
-                    ? Status
+                return Verify.Element( _status )
+                    ? _status
                     : Element.Default;
             }
             catch( Exception ex )
@@ -377,20 +363,17 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
-                    : default;
+                return Verify.Map( _args )
+                    ? _args
+                    : default( IDictionary<string, object> );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IDictionary<string, object> );
             }
         }
 
-        // ***************************************************************************************************************************
-        // ******************************************* INTERFACE IMPLIMENTATIONS *****************************************************
-        // ***************************************************************************************************************************
         /// <summary>
         /// Gets the source.
         /// </summary>
@@ -400,8 +383,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( Source )
-                    ? Source
+                return Validate.Source( _source )
+                    ? _source
                     : Source.NS;
             }
             catch( Exception ex )

@@ -4,12 +4,7 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
-    using System.Collections.Generic;
     using System.Data;
 
     /// <summary>
@@ -24,9 +19,13 @@ namespace BudgetExecution
     /// <seealso cref = "IDeobligation"/>
     public class Deobligation : Obligation
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        protected new Source _source = Source.Deobligations;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Deobligation"/> class.
@@ -42,11 +41,11 @@ namespace BudgetExecution
         public Deobligation( IQuery query )
             : base( query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.DeobligationId );
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.DeobligationId );
             OriginalActionDate = GetOriginalActionDate();
-            Amount = GetDeobligations();
-            Data = Record?.ToDictionary();
+            _amount = GetDeobligations();
+            _data = _record?.ToDictionary();
             Type = OutlayType.Deobligation;
         }
 
@@ -59,71 +58,31 @@ namespace BudgetExecution
         public Deobligation( IBuilder db )
             : base( db )
         {
-            Record = db.GetRecord();
-            ID = new Key( Record, PrimaryKey.DeobligationId );
+            _record = db.GetRecord();
+            _id = new Key( _record, PrimaryKey.DeobligationId );
             OriginalActionDate = GetOriginalActionDate();
-            Amount = GetDeobligations();
-            Data = Record?.ToDictionary();
+            _amount = GetDeobligations();
+            _data = _record?.ToDictionary();
             Type = OutlayType.Deobligation;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Deobligation"/> class.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The dr.
         /// </param>
-        public Deobligation( DataRow datarow )
-            : base( datarow )
+        public Deobligation( DataRow dataRow )
+            : base( dataRow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.DeobligationId );
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.DeobligationId );
             OriginalActionDate = GetOriginalActionDate();
-            Amount = GetDeobligations();
-            Data = Record?.ToDictionary();
+            _amount = GetDeobligations();
+            _data = _record?.ToDictionary();
             Type = OutlayType.Deobligation;
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected override Source Source { get; set; } = Source.Deobligations;
-
-        /// <summary>
-        /// Gets the deobligation identifier.
-        /// </summary>
-        /// <value>
-        /// The deobligation identifier.
-        /// </value>
-        private protected override IKey ID { get; set; }
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private protected override IDictionary<string, object> Data { get; set; }
-
-        /// <summary>
-        /// Gets or sets the amount.
-        /// </summary>
-        /// <value>
-        /// The amount.
-        /// </value>
-        private protected override IAmount Amount { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the deobligation identifier.
         /// </summary>
@@ -133,14 +92,14 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
-                    : default;
+                return Verify.Key( _id )
+                    ? _id 
+                    : default( IKey );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IKey );
             }
         }
 
@@ -156,12 +115,12 @@ namespace BudgetExecution
             {
                 return Deobligations.GetFunding() > -1.0D
                     ? Deobligations
-                    : default;
+                    : default( IAmount );
             }
             catch( Exception ex )
             {
                 Fail( ex );
-                return default;
+                return default( IAmount );
             }
         }
     }
