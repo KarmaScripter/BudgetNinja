@@ -6,9 +6,6 @@ using System;
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
@@ -25,10 +22,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class FullTimeEquivalent : ProgramResultsCode, IFullTimeEquivalent
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref = "T:BudgetExecution.FullTimeEquivalent"/> class.
@@ -80,22 +73,6 @@ namespace BudgetExecution
         /// The source
         /// </summary>
         protected new Source _source = Source.FTE;
-
-        /// <summary>
-        /// Gets the fte identifier.
-        /// </summary>
-        /// <value>
-        /// The fte identifier.
-        /// </value>
-        private protected  IKey _id;
-
-        /// <summary>
-        /// Gets the fte identifier.
-        /// </summary>
-        /// <value>
-        /// The fte identifier.
-        /// </value>
-        private protected readonly IAmount _amount;
         
         /// <summary>
         /// Gets the PRC identifier.
