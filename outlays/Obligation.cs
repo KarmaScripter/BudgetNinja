@@ -28,6 +28,11 @@ namespace BudgetExecution
         /// </value>
         private protected IAmount _amount;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private protected readonly Source _source = Source.Obligations;
+
         /// <inheritdoc/>
         /// <summary>
         /// Initializes a new instance of the <see cref = "T:BudgetExecution.Obligation"/>
@@ -43,7 +48,6 @@ namespace BudgetExecution
         /// <param name = "query" >
         /// </param>
         public Obligation( IQuery query )
-            : base( query )
         {
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.ObligationId );
@@ -77,7 +81,6 @@ namespace BudgetExecution
         /// The dr.
         /// </param>
         public Obligation( DataRow dataRow )
-            : base( dataRow )
         {
             _records = dataRow;
             _id = new Key( _records, PrimaryKey.ObligationId );
@@ -144,6 +147,26 @@ namespace BudgetExecution
             {
                 Fail( ex );
                 return default( IAmount );
+            }
+        }
+
+        /// <summary>
+        /// Gets the data builder.
+        /// </summary>
+        /// <returns>
+        /// </returns>
+        public override IBuilder GetBuilder()
+        {
+            try
+            {
+                return Verify.Source( _source )
+                    ? new Builder( _source, _data )
+                    : default( Builder );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( IBuilder );
             }
         }
     }

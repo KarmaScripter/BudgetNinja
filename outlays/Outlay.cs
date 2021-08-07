@@ -37,7 +37,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     [ SuppressMessage( "ReSharper", "FieldCanBeMadeReadOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
-    public class Outlay : Cost
+    public abstract class Outlay : Cost
     {
         /// <summary>
         /// Gets or sets the authority data.
@@ -46,85 +46,6 @@ namespace BudgetExecution
         /// The authority data.
         /// </value>
         private protected CostAccount _prc;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private protected Source _source;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Outlay"/> class.
-        /// </summary>
-        public Outlay()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Outlay"/> class.
-        /// </summary>
-        /// <param name = "query" >
-        /// </param>
-        public Outlay( IQuery query )
-        {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.OutlayId );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Balance = new Amount( _records, Numeric.Balance );
-            _data = _records?.ToDictionary();
-            Type = OutlayType.All;
-            SetExpenseType( Type );
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Outlay"/> class.
-        /// </summary>
-        /// <param name = "builder" >
-        /// </param>
-        public Outlay( IBuilder builder )
-        {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.OutlayId );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Balance = new Amount( _records, Numeric.Balance );
-            _data = _records?.ToDictionary();
-            Type = OutlayType.All;
-            SetExpenseType( Type );
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Outlay"/> class.
-        /// </summary>
-        /// <param name = "dataRow" >
-        /// The dr.
-        /// </param>
-        public Outlay( DataRow dataRow )
-        {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.OutlayId );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Balance = new Amount( _records, Numeric.Balance );
-            _data = _records?.ToDictionary();
-            Type = OutlayType.All;
-            SetExpenseType( Type );
-        }
         
         /// <summary>
         /// Gets the outlay identifier.
@@ -172,19 +93,6 @@ namespace BudgetExecution
         /// </summary>
         /// <returns>
         /// </returns>
-        public IBuilder GetBuilder()
-        {
-            try
-            {
-                return Verify.Map( _data )
-                    ? new Builder( _source, _data )
-                    : default( Builder );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( IBuilder );
-            }
-        }
+        public abstract IBuilder GetBuilder();
     }
 }

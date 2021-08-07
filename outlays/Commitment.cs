@@ -28,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected Source _source = Source.Commitments;
+        private protected readonly Source _source = Source.Commitments;
         
         /// <summary>
         /// Gets or sets the amount.
@@ -52,7 +52,6 @@ namespace BudgetExecution
         /// <param name = "query" >
         /// </param>
         public Commitment( IQuery query )
-            : base( query )
         {
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.CommitmentId );
@@ -68,7 +67,6 @@ namespace BudgetExecution
         /// The database.
         /// </param>
         public Commitment( IBuilder db )
-            : base( db )
         {
             _records = db.GetRecord();
             _id = new Key( _records, PrimaryKey.CommitmentId );
@@ -84,7 +82,6 @@ namespace BudgetExecution
         /// The dr.
         /// </param>
         public Commitment( DataRow dataRow )
-            : base( dataRow )
         {
             _records = dataRow;
             _id = new Key( _records, PrimaryKey.CommitmentId );
@@ -151,6 +148,15 @@ namespace BudgetExecution
                 Fail( ex );
                 return default( IAmount );
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override IBuilder GetBuilder()
+        {
+            return new Builder( _source, _data );
         }
     }
 }
