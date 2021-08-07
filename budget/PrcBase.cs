@@ -17,27 +17,15 @@ namespace BudgetExecution
     /// </summary>
     [ SuppressMessage( "ReSharper", "VirtualMemberNeverOverridden.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
-    public abstract class PrcBase : ISource
+    public abstract class PrcBase 
     {
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
-        /// Gets or sets the source.
+        /// Gets or sets the dataRow.
         /// </summary>
         /// <value>
-        /// The source.
+        /// The dataRow.
         /// </value>
-        protected  Source _source;
-
-        /// <summary>
-        /// Gets or sets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private protected  DataRow _record;
+        private protected DataRow _records;
 
         /// <summary>
         /// Gets or sets the PRC identifier.
@@ -45,7 +33,7 @@ namespace BudgetExecution
         /// <value>
         /// The PRC identifier.
         /// </value>
-        private protected  IKey _id;
+        private protected IKey _id;
 
         /// <summary>
         /// Gets or sets the budget level.
@@ -53,7 +41,7 @@ namespace BudgetExecution
         /// <value>
         /// The budget level.
         /// </value>
-        private protected  IElement _level;
+        private protected IElement _level;
 
         /// <summary>
         /// Gets or sets the bfy.
@@ -61,7 +49,7 @@ namespace BudgetExecution
         /// <value>
         /// The bfy.
         /// </value>
-        private protected  IElement _bfy;
+        private protected IElement _bfy;
 
         /// <summary>
         /// Gets or sets the rpio code.
@@ -69,7 +57,7 @@ namespace BudgetExecution
         /// <value>
         /// The rpio code.
         /// </value>
-        private protected  IElement _rpioCode;
+        private protected IElement _rpioCode;
 
         /// <summary>
         /// Gets or sets the fund code.
@@ -77,7 +65,7 @@ namespace BudgetExecution
         /// <value>
         /// The fund code.
         /// </value>
-        private protected  IElement _fundCode;
+        private protected IElement _fundCode;
 
         /// <summary>
         /// Gets or sets the ah code.
@@ -85,7 +73,7 @@ namespace BudgetExecution
         /// <value>
         /// The ah code.
         /// </value>
-        private protected  IElement _ahCode;
+        private protected IElement _ahCode;
 
         /// <summary>
         /// Gets or sets the org code.
@@ -93,7 +81,7 @@ namespace BudgetExecution
         /// <value>
         /// The org code.
         /// </value>
-        private protected  IElement _orgCode;
+        private protected IElement _orgCode;
 
         /// <summary>
         /// Gets or sets the account code.
@@ -101,7 +89,7 @@ namespace BudgetExecution
         /// <value>
         /// The account code.
         /// </value>
-        private protected  IElement _accountCode;
+        private protected IElement _accountCode;
 
         /// <summary>
         /// Gets or sets the boc code.
@@ -109,7 +97,7 @@ namespace BudgetExecution
         /// <value>
         /// The boc code.
         /// </value>
-        private protected  IElement _bocCode;
+        private protected IElement _bocCode;
 
         /// <summary>
         /// Gets or sets the rc code.
@@ -117,7 +105,7 @@ namespace BudgetExecution
         /// <value>
         /// The rc code.
         /// </value>
-        private protected  IElement _rcCode;
+        private protected IElement _rcCode;
 
         /// <summary>
         /// Gets or sets the activity code.
@@ -125,27 +113,27 @@ namespace BudgetExecution
         /// <value>
         /// The activity code.
         /// </value>
-        private protected  IElement _activityCode;
+        private protected IElement _activityCode;
         
         /// <summary>
         /// Sets the field.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
         /// </param>
         /// <returns>
         /// </returns>
-        public string GetField( DataRow data, Field field )
+        public string GetField( DataRow dataRow, Field field )
         {
-            if( data != null
+            if( dataRow != null
                 && Validate.Field( field ) )
             {
                 try
                 {
-                    return data.GetField( field );
+                    return dataRow.GetField( field );
                 }
                 catch( Exception ex )
                 {
@@ -376,27 +364,7 @@ namespace BudgetExecution
                 return Element.Default;
             }
         }
-
-        /// <summary>
-        /// Gets the source.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        public Source GetSource()
-        {
-            try
-            {
-                return Validate.Source( _source )
-                    ? _source
-                    : Source.NS;
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return Source.NS;
-            }
-        }
-
+        
         /// <summary>
         /// Get Error Dialog.
         /// </summary>

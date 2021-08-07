@@ -32,11 +32,11 @@ namespace BudgetExecution
         /// </param>
         public TimeOff( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.TimeOffId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.TimeOffId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -47,11 +47,11 @@ namespace BudgetExecution
         /// </param>
         public TimeOff( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.TimeOffId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.TimeOffId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -62,11 +62,11 @@ namespace BudgetExecution
         /// </param>
         public TimeOff( DataRow data )
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.TimeOffId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = data;
+            _id = new Key( _records, PrimaryKey.TimeOffId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

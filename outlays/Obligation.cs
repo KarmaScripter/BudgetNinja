@@ -21,28 +21,12 @@ namespace BudgetExecution
     public class Obligation : Outlay
     {
         /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected new Source _source = Source.Obligations;
-
-        /// <summary>
-        /// Gets or sets the PRC identifier.
-        /// </summary>
-        /// <value>
-        /// The PRC identifier.
-        /// </value>
-        private protected  IKey _id;
-        
-        /// <summary>
         /// Gets or sets the amount.
         /// </summary>
         /// <value>
         /// The amount.
         /// </value>
-        private protected  IAmount _amount;
+        private protected IAmount _amount;
 
         /// <inheritdoc/>
         /// <summary>
@@ -61,11 +45,11 @@ namespace BudgetExecution
         public Obligation( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ObligationId );
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.ObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            _amount = new Amount( _record, Numeric.Obligations );
-            _data = _record?.ToDictionary();
+            _amount = new Amount( _records, Numeric.Obligations );
+            _data = _records?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -77,11 +61,11 @@ namespace BudgetExecution
         /// </param>
         public Obligation( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ObligationId );
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.ObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            _amount = new Amount( _record, Numeric.Obligations );
-            _data = _record?.ToDictionary();
+            _amount = new Amount( _records, Numeric.Obligations );
+            _data = _records?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -95,11 +79,11 @@ namespace BudgetExecution
         public Obligation( DataRow dataRow )
             : base( dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.ObligationId );
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.ObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            _amount = new Amount( _record, Numeric.Obligations );
-            _data = _record?.ToDictionary();
+            _amount = new Amount( _records, Numeric.Obligations );
+            _data = _records?.ToDictionary();
             Type = OutlayType.Obligation;
         }
         

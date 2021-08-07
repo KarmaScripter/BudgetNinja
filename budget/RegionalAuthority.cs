@@ -44,9 +44,9 @@ namespace BudgetExecution
         public RegionalAuthority( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _budgetFiscalYear = new BudgetFiscalYear( _record.GetField( Field.BFY ) );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _budgetFiscalYear = new BudgetFiscalYear( _records.GetField( Field.BFY ) );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -58,9 +58,9 @@ namespace BudgetExecution
         public RegionalAuthority( IBuilder builder )
             : base( builder )
         {
-            _record = builder?.GetRecord();
-            _budgetFiscalYear = new BudgetFiscalYear( _record.GetField( Field.BFY ) );
-            _data = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _budgetFiscalYear = new BudgetFiscalYear( _records.GetField( Field.BFY ) );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

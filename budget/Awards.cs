@@ -48,12 +48,12 @@ namespace BudgetExecution
         /// </param>
         public Awards( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AwardsId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _boc = new Element( _record, Field.BocCode );
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.AwardsId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _boc = new Element( _records, Field.BocCode );
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -64,12 +64,12 @@ namespace BudgetExecution
         /// </param>
         public Awards( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AwardsId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _boc = new Element( _record, Field.BocCode );
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.AwardsId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _boc = new Element( _records, Field.BocCode );
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -80,12 +80,12 @@ namespace BudgetExecution
         /// </param>
         public Awards( DataRow data )
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.AwardsId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _boc = new Element( _record, Field.BocCode );
+            _records = data;
+            _id = new Key( _records, PrimaryKey.AwardsId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _boc = new Element( _records, Field.BocCode );
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

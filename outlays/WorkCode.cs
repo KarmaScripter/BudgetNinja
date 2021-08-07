@@ -45,25 +45,25 @@ namespace BudgetExecution
         public WorkCode( IQuery query )
             : this()
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.WorkCodeId );
-            _code = new Element( _record, Field.Code );
-            _name = new Element( _record, Field.Name );
-            _shortName = new Element( _record, Field.ShortName );
-            _notifications = new Element( _record, Field.Notifications );
-            _status = new Element( _record, Field.Status );
-            _payPeriod = new Element( _record, Field.PayPeriod );
-            _bbfy = new Element( _record, Field.BBFY );
-            _fundCode = new Element( _record, Field.FundCode );
-            _focCode = new Element( _record, Field.FocCode );
-            _costOrgCode = new Element( _record, Field.CostOrgCode );
-            _costOrgName = new Element( _record, Field.CostOrgName );
-            _rcCode = new Element( _record, Field.RcCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            _projectCodeName = new Element( _record, Field.ProjectName );
-            _approvalDate = DateTime.Parse( _record[ $"{Field.ApprovalDate}" ].ToString() );
-            _args = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.WorkCodeId );
+            _code = new Element( _records, Field.Code );
+            _name = new Element( _records, Field.Name );
+            _shortName = new Element( _records, Field.ShortName );
+            _notifications = new Element( _records, Field.Notifications );
+            _status = new Element( _records, Field.Status );
+            _payPeriod = new Element( _records, Field.PayPeriod );
+            _bbfy = new Element( _records, Field.BBFY );
+            _fundCode = new Element( _records, Field.FundCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _costOrgCode = new Element( _records, Field.CostOrgCode );
+            _costOrgName = new Element( _records, Field.CostOrgName );
+            _rcCode = new Element( _records, Field.RcCode );
+            _accountCode = new Element( _records, Field.AccountCode );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _projectCodeName = new Element( _records, Field.ProjectName );
+            _approvalDate = DateTime.Parse( _records[ $"{Field.ApprovalDate}" ].ToString() );
+            _args = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -74,25 +74,25 @@ namespace BudgetExecution
         /// </param>
         public WorkCode( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.WorkCodeId );
-            _code = new Element( _record, Field.Code );
-            _name = new Element( _record, Field.Name );
-            _shortName = new Element( _record, Field.ShortName );
-            _notifications = new Element( _record, Field.Notifications );
-            _status = new Element( _record, Field.Status );
-            _payPeriod = new Element( _record, Field.PayPeriod );
-            _bbfy = new Element( _record, Field.BBFY );
-            _fundCode = new Element( _record, Field.FundCode );
-            _focCode = new Element( _record, Field.FocCode );
-            _costOrgCode = new Element( _record, Field.CostOrgCode );
-            _costOrgName = new Element( _record, Field.CostOrgName );
-            _rcCode = new Element( _record, Field.RcCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            _projectCodeName = new Element( _record, Field.ProjectName );
-            _approvalDate = DateTime.Parse( _record?[ $"{Field.ApprovalDate}" ].ToString() );
-            _args = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.WorkCodeId );
+            _code = new Element( _records, Field.Code );
+            _name = new Element( _records, Field.Name );
+            _shortName = new Element( _records, Field.ShortName );
+            _notifications = new Element( _records, Field.Notifications );
+            _status = new Element( _records, Field.Status );
+            _payPeriod = new Element( _records, Field.PayPeriod );
+            _bbfy = new Element( _records, Field.BBFY );
+            _fundCode = new Element( _records, Field.FundCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _costOrgCode = new Element( _records, Field.CostOrgCode );
+            _costOrgName = new Element( _records, Field.CostOrgName );
+            _rcCode = new Element( _records, Field.RcCode );
+            _accountCode = new Element( _records, Field.AccountCode );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _projectCodeName = new Element( _records, Field.ProjectName );
+            _approvalDate = DateTime.Parse( _records?[ $"{Field.ApprovalDate}" ].ToString() );
+            _args = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -103,25 +103,25 @@ namespace BudgetExecution
         /// </param>
         public WorkCode( DataRow data )
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.WorkCodeId );
-            _code = new Element( _record, Field.Code );
-            _name = new Element( _record, Field.Name );
-            _shortName = new Element( _record, Field.ShortName );
-            _notifications = new Element( _record, Field.Notifications );
-            _status = new Element( _record, Field.Status );
-            _payPeriod = new Element( _record, Field.PayPeriod );
-            _bbfy = new Element( _record, Field.BBFY );
-            _fundCode = new Element( _record, Field.FundCode );
-            _focCode = new Element( _record, Field.FocCode );
-            _costOrgCode = new Element( _record, Field.CostOrgCode );
-            _costOrgName = new Element( _record, Field.CostOrgName );
-            _rcCode = new Element( _record, Field.RcCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            _projectCodeName = new Element( _record, Field.ProjectName );
-            _approvalDate = DateTime.Parse( _record[ $"{Field.ApprovalDate}" ].ToString() );
-            _args = _record?.ToDictionary();
+            _records = data;
+            _id = new Key( _records, PrimaryKey.WorkCodeId );
+            _code = new Element( _records, Field.Code );
+            _name = new Element( _records, Field.Name );
+            _shortName = new Element( _records, Field.ShortName );
+            _notifications = new Element( _records, Field.Notifications );
+            _status = new Element( _records, Field.Status );
+            _payPeriod = new Element( _records, Field.PayPeriod );
+            _bbfy = new Element( _records, Field.BBFY );
+            _fundCode = new Element( _records, Field.FundCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _costOrgCode = new Element( _records, Field.CostOrgCode );
+            _costOrgName = new Element( _records, Field.CostOrgName );
+            _rcCode = new Element( _records, Field.RcCode );
+            _accountCode = new Element( _records, Field.AccountCode );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _projectCodeName = new Element( _records, Field.ProjectName );
+            _approvalDate = DateTime.Parse( _records[ $"{Field.ApprovalDate}" ].ToString() );
+            _args = _records?.ToDictionary();
         }
 
         /// <summary>

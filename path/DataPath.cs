@@ -37,13 +37,13 @@ namespace BudgetExecution
         private protected readonly string _input;
 
         /// <summary>The current directory</summary>
-        readonly public static string CurrentDirectory = Directory.GetCurrentDirectory();
+        public static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
 
         /// <summary>The base directory</summary>
-        readonly public static string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        public static readonly string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>The connection string</summary>
-        readonly public static ConnectionStringSettingsCollection ConnectionString =
+        public static readonly ConnectionStringSettingsCollection ConnectionString =
             ConfigurationManager.ConnectionStrings;
         
         /// <summary>

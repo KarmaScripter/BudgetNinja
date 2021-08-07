@@ -37,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected  new Source _source = Source.PRC;
+        private protected Source _source = Source.PRC;
 
         /// <summary>
         /// Gets the amount.
@@ -77,22 +77,21 @@ namespace BudgetExecution
         /// The query.
         /// </param>
         public ProgramResultsCode( IQuery query )
-            : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _level = new Element( _records, Field.BudgetLevel );
+            _bfy = new Element( _records, Field.BFY );
+            _rpioCode = new Element( _records, Field.RpioCode );
+            _ahCode = new Element( _records, Field.AhCode );
+            _fundCode = new Element( _records, Field.FundCode );
+            _orgCode = new Element( _records, Field.OrgCode );
+            _rcCode = new Element( _records, Field.RcCode );
+            _bocCode = new Element( _records, Field.BocCode );
+            _accountCode = new Element( _records, Field.AccountCode );
+            _activityCode = new Element( _records, Field.ActivityCode );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
             _elements = GetElements();
         }
 
@@ -103,22 +102,21 @@ namespace BudgetExecution
         /// The builder.
         /// </param>
         public ProgramResultsCode( IBuilder builder )
-            : base( builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _level = new Element( _records, Field.BudgetLevel );
+            _bfy = new Element( _records, Field.BFY );
+            _rpioCode = new Element( _records, Field.RpioCode );
+            _ahCode = new Element( _records, Field.AhCode );
+            _fundCode = new Element( _records, Field.FundCode );
+            _orgCode = new Element( _records, Field.OrgCode );
+            _rcCode = new Element( _records, Field.RcCode );
+            _bocCode = new Element( _records, Field.BocCode );
+            _accountCode = new Element( _records, Field.AccountCode );
+            _activityCode = new Element( _records, Field.ActivityCode );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
             _elements = GetElements();
         }
 
@@ -129,22 +127,21 @@ namespace BudgetExecution
         /// The dataRow.
         /// </param>
         public ProgramResultsCode( DataRow dataRow )
-            : base( dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _level = new Element( _records, Field.BudgetLevel );
+            _bfy = new Element( _records, Field.BFY );
+            _rpioCode = new Element( _records, Field.RpioCode );
+            _ahCode = new Element( _records, Field.AhCode );
+            _fundCode = new Element( _records, Field.FundCode );
+            _orgCode = new Element( _records, Field.OrgCode );
+            _rcCode = new Element( _records, Field.RcCode );
+            _bocCode = new Element( _records, Field.BocCode );
+            _accountCode = new Element( _records, Field.AccountCode );
+            _activityCode = new Element( _records, Field.ActivityCode );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
             _elements = GetElements();
         }
 
@@ -154,22 +151,21 @@ namespace BudgetExecution
         /// <param name = "dict" >
         /// </param>
         public ProgramResultsCode( IDictionary<string, object> dict )
-            : base( dict )
         {
-            _record = new DataBuilder( _source, dict )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( _source, dict )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _level = new Element( _records, Field.BudgetLevel );
+            _bfy = new Element( _records, Field.BFY );
+            _rpioCode = new Element( _records, Field.RpioCode );
+            _ahCode = new Element( _records, Field.AhCode );
+            _fundCode = new Element( _records, Field.FundCode );
+            _orgCode = new Element( _records, Field.OrgCode );
+            _rcCode = new Element( _records, Field.RcCode );
+            _bocCode = new Element( _records, Field.BocCode );
+            _accountCode = new Element( _records, Field.AccountCode );
+            _activityCode = new Element( _records, Field.ActivityCode );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
             _elements = GetElements();
         }
         
@@ -392,6 +388,25 @@ namespace BudgetExecution
             {
                 Fail( ex );
                 return default( IAmount );
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Source GetSource()
+        {
+            try
+            {
+                return Verify.Source( _source )
+                    ? _source
+                    : default( Source );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( Source );
             }
         }
     }

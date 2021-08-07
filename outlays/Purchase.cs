@@ -33,30 +33,30 @@ namespace BudgetExecution
         public Purchase( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _iD = new Key( _record, PrimaryKey.PurchaseId );
-            NpmCode = new Element( _record, Field.NpmCode );
-            DocumentType = new Element( _record, Field.DocumentType );
-            PurchaseRequest = new Element( _record, Field.PurchaseRequest );
-            DocumentPrefix = new Element( _record, Field.DocumentPrefix );
-            DCN = new Element( _record, Field.DCN );
-            ObligatingDocumentNumber = new Element( _record, Field.ObligatingDocumentNumber );
-            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
-            GrantNumber = new Element( _record, Field.GrantNumber );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
-            System = new Element( _record, Field.System );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            TransactionNumber = new Element( _record, Field.TransactionNumber );
-            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _iD = new Key( _records, PrimaryKey.PurchaseId );
+            _npmCode = new Element( _records, Field.NpmCode );
+            _documentType = new Element( _records, Field.DocumentType );
+            _purchaseRequest = new Element( _records, Field.PurchaseRequest );
+            _documentPrefix = new Element( _records, Field.DocumentPrefix );
+            _dcn = new Element( _records, Field.DCN );
+            _obligatingDocumentNumber = new Element( _records, Field.ObligatingDocumentNumber );
+            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
+            _grantNumber = new Element( _records, Field.GrantNumber );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
+            _system = new Element( _records, Field.System );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _transactionNumber = new Element( _records, Field.TransactionNumber );
+            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -68,30 +68,30 @@ namespace BudgetExecution
         public Purchase( IBuilder db )
             : base( db )
         {
-            _record = db?.GetRecord();
-            _iD = new Key( _record, PrimaryKey.PurchaseId );
-            NpmCode = new Element( _record, Field.NpmCode );
-            DocumentType = new Element( _record, Field.DocumentType );
-            PurchaseRequest = new Element( _record, Field.PurchaseRequest );
-            DocumentPrefix = new Element( _record, Field.DocumentPrefix );
-            DCN = new Element( _record, Field.DCN );
-            ObligatingDocumentNumber = new Element( _record, Field.ObligatingDocumentNumber );
-            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
-            GrantNumber = new Element( _record, Field.GrantNumber );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
-            System = new Element( _record, Field.System );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            TransactionNumber = new Element( _record, Field.TransactionNumber );
-            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = db?.GetRecord();
+            _iD = new Key( _records, PrimaryKey.PurchaseId );
+            _npmCode = new Element( _records, Field.NpmCode );
+            _documentType = new Element( _records, Field.DocumentType );
+            _purchaseRequest = new Element( _records, Field.PurchaseRequest );
+            _documentPrefix = new Element( _records, Field.DocumentPrefix );
+            _dcn = new Element( _records, Field.DCN );
+            _obligatingDocumentNumber = new Element( _records, Field.ObligatingDocumentNumber );
+            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
+            _grantNumber = new Element( _records, Field.GrantNumber );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
+            _system = new Element( _records, Field.System );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _transactionNumber = new Element( _records, Field.TransactionNumber );
+            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -103,30 +103,30 @@ namespace BudgetExecution
         public Purchase( DataRow data )
             : base( data )
         {
-            _record = data;
-            _iD = new Key( _record, PrimaryKey.PurchaseId );
-            NpmCode = new Element( _record, Field.NpmCode );
-            DocumentType = new Element( _record, Field.DocumentType );
-            PurchaseRequest = new Element( _record, Field.PurchaseRequest );
-            DocumentPrefix = new Element( _record, Field.DocumentPrefix );
-            DCN = new Element( _record, Field.DCN );
-            ObligatingDocumentNumber = new Element( _record, Field.ObligatingDocumentNumber );
-            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
-            GrantNumber = new Element( _record, Field.GrantNumber );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
-            System = new Element( _record, Field.System );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            TransactionNumber = new Element( _record, Field.TransactionNumber );
-            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = data;
+            _iD = new Key( _records, PrimaryKey.PurchaseId );
+            _npmCode = new Element( _records, Field.NpmCode );
+            _documentType = new Element( _records, Field.DocumentType );
+            _purchaseRequest = new Element( _records, Field.PurchaseRequest );
+            _documentPrefix = new Element( _records, Field.DocumentPrefix );
+            _dcn = new Element( _records, Field.DCN );
+            _obligatingDocumentNumber = new Element( _records, Field.ObligatingDocumentNumber );
+            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
+            _grantNumber = new Element( _records, Field.GrantNumber );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
+            _system = new Element( _records, Field.System );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _transactionNumber = new Element( _records, Field.TransactionNumber );
+            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

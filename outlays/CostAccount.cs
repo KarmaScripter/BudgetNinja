@@ -19,19 +19,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     public class CostAccount : Cost, ICostAccount
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The PRC
         /// </summary>
         private protected readonly IProgramResultsCode _prc;
-
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "CostAccount"/> class.
         /// </summary>
@@ -40,29 +32,29 @@ namespace BudgetExecution
         /// </param>
         public CostAccount( DataRow data )
         {
-            _record = data;
+            _records = data;
             _prc = new ProgramResultsCode( data );
-            _id = new Key( _record, PrimaryKey.PrcId );
-            NpmCode = new Element( _record, Field.NpmCode );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            DocumentType = new Element( _record, Field.DocumentType );
-            DocumentPrefix = new Element( _record, Field.DocumentPrefix );
-            DCN = new Element( _record, Field.DocumentType );
-            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
-            ObligatingDocumentNumber = new Element( _record, Field.ObligatingDocumentNumber );
-            System = new Element( _record, Field.System );
-            TransactionNumber = new Element( _record, Field.TransactionNumber );
-            GrantNumber = new Element( _record, Field.GrantNumber );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Balance = new Amount( _record, Numeric.Balance );
-            Data = _record?.ToDictionary();
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _npmCode = new Element( _records, Field.NpmCode );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _documentType = new Element( _records, Field.DocumentType );
+            _documentPrefix = new Element( _records, Field.DocumentPrefix );
+            _dcn = new Element( _records, Field.DocumentType );
+            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _obligatingDocumentNumber = new Element( _records, Field.ObligatingDocumentNumber );
+            _system = new Element( _records, Field.System );
+            _transactionNumber = new Element( _records, Field.TransactionNumber );
+            _grantNumber = new Element( _records, Field.GrantNumber );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Balance = new Amount( _records, Numeric.Balance );
+            _data = _records?.ToDictionary();
         }
 
         // **************************************************************************************************************************
@@ -98,7 +90,7 @@ namespace BudgetExecution
         {
             try
             {
-                var code = FocCode?.GetValue();
+                var code = _focCode?.GetValue();
 
                 return Verify.Input( code )
                     ? new FinanceObjectClass( code )
@@ -120,8 +112,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( NpmCode?.GetValue() )
-                    ? new NationalProgram( NpmCode?.GetValue() )
+                return Verify.Input( _npmCode?.GetValue() )
+                    ? new NationalProgram( _npmCode?.GetValue() )
                     : default( NationalProgram );
             }
             catch( Exception ex )
@@ -160,8 +152,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( ProgramProjectCode?.GetValue() )
-                    ? new ProgramProject( ProgramProjectCode?.GetValue() )
+                return Verify.Input( _programProjectCode?.GetValue() )
+                    ? new ProgramProject( _programProjectCode?.GetValue() )
                     : default( ProgramProject );
             }
             catch( Exception ex )
@@ -180,8 +172,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( ProgramAreaCode?.GetValue() )
-                    ? new ProgramArea( ProgramAreaCode?.GetValue() )
+                return Verify.Input( _programAreaCode?.GetValue() )
+                    ? new ProgramArea( _programAreaCode?.GetValue() )
                     : default( ProgramArea );
             }
             catch( Exception ex )

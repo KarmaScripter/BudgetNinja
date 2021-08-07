@@ -58,7 +58,8 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>etc\DbNinja.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BudgetBadger">
@@ -297,9 +298,9 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
-    <Content Include="etc\DbNinja.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="etc\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

@@ -14,32 +14,6 @@ namespace BudgetExecution
     public class TravelData : Obligation
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TravelData"/> class.
-        /// </summary>
-        /// <inheritdoc />
-        public TravelData()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TravelData"/> class.
-        /// </summary>
-        /// <param name="query"></param>
-        public TravelData( IQuery query )
-            : base( query )
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TravelData"/> class.
-        /// </summary>
-        /// <param name="builder">The builder.</param>
-        public TravelData( IBuilder builder )
-            : base( builder )
-        {
-        }
-
-        /// <summary>
         /// Gets the destination.
         /// </summary>
         /// <value>
@@ -94,5 +68,31 @@ namespace BudgetExecution
         /// The end date.
         /// </value>
         private protected ITime _endDate;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TravelData"/> class.
+        /// </summary>
+        /// <inheritdoc />
+        public TravelData()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TravelData"/> class.
+        /// </summary>
+        /// <param name="query"></param>
+        public TravelData( IQuery query )
+            : base( query )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TravelData"/> class.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        public TravelData( IBuilder builder )
+            : base( builder )
+        {
+        }
     }
 }

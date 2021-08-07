@@ -156,7 +156,7 @@ namespace BudgetExecution
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref = "T:System.String"/> that represents this instance.
+        /// A <see cref = "T:_system.String"/> that represents this instance.
         /// </returns>
         /// <inheritdoc>
         /// <cref>
@@ -164,7 +164,7 @@ namespace BudgetExecution
         /// </inheritdoc>
         public override string ToString()
         {
-            if( _record != null )
+            if( _records != null )
             {
                 try
                 {
@@ -447,7 +447,7 @@ namespace BudgetExecution
         private protected IDictionary<string, object> GetArgs( string code )
         {
             if( Verify.Input( code )
-                && Verify.Input( _record[ $"{Field.RcCode}" ].ToString() )
+                && Verify.Input( _records[ $"{Field.RcCode}" ].ToString() )
                 && code.StartsWith( "06", StringComparison.Ordinal )
                 && code.Length <= 3 )
             {

@@ -37,11 +37,11 @@ namespace BudgetExecution
         public UnliquidatedObligation( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder()?.GetRecord();
-            _id = new Key( _record, PrimaryKey.UnliquidatedObligationId );
+            _records = new DataBuilder()?.GetRecord();
+            _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            ULO = new Amount( _record, Numeric.ULO );
-            _data = _record?.ToDictionary();
+            ULO = new Amount( _records, Numeric.ULO );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -53,11 +53,11 @@ namespace BudgetExecution
         public UnliquidatedObligation( IBuilder builder )
             : base( builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.UnliquidatedObligationId );
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            ULO = new Amount( _record, Numeric.ULO );
-            _data = _record?.ToDictionary();
+            ULO = new Amount( _records, Numeric.ULO );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -68,11 +68,11 @@ namespace BudgetExecution
         /// </param>
         public UnliquidatedObligation( DataRow datarow )
         {
-            _record = datarow;
-            _id = new Key( _record, PrimaryKey.UnliquidatedObligationId );
+            _records = datarow;
+            _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
             OriginalActionDate = GetOriginalActionDate();
-            ULO = new Amount( _record, Numeric.ULO );
-            _data = _record?.ToDictionary();
+            ULO = new Amount( _records, Numeric.ULO );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

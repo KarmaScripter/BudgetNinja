@@ -58,12 +58,12 @@ namespace BudgetExecution
         /// </param>
         public Overtime( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.OvertimeId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _boc = new Element( _record, Field.BocCode );
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.OvertimeId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _boc = new Element( _records, Field.BocCode );
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -74,12 +74,12 @@ namespace BudgetExecution
         /// </param>
         public Overtime( IBuilder databuilder )
         {
-            _record = databuilder.GetRecord();
-            _id = new Key( _record, PrimaryKey.OvertimeId );
-            _fundCode = new Element( _record, Field.FundCode );
-            _boc = new Element( _record, Field.BocCode );
+            _records = databuilder.GetRecord();
+            _id = new Key( _records, PrimaryKey.OvertimeId );
+            _fundCode = new Element( _records, Field.FundCode );
+            _boc = new Element( _records, Field.BocCode );
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -90,11 +90,11 @@ namespace BudgetExecution
         /// </param>
         public Overtime( DataRow data )
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.OvertimeId );
-            _fundCode = new Element( _record, Field.FundCode );
+            _records = data;
+            _id = new Key( _records, PrimaryKey.OvertimeId );
+            _fundCode = new Element( _records, Field.FundCode );
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

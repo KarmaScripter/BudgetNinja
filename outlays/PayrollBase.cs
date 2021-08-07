@@ -21,7 +21,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private protected DataRow _record;
+        private protected DataRow _records;
 
         /// <summary>
         /// Gets or sets the arguments.

@@ -119,7 +119,7 @@ namespace BudgetExecution
             try
             {
                 return Enum.IsDefined( typeof( AwardType ), _type )
-                    ? new Element( _record, Field.Type )
+                    ? new Element( _records, Field.Type )
                     : default( Element );
             }
             catch( Exception ex )

@@ -28,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly new Source _source = Source.Commitments;
+        private protected Source _source = Source.Commitments;
         
         /// <summary>
         /// Gets or sets the amount.
@@ -54,10 +54,10 @@ namespace BudgetExecution
         public Commitment( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.CommitmentId );
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.CommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.Commitment;
         }
 
@@ -70,10 +70,10 @@ namespace BudgetExecution
         public Commitment( IBuilder db )
             : base( db )
         {
-            _record = db.GetRecord();
-            _id = new Key( _record, PrimaryKey.CommitmentId );
+            _records = db.GetRecord();
+            _id = new Key( _records, PrimaryKey.CommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.Commitment;
         }
 
@@ -86,10 +86,10 @@ namespace BudgetExecution
         public Commitment( DataRow dataRow )
             : base( dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.CommitmentId );
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.CommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.Commitment;
         }
         

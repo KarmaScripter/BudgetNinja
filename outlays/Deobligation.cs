@@ -41,11 +41,11 @@ namespace BudgetExecution
         public Deobligation( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.DeobligationId );
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.DeobligationId );
             OriginalActionDate = GetOriginalActionDate();
             _amount = GetDeobligations();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.Deobligation;
         }
 
@@ -58,11 +58,11 @@ namespace BudgetExecution
         public Deobligation( IBuilder db )
             : base( db )
         {
-            _record = db.GetRecord();
-            _id = new Key( _record, PrimaryKey.DeobligationId );
+            _records = db.GetRecord();
+            _id = new Key( _records, PrimaryKey.DeobligationId );
             OriginalActionDate = GetOriginalActionDate();
             _amount = GetDeobligations();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.Deobligation;
         }
 
@@ -75,11 +75,11 @@ namespace BudgetExecution
         public Deobligation( DataRow dataRow )
             : base( dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.DeobligationId );
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.DeobligationId );
             OriginalActionDate = GetOriginalActionDate();
             _amount = GetDeobligations();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.Deobligation;
         }
         

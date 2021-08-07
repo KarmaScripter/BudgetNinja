@@ -5,7 +5,6 @@
 namespace BudgetExecution
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
@@ -41,6 +40,19 @@ namespace BudgetExecution
     public class Outlay : Cost
     {
         /// <summary>
+        /// Gets or sets the authority data.
+        /// </summary>
+        /// <value>
+        /// The authority data.
+        /// </value>
+        private protected CostAccount _prc;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private protected Source _source;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref = "Outlay"/> class.
         /// </summary>
         public Outlay()
@@ -54,17 +66,17 @@ namespace BudgetExecution
         /// </param>
         public Outlay( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.OutlayId );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Balance = new Amount( _record, Numeric.Balance );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.OutlayId );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Balance = new Amount( _records, Numeric.Balance );
+            _data = _records?.ToDictionary();
             Type = OutlayType.All;
             SetExpenseType( Type );
         }
@@ -76,17 +88,17 @@ namespace BudgetExecution
         /// </param>
         public Outlay( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.OutlayId );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Balance = new Amount( _record, Numeric.Balance );
-            _data = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.OutlayId );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Balance = new Amount( _records, Numeric.Balance );
+            _data = _records?.ToDictionary();
             Type = OutlayType.All;
             SetExpenseType( Type );
         }
@@ -99,44 +111,20 @@ namespace BudgetExecution
         /// </param>
         public Outlay( DataRow dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.OutlayId );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Balance = new Amount( _record, Numeric.Balance );
-            _data = _record?.ToDictionary();
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.OutlayId );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Balance = new Amount( _records, Numeric.Balance );
+            _data = _records?.ToDictionary();
             Type = OutlayType.All;
             SetExpenseType( Type );
         }
-        
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        private protected readonly Source _source = Source.Outlays;
-
-        /// <summary>
-        /// Gets or sets the authority data.
-        /// </summary>
-        /// <value>
-        /// The authority data.
-        /// </value>
-        private protected CostAccount _prc;
-
-        /// <summary>
-        /// Gets or sets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private protected IDictionary<string, object> _data;
         
         /// <summary>
         /// Gets the outlay identifier.
@@ -162,7 +150,7 @@ namespace BudgetExecution
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref = "T:System.String"/> that represents this instance.
+        /// A <see cref = "T:_system.String"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {

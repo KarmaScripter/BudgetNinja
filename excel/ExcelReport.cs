@@ -465,8 +465,8 @@ namespace BudgetExecution
                         var col = datatable.Columns[ colinx ];
                         AppendTextCell( columnnames[ colinx ] + "1", col.ColumnName, headerrow );
 
-                        isnumeric[ colinx ] = col.DataType.FullName == "System.Decimal"
-                            || col.DataType.FullName == "System.Int32";
+                        isnumeric[ colinx ] = col.DataType.FullName == "_system.Decimal"
+                            || col.DataType.FullName == "_system.Int32";
                     }
 
                     foreach( DataRow dr in datatable.Rows )

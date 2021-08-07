@@ -48,23 +48,23 @@ namespace BudgetExecution
         /// </param>
         public Leave( IQuery query )
         {
-            _record = new Builder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.LeaveProjectionId );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _employeeNumber = new Element( _record, Field.EmployeeNumber );
-            _firstName = new Element( _record, Field.FirstName );
-            _lastName = new Element( _record, Field.LastName );
-            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
-            _workCode = new Element( _record, Field.WorkCode );
-            _yearToDateEarned = new Amount( _record, Numeric.YearToDateEarned );
-            _yearToDateUsed = new Amount( _record, Numeric.YearToDateUsed );
-            _maxLeaveCarryover = new Amount( _record, Numeric.MaxLeaveCarryover );
-            _projectedPayPeriod = new Amount( _record, Numeric.ProjectedPayPeriod );
-            _projectedAnnual = new Amount( _record, Numeric.ProjectedAnnual );
-            UseOrLose = new Amount( _record, Numeric.UseOrLose );
-            _availableHours = new Amount( _record, Numeric.AvailableHours );
-            _args = _record.ToDictionary();
+            _records = new Builder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.LeaveProjectionId );
+            _rpioCode = new Element( _records, Field.RpioCode );
+            _employeeNumber = new Element( _records, Field.EmployeeNumber );
+            _firstName = new Element( _records, Field.FirstName );
+            _lastName = new Element( _records, Field.LastName );
+            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
+            _workCode = new Element( _records, Field.WorkCode );
+            _yearToDateEarned = new Amount( _records, Numeric.YearToDateEarned );
+            _yearToDateUsed = new Amount( _records, Numeric.YearToDateUsed );
+            _maxLeaveCarryover = new Amount( _records, Numeric.MaxLeaveCarryover );
+            _projectedPayPeriod = new Amount( _records, Numeric.ProjectedPayPeriod );
+            _projectedAnnual = new Amount( _records, Numeric.ProjectedAnnual );
+            UseOrLose = new Amount( _records, Numeric.UseOrLose );
+            _availableHours = new Amount( _records, Numeric.AvailableHours );
+            _args = _records.ToDictionary();
         }
 
         /// <summary>
@@ -75,23 +75,23 @@ namespace BudgetExecution
         /// </param>
         public Leave( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.LeaveProjectionId );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _employeeNumber = new Element( _record, Field.EmployeeNumber );
-            _firstName = new Element( _record, Field.FirstName );
-            _lastName = new Element( _record, Field.LastName );
-            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
-            _workCode = new Element( _record, Field.WorkCode );
-            _yearToDateEarned = new Amount( _record, Numeric.YearToDateEarned );
-            _yearToDateUsed = new Amount( _record, Numeric.YearToDateUsed );
-            _maxLeaveCarryover = new Amount( _record, Numeric.MaxLeaveCarryover );
-            _projectedPayPeriod = new Amount( _record, Numeric.ProjectedPayPeriod );
-            _projectedAnnual = new Amount( _record, Numeric.ProjectedAnnual );
-            UseOrLose = new Amount( _record, Numeric.UseOrLose );
-            _availableHours = new Amount( _record, Numeric.AvailableHours );
-            _args = _record.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.LeaveProjectionId );
+            _rpioCode = new Element( _records, Field.RpioCode );
+            _employeeNumber = new Element( _records, Field.EmployeeNumber );
+            _firstName = new Element( _records, Field.FirstName );
+            _lastName = new Element( _records, Field.LastName );
+            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
+            _workCode = new Element( _records, Field.WorkCode );
+            _yearToDateEarned = new Amount( _records, Numeric.YearToDateEarned );
+            _yearToDateUsed = new Amount( _records, Numeric.YearToDateUsed );
+            _maxLeaveCarryover = new Amount( _records, Numeric.MaxLeaveCarryover );
+            _projectedPayPeriod = new Amount( _records, Numeric.ProjectedPayPeriod );
+            _projectedAnnual = new Amount( _records, Numeric.ProjectedAnnual );
+            UseOrLose = new Amount( _records, Numeric.UseOrLose );
+            _availableHours = new Amount( _records, Numeric.AvailableHours );
+            _args = _records.ToDictionary();
         }
 
         /// <summary>
@@ -103,23 +103,23 @@ namespace BudgetExecution
         public Leave( DataRow datarow )
             : this()
         {
-            _record = datarow;
-            _id = new Key( _record, PrimaryKey.LeaveProjectionId );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _employeeNumber = new Element( _record, Field.EmployeeNumber );
-            _firstName = new Element( _record, Field.FirstName );
-            _lastName = new Element( _record, Field.LastName );
-            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
-            _workCode = new Element( _record, Field.WorkCode );
-            _yearToDateEarned = new Amount( _record, Numeric.YearToDateEarned );
-            _yearToDateUsed = new Amount( _record, Numeric.YearToDateUsed );
-            _maxLeaveCarryover = new Amount( _record, Numeric.MaxLeaveCarryover );
-            _projectedPayPeriod = new Amount( _record, Numeric.ProjectedPayPeriod );
-            _projectedAnnual = new Amount( _record, Numeric.ProjectedAnnual );
-            UseOrLose = new Amount( _record, Numeric.UseOrLose );
-            _availableHours = new Amount( _record, Numeric.AvailableHours );
-            _args = _record.ToDictionary();
+            _records = datarow;
+            _id = new Key( _records, PrimaryKey.LeaveProjectionId );
+            _rpioCode = new Element( _records, Field.RpioCode );
+            _employeeNumber = new Element( _records, Field.EmployeeNumber );
+            _firstName = new Element( _records, Field.FirstName );
+            _lastName = new Element( _records, Field.LastName );
+            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
+            _workCode = new Element( _records, Field.WorkCode );
+            _yearToDateEarned = new Amount( _records, Numeric.YearToDateEarned );
+            _yearToDateUsed = new Amount( _records, Numeric.YearToDateUsed );
+            _maxLeaveCarryover = new Amount( _records, Numeric.MaxLeaveCarryover );
+            _projectedPayPeriod = new Amount( _records, Numeric.ProjectedPayPeriod );
+            _projectedAnnual = new Amount( _records, Numeric.ProjectedAnnual );
+            UseOrLose = new Amount( _records, Numeric.UseOrLose );
+            _availableHours = new Amount( _records, Numeric.AvailableHours );
+            _args = _records.ToDictionary();
         }
 
         // ***************************************************************************************************************************

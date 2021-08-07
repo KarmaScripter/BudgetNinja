@@ -164,41 +164,41 @@ namespace BudgetExecution
                     {
                         case OutlayType.Obligation:
                         {
-                            Obligations = new Amount( _record, Numeric.Obligations );
+                            Obligations = new Amount( _records, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.Commitment:
                         {
-                            Commitments = new Amount( _record, Numeric.Obligations );
+                            Commitments = new Amount( _records, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.OpenCommitment:
                         {
-                            OpenCommitments = new Amount( _record, Numeric.Obligations );
+                            OpenCommitments = new Amount( _records, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.ULO:
                         {
-                            ULO = new Amount( _record, Numeric.Obligations );
+                            ULO = new Amount( _records, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.Deobligation:
                         {
-                            Deobligations = new Amount( _record, Numeric.Obligations );
+                            Deobligations = new Amount( _records, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.All:
                         {
-                            Obligations = new Amount( _record, Numeric.Obligations );
-                            Deobligations = new Amount( _record, Numeric.Obligations );
-                            Commitments = new Amount( _record, Numeric.Obligations );
-                            OpenCommitments = new Amount( _record, Numeric.Obligations );
-                            ULO = new Amount( _record, Numeric.Obligations );
+                            Obligations = new Amount( _records, Numeric.Obligations );
+                            Deobligations = new Amount( _records, Numeric.Obligations );
+                            Commitments = new Amount( _records, Numeric.Obligations );
+                            OpenCommitments = new Amount( _records, Numeric.Obligations );
+                            ULO = new Amount( _records, Numeric.Obligations );
                             break;
                         }
 

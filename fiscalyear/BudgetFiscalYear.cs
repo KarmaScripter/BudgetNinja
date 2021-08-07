@@ -363,12 +363,12 @@ namespace BudgetExecution
             }
         }
 
-        /// <inheritdoc cref = "T:System.String"/>
+        /// <inheritdoc cref = "T:_system.String"/>
         /// <summary>
         /// The ToString
         /// </summary>
         /// <returns>
-        /// The <see cref = "T:System.String"/>
+        /// The <see cref = "T:_system.String"/>
         /// </returns>
         public override string ToString()
         {

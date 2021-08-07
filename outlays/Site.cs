@@ -34,32 +34,32 @@ namespace BudgetExecution
         public Site( IQuery query )
             : base( query )
         {
-            _record = new Builder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.SiteId );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            DCN = new Element( _record, Field.DCN );
-            EpaSiteId = new Element( _record, Field.EpaSiteId );
-            SiteName = new Element( _record, Field.SiteName );
-            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
-            SiteProjectName = new Element( _record, Field.SiteProjectName );
-            City = new Element( _record, Field.City );
-            District = new Element( _record, Field.District );
-            County = new Element( _record, Field.County );
-            StateCode = new Element( _record, Field.StateCode );
-            StateName = new Element( _record, Field.StateName );
-            StreetAddressLine1 = new Element( _record, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( _record, Field.StreetAddressLine2 );
-            ZipCode = new Element( _record, Field.ZipCode );
-            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
-            LastActionDate = new Time( _record, EventDate.LastActionDate );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = new Builder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.SiteId );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _dcn = new Element( _records, Field.DCN );
+            EpaSiteId = new Element( _records, Field.EpaSiteId );
+            SiteName = new Element( _records, Field.SiteName );
+            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
+            SiteProjectName = new Element( _records, Field.SiteProjectName );
+            City = new Element( _records, Field.City );
+            District = new Element( _records, Field.District );
+            County = new Element( _records, Field.County );
+            StateCode = new Element( _records, Field.StateCode );
+            StateName = new Element( _records, Field.StateName );
+            StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
+            ZipCode = new Element( _records, Field.ZipCode );
+            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            LastActionDate = new Time( _records, EventDate.LastActionDate );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -71,32 +71,32 @@ namespace BudgetExecution
         public Site( IBuilder db )
             : base( db )
         {
-            _record = db?.GetRecord();
-            _id = new Key( _record, PrimaryKey.SiteId );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            DCN = new Element( _record, Field.DCN );
-            EpaSiteId = new Element( _record, Field.EpaSiteId );
-            SiteName = new Element( _record, Field.SiteName );
-            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
-            SiteProjectName = new Element( _record, Field.SiteProjectName );
-            City = new Element( _record, Field.City );
-            District = new Element( _record, Field.District );
-            County = new Element( _record, Field.County );
-            StateCode = new Element( _record, Field.StateCode );
-            StateName = new Element( _record, Field.StateName );
-            StreetAddressLine1 = new Element( _record, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( _record, Field.StreetAddressLine2 );
-            ZipCode = new Element( _record, Field.ZipCode );
-            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
-            LastActionDate = new Time( _record, EventDate.LastActionDate );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = db?.GetRecord();
+            _id = new Key( _records, PrimaryKey.SiteId );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _dcn = new Element( _records, Field.DCN );
+            EpaSiteId = new Element( _records, Field.EpaSiteId );
+            SiteName = new Element( _records, Field.SiteName );
+            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
+            SiteProjectName = new Element( _records, Field.SiteProjectName );
+            City = new Element( _records, Field.City );
+            District = new Element( _records, Field.District );
+            County = new Element( _records, Field.County );
+            StateCode = new Element( _records, Field.StateCode );
+            StateName = new Element( _records, Field.StateName );
+            StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
+            ZipCode = new Element( _records, Field.ZipCode );
+            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            LastActionDate = new Time( _records, EventDate.LastActionDate );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -107,32 +107,32 @@ namespace BudgetExecution
         /// </param>
         public Site( DataRow datarow )
         {
-            _record = datarow;
-            _id = new Key( _record, PrimaryKey.SiteId );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            DCN = new Element( _record, Field.DCN );
-            EpaSiteId = new Element( _record, Field.EpaSiteId );
-            SiteName = new Element( _record, Field.SiteName );
-            SiteProjectCode = new Element( _record, Field.SiteProjectCode );
-            SiteProjectName = new Element( _record, Field.SiteProjectName );
-            City = new Element( _record, Field.City );
-            District = new Element( _record, Field.District );
-            County = new Element( _record, Field.County );
-            StateCode = new Element( _record, Field.StateCode );
-            StateName = new Element( _record, Field.StateName );
-            StreetAddressLine1 = new Element( _record, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( _record, Field.StreetAddressLine2 );
-            ZipCode = new Element( _record, Field.ZipCode );
-            OriginalActionDate = new Time( _record, EventDate.OriginalActionDate );
-            LastActionDate = new Time( _record, EventDate.LastActionDate );
-            Commitments = new Amount( _record, Numeric.Commitments );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            Obligations = new Amount( _record, Numeric.Obligations );
-            ULO = new Amount( _record, Numeric.ULO );
-            Deobligations = new Amount( _record, Numeric.Deobligations );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = datarow;
+            _id = new Key( _records, PrimaryKey.SiteId );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _dcn = new Element( _records, Field.DCN );
+            EpaSiteId = new Element( _records, Field.EpaSiteId );
+            SiteName = new Element( _records, Field.SiteName );
+            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
+            SiteProjectName = new Element( _records, Field.SiteProjectName );
+            City = new Element( _records, Field.City );
+            District = new Element( _records, Field.District );
+            County = new Element( _records, Field.County );
+            StateCode = new Element( _records, Field.StateCode );
+            StateName = new Element( _records, Field.StateName );
+            StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
+            ZipCode = new Element( _records, Field.ZipCode );
+            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            LastActionDate = new Time( _records, EventDate.LastActionDate );
+            Commitments = new Amount( _records, Numeric.Commitments );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            Obligations = new Amount( _records, Numeric.Obligations );
+            ULO = new Amount( _records, Numeric.ULO );
+            Deobligations = new Amount( _records, Numeric.Deobligations );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
 
         // ***************************************************************************************************************************

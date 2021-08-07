@@ -106,22 +106,22 @@ namespace BudgetExecution
         public Payment( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PaymentId );
-            _invoiceNumber = new Element( _record, Field.InvoiceNumber );
-            _contractNumber = new Element( _record, Field.ContractNumber );
-            _orderNumber = new Element( _record, Field.OrderNumber );
-            _checkDate = new Time( _record, EventDate.CheckDate );
-            _invoiceDate = new Time( _record, EventDate.InvoiceDate );
-            _modificationNumber = new Element( _record, Field.ModificationNumber );
-            DocumentType = new Element( _record, Field.DocumentNumber );
-            DCN = new Element( _record, Field.DCN );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            _costOrgCode = new Element( _record, Field.CostOrgCode );
-            _amount = new Amount( _record, Numeric.Payment );
-            _disbursed = new Amount( _record, Numeric.Disbursed );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.PaymentId );
+            _invoiceNumber = new Element( _records, Field.InvoiceNumber );
+            _contractNumber = new Element( _records, Field.ContractNumber );
+            _orderNumber = new Element( _records, Field.OrderNumber );
+            _checkDate = new Time( _records, EventDate.CheckDate );
+            _invoiceDate = new Time( _records, EventDate.InvoiceDate );
+            _modificationNumber = new Element( _records, Field.ModificationNumber );
+            _documentType = new Element( _records, Field.DocumentNumber );
+            _dcn = new Element( _records, Field.DCN );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _costOrgCode = new Element( _records, Field.CostOrgCode );
+            _amount = new Amount( _records, Numeric.Payment );
+            _disbursed = new Amount( _records, Numeric.Disbursed );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -133,22 +133,22 @@ namespace BudgetExecution
         public Payment( IBuilder databuilder )
             : base( databuilder )
         {
-            _record = databuilder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PaymentId );
-            _invoiceNumber = new Element( _record, Field.InvoiceNumber );
-            _contractNumber = new Element( _record, Field.ContractNumber );
-            _orderNumber = new Element( _record, Field.OrderNumber );
-            _checkDate = new Time( _record, EventDate.CheckDate );
-            _invoiceDate = new Time( _record, EventDate.InvoiceDate );
-            _modificationNumber = new Element( _record, Field.ModificationNumber );
-            DocumentType = new Element( _record, Field.DocumentNumber );
-            DCN = new Element( _record, Field.DCN );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            _costOrgCode = new Element( _record, Field.CostOrgCode );
-            _amount = new Amount( _record, Numeric.Payment );
-            _disbursed = new Amount( _record, Numeric.Disbursed );
-            _data = _record?.ToDictionary();
+            _records = databuilder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.PaymentId );
+            _invoiceNumber = new Element( _records, Field.InvoiceNumber );
+            _contractNumber = new Element( _records, Field.ContractNumber );
+            _orderNumber = new Element( _records, Field.OrderNumber );
+            _checkDate = new Time( _records, EventDate.CheckDate );
+            _invoiceDate = new Time( _records, EventDate.InvoiceDate );
+            _modificationNumber = new Element( _records, Field.ModificationNumber );
+            _documentType = new Element( _records, Field.DocumentNumber );
+            _dcn = new Element( _records, Field.DCN );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _costOrgCode = new Element( _records, Field.CostOrgCode );
+            _amount = new Amount( _records, Numeric.Payment );
+            _disbursed = new Amount( _records, Numeric.Disbursed );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -160,22 +160,22 @@ namespace BudgetExecution
         public Payment( DataRow dataRow )
             : base( dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.PaymentId );
-            _invoiceNumber = new Element( _record, Field.InvoiceNumber );
-            _contractNumber = new Element( _record, Field.ContractNumber );
-            _orderNumber = new Element( _record, Field.OrderNumber );
-            _checkDate = new Time( _record, EventDate.CheckDate );
-            _invoiceDate = new Time( _record, EventDate.InvoiceDate );
-            _modificationNumber = new Element( _record, Field.ModificationNumber );
-            DocumentType = new Element( _record, Field.DocumentNumber );
-            DCN = new Element( _record, Field.DCN );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            _costOrgCode = new Element( _record, Field.CostOrgCode );
-            _amount = new Amount( _record, Numeric.Payment );
-            _disbursed = new Amount( _record, Numeric.Disbursed );
-            _data = _record?.ToDictionary();
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.PaymentId );
+            _invoiceNumber = new Element( _records, Field.InvoiceNumber );
+            _contractNumber = new Element( _records, Field.ContractNumber );
+            _orderNumber = new Element( _records, Field.OrderNumber );
+            _checkDate = new Time( _records, EventDate.CheckDate );
+            _invoiceDate = new Time( _records, EventDate.InvoiceDate );
+            _modificationNumber = new Element( _records, Field.ModificationNumber );
+            _documentType = new Element( _records, Field.DocumentNumber );
+            _dcn = new Element( _records, Field.DCN );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _costOrgCode = new Element( _records, Field.CostOrgCode );
+            _amount = new Amount( _records, Numeric.Payment );
+            _disbursed = new Amount( _records, Numeric.Disbursed );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>
@@ -207,8 +207,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( FocName )
-                    ? FocName
+                return Verify.Element( _focName )
+                    ? _focName
                     : Element.Default;
             }
             catch( Exception ex )

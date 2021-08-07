@@ -41,74 +41,7 @@ namespace BudgetExecution
         /// The source.
         /// </value>
         private protected readonly new Source _source = Source.Transfers;
-        
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
-        /// </summary>
-        public Reprogramming()
-        {
-        }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
-        /// </summary>
-        /// <param name = "query" >
-        /// The query.
-        /// </param>
-        public Reprogramming( IQuery query )
-            : base( query )
-        {
-            _record = new Builder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.TransferId );
-            _docType = new Element( _record, Field.DocType );
-            _documentNumber = new Element( _record, Field.DocumentNumber );
-            _purpose = new Element( _record, Field.Purpose );
-            _fromTo = new Element( _record, Field.FromTo );
-            _date = DateTime.Parse( _record[ $"{Field.DocumentNumber}" ].ToString() );
-            _amount = GetAmount();
-            _data = _record?.ToDictionary();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
-        /// </summary>
-        /// <param name = "builder" >
-        /// The databuilder.
-        /// </param>
-        public Reprogramming( IBuilder builder )
-            : base( builder )
-        {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.TransferId );
-            _docType = new Element( _record, Field.DocType );
-            _documentNumber = new Element( _record, Field.DocumentNumber );
-            _purpose = new Element( _record, Field.Purpose );
-            _fromTo = new Element( _record, Field.FromTo );
-            _date = DateTime.Parse( _record?[ $"{Field.DocumentNumber}" ].ToString() );
-            _amount = GetAmount();
-            _data = _record?.ToDictionary();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
-        /// </summary>
-        /// <param name = "dataRow" >
-        /// The dr.
-        /// </param>
-        public Reprogramming( DataRow dataRow )
-            : base( dataRow )
-        {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.TransferId );
-            _docType = new Element( _record, Field.DocType );
-            _documentNumber = new Element( _record, Field.DocumentNumber );
-            _purpose = new Element( _record, Field.Purpose );
-            _fromTo = new Element( _record, Field.FromTo );
-            _date = DateTime.Parse( _record[ $"{Field.DocumentNumber}" ].ToString() );
-            _amount = GetAmount();
-            _data = _record?.ToDictionary();
-        }
-        
         /// <summary>
         /// Gets the date.
         /// </summary>
@@ -148,6 +81,73 @@ namespace BudgetExecution
         /// The purpose.
         /// </value>
         private readonly IElement _purpose;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
+        /// </summary>
+        public Reprogramming()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
+        /// </summary>
+        /// <param name = "query" >
+        /// The query.
+        /// </param>
+        public Reprogramming( IQuery query )
+            : base( query )
+        {
+            _records = new Builder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.TransferId );
+            _docType = new Element( _records, Field.DocType );
+            _documentNumber = new Element( _records, Field.DocumentNumber );
+            _purpose = new Element( _records, Field.Purpose );
+            _fromTo = new Element( _records, Field.FromTo );
+            _date = DateTime.Parse( _records[ $"{Field.DocumentNumber}" ].ToString() );
+            _amount = GetAmount();
+            _data = _records?.ToDictionary();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
+        /// </summary>
+        /// <param name = "builder" >
+        /// The databuilder.
+        /// </param>
+        public Reprogramming( IBuilder builder )
+            : base( builder )
+        {
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.TransferId );
+            _docType = new Element( _records, Field.DocType );
+            _documentNumber = new Element( _records, Field.DocumentNumber );
+            _purpose = new Element( _records, Field.Purpose );
+            _fromTo = new Element( _records, Field.FromTo );
+            _date = DateTime.Parse( _records?[ $"{Field.DocumentNumber}" ].ToString() );
+            _amount = GetAmount();
+            _data = _records?.ToDictionary();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
+        /// </summary>
+        /// <param name = "dataRow" >
+        /// The dr.
+        /// </param>
+        public Reprogramming( DataRow dataRow )
+            : base( dataRow )
+        {
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.TransferId );
+            _docType = new Element( _records, Field.DocType );
+            _documentNumber = new Element( _records, Field.DocumentNumber );
+            _purpose = new Element( _records, Field.Purpose );
+            _fromTo = new Element( _records, Field.FromTo );
+            _date = DateTime.Parse( _records[ $"{Field.DocumentNumber}" ].ToString() );
+            _amount = GetAmount();
+            _data = _records?.ToDictionary();
+        }
         
         /// <summary>
         /// Gets the transfer identifier.

@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -52,19 +48,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Local" ) ]
     public class AllowanceHolder : IAllowanceHolder, IProgramElement, ISource
     {
-        // *************************************************************************************************************************
-        // ****************************************************     FIELDS    ******************************************************
-        // *************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.AllowanceHolders;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly static Source _source = Source.AllowanceHolders;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
         /// </summary>
@@ -80,11 +68,11 @@ namespace BudgetExecution
         /// </param>
         public AllowanceHolder( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -95,11 +83,11 @@ namespace BudgetExecution
         /// </param>
         public AllowanceHolder( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -111,11 +99,11 @@ namespace BudgetExecution
         public AllowanceHolder( DataRow data )
             : this()
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -126,11 +114,11 @@ namespace BudgetExecution
         /// </param>
         public AllowanceHolder( string ahcode )
         {
-            Record = new DataBuilder( _source, SetArgs( ahcode ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( _source, SetArgs( ahcode ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         // **********************************************************************************************************************
@@ -143,7 +131,7 @@ namespace BudgetExecution
         /// <value>
         /// The dict.
         /// </value>
-        private DataRow Record { get; }
+        private readonly DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -151,7 +139,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private IDictionary<string, object> Data { get; }
+        private readonly IDictionary<string, object> _data;
 
         /// <summary>
         /// Gets the code.
@@ -159,7 +147,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private IElement Code { get; }
+        private readonly IElement _code;
 
         /// <summary>
         /// Gets the allowance holder identifier.
@@ -167,7 +155,7 @@ namespace BudgetExecution
         /// <value>
         /// The allowance holder identifier.
         /// </value>
-        private IKey ID { get; }
+        private readonly IKey _id;
 
         /// <summary>
         /// Gets the name.
@@ -175,12 +163,8 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private IElement Name { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly IElement _name;
+        
         /// <summary>
         /// Sets the arguments.
         /// </summary>
@@ -215,15 +199,15 @@ namespace BudgetExecution
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref = "T:System.String"/> that represents this instance.
+        /// A <see cref = "T:_system.String"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {
-            if( Verify.Input( Code.GetValue() ) )
+            if( Verify.Input( _code.GetValue() ) )
             {
                 try
                 {
-                    return Code.GetValue();
+                    return _code.GetValue();
                 }
                 catch( Exception ex )
                 {
@@ -244,8 +228,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -264,8 +248,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : default( IKey );
             }
             catch( Exception ex )
@@ -284,8 +268,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Code.GetValue() )
-                    ? Code
+                return Verify.Input( _code.GetValue() )
+                    ? _code
                     : default( IElement );
             }
             catch( Exception ex )
@@ -304,8 +288,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Name.GetValue() )
-                    ? Name
+                return Verify.Input( _name.GetValue() )
+                    ? _name
                     : default( IElement );
             }
             catch( Exception ex )

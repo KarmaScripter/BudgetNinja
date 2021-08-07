@@ -4,122 +4,15 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
-    using System.Data;
 
     /// <summary>
     /// 
     /// </summary>
     /// <seealso cref = "PrcBase"/>
-    public class PrcConfig : PrcBase
+    public abstract class PrcConfig : PrcBase
     {
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "PrcConfig"/> class.
-        /// </summary>
-        public PrcConfig()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "PrcConfig"/> class.
-        /// </summary>
-        /// <param name = "dataRow" >
-        /// The dataRow.
-        /// </param>
-        public PrcConfig( DataRow dataRow )
-        {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "PrcConfig"/> class.
-        /// </summary>
-        /// <param name = "builder" >
-        /// The builder.
-        /// </param>
-        public PrcConfig( IBuilder builder )
-        {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "PrcConfig"/> class.
-        /// </summary>
-        /// <param name = "query" >
-        /// The query.
-        /// </param>
-        public PrcConfig( IQuery query )
-        {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "PrcConfig"/> class.
-        /// </summary>
-        /// <param name = "dict" >
-        /// </param>
-        public PrcConfig( IDictionary<string, object> dict )
-        {
-            _record = new DataBuilder( _source, dict )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _level = new Element( _record, Field.BudgetLevel );
-            _bfy = new Element( _record, Field.BFY );
-            _rpioCode = new Element( _record, Field.RpioCode );
-            _ahCode = new Element( _record, Field.AhCode );
-            _fundCode = new Element( _record, Field.FundCode );
-            _orgCode = new Element( _record, Field.OrgCode );
-            _rcCode = new Element( _record, Field.RcCode );
-            _bocCode = new Element( _record, Field.BocCode );
-            _accountCode = new Element( _record, Field.AccountCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-        }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Gets the PRC identifier.
         /// </summary>

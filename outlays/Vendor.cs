@@ -45,23 +45,23 @@ namespace BudgetExecution
         public Vendor( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.VendorId );
-            Code = new Element( _record, Field.Code );
-            Name = new Element( _record, Field.Name );
-            DunsNumber = new Element( _record, Field.DunsNumber );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            DocumentType = new Element( _record, Field.DocumentType );
-            DocumentNumber = new Element( _record, Field.DocumentNumber );
-            StartDate = new Time( _record, EventDate.StartDate );
-            EndDate = new Time( _record, EventDate.EndDate );
-            ClosedDate = new Time( _record, EventDate.ClosedDate );
-            _amount = new Amount( _record, Numeric.Amount );
-            Expended = new Amount( _record, Numeric.Expended );
-            ULO = new Amount( _record, Numeric.ULO );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.VendorId );
+            Code = new Element( _records, Field.Code );
+            Name = new Element( _records, Field.Name );
+            DunsNumber = new Element( _records, Field.DunsNumber );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _documentType = new Element( _records, Field.DocumentType );
+            DocumentNumber = new Element( _records, Field.DocumentNumber );
+            StartDate = new Time( _records, EventDate.StartDate );
+            EndDate = new Time( _records, EventDate.EndDate );
+            ClosedDate = new Time( _records, EventDate.ClosedDate );
+            _amount = new Amount( _records, Numeric.Amount );
+            Expended = new Amount( _records, Numeric.Expended );
+            ULO = new Amount( _records, Numeric.ULO );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -73,23 +73,23 @@ namespace BudgetExecution
         public Vendor( IBuilder builder )
             : base( builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.VendorId );
-            Code = new Element( _record, Field.Code );
-            Name = new Element( _record, Field.Name );
-            DunsNumber = new Element( _record, Field.DunsNumber );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            DocumentType = new Element( _record, Field.DocumentType );
-            DocumentNumber = new Element( _record, Field.DocumentNumber );
-            StartDate = new Time( _record, EventDate.StartDate );
-            EndDate = new Time( _record, EventDate.EndDate );
-            ClosedDate = new Time( _record, EventDate.ClosedDate );
-            _amount = new Amount( _record, Numeric.Amount );
-            Expended = new Amount( _record, Numeric.Expended );
-            ULO = new Amount( _record, Numeric.ULO );
-            _data = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.VendorId );
+            Code = new Element( _records, Field.Code );
+            Name = new Element( _records, Field.Name );
+            DunsNumber = new Element( _records, Field.DunsNumber );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _documentType = new Element( _records, Field.DocumentType );
+            DocumentNumber = new Element( _records, Field.DocumentNumber );
+            StartDate = new Time( _records, EventDate.StartDate );
+            EndDate = new Time( _records, EventDate.EndDate );
+            ClosedDate = new Time( _records, EventDate.ClosedDate );
+            _amount = new Amount( _records, Numeric.Amount );
+            Expended = new Amount( _records, Numeric.Expended );
+            ULO = new Amount( _records, Numeric.ULO );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -101,23 +101,23 @@ namespace BudgetExecution
         public Vendor( DataRow datarow )
             : this()
         {
-            _record = datarow;
-            _id = new Key( _record, PrimaryKey.VendorId );
-            Code = new Element( _record, Field.Code );
-            Name = new Element( _record, Field.Name );
-            DunsNumber = new Element( _record, Field.DunsNumber );
-            ProgramProjectCode = new Element( _record, Field.ProgramProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            DocumentType = new Element( _record, Field.DocumentType );
-            DocumentNumber = new Element( _record, Field.DocumentNumber );
-            StartDate = new Time( _record, EventDate.StartDate );
-            EndDate = new Time( _record, EventDate.EndDate );
-            ClosedDate = new Time( _record, EventDate.ClosedDate );
-            _amount = new Amount( _record, Numeric.Amount );
-            Expended = new Amount( _record, Numeric.Expended );
-            ULO = new Amount( _record, Numeric.ULO );
-            _data = _record?.ToDictionary();
+            _records = datarow;
+            _id = new Key( _records, PrimaryKey.VendorId );
+            Code = new Element( _records, Field.Code );
+            Name = new Element( _records, Field.Name );
+            DunsNumber = new Element( _records, Field.DunsNumber );
+            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _documentType = new Element( _records, Field.DocumentType );
+            DocumentNumber = new Element( _records, Field.DocumentNumber );
+            StartDate = new Time( _records, EventDate.StartDate );
+            EndDate = new Time( _records, EventDate.EndDate );
+            ClosedDate = new Time( _records, EventDate.ClosedDate );
+            _amount = new Amount( _records, Numeric.Amount );
+            Expended = new Amount( _records, Numeric.Expended );
+            ULO = new Amount( _records, Numeric.ULO );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

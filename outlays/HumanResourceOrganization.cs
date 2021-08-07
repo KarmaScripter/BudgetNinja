@@ -43,11 +43,11 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( IQuery query )
         {
-            _record = new Builder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.HumanResourceOrganizationId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _args = _record?.ToDictionary();
+            _records = new Builder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.HumanResourceOrganizationId );
+            _name = new Element( _records, Field.Name );
+            _code = new Element( _records, Field.Code );
+            _args = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -59,11 +59,11 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.HumanResourceOrganizationId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _args = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.HumanResourceOrganizationId );
+            _name = new Element( _records, Field.Name );
+            _code = new Element( _records, Field.Code );
+            _args = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -75,11 +75,11 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( DataRow data )
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.HumanResourceOrganizationId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _args = _record?.ToDictionary();
+            _records = data;
+            _id = new Key( _records, PrimaryKey.HumanResourceOrganizationId );
+            _name = new Element( _records, Field.Name );
+            _code = new Element( _records, Field.Code );
+            _args = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private readonly DataRow _record;
+        private readonly DataRow _records;
 
         /// <summary>
         /// Gets the arguments.

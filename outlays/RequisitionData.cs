@@ -4,37 +4,14 @@
 
 namespace BudgetExecution
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// 
     /// </summary>
+    [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public class RequisitionData : Commitment
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
-        /// </summary>
-        /// <inheritdoc />
-        public RequisitionData()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
-        /// </summary>
-        /// <param name="query"></param>
-        public RequisitionData( IQuery query )
-            : base( query )
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
-        /// </summary>
-        /// <param name="db">The database.</param>
-        public RequisitionData( IBuilder db )
-            : base( db )
-        {
-        }
-
         /// <summary>
         /// Gets the request number.
         /// </summary>
@@ -130,5 +107,31 @@ namespace BudgetExecution
         /// The reversed.
         /// </value>
         private protected IAmount _reversed;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
+        /// </summary>
+        /// <inheritdoc />
+        public RequisitionData()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
+        /// </summary>
+        /// <param name="query"></param>
+        public RequisitionData( IQuery query )
+            : base( query )
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequisitionData"/> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
+        public RequisitionData( IBuilder db )
+            : base( db )
+        {
+        }
     }
 }

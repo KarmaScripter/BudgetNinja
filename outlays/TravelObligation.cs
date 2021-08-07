@@ -22,7 +22,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected new  Source _source = Source.TravelObligations;
+        private protected Source _source = Source.TravelObligations;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "TravelObligation"/> class.
@@ -40,21 +40,21 @@ namespace BudgetExecution
         public TravelObligation( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.TravelObligationId );
-            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            DCN = new Element( _record, Field.DCN );
-            _firstName = new Element( _record, Field.FirstName );
-            _middleName = new Element( _record, Field.MiddleName );
-            _lastName = new Element( _record, Field.LastName );
-            _email = new Element( _record, Field.Email );
-            _destination = new Element( _record, Field.Destination );
-            _startDate = new Time( _record, EventDate.StartDate );
-            _endDate = new Time( _record, EventDate.EndDate );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.TravelObligationId );
+            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _dcn = new Element( _records, Field.DCN );
+            _firstName = new Element( _records, Field.FirstName );
+            _middleName = new Element( _records, Field.MiddleName );
+            _lastName = new Element( _records, Field.LastName );
+            _email = new Element( _records, Field.Email );
+            _destination = new Element( _records, Field.Destination );
+            _startDate = new Time( _records, EventDate.StartDate );
+            _endDate = new Time( _records, EventDate.EndDate );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -67,21 +67,21 @@ namespace BudgetExecution
         public TravelObligation( IBuilder builder )
             : base( builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.TravelObligationId );
-            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            DCN = new Element( _record, Field.DCN );
-            _firstName = new Element( _record, Field.FirstName );
-            _middleName = new Element( _record, Field.MiddleName );
-            _lastName = new Element( _record, Field.LastName );
-            _email = new Element( _record, Field.Email );
-            _destination = new Element( _record, Field.Destination );
-            _startDate = new Time( _record, EventDate.StartDate );
-            _endDate = new Time( _record, EventDate.EndDate );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.TravelObligationId );
+            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _dcn = new Element( _records, Field.DCN );
+            _firstName = new Element( _records, Field.FirstName );
+            _middleName = new Element( _records, Field.MiddleName );
+            _lastName = new Element( _records, Field.LastName );
+            _email = new Element( _records, Field.Email );
+            _destination = new Element( _records, Field.Destination );
+            _startDate = new Time( _records, EventDate.StartDate );
+            _endDate = new Time( _records, EventDate.EndDate );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
             Type = OutlayType.Obligation;
         }
 
@@ -93,21 +93,21 @@ namespace BudgetExecution
         /// </param>
         public TravelObligation( DataRow datarow )
         {
-            _record = datarow;
-            _id = new Key( _record, PrimaryKey.TravelObligationId );
-            ProgramAreaCode = new Element( _record, Field.ProgramAreaCode );
-            FocCode = new Element( _record, Field.FocCode );
-            FocName = new Element( _record, Field.FocName );
-            DCN = new Element( _record, Field.DCN );
-            _firstName = new Element( _record, Field.FirstName );
-            _middleName = new Element( _record, Field.MiddleName );
-            _lastName = new Element( _record, Field.LastName );
-            _email = new Element( _record, Field.Email );
-            _destination = new Element( _record, Field.Destination );
-            _startDate = new Time( _record, EventDate.StartDate );
-            _endDate = new Time( _record, EventDate.EndDate );
-            _amount = new Amount( _record, Numeric.Amount );
-            _data = _record?.ToDictionary();
+            _records = datarow;
+            _id = new Key( _records, PrimaryKey.TravelObligationId );
+            _programAreaCode = new Element( _records, Field.ProgramAreaCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _focName = new Element( _records, Field.FocName );
+            _dcn = new Element( _records, Field.DCN );
+            _firstName = new Element( _records, Field.FirstName );
+            _middleName = new Element( _records, Field.MiddleName );
+            _lastName = new Element( _records, Field.LastName );
+            _email = new Element( _records, Field.Email );
+            _destination = new Element( _records, Field.Destination );
+            _startDate = new Time( _records, EventDate.StartDate );
+            _endDate = new Time( _records, EventDate.EndDate );
+            _amount = new Amount( _records, Numeric.Amount );
+            _data = _records?.ToDictionary();
             Type = OutlayType.Obligation;
         }
         

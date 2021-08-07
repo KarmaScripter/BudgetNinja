@@ -46,8 +46,8 @@ namespace BudgetExecution
         public FullTimeEquivalent( IQuery query )
             : base( query )
         {
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _amount = new Amount( _record, Numeric.Amount );
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _amount = new Amount( _records, Numeric.Amount );
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace BudgetExecution
         public FullTimeEquivalent( IBuilder builder )
             : base( builder )
         {
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _amount = new Amount( _record, Numeric.Amount );
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _amount = new Amount( _records, Numeric.Amount );
         }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace BudgetExecution
         public FullTimeEquivalent( DataRow dataRow )
             : base( dataRow )
         {
-            _id = new Key( _record, PrimaryKey.PrcId );
-            _amount = new Amount( _record, Numeric.Amount );
+            _id = new Key( _records, PrimaryKey.PrcId );
+            _amount = new Amount( _records, Numeric.Amount );
         }
         
         /// <summary>

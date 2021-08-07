@@ -35,10 +35,10 @@ namespace BudgetExecution
         public OpenCommitment( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.OpenCommitmentId );
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.OpenCommitment;
         }
 
@@ -51,10 +51,10 @@ namespace BudgetExecution
         public OpenCommitment( IBuilder db )
             : base( db )
         {
-            _record = db?.GetRecord();
-            _id = new Key( _record, PrimaryKey.OpenCommitmentId );
+            _records = db?.GetRecord();
+            _id = new Key( _records, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.OpenCommitment;
         }
 
@@ -67,10 +67,10 @@ namespace BudgetExecution
         public OpenCommitment( DataRow dataRow )
             : base( dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.OpenCommitmentId );
+            _records = dataRow;
+            _id = new Key( _records, PrimaryKey.OpenCommitmentId );
             OriginalActionDate = GetOriginalActionDate();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
             Type = OutlayType.OpenCommitment;
         }
         

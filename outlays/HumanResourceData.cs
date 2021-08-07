@@ -40,29 +40,29 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceData( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.WorkforceDataId );
-            _employeeNumber = new Element( _record, Field.EmployeeNumber );
-            _firstName = new Element( _record, Field.FirstName );
-            _lastName = new Element( _record, Field.LastName );
-            _status = new Element( _record, Field.Status );
-            _jobTitle = new Element( _record, Field.JobTitle );
-            _occupationalSeries = new Element( _record, Field.OccupationalSeries );
-            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
-            _grade = new Element( _record, Field.Grade );
-            _step = new Element( _record, Field.Step );
-            _appointmentAuthority = new Element( _record, Field.AppointmentAuthority );
-            _appointmentType = new Element( _record, Field.AppointmentType );
-            _bargainingUnit = new Element( _record, Field.BargainingUnit );
-            _retirementPlan = new Element( _record, Field.RetirementPlan );
-            _hireDate = new Time( _record, EventDate.HireDate );
-            _serviceDate = new Time( _record, EventDate.ServiceDate );
-            _wigiDueDate = new Time( _record, EventDate.WigiDueDate );
-            _gradeEntryDate = new Time( _record, EventDate.GradeEntryDate );
-            _stepEntryDate = new Time( _record, EventDate.StepEntryDate );
-            _compensationRate = new Amount( _record, Numeric.CompensationRate );
-            _args = _record.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.WorkforceDataId );
+            _employeeNumber = new Element( _records, Field.EmployeeNumber );
+            _firstName = new Element( _records, Field.FirstName );
+            _lastName = new Element( _records, Field.LastName );
+            _status = new Element( _records, Field.Status );
+            _jobTitle = new Element( _records, Field.JobTitle );
+            _occupationalSeries = new Element( _records, Field.OccupationalSeries );
+            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
+            _grade = new Element( _records, Field.Grade );
+            _step = new Element( _records, Field.Step );
+            _appointmentAuthority = new Element( _records, Field.AppointmentAuthority );
+            _appointmentType = new Element( _records, Field.AppointmentType );
+            _bargainingUnit = new Element( _records, Field.BargainingUnit );
+            _retirementPlan = new Element( _records, Field.RetirementPlan );
+            _hireDate = new Time( _records, EventDate.HireDate );
+            _serviceDate = new Time( _records, EventDate.ServiceDate );
+            _wigiDueDate = new Time( _records, EventDate.WigiDueDate );
+            _gradeEntryDate = new Time( _records, EventDate.GradeEntryDate );
+            _stepEntryDate = new Time( _records, EventDate.StepEntryDate );
+            _compensationRate = new Amount( _records, Numeric.CompensationRate );
+            _args = _records.ToDictionary();
         }
 
         /// <summary>
@@ -73,29 +73,29 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceData( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.WorkforceDataId );
-            _employeeNumber = new Element( _record, Field.EmployeeNumber );
-            _firstName = new Element( _record, Field.FirstName );
-            _lastName = new Element( _record, Field.LastName );
-            _status = new Element( _record, Field.Status );
-            _jobTitle = new Element( _record, Field.JobTitle );
-            _occupationalSeries = new Element( _record, Field.OccupationalSeries );
-            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
-            _grade = new Element( _record, Field.Grade );
-            _step = new Element( _record, Field.Step );
-            _appointmentAuthority = new Element( _record, Field.AppointmentAuthority );
-            _appointmentType = new Element( _record, Field.AppointmentType );
-            _bargainingUnit = new Element( _record, Field.BargainingUnit );
-            _retirementPlan = new Element( _record, Field.RetirementPlan );
-            _hireDate = new Time( _record, EventDate.HireDate );
-            _serviceDate = new Time( _record, EventDate.ServiceDate );
-            _wigiDueDate = new Time( _record, EventDate.WigiDueDate );
-            _gradeEntryDate = new Time( _record, EventDate.GradeEntryDate );
-            _stepEntryDate = new Time( _record, EventDate.StepEntryDate );
-            _compensationRate = new Amount( _record, Numeric.CompensationRate );
-            _args = _record.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.WorkforceDataId );
+            _employeeNumber = new Element( _records, Field.EmployeeNumber );
+            _firstName = new Element( _records, Field.FirstName );
+            _lastName = new Element( _records, Field.LastName );
+            _status = new Element( _records, Field.Status );
+            _jobTitle = new Element( _records, Field.JobTitle );
+            _occupationalSeries = new Element( _records, Field.OccupationalSeries );
+            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
+            _grade = new Element( _records, Field.Grade );
+            _step = new Element( _records, Field.Step );
+            _appointmentAuthority = new Element( _records, Field.AppointmentAuthority );
+            _appointmentType = new Element( _records, Field.AppointmentType );
+            _bargainingUnit = new Element( _records, Field.BargainingUnit );
+            _retirementPlan = new Element( _records, Field.RetirementPlan );
+            _hireDate = new Time( _records, EventDate.HireDate );
+            _serviceDate = new Time( _records, EventDate.ServiceDate );
+            _wigiDueDate = new Time( _records, EventDate.WigiDueDate );
+            _gradeEntryDate = new Time( _records, EventDate.GradeEntryDate );
+            _stepEntryDate = new Time( _records, EventDate.StepEntryDate );
+            _compensationRate = new Amount( _records, Numeric.CompensationRate );
+            _args = _records.ToDictionary();
         }
 
         /// <summary>
@@ -107,29 +107,29 @@ namespace BudgetExecution
         public HumanResourceData( DataRow data )
             : this()
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.WorkforceDataId );
-            _employeeNumber = new Element( _record, Field.EmployeeNumber );
-            _firstName = new Element( _record, Field.FirstName );
-            _lastName = new Element( _record, Field.LastName );
-            _status = new Element( _record, Field.Status );
-            _jobTitle = new Element( _record, Field.JobTitle );
-            _occupationalSeries = new Element( _record, Field.OccupationalSeries );
-            _humanResourceOrganizationCode = new Element( _record, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _record, Field.HumanResourceOrganizationName );
-            _grade = new Element( _record, Field.Grade );
-            _step = new Element( _record, Field.Step );
-            _appointmentAuthority = new Element( _record, Field.AppointmentAuthority );
-            _appointmentType = new Element( _record, Field.AppointmentType );
-            _bargainingUnit = new Element( _record, Field.BargainingUnit );
-            _retirementPlan = new Element( _record, Field.RetirementPlan );
-            _hireDate = new Time( _record, EventDate.HireDate );
-            _serviceDate = new Time( _record, EventDate.ServiceDate );
-            _wigiDueDate = new Time( _record, EventDate.WigiDueDate );
-            _gradeEntryDate = new Time( _record, EventDate.GradeEntryDate );
-            _stepEntryDate = new Time( _record, EventDate.StepEntryDate );
-            _compensationRate = new Amount( _record, Numeric.CompensationRate );
-            _args = _record.ToDictionary();
+            _records = data;
+            _id = new Key( _records, PrimaryKey.WorkforceDataId );
+            _employeeNumber = new Element( _records, Field.EmployeeNumber );
+            _firstName = new Element( _records, Field.FirstName );
+            _lastName = new Element( _records, Field.LastName );
+            _status = new Element( _records, Field.Status );
+            _jobTitle = new Element( _records, Field.JobTitle );
+            _occupationalSeries = new Element( _records, Field.OccupationalSeries );
+            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
+            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
+            _grade = new Element( _records, Field.Grade );
+            _step = new Element( _records, Field.Step );
+            _appointmentAuthority = new Element( _records, Field.AppointmentAuthority );
+            _appointmentType = new Element( _records, Field.AppointmentType );
+            _bargainingUnit = new Element( _records, Field.BargainingUnit );
+            _retirementPlan = new Element( _records, Field.RetirementPlan );
+            _hireDate = new Time( _records, EventDate.HireDate );
+            _serviceDate = new Time( _records, EventDate.ServiceDate );
+            _wigiDueDate = new Time( _records, EventDate.WigiDueDate );
+            _gradeEntryDate = new Time( _records, EventDate.GradeEntryDate );
+            _stepEntryDate = new Time( _records, EventDate.StepEntryDate );
+            _compensationRate = new Amount( _records, Numeric.CompensationRate );
+            _args = _records.ToDictionary();
         }
 
         // **********************************************************************************************************************
@@ -142,7 +142,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private readonly DataRow _record;
+        private readonly DataRow _records;
 
         /// <summary>
         /// Gets the arguments.

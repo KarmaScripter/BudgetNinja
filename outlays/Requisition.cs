@@ -40,20 +40,20 @@ namespace BudgetExecution
         public Requisition( IQuery query )
             : base( query )
         {
-            _record = new Builder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.RequisitionId );
-            DCN = new Element( _record, Field.DCN );
-            _requestNumber = new Element( _record, Field.RequestNumber );
-            _modifiedBy = new Element( _record, Field.ModifiedBy );
-            _createdBy = new Element( _record, Field.CreatedBy );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            _requestDate = new Time( _record, EventDate.RequestDate );
-            _documentDate = new Time( _record, EventDate.DocumentDate );
-            _closedDate = new Time( _record, EventDate.ClosedDate );
-            _requested = new Amount( _record, Numeric.Requested );
-            _closed = new Amount( _record, Numeric.Closed );
-            _data = _record?.ToDictionary();
+            _records = new Builder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.RequisitionId );
+            _dcn = new Element( _records, Field.DCN );
+            _requestNumber = new Element( _records, Field.RequestNumber );
+            _modifiedBy = new Element( _records, Field.ModifiedBy );
+            _createdBy = new Element( _records, Field.CreatedBy );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _requestDate = new Time( _records, EventDate.RequestDate );
+            _documentDate = new Time( _records, EventDate.DocumentDate );
+            _closedDate = new Time( _records, EventDate.ClosedDate );
+            _requested = new Amount( _records, Numeric.Requested );
+            _closed = new Amount( _records, Numeric.Closed );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -65,20 +65,20 @@ namespace BudgetExecution
         public Requisition( IBuilder db )
             : base( db )
         {
-            _record = db.GetRecord();
-            _id = new Key( _record, PrimaryKey.RequisitionId );
-            DCN = new Element( _record, Field.DCN );
-            _requestNumber = new Element( _record, Field.RequestNumber );
-            _modifiedBy = new Element( _record, Field.ModifiedBy );
-            _createdBy = new Element( _record, Field.CreatedBy );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            _requestDate = new Time( _record, EventDate.RequestDate );
-            _documentDate = new Time( _record, EventDate.DocumentDate );
-            _closedDate = new Time( _record, EventDate.ClosedDate );
-            _requested = new Amount( _record, Numeric.Requested );
-            _closed = new Amount( _record, Numeric.Closed );
-            _data = _record?.ToDictionary();
+            _records = db.GetRecord();
+            _id = new Key( _records, PrimaryKey.RequisitionId );
+            _dcn = new Element( _records, Field.DCN );
+            _requestNumber = new Element( _records, Field.RequestNumber );
+            _modifiedBy = new Element( _records, Field.ModifiedBy );
+            _createdBy = new Element( _records, Field.CreatedBy );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _requestDate = new Time( _records, EventDate.RequestDate );
+            _documentDate = new Time( _records, EventDate.DocumentDate );
+            _closedDate = new Time( _records, EventDate.ClosedDate );
+            _requested = new Amount( _records, Numeric.Requested );
+            _closed = new Amount( _records, Numeric.Closed );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -89,20 +89,20 @@ namespace BudgetExecution
         /// </param>
         public Requisition( DataRow data )
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.RequisitionId );
-            DCN = new Element( _record, Field.DCN );
-            _requestNumber = new Element( _record, Field.RequestNumber );
-            _modifiedBy = new Element( _record, Field.ModifiedBy );
-            _createdBy = new Element( _record, Field.CreatedBy );
-            _projectCode = new Element( _record, Field.ProjectCode );
-            FocCode = new Element( _record, Field.FocCode );
-            _requestDate = new Time( _record, EventDate.RequestDate );
-            _documentDate = new Time( _record, EventDate.DocumentDate );
-            _closedDate = new Time( _record, EventDate.ClosedDate );
-            _requested = new Amount( _record, Numeric.Requested );
-            _closed = new Amount( _record, Numeric.Closed );
-            _data = _record?.ToDictionary();
+            _records = data;
+            _id = new Key( _records, PrimaryKey.RequisitionId );
+            _dcn = new Element( _records, Field.DCN );
+            _requestNumber = new Element( _records, Field.RequestNumber );
+            _modifiedBy = new Element( _records, Field.ModifiedBy );
+            _createdBy = new Element( _records, Field.CreatedBy );
+            _projectCode = new Element( _records, Field.ProjectCode );
+            _focCode = new Element( _records, Field.FocCode );
+            _requestDate = new Time( _records, EventDate.RequestDate );
+            _documentDate = new Time( _records, EventDate.DocumentDate );
+            _closedDate = new Time( _records, EventDate.ClosedDate );
+            _requested = new Amount( _records, Numeric.Requested );
+            _closed = new Amount( _records, Numeric.Closed );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>

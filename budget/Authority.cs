@@ -134,7 +134,7 @@ namespace BudgetExecution
             : base( query )
         {
             _source = query.GetSource();
-            _record = new DataBuilder( query )?.GetRecord();
+            _records = new DataBuilder( query )?.GetRecord();
             _budgetFiscalYear = GetBudgetFiscalYear();
             _rpio = GetResourcePlanningOffice();
             _fund = GetFund();
@@ -143,7 +143,7 @@ namespace BudgetExecution
             _organization = GetOrganization();
             _account = GetAccount();
             _responsibilityCenter = GetResponsibilityCenter();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -155,8 +155,8 @@ namespace BudgetExecution
         public Authority( IBuilder builder )
             : base( builder )
         {
-            _record = builder?.GetRecord();
-            _source = GetSource( _record );
+            _records = builder?.GetRecord();
+            _source = GetSource( _records );
             _budgetFiscalYear = GetBudgetFiscalYear();
             _rpio = GetResourcePlanningOffice();
             _fund = GetFund();
@@ -166,7 +166,7 @@ namespace BudgetExecution
             _account = GetAccount();
             _responsibilityCenter = GetResponsibilityCenter();
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -178,8 +178,8 @@ namespace BudgetExecution
         public Authority( DataRow data )
             : base( data )
         {
-            _record = data;
-            _source = GetSource( _record );
+            _records = data;
+            _source = GetSource( _records );
             _budgetFiscalYear = GetBudgetFiscalYear();
             _rpio = GetResourcePlanningOffice();
             _fund = GetFund();
@@ -190,7 +190,7 @@ namespace BudgetExecution
             _responsibilityCenter = GetResponsibilityCenter();
             _activity = GetActivity();
             _amount = GetAmount();
-            _data = _record?.ToDictionary();
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>

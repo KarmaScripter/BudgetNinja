@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        protected new  Source _source = Source.Reimbursables;
+        private protected Source _source = Source.Reimbursables;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reimbursable"/> class.
@@ -46,13 +46,13 @@ namespace BudgetExecution
         public Reimbursable( IQuery query )
             : base( query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ReimbursableId );
-            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            ULO = new Amount( _record, Numeric.ULO );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _records, PrimaryKey.ReimbursableId );
+            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            ULO = new Amount( _records, Numeric.ULO );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace BudgetExecution
         public Reimbursable( IBuilder builder )
             : base( builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ReimbursableId );
-            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            ULO = new Amount( _record, Numeric.ULO );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = builder?.GetRecord();
+            _id = new Key( _records, PrimaryKey.ReimbursableId );
+            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            ULO = new Amount( _records, Numeric.ULO );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
 
         /// <summary>
@@ -82,13 +82,13 @@ namespace BudgetExecution
         public Reimbursable( DataRow data )
             : base( data )
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.ReimbursableId );
-            AgreementNumber = new Element( _record, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( _record, Numeric.OpenCommitments );
-            ULO = new Amount( _record, Numeric.ULO );
-            Expenditures = new Amount( _record, Numeric.Expenditures );
-            _data = _record?.ToDictionary();
+            _records = data;
+            _id = new Key( _records, PrimaryKey.ReimbursableId );
+            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
+            ULO = new Amount( _records, Numeric.ULO );
+            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _data = _records?.ToDictionary();
         }
         
         /// <summary>
