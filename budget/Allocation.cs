@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -20,10 +16,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class Allocation : AllocationData, IAllocation
     {
-        // ****************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS ***************************************************************
-        // ****************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "Allocation"/> class.
         /// </summary>
@@ -39,34 +31,26 @@ namespace BudgetExecution
         /// </param>
         public Allocation( IAuthority authority )
         {
-            Authority = authority;
-            _budgetFiscalYear = Authority?.GetBudgetFiscalYear();
-            _data = Authority?.ToDictionary();
-            Funds = GetFunds();
-            ProgramResultCodes = GetProgramResultsCodes();
-            FullTimeEquivalents = GetFullTimeEquivalents();
-            Organizations = GetOrganizations();
-            AllowanceHolders = GetAllowanceHolders();
-            Accounts = GetAccounts();
-            ObjectClasses = GetBudgetObjectClasses();
+            _authority = authority;
+            _budgetFiscalYear = _authority?.GetBudgetFiscalYear();
+            _data = _authority?.ToDictionary();
+            _funds = GetFunds();
+            _programResultCodes = GetProgramResultsCodes();
+            _fullTimeEquivalents = GetFullTimeEquivalents();
+            _organizations = GetOrganizations();
+            _allowanceHolders = GetAllowanceHolders();
+            _accounts = GetAccounts();
+            _objectClasses = GetBudgetObjectClasses();
         }
 
-        // ****************************************************************************************************************************
-        // *************************************************   PROPERTIES   ***********************************************************
-        // ****************************************************************************************************************************
-
         /// <summary>
-        /// Gets or sets the data.
+        /// Gets or sets the dataRow.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The dataRow.
         /// </value>
-        private protected IAuthority Authority { get; }
-
-        // ****************************************************************************************************************************
-        // ************************************************  METHODS   ****************************************************************
-        // ****************************************************************************************************************************
-
+        private readonly IAuthority _authority;
+        
         /// <summary>
         /// Gets the authority.
         /// </summary>
@@ -76,7 +60,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Authority ?? default( Authority );
+                return _authority ?? default( Authority );
             }
             catch( Exception ex )
             {
@@ -98,7 +82,7 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<DataRow> FilterData( Numeric numeric, string filter )
         {
-            if( _data.Any()
+            if( _data?.Any() == true
                 && Enum.IsDefined( typeof( Numeric ), numeric )
                 && Verify.Input( filter ) )
             {
@@ -125,22 +109,22 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the total.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <returns>
         /// </returns>
-        public double CalculateTotal( IEnumerable<DataRow> data )
+        public double CalculateTotal( IEnumerable<DataRow> dataRow )
         {
-            if( Verify.Input( data )
-                && data?.HasNumeric() == true )
+            if( Verify.Input( dataRow )
+                && dataRow?.HasNumeric() == true )
             {
                 try
                 {
-                    var total = data.Sum( p => p.Field<double>( $"{Numeric.Amount}" ) );
+                    var _sum = dataRow.Sum( p => p.Field<double>( $"{Numeric.Amount}" ) );
 
-                    return total > 0.0d
-                        ? total
+                    return _sum > 0.0d
+                        ? _sum
                         : 0.0d;
                 }
                 catch( Exception ex )

@@ -4,31 +4,22 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     public class ProgramProject : ProgramBase, IProgramProject, IProgramElement, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************     FIELDS    ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.ProgramProjects;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly Source _source = Source.ProgramProjects;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramProject"/> class.
         /// </summary>
@@ -44,59 +35,59 @@ namespace BudgetExecution
         /// </param>
         public ProgramProject( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ProgramProjectId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            Definition = new Element( Record, Field.Definition );
-            Laws = new Element( Record, Field.Laws );
-            Narrative = new Element( Record, Field.Narrative );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ProgramProjectId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _definition = new Element( _record, Field.Definition );
+            _laws = new Element( _record, Field.Laws );
+            _narrative = new Element( _record, Field.Narrative );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _programAreaName = new Element( _record, Field.ProgramAreaName );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramProject"/> class.
         /// </summary>
-        /// <param name = "builder" >
-        /// The builder.
+        /// <param name = "dataBuilder" >
+        /// The dataBuilder.
         /// </param>
-        public ProgramProject( IBuilder builder )
+        public ProgramProject( IBuilder dataBuilder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ProgramProjectId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            Definition = new Element( Record, Field.Definition );
-            Laws = new Element( Record, Field.Laws );
-            Narrative = new Element( Record, Field.Narrative );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
-            Data = Record?.ToDictionary();
+            _record = dataBuilder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ProgramProjectId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _definition = new Element( _record, Field.Definition );
+            _laws = new Element( _record, Field.Laws );
+            _narrative = new Element( _record, Field.Narrative );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _programAreaName = new Element( _record, Field.ProgramAreaName );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramProject"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public ProgramProject( DataRow data )
+        public ProgramProject( DataRow dataRow )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.ProgramProjectId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            Definition = new Element( Record, Field.Definition );
-            Laws = new Element( Record, Field.Laws );
-            Narrative = new Element( Record, Field.Narrative );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
-            Data = Record?.ToDictionary();
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.ProgramProjectId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _definition = new Element( _record, Field.Definition );
+            _laws = new Element( _record, Field.Laws );
+            _narrative = new Element( _record, Field.Narrative );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _programAreaName = new Element( _record, Field.ProgramAreaName );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -107,23 +98,19 @@ namespace BudgetExecution
         /// </param>
         public ProgramProject( string code )
         {
-            Record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ProgramProjectId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            Definition = new Element( Record, Field.Definition );
-            Laws = new Element( Record, Field.Laws );
-            Narrative = new Element( Record, Field.Narrative );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ProgramProjectId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _definition = new Element( _record, Field.Definition );
+            _laws = new Element( _record, Field.Laws );
+            _narrative = new Element( _record, Field.Narrative );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _programAreaName = new Element( _record, Field.ProgramAreaName );
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Sets the arguments.
         /// </summary>
@@ -162,8 +149,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Definition )
-                    ? Definition
+                return Verify.Element( _definition )
+                    ? _definition
                     : Element.Default;
             }
             catch( Exception ex )
@@ -182,8 +169,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Laws )
-                    ? Laws
+                return Verify.Element( _laws )
+                    ? _laws
                     : Element.Default;
             }
             catch( Exception ex )
@@ -202,8 +189,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Title )
-                    ? Title
+                return Verify.Element( _title )
+                    ? _title
                     : Element.Default;
             }
             catch( Exception ex )
@@ -222,8 +209,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Narrative )
-                    ? Narrative
+                return Verify.Element( _narrative )
+                    ? _narrative
                     : Element.Default;
             }
             catch( Exception ex )
@@ -242,8 +229,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ProgramAreaName )
-                    ? ProgramAreaCode
+                return Verify.Element( _programAreaName )
+                    ? _programAreaCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -262,8 +249,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ProgramAreaName )
-                    ? ProgramAreaName
+                return Verify.Element( _programAreaName )
+                    ? _programAreaName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -283,8 +270,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code.GetValue()
+                return Verify.Element( _code )
+                    ? _code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -303,8 +290,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -323,8 +310,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -343,8 +330,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -363,8 +350,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )

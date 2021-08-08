@@ -24,7 +24,7 @@ namespace BudgetExecution
     /// from unexpended balances of prior-year budgetary resources and in part from
     /// budgetary resources provided for the year in which the money is spent. Outlays
     /// are stated both gross and net of offsetting collections. (See Offsetting
-    /// Collections under Collections.) Total government outlays include outlays of off
+    /// Collections under Collections.) _total government outlays include outlays of off
     /// budget federal entities. (See also Expenditure; Expense.)
     /// </summary>
     /// <seealso cref = "IDataBuilder"/>

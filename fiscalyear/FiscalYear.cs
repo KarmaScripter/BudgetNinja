@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -22,17 +18,13 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
     public abstract class FiscalYear : CalendarYear
     {
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the bfy.
         /// </summary>
         /// <value>
         /// The bfy.
         /// </value>
-        public BFY BFY { get; set; }
+        public BFY BFY;
 
         /// <summary>
         /// Gets or sets the fiscal year identifier.
@@ -40,7 +32,7 @@ namespace BudgetExecution
         /// <value>
         /// The fiscal year identifier.
         /// </value>
-        public IKey FiscalYearId { get; set; }
+        private protected IKey _fiscalYearId;
 
         /// <summary>
         /// Gets or sets the bbfy.
@@ -48,7 +40,7 @@ namespace BudgetExecution
         /// <value>
         /// The bbfy.
         /// </value>
-        private protected IElement BBFY { get; set; }
+        private protected IElement _bbfy;
 
         /// <summary>
         /// Gets or sets the ebfy.
@@ -56,7 +48,7 @@ namespace BudgetExecution
         /// <value>
         /// The ebfy.
         /// </value>
-        private protected IElement EBFY { get; set; }
+        private protected IElement _ebfy;
 
         /// <summary>
         /// Gets or sets the first year.
@@ -64,7 +56,7 @@ namespace BudgetExecution
         /// <value>
         /// The first year.
         /// </value>
-        private protected IElement FirstYear { get; set; }
+        private protected IElement _firstYear;
 
         /// <summary>
         /// Gets or sets the last year.
@@ -72,7 +64,7 @@ namespace BudgetExecution
         /// <value>
         /// The last year.
         /// </value>
-        private protected IElement LastYear { get; set; }
+        private protected IElement _lastYear;
 
         /// <summary>
         /// Gets or sets the expiring year.
@@ -80,7 +72,7 @@ namespace BudgetExecution
         /// <value>
         /// The expiring year.
         /// </value>
-        private protected IElement ExpiringYear { get; set; }
+        private protected IElement _expiringYear;
 
         /// <summary>
         /// Gets or sets the input year.
@@ -88,7 +80,7 @@ namespace BudgetExecution
         /// <value>
         /// The input year.
         /// </value>
-        private protected IElement InputYear { get; set; }
+        private protected IElement _inputYear;
 
         /// <summary>
         /// Gets or sets the start date.
@@ -96,7 +88,7 @@ namespace BudgetExecution
         /// <value>
         /// The start date.
         /// </value>
-        private protected IElement StartDate { get; set; }
+        private protected IElement _startDate;
 
         /// <summary>
         /// Gets or sets the end date.
@@ -104,7 +96,7 @@ namespace BudgetExecution
         /// <value>
         /// The end date.
         /// </value>
-        private protected IElement EndDate { get; set; }
+        private protected IElement _endDate;
 
         /// <summary>
         /// Gets or sets the cancellation date.
@@ -112,7 +104,7 @@ namespace BudgetExecution
         /// <value>
         /// The cancellation date.
         /// </value>
-        private protected IElement CancellationDate { get; set; }
+        private protected IElement _cancellationDate;
 
         /// <summary>
         /// Gets or sets the arguments.
@@ -120,12 +112,8 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> Data { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private protected IDictionary<string, object> _data;
+        
         /// <summary>
         /// Gets the bfy.
         /// </summary>
@@ -155,8 +143,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( StartDate )
-                    ? StartDate
+                return Verify.Element( _startDate )
+                    ? _startDate
                     : Element.Default;
             }
             catch( Exception ex )
@@ -175,8 +163,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ExpiringYear )
-                    ? ExpiringYear
+                return Verify.Element( _expiringYear )
+                    ? _expiringYear
                     : Element.Default;
             }
             catch( Exception ex )
@@ -195,8 +183,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( CancellationDate )
-                    ? CancellationDate
+                return Verify.Element( _cancellationDate )
+                    ? _cancellationDate
                     : Element.Default;
             }
             catch( Exception ex )
@@ -213,22 +201,22 @@ namespace BudgetExecution
         {
             try
             {
-                if( int.Parse( StartDate.GetValue() ) == GetCurrentYear() )
+                if( int.Parse( _startDate.GetValue() ) == GetCurrentYear() )
                 {
                     BFY = BFY.Current;
-                    BBFY = new Element( Record, Field.BBFY );
-                    FirstYear = new Element( Record, Field.FirstYear );
-                    LastYear = new Element( Record, Field.EBFY );
-                    ExpiringYear = new Element( Record, Field.ExpiringYear );
+                    _bbfy = new Element( Record, Field.BBFY );
+                    _firstYear = new Element( Record, Field.FirstYear );
+                    _lastYear = new Element( Record, Field.EBFY );
+                    _expiringYear = new Element( Record, Field.ExpiringYear );
                 }
 
-                if( int.Parse( StartDate.GetValue() ) <= GetCurrentYear() - 1 )
+                if( int.Parse( _startDate.GetValue() ) <= GetCurrentYear() - 1 )
                 {
                     BFY = BFY.CarryOver;
-                    BBFY = new Element( Record, Field.BBFY );
-                    FirstYear = new Element( Record, Field.FirstYear );
-                    LastYear = new Element( Record, Field.EBFY );
-                    ExpiringYear = new Element( Record, Field.ExpiringYear );
+                    _bbfy = new Element( Record, Field.BBFY );
+                    _firstYear = new Element( Record, Field.FirstYear );
+                    _lastYear = new Element( Record, Field.EBFY );
+                    _expiringYear = new Element( Record, Field.ExpiringYear );
                 }
             }
             catch( Exception ex )
@@ -313,27 +301,27 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var fiscalyear = new Dictionary<string, object>();
+                    var _year = new Dictionary<string, object>();
 
                     switch( bfy )
                     {
                         case BFY.Current:
                         {
-                            fiscalyear?.Add( $"{Field.BBFY}", GetCurrentYear().ToString() );
-                            fiscalyear?.Add( $"{Field.EBFY}", ( GetCurrentYear() + 1 ).ToString() );
+                            _year?.Add( $"{Field.BBFY}", GetCurrentYear().ToString() );
+                            _year?.Add( $"{Field.EBFY}", ( GetCurrentYear() + 1 ).ToString() );
 
-                            return fiscalyear.Any()
-                                ? fiscalyear
+                            return _year.Any()
+                                ? _year
                                 : default( Dictionary<string, object> );
                         }
 
                         case BFY.CarryOver:
                         {
-                            fiscalyear?.Add( $"{Field.BBFY}", ( GetCurrentYear() - 1 ).ToString() );
-                            fiscalyear?.Add( $"{Field.EBFY}", GetCurrentYear().ToString() );
+                            _year?.Add( $"{Field.BBFY}", ( GetCurrentYear() - 1 ).ToString() );
+                            _year?.Add( $"{Field.EBFY}", GetCurrentYear().ToString() );
 
-                            return fiscalyear?.Any() == true
-                                ? fiscalyear
+                            return _year?.Any() == true
+                                ? _year
                                 : default( Dictionary<string, object> );
                         }
                     }
@@ -357,8 +345,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )

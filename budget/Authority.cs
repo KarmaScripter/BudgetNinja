@@ -116,7 +116,12 @@ namespace BudgetExecution
         /// The metric.
         /// </value>
         private protected IDataMetric _metric;
-        
+
+        /// <summary>
+        /// The source
+        /// </summary>
+        private readonly Source _source;
+
         /// <summary>
         /// Initializes a new instance of the <see/> class.
         /// </summary>
@@ -150,7 +155,7 @@ namespace BudgetExecution
         /// Initializes a new instance of the <see/> class.
         /// </summary>
         /// <param name = "builder" >
-        /// The data.
+        /// The dataRow.
         /// </param>
         public Authority( IBuilder builder )
             : base( builder )
@@ -172,13 +177,13 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Authority( DataRow data )
-            : base( data )
+        public Authority( DataRow dataRow )
+            : base( dataRow )
         {
-            _records = data;
+            _records = dataRow;
             _source = GetSource( _records );
             _budgetFiscalYear = GetBudgetFiscalYear();
             _rpio = GetResourcePlanningOffice();
@@ -196,26 +201,28 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the source.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <returns>
         /// </returns>
-        private protected Source GetSource( DataRow data )
+        private protected Source GetSource( DataRow dataRow )
         {
-            if( Verify.Row( data ) )
+            if( Verify.Row( dataRow ) )
             {
                 try
                 {
-                    var name = data?.Table?.TableName;
+                    var _name = dataRow
+                        ?.Table
+                        ?.TableName;
 
-                    if( Verify.Input( name ) )
+                    if( Verify.Input( _name ) )
                     {
-                        var source = (Source)Enum.Parse( typeof( Source ), name );
+                        var _value = (Source)Enum.Parse( typeof( Source ), _name );
 
-                        if( Enum.IsDefined( typeof( Source ), source ) )
+                        if( Enum.IsDefined( typeof( Source ), _value ) )
                         {
-                            return source;
+                            return _value;
                         }
                     }
                 }
@@ -241,10 +248,10 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var builder = new Builder( _source, _data );
+                    var _builder = new Builder( _source, _data );
 
-                    return Verify.Rows( builder?.GetData() )
-                        ? builder
+                    return Verify.Rows( _builder?.GetData() )
+                        ? _builder
                         : default( Builder );
                 }
                 catch( Exception ex )
@@ -276,7 +283,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -287,10 +294,11 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var data = new DataBuilder( _source, _data )?.GetData();
+                    var _rows = new DataBuilder( _source, _data )
+                        ?.GetData();
 
-                    return Verify.Rows( data )
-                        ? data
+                    return Verify.Rows( _rows )
+                        ? _rows
                         : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )
@@ -304,7 +312,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <param name = "field" >
         /// The field.
@@ -320,11 +328,14 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var data = new DataBuilder( _source, _data )?.GetData();
-                    var filtered = data?.Filter( field.ToString(), filter );
+                    var _rows = new DataBuilder( _source, _data )
+                        ?.GetData();
 
-                    return Verify.Rows( filtered )
-                        ? filtered
+                    var _filter = _rows
+                        ?.Filter( field.ToString(), filter );
+
+                    return Verify.Rows( _filter )
+                        ? _filter
                         : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )
@@ -346,17 +357,18 @@ namespace BudgetExecution
         {
             try
             {
-                var bfy = _budgetFiscalYear?.GetAvailability();
+                var _element = _budgetFiscalYear
+                    ?.GetAvailability();
 
-                if( Verify.Element( bfy ) )
+                if( Verify.Element( _element ) )
                 {
                     try
                     {
-                        var availability =
-                            (FundAvailability)Enum.Parse( typeof( FundAvailability ), bfy?.GetValue() );
+                        var _availability =
+                            (FundAvailability)Enum.Parse( typeof( FundAvailability ), _element?.GetValue() );
 
-                        return Validate.Availability( availability )
-                            ? availability
+                        return Validate.Availability( _availability )
+                            ? _availability
                             : default( FundAvailability );
                     }
                     catch( Exception ex )
@@ -378,7 +390,7 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the metric.
         /// </summary>
-        /// <param name = "data" >
+        /// <param name = "dataRow" >
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -387,17 +399,16 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        public IDataMetric GetMetric( IEnumerable<DataRow> data, Field field,
-            Numeric numeric = Numeric.Amount )
+        public IDataMetric GetMetric( IEnumerable<DataRow> dataRow, Field field, Numeric numeric = Numeric.Amount )
         {
-            if( Verify.Rows( data )
+            if( Verify.Rows( dataRow )
                 && Validate.Field( field )
                 && Validate.Numeric( numeric )
-                && data.HasNumeric() )
+                && dataRow.HasNumeric() )
             {
                 try
                 {
-                    return new DataMetric( data, field, numeric );
+                    return new DataMetric( dataRow, field, numeric );
                 }
                 catch( Exception ex )
                 {

@@ -1,4 +1,4 @@
-﻿// <copyright file = "TimeOff.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "_timeOff.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -17,6 +17,14 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public class TimeOff : Supplemental
     {
+        /// <summary>
+        /// Gets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private const Source _source = Source.TimeOff;
+
         /// <summary>
         /// Initializes a new instance of the <see cref = "TimeOff"/> class.
         /// </summary>
@@ -42,12 +50,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "TimeOff"/> class.
         /// </summary>
-        /// <param name = "builder" >
+        /// <param name = "dataBuilder" >
         /// The databuilder.
         /// </param>
-        public TimeOff( IBuilder builder )
+        public TimeOff( IBuilder dataBuilder )
         {
-            _records = builder?.GetRecord();
+            _records = dataBuilder?.GetRecord();
             _id = new Key( _records, PrimaryKey.TimeOffId );
             _fundCode = new Element( _records, Field.FundCode );
             _amount = new Amount( _records, Numeric.Amount );
@@ -57,12 +65,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "TimeOff"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public TimeOff( DataRow data )
+        public TimeOff( DataRow dataRow )
         {
-            _records = data;
+            _records = dataRow;
             _id = new Key( _records, PrimaryKey.TimeOffId );
             _fundCode = new Element( _records, Field.FundCode );
             _amount = new Amount( _records, Numeric.Amount );
@@ -70,15 +78,7 @@ namespace BudgetExecution
         }
         
         /// <summary>
-        /// Gets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        private protected readonly new Source _source = Source.TimeOff;
-        
-        /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -88,10 +88,11 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var data = new DataBuilder( _source, _data )?.GetData();
+                    var _rows = new DataBuilder( _source, _data )
+                        ?.GetData();
 
-                    return Verify.Input( data )
-                        ? data
+                    return Verify.Input( _rows )
+                        ? _rows
                         : default( IEnumerable<DataRow> );
                 }
                 catch( SystemException ex )

@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ******************************   ASSEMBLIES   ****************************************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -26,18 +22,82 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class ExcelBudget : BudgetConfig
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The sheet count
         /// </summary>
         private readonly int _sheetCount;
 
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the allocation.
+        /// </summary>
+        /// <value>
+        /// The allocation.
+        /// </value>
+        private readonly IAllocation _allocation;
+
+        /// <summary>
+        /// Gets the authority.
+        /// </summary>
+        /// <value>
+        /// The authority.
+        /// </value>
+        private readonly IAuthority _authority;
+
+        /// <summary>
+        /// Gets the bfy.
+        /// </summary>
+        /// <value>
+        /// The bfy.
+        /// </value>
+        private readonly IBudgetFiscalYear _bfy;
+
+        /// <summary>
+        /// Gets the rpio.
+        /// </summary>
+        /// <value>
+        /// The rpio.
+        /// </value>
+        private readonly IResourcePlanningOffice _rpio;
+
+        /// <summary>
+        /// Gets the fund.
+        /// </summary>
+        /// <value>
+        /// The fund.
+        /// </value>
+        private readonly IFund _fund;
+
+        /// <summary>
+        /// Gets the ah.
+        /// </summary>
+        /// <value>
+        /// The ah.
+        /// </value>
+        private readonly IAllowanceHolder _ah;
+
+        /// <summary>
+        /// Gets the org.
+        /// </summary>
+        /// <value>
+        /// The org.
+        /// </value>
+        private readonly IOrganization _org;
+
+        /// <summary>
+        /// Gets the rc.
+        /// </summary>
+        /// <value>
+        /// The rc.
+        /// </value>
+        private readonly IResponsibilityCenter _rc;
+
+        /// <summary>
+        /// Gets the division.
+        /// </summary>
+        /// <value>
+        /// The division.
+        /// </value>
+        private readonly IDivision _division;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "ExcelBudget"/> class.
@@ -57,105 +117,17 @@ namespace BudgetExecution
             Excel = new ExcelPackage( new FileInfo( _filePath ) );
             Workbook = Excel.Workbook;
             _sheetCount = Workbook.Worksheets.Count;
-            Authority = authority;
-            Allocation = Authority.GetAllocation();
-            Data = Allocation.GetData();
-            BFY = Authority.GetBudgetFiscalYear();
-            RPIO = Authority.GetResourcePlanningOffice();
-            Fund = Authority.GetFund();
-            AH = Authority.GetAllowanceHolder();
-            ORG = Authority.GetOrganization();
-            RC = Authority.GetResponsibilityCenter();
-            Division = new Division( RC );
+            _authority = authority;
+            _allocation = _authority.GetAllocation();
+            Data = _allocation.GetData();
+            _bfy = _authority.GetBudgetFiscalYear();
+            _rpio = _authority.GetResourcePlanningOffice();
+            _fund = _authority.GetFund();
+            _ah = _authority.GetAllowanceHolder();
+            _org = _authority.GetOrganization();
+            _rc = _authority.GetResponsibilityCenter();
+            _division = new Division( _rc );
         }
-
-        // ***************************************************************************************************************************
-        // ****************************************************  PROPERTIES   ********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets the allocation.
-        /// </summary>
-        /// <value>
-        /// The allocation.
-        /// </value>
-        private IAllocation Allocation { get; }
-
-        /// <summary>
-        /// Gets the authority.
-        /// </summary>
-        /// <value>
-        /// The authority.
-        /// </value>
-        private IAuthority Authority { get; }
-
-        /// <summary>
-        /// Gets the bfy.
-        /// </summary>
-        /// <value>
-        /// The bfy.
-        /// </value>
-        private IBudgetFiscalYear BFY { get; }
-
-        /// <summary>
-        /// Gets the rpio.
-        /// </summary>
-        /// <value>
-        /// The rpio.
-        /// </value>
-        private IResourcePlanningOffice RPIO { get; }
-
-        /// <summary>
-        /// Gets the fund.
-        /// </summary>
-        /// <value>
-        /// The fund.
-        /// </value>
-        private IFund Fund { get; }
-
-        /// <summary>
-        /// Gets the ah.
-        /// </summary>
-        /// <value>
-        /// The ah.
-        /// </value>
-        private IAllowanceHolder AH { get; }
-
-        /// <summary>
-        /// Gets the org.
-        /// </summary>
-        /// <value>
-        /// The org.
-        /// </value>
-        private IOrganization ORG { get; }
-
-        /// <summary>
-        /// Gets the rc.
-        /// </summary>
-        /// <value>
-        /// The rc.
-        /// </value>
-        private IResponsibilityCenter RC { get; }
-
-        /// <summary>
-        /// Gets the division.
-        /// </summary>
-        /// <value>
-        /// The division.
-        /// </value>
-        private IDivision Division { get; }
-
-        /// <summary>
-        /// Gets or sets the text.
-        /// </summary>
-        /// <value>
-        /// The text.
-        /// </value>
-        private string Text { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Gets the control number.
@@ -175,18 +147,18 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var connection = new ConnectionBuilder( Source.ControlNumbers, Provider.SQLite );
+                    var _connection = new ConnectionBuilder( Source.ControlNumbers, Provider.SQLite );
 
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
                         [ $"{Field.FundCode}" ] = fund.GetCode(),
-                        [ $"{Field.BFY}" ] = BFY.GetFirstYear(),
-                        [ $"{Field.RcCode}" ] = RC.GetCode()
+                        [ $"{Field.BFY}" ] = _bfy.GetFirstYear(),
+                        [ $"{Field.RcCode}" ] = _rc.GetCode()
                     };
 
-                    var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                    var query = new Query( connection, sqlstatement );
-                    return new ControlNumber( query );
+                    var _sqlStatement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                    var _query = new Query( _connection, _sqlStatement );
+                    return new ControlNumber( _query );
                 }
                 catch( Exception ex )
                 {
@@ -207,7 +179,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Allocation ?? default( IAllocation );
+                return _allocation ?? default( IAllocation );
             }
             catch( Exception ex )
             {
@@ -303,12 +275,12 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var rng = grid.GetRange();
-                    rng.Style.Font.Color.SetColor( Color.Black );
-                    rng.Style.Font.SetFromFont( _dataFont );
-                    rng.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    rng.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
-                    rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                    using var _range = grid.GetRange();
+                    _range.Style.Font.Color.SetColor( Color.Black );
+                    _range.Style.Font.SetFromFont( _dataFont );
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
+                    _range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
                 }
                 catch( Exception ex )
                 {
@@ -364,43 +336,43 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var worksheet = grid.GetWorksheet();
-                    var row = grid.From.Row;
-                    var col = grid.From.Column;
+                    var _worksheet = grid.GetWorksheet();
+                    var _row = grid.From.Row;
+                    var _col = grid.From.Column;
 
                     if( org == null )
                     {
-                        worksheet.Cells[ row - 1, col ].Value = $"{fund.GetName()} - {fund.GetCode()}";
+                        _worksheet.Cells[ _row - 1, _col ].Value = $"{fund.GetName()} - {fund.GetCode()}";
                     }
 
                     if( org != null )
                     {
-                        worksheet.Cells[ row - 1, col ].Value = $"{org.GetName()} - {org.GetCode()}";
+                        _worksheet.Cells[ _row - 1, _col ].Value = $"{org.GetName()} - {org.GetCode()}";
                     }
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 6 ].Style.Fill.PatternType =
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 6 ].Style.Fill.PatternType =
                         ExcelFillStyle.Solid;
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 6 ]
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 6 ]
                         .Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 6 ].Style.HorizontalAlignment =
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 6 ].Style.HorizontalAlignment =
                         ExcelHorizontalAlignment.Left;
 
-                    worksheet.Cells[ row, col ].Value = "Account";
-                    worksheet.Cells[ row, col + 1 ].Value = "Travel";
-                    worksheet.Cells[ row, col + 2 ].Value = "Expenses";
-                    worksheet.Cells[ row, col + 3 ].Value = "Contracts";
-                    worksheet.Cells[ row, col + 4 ].Value = "Grants";
-                    worksheet.Cells[ row, col + 5 ].Value = "Total";
-                    using var hdr = worksheet.Cells[ row, col, row, col + 6 ];
-                    hdr.Style.Font.Bold = true;
-                    hdr.Style.Font.Color.SetColor( _fontColor );
-                    hdr.Style.Font.SetFromFont( _dataFont );
-                    hdr.Style.Border.BorderAround( ExcelBorderStyle.Thin );
-                    hdr.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    hdr.Style.Fill.BackgroundColor.SetColor( _secondaryBackColor );
-                    hdr.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    _worksheet.Cells[ _row, _col ].Value = "Account";
+                    _worksheet.Cells[ _row, _col + 1 ].Value = "Travel";
+                    _worksheet.Cells[ _row, _col + 2 ].Value = "Expenses";
+                    _worksheet.Cells[ _row, _col + 3 ].Value = "Contracts";
+                    _worksheet.Cells[ _row, _col + 4 ].Value = "Grants";
+                    _worksheet.Cells[ _row, _col + 5 ].Value = "_total";
+                    using var _range = _worksheet.Cells[ _row, _col, _row, _col + 6 ];
+                    _range.Style.Font.Bold = true;
+                    _range.Style.Font.Color.SetColor( _fontColor );
+                    _range.Style.Font.SetFromFont( _dataFont );
+                    _range.Style.Border.BorderAround( ExcelBorderStyle.Thin );
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( _secondaryBackColor );
+                    _range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }
                 catch( Exception ex )
                 {
@@ -423,52 +395,52 @@ namespace BudgetExecution
         /// </param>
         public void SetAllocationTableFormat( Grid grid, IFund fund, IAllowanceHolder ah = null )
         {
-            if( grid.GetWorksheet() != null
+            if( grid?.GetWorksheet() != null
                 && grid.GetRange() != null
                 && fund != null )
             {
                 try
                 {
-                    var worksheet = grid.GetWorksheet();
-                    var row = grid.From.Row;
-                    var col = grid.From.Column;
+                    var _worksheet = grid.GetWorksheet();
+                    var _row = grid.From.Row;
+                    var _col = grid.From.Column;
 
                     if( ah == null )
                     {
-                        worksheet.Cells[ row - 3, col ].Value =
+                        _worksheet.Cells[ _row - 3, _col ].Value =
                             $"FundCode - {fund.GetName()} - {fund.GetCode()}";
                     }
 
                     if( ah != null )
                     {
-                        worksheet.Cells[ row - 2, col ].Value =
+                        _worksheet.Cells[ _row - 2, _col ].Value =
                             $"{ah.GetName()} - {fund.GetCode()} - {ah.GetCode()}";
                     }
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 6 ].Style.Fill.PatternType =
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 6 ].Style.Fill.PatternType =
                         ExcelFillStyle.Solid;
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 6 ]
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 6 ]
                         .Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 6 ].Style.HorizontalAlignment =
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 6 ].Style.HorizontalAlignment =
                         ExcelHorizontalAlignment.Left;
 
-                    worksheet.Cells[ row, col ].Value = "Account";
-                    worksheet.Cells[ row, col + 1 ].Value = "Site";
-                    worksheet.Cells[ row, col + 2 ].Value = "Travel";
-                    worksheet.Cells[ row, col + 3 ].Value = "Expenses";
-                    worksheet.Cells[ row, col + 4 ].Value = "Contracts";
-                    worksheet.Cells[ row, col + 5 ].Value = "Grants";
-                    worksheet.Cells[ row, col + 6 ].Value = "Total";
-                    using var hdr = worksheet.Cells[ row, col, row, col + 6 ];
-                    hdr.Style.Font.Bold = true;
-                    hdr.Style.Font.Color.SetColor( Color.Black );
-                    hdr.Style.Font.SetFromFont( _dataFont );
-                    hdr.Style.Border.BorderAround( ExcelBorderStyle.Thin );
-                    hdr.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    hdr.Style.Fill.BackgroundColor.SetColor( Color.FromArgb( 255, 221, 235, 247 ) );
-                    hdr.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    _worksheet.Cells[ _row, _col ].Value = "Account";
+                    _worksheet.Cells[ _row, _col + 1 ].Value = "Site";
+                    _worksheet.Cells[ _row, _col + 2 ].Value = "Travel";
+                    _worksheet.Cells[ _row, _col + 3 ].Value = "Expenses";
+                    _worksheet.Cells[ _row, _col + 4 ].Value = "Contracts";
+                    _worksheet.Cells[ _row, _col + 5 ].Value = "Grants";
+                    _worksheet.Cells[ _row, _col + 6 ].Value = "_total";
+                    using var _range = _worksheet.Cells[ _row, _col, _row, _col + 6 ];
+                    _range.Style.Font.Bold = true;
+                    _range.Style.Font.Color.SetColor( Color.Black );
+                    _range.Style.Font.SetFromFont( _dataFont );
+                    _range.Style.Border.BorderAround( ExcelBorderStyle.Thin );
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( Color.FromArgb( 255, 221, 235, 247 ) );
+                    _range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }
                 catch( Exception ex )
                 {
@@ -485,36 +457,36 @@ namespace BudgetExecution
         /// </param>
         public void SetAwardsHeaderFormat( Grid grid )
         {
-            if( grid.GetWorksheet() != null
+            if( grid?.GetWorksheet() != null
                 && grid.GetRange() != null
-                && Allocation.GetAwards().Any() )
+                && _allocation.GetAwards().Any() )
             {
                 try
                 {
-                    var worksheet = grid.GetWorksheet();
-                    var row = grid.From.Row;
-                    var col = grid.From.Column;
-                    worksheet.Cells[ row - 1, col ].Value = "Supplemental";
+                    var _worksheet = grid.GetWorksheet();
+                    var _row = grid.From.Row;
+                    var _col = grid.From.Column;
+                    _worksheet.Cells[ _row - 1, _col ].Value = "Supplemental";
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 1 ].Style.Fill.PatternType =
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 1 ].Style.Fill.PatternType =
                         ExcelFillStyle.Solid;
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 1 ]
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 1 ]
                         .Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
 
-                    worksheet.Cells[ row - 1, col, row - 1, col + 1 ].Style.HorizontalAlignment =
+                    _worksheet.Cells[ _row - 1, _col, _row - 1, _col + 1 ].Style.HorizontalAlignment =
                         ExcelHorizontalAlignment.Left;
 
-                    worksheet.Cells[ row, col ].Value = "Type";
-                    worksheet.Cells[ row, col + 1 ].Value = "Amount";
-                    using var hdr = worksheet.Cells[ row, col, row, col + 1 ];
-                    hdr.Style.Font.Bold = true;
-                    hdr.Style.Font.Color.SetColor( Color.Black );
-                    hdr.Style.Font.SetFromFont( _dataFont );
-                    hdr.Style.Border.BorderAround( ExcelBorderStyle.Thin );
-                    hdr.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    hdr.Style.Fill.BackgroundColor.SetColor( Color.FromArgb( 255, 221, 235, 247 ) );
-                    hdr.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    _worksheet.Cells[ _row, _col ].Value = "Type";
+                    _worksheet.Cells[ _row, _col + 1 ].Value = "Amount";
+                    using var _range = _worksheet.Cells[ _row, _col, _row, _col + 1 ];
+                    _range.Style.Font.Bold = true;
+                    _range.Style.Font.Color.SetColor( Color.Black );
+                    _range.Style.Font.SetFromFont( _dataFont );
+                    _range.Style.Border.BorderAround( ExcelBorderStyle.Thin );
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( Color.FromArgb( 255, 221, 235, 247 ) );
+                    _range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }
                 catch( Exception ex )
                 {
@@ -544,29 +516,29 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var worksheet = grid.GetWorksheet();
-                    var controlnumber = GetControlNumber( fund, bfy );
+                    var _worksheet = grid.GetWorksheet();
+                    var _number = GetControlNumber( fund, bfy );
 
-                    worksheet.Cells[ grid.From.Row, grid.From.Column ].Value =
-                        $"Division {Division.GetDivisionName()}";
+                    _worksheet.Cells[ grid.From.Row, grid.From.Column ].Value =
+                        $"Division {_division.GetDivisionName()}";
 
-                    worksheet.Cells[ 2, 3, 2, 4 ].Value = $"{Division.GetDivisionName()}";
-                    worksheet.Cells[ 3, 2 ].Value = $"Control {controlnumber?.GetBudgetControlNumber()}";
-                    worksheet.Cells[ 2, 7 ].Value = $"Fiscal Year {bfy.GetFirstYear()}";
-                    worksheet.Cells[ 3, 7 ].Value = $"Treasury {fund.GetTreasurySymbol()}";
-                    worksheet.Cells[ 4, 2 ].Value = "Authority  PL 166-6";
-                    worksheet.Cells[ 4, 7 ].Value = "Organization ";
+                    _worksheet.Cells[ 2, 3, 2, 4 ].Value = $"{_division.GetDivisionName()}";
+                    _worksheet.Cells[ 3, 2 ].Value = $"Control {_number?.GetBudgetControlNumber()}";
+                    _worksheet.Cells[ 2, 7 ].Value = $"Fiscal Year {bfy.GetFirstYear()}";
+                    _worksheet.Cells[ 3, 7 ].Value = $"Treasury {fund.GetTreasurySymbol()}";
+                    _worksheet.Cells[ 4, 2 ].Value = "Authority  PL 166-6";
+                    _worksheet.Cells[ 4, 7 ].Value = "Organization ";
 
-                    if( fund.GetCode().GetValue().StartsWith( $"{FundCode.B}" ) )
+                    if( fund.GetCode()?.GetValue()?.StartsWith( $"{FundCode.B}" ) == true )
                     {
-                        worksheet.Cells[ 3, 8 ].Value = fund.GetTreasurySymbol()
+                        _worksheet.Cells[ 3, 8 ].Value = fund.GetTreasurySymbol()
                             ?.GetValue()
                             .Replace( "{A}/{B}", bfy.GetFirstYear() + "-" + bfy.GetLastYear() );
                     }
 
-                    if( !fund.GetCode().GetValue().StartsWith( $"{FundCode.B}" ) )
+                    if( !fund.GetCode()?.GetValue()?.StartsWith( $"{FundCode.B}" ) == true )
                     {
-                        worksheet.Cells[ 3, 8 ].Value = fund.GetTreasurySymbol();
+                        _worksheet.Cells[ 3, 8 ].Value = fund.GetTreasurySymbol();
                     }
                 }
                 catch( Exception ex )
@@ -584,27 +556,27 @@ namespace BudgetExecution
         /// </param>
         public void SetSummaryFormat( Grid grid )
         {
-            if( grid.GetWorksheet() != null
+            if( grid?.GetWorksheet() != null
                 && grid.GetRange() != null )
             {
                 try
                 {
-                    var worksheet = grid.GetWorksheet();
-                    var row = grid.From.Row;
-                    var col = grid.From.Column;
-                    worksheet.Cells[ row, col ].Value = "Authority";
-                    worksheet.Cells[ row, col ].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells[ row, col ].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    worksheet.Cells[ row, col + 1 ].Formula = $"=SUM(C{_index}:C{row - 1})";
-                    worksheet.Cells[ row, col + 2 ].Formula = $"=SUM(D{_index}:D{row - 1})";
-                    worksheet.Cells[ row, col + 3 ].Formula = $"=SUM(E{_index}:E{row - 1})";
-                    worksheet.Cells[ row, col + 4 ].Formula = $"=SUM(F{_index}:F{row - 1})";
-                    worksheet.Cells[ row, col + 5 ].Formula = $"=SUM(G{_index}:G{row - 1})";
-                    worksheet.Cells[ row, col + 6 ].Formula = $"=SUM(H{_index}:H{row - 1})";
-                    worksheet.Cells[ row, col, row, col + 6 ].Style.Font.Bold = true;
-                    worksheet.Cells[ row, col + 1, row, col + 6 ].Style.Numberformat.Format = "#,###";
+                    var _worksheet = grid.GetWorksheet();
+                    var _row = grid.From.Row;
+                    var _col = grid.From.Column;
+                    _worksheet.Cells[ _row, _col ].Value = "Authority";
+                    _worksheet.Cells[ _row, _col ].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    _worksheet.Cells[ _row, _col ].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    _worksheet.Cells[ _row, _col + 1 ].Formula = $"=SUM(C{_index}:C{_row - 1})";
+                    _worksheet.Cells[ _row, _col + 2 ].Formula = $"=SUM(D{_index}:D{_row - 1})";
+                    _worksheet.Cells[ _row, _col + 3 ].Formula = $"=SUM(E{_index}:E{_row - 1})";
+                    _worksheet.Cells[ _row, _col + 4 ].Formula = $"=SUM(F{_index}:F{_row - 1})";
+                    _worksheet.Cells[ _row, _col + 5 ].Formula = $"=SUM(G{_index}:G{_row - 1})";
+                    _worksheet.Cells[ _row, _col + 6 ].Formula = $"=SUM(H{_index}:H{_row - 1})";
+                    _worksheet.Cells[ _row, _col, _row, _col + 6 ].Style.Font.Bold = true;
+                    _worksheet.Cells[ _row, _col + 1, _row, _col + 6 ].Style.Numberformat.Format = "#,###";
 
-                    worksheet.Cells[ row, col, row, col + 6 ].Style.HorizontalAlignment =
+                    _worksheet.Cells[ _row, _col, _row, _col + 6 ].Style.HorizontalAlignment =
                         ExcelHorizontalAlignment.Center;
 
                     SetTotalRowFormat( grid );
@@ -627,37 +599,43 @@ namespace BudgetExecution
         /// </param>
         public void SetAwardRowsFormat( Grid grid, IFund fund )
         {
-            if( grid.GetWorksheet() != null
+            if( grid?.GetWorksheet() != null
                 && grid.GetRange() != null
                 && Verify.Input( fund.GetCode().GetValue() ) )
             {
                 try
                 {
-                    var worksheet = grid.GetWorksheet();
-                    var row = grid.From.Row;
-                    var col = grid.From.Column;
-                    var awards = Allocation.GetAwards();
+                    var _worksheet = grid.GetWorksheet();
+                    var _row = grid.From.Row;
+                    var _column = grid.From.Column;
+                    var _enumerable = _allocation.GetAwards();
 
-                    var lookup = awards.Where( p => p.GetFundCode().Equals( fund.GetCode().GetValue() ) )
-                        .ToLookup( p => p.GetFundCode(), p => p );
+                    var _lookup = _enumerable
+                        ?.Where( p => p.GetFundCode().Equals( fund.GetCode().GetValue() ) )
+                        ?.ToLookup( p => p.GetFundCode(), p => p );
 
-                    foreach( var group in lookup )
+                    if( _lookup != null )
                     {
-                        worksheet.Cells[ row, col ].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-                        worksheet.Cells[ row, col ].Value = group.Key;
+                        foreach( var _group in _lookup )
+                        {
+                            _worksheet.Cells[ _row, _column ].Style.HorizontalAlignment =
+                                ExcelHorizontalAlignment.Left;
 
-                        worksheet.Cells[ row, col + 1 ].Value =
-                            decimal.Parse( lookup[ group.Key ].ToString() );
+                            _worksheet.Cells[ _row, _column ].Value = _group.Key;
 
-                        row++;
+                            _worksheet.Cells[ _row, _column + 1 ].Value =
+                                decimal.Parse( _lookup[ _group.Key ].ToString() );
+
+                            _row++;
+                        }
                     }
 
-                    worksheet.Cells[ row, col ].Value = "Total";
-                    worksheet.Cells[ row, col, row, col + 1 ].Style.Font.Bold = true;
-                    worksheet.Cells[ row, col ].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
-                    worksheet.Cells[ row, col ].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    worksheet.Cells[ row, col + 1 ].Formula = $"=SUM(C{row}:C{row - 1})";
-                    worksheet.Cells[ row, col + 1 ].Style.Border.Bottom.Style = ExcelBorderStyle.Double;
+                    _worksheet.Cells[ _row, _column ].Value = "_total";
+                    _worksheet.Cells[ _row, _column, _row, _column + 1 ].Style.Font.Bold = true;
+                    _worksheet.Cells[ _row, _column ].Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                    _worksheet.Cells[ _row, _column ].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    _worksheet.Cells[ _row, _column + 1 ].Formula = $"=SUM(C{_row}:C{_row - 1})";
+                    _worksheet.Cells[ _row, _column + 1 ].Style.Border.Bottom.Style = ExcelBorderStyle.Double;
                 }
                 catch( Exception ex )
                 {
@@ -682,16 +660,17 @@ namespace BudgetExecution
         /// </returns>
         public double CalculateBocTotal( IEnumerable<DataRow> data, Field column, BOC filter )
         {
-            if( data.Any()
+            if( data?.Any() == true
                 && Enum.IsDefined( typeof( Field ), column )
                 && Enum.IsDefined( typeof( BOC ), filter ) )
             {
-                var sum = data.Where( p => p.Field<string>( column.ToString() ).Equals( filter.ToString() ) )
-                    .Select( p => p.Field<decimal>( Numeric.Amount.ToString() ) )
-                    .Sum();
+                var _sum = data
+                    ?.Where( p => p.Field<string>( column.ToString() ).Equals( filter.ToString() ) )
+                    ?.Select( p => p.Field<decimal>( Numeric.Amount.ToString() ) )
+                    ?.Sum();
 
-                return sum > 0
-                    ? (double)sum
+                return _sum > 0
+                    ? (double)_sum
                     : default( double );
             }
 
@@ -713,40 +692,40 @@ namespace BudgetExecution
         public void PopulateAccountRows( Grid grid, ILookup<string, DataRow> code,
             IGrouping<string, DataRow> kvp )
         {
-            if( grid.GetWorksheet() != null
+            if( grid?.GetWorksheet() != null
                 && grid.GetRange() != null
                 && code != null
                 && kvp != null )
             {
                 try
                 {
-                    var worksheet = grid.GetWorksheet();
-                    var row = grid.From.Row;
-                    var col = grid.From.Column;
-                    var travel = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Travel );
-                    var site = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.SiteTravel );
-                    var expenses = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Expenses );
-                    var contracts = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Contracts );
-                    var grants = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Grants );
-                    var total = travel + expenses + contracts + grants;
+                    var _worksheet = grid.GetWorksheet();
+                    var _row = grid.From.Row;
+                    var _column = grid.From.Column;
+                    var _travel = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Travel );
+                    var _site = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.SiteTravel );
+                    var _expenses = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Expenses );
+                    var _contracts = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Contracts );
+                    var _grants = CalculateBocTotal( code[ kvp.Key ], Field.BocCode, BOC.Grants );
+                    var _total = _travel + _expenses + _contracts + _grants;
 
-                    switch( worksheet.Name )
+                    switch( _worksheet.Name )
                     {
                         case "SF-6A REMOVALS":
                         {
                             foreach( var p in code[ kvp.Key ] )
                             {
-                                worksheet.Cells[ row, col ].Value = p.Field<string>( $"{Field.AccountCode}" )
+                                _worksheet.Cells[ _row, _column ].Value = p.Field<string>( $"{Field.AccountCode}" )
                                     + " " 
                                     + p.Field<string>( $"{Field.OrgCode}" )
                                         ?.Replace( "0600", "-" );
 
-                                worksheet.Cells[ row, col + 1 ].Value = site;
-                                worksheet.Cells[ row, col + 2 ].Value = travel;
-                                worksheet.Cells[ row, col + 3 ].Value = expenses;
-                                worksheet.Cells[ row, col + 4 ].Value = contracts;
-                                worksheet.Cells[ row, col + 5 ].Value = grants;
-                                worksheet.Cells[ row, col + 6 ].Value = total;
+                                _worksheet.Cells[ _row, _column + 1 ].Value = _site;
+                                _worksheet.Cells[ _row, _column + 2 ].Value = _travel;
+                                _worksheet.Cells[ _row, _column + 3 ].Value = _expenses;
+                                _worksheet.Cells[ _row, _column + 4 ].Value = _contracts;
+                                _worksheet.Cells[ _row, _column + 5 ].Value = _grants;
+                                _worksheet.Cells[ _row, _column + 6 ].Value = _total;
                             }
 
                             break;
@@ -756,16 +735,16 @@ namespace BudgetExecution
                         {
                             foreach( var p in code[ kvp.Key ] )
                             {
-                                worksheet.Cells[ row, col ].Value = p.Field<string>( $"{Field.AccountCode}" )
+                                _worksheet.Cells[ _row, _column ].Value = p.Field<string>( $"{Field.AccountCode}" )
                                     + "- "
                                     + p.Field<string>( $"{Field.FundCode}" );
 
-                                worksheet.Cells[ row, col + 1 ].Value = site;
-                                worksheet.Cells[ row, col + 2 ].Value = travel;
-                                worksheet.Cells[ row, col + 3 ].Value = expenses;
-                                worksheet.Cells[ row, col + 4 ].Value = contracts;
-                                worksheet.Cells[ row, col + 5 ].Value = grants;
-                                worksheet.Cells[ row, col + 6 ].Value = total;
+                                _worksheet.Cells[ _row, _column + 1 ].Value = _site;
+                                _worksheet.Cells[ _row, _column + 2 ].Value = _travel;
+                                _worksheet.Cells[ _row, _column + 3 ].Value = _expenses;
+                                _worksheet.Cells[ _row, _column + 4 ].Value = _contracts;
+                                _worksheet.Cells[ _row, _column + 5 ].Value = _grants;
+                                _worksheet.Cells[ _row, _column + 6 ].Value = _total;
                             }
 
                             break;

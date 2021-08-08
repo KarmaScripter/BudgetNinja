@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -19,17 +15,13 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
     public abstract class AccountBase
     {
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <value>
         /// The data.
         /// </value>
-        private protected DataRow Record { get; set; }
+        private protected DataRow _record;
 
         /// <summary>
         /// Gets the account identifier.
@@ -37,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The account identifier.
         /// </value>
-        private protected IKey ID { get; set; }
+        private protected IKey _id;
 
         /// <summary>
         /// Gets the NPM code.
@@ -45,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The NPM code.
         /// </value>
-        private protected IElement NpmCode { get; set; }
+        private protected IElement _npmCode;
 
         /// <summary>
         /// Gets the account code.
@@ -53,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The account code.
         /// </value>
-        private protected IElement Code { get; set; }
+        private protected IElement _code;
 
         /// <summary>
         /// Gets the program project code.
@@ -61,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The program project code.
         /// </value>
-        private protected IElement ProgramProjectCode { get; set; }
+        private protected IElement _programProjectCode;
 
         /// <summary>
         /// Gets the program area code.
@@ -69,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The program area code.
         /// </value>
-        private protected IElement ProgramAreaCode { get; set; }
+        private protected IElement _programAreaCode;
 
         /// <summary>
         /// Gets the goal code.
@@ -77,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The goal code.
         /// </value>
-        private protected IElement GoalCode { get; set; }
+        private protected IElement _goalCode;
 
         /// <summary>
         /// Gets the objective code.
@@ -85,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The objective code.
         /// </value>
-        private protected IElement ObjectiveCode { get; set; }
+        private protected IElement _objectiveCode;
 
         /// <summary>
         /// Gets the activity code.
@@ -93,7 +85,7 @@ namespace BudgetExecution
         /// <value>
         /// The activity code.
         /// </value>
-        private protected IElement ActivityCode { get; set; }
+        private protected IElement _activityCode;
 
         /// <summary>
         /// Gets the arguments.
@@ -101,12 +93,8 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> Data { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        private protected IDictionary<string, object> _data;
+        
         /// <summary>
         /// Sets the arguments.
         /// </summary>
@@ -145,8 +133,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : default( IKey );
             }
             catch( Exception ex )
@@ -165,8 +153,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Code?.GetValue() )
-                    ? Code
+                return Verify.Input( _code?.GetValue() )
+                    ? _code
                     : default( IElement );
             }
             catch( SystemException ex )
@@ -182,9 +170,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error.SetText();
-            error.ShowDialog();
+            using var _error = new Error( ex );
+            _error.SetText();
+            _error.ShowDialog();
         }
     }
 }

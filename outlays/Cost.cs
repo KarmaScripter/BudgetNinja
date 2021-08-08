@@ -12,7 +12,7 @@ namespace BudgetExecution
     /// <summary>
     /// The Cost class is the abstract representation of appropriated resources used in
     /// the execution of the EPA's Strategtic Plan. It ties elements of the Agency's
-    /// Account Code Structure to the Strategic Plan along with their corresponding
+    /// Account _code Structure to the Strategic Plan along with their corresponding
     /// outlays; Costs are implemented in conjunction with the actual expenses
     /// incurred.
     /// </summary>

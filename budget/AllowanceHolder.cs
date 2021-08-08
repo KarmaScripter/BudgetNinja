@@ -29,7 +29,7 @@ namespace BudgetExecution
     /// Holder. Note there is a separate allotment for every appropriation (Treasury
     /// account symbol) for every fiscal year. The OB Director retains the original
     /// signed apportionment documents on behalf of the agency. This is the agency’s
-    /// formal designation regarding “Administrative Subdivisions of Funds.” The agency
+    /// formal designation regarding “Administrative Subdivisions of _funds.” The agency
     /// does not have sub-allotments. The one restriction on the agency’s allotment is
     /// that it cannot exceed the amount of the apportionment. At the Regional level,
     /// Allowance Holder's further divide the Agency's funding with the Regional
@@ -51,8 +51,48 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private readonly static Source _source = Source.AllowanceHolders;
-        
+        private protected readonly Source _source = Source.AllowanceHolders;
+
+        /// <summary>
+        /// Gets or sets the dict.
+        /// </summary>
+        /// <value>
+        /// The dict.
+        /// </value>
+        private readonly DataRow _record;
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        private readonly IDictionary<string, object> _data;
+
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        private readonly IElement _code;
+
+        /// <summary>
+        /// Gets the allowance holder identifier.
+        /// </summary>
+        /// <value>
+        /// The allowance holder identifier.
+        /// </value>
+        private readonly IKey _id;
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        private readonly IElement _name;
+
         /// <summary>
         /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
         /// </summary>
@@ -63,12 +103,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
         /// </summary>
-        /// <param name = "builder" >
-        /// The builder.
+        /// <param name = "dataBuilder" >
+        /// The dataBuilder.
         /// </param>
-        public AllowanceHolder( IBuilder builder )
+        public AllowanceHolder( IBuilder dataBuilder )
         {
-            _record = builder?.GetRecord();
+            _record = dataBuilder?.GetRecord();
             _id = new Key( _record, PrimaryKey.AllowanceHolderId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );
@@ -121,50 +161,6 @@ namespace BudgetExecution
             _data = _record?.ToDictionary();
         }
 
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the dict.
-        /// </summary>
-        /// <value>
-        /// The dict.
-        /// </value>
-        private readonly DataRow _record;
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private readonly IDictionary<string, object> _data;
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        private readonly IElement _code;
-
-        /// <summary>
-        /// Gets the allowance holder identifier.
-        /// </summary>
-        /// <value>
-        /// The allowance holder identifier.
-        /// </value>
-        private readonly IKey _id;
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private readonly IElement _name;
-        
         /// <summary>
         /// Sets the arguments.
         /// </summary>

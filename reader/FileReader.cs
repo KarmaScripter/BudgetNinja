@@ -1,6 +1,6 @@
-﻿// // <copyright file=" <File Name> .cs" company="Terry D. Eppler">
-// // Copyright (c) Terry Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
+// Copyright (c) Terry Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -10,46 +10,50 @@ namespace BudgetExecution
     using System.IO.Compression;
     using System.Linq;
 
-    /// <summary> </summary>
-    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    /// <summary>
+    /// 
+    /// </summary>
+    [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     public class FileReader
     {
-        /// <summary> The file </summary>
+        /// <summary>
+        /// The data file
+        /// </summary>
         private protected readonly IFile _dataFile;
-        
-        /// <summary> Gets or sets the data. </summary>
-        /// <value> The data. </value>
+
+        /// <summary>
+        /// The file information
+        /// </summary>
         private protected readonly FileInfo _fileInfo;
 
-        /// <summary> Gets or sets the file stream. </summary>
-        /// <value> The file stream. </value>
+        /// <summary>
+        /// The file stream
+        /// </summary>
         private protected FileStream _fileStream;
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref = "FileReader"/>
-        /// class.
+        /// Initializes a new instance of the <see cref="FileReader"/> class.
         /// </summary>
         public FileReader()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref = "FileReader"/>
-        /// class.
+        /// Initializes a new instance of the <see cref="FileReader"/> class.
         /// </summary>
-        /// <param name = "file" > The file. </param>
+        /// <param name="file">The file.</param>
         public FileReader( IFile file )
         {
             _dataFile = file;
             _fileInfo = _dataFile.GetFileInfo();
         }
 
-        /// <summary> Reads all text. </summary>
-        /// <returns> </returns>
+        /// <summary>
+        /// Reads all text.
+        /// </summary>
+        /// <returns></returns>
         public string ReadAllText()
         {
             try
@@ -74,8 +78,10 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Reads all lines. </summary>
-        /// <returns> </returns>
+        /// <summary>
+        /// Reads all lines.
+        /// </summary>
+        /// <returns></returns>
         public string[ ] ReadAllLines()
         {
             try
@@ -100,8 +106,10 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Reads all bytes. </summary>
-        /// <returns> </returns>
+        /// <summary>
+        /// Reads all bytes.
+        /// </summary>
+        /// <returns></returns>
         public byte[ ] ReadAllBytes()
         {
             try
@@ -126,8 +134,10 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Gets the text. </summary>
-        /// <returns> </returns>
+        /// <summary>
+        /// Reads to end.
+        /// </summary>
+        /// <returns></returns>
         public string ReadToEnd()
         {
             try
@@ -146,7 +156,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Des the compress. </summary>
+        /// <summary>
+        /// Des the compress.
+        /// </summary>
         public void DeCompress()
         {
             try
@@ -162,8 +174,10 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Fails the specified ex. </summary>
-        /// <param name = "ex" > The ex. </param>
+        /// <summary>
+        /// Fails the specified ex.
+        /// </summary>
+        /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );

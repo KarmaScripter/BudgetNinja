@@ -4,9 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -16,28 +13,24 @@ namespace BudgetExecution
     /// </summary>
     public interface IDataMetric : IMetric, ISource
     {
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Calculates the deviation.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
         /// The numeric.
         /// </param>
         /// <returns>
         /// </returns>
-        double CalculateDeviation( IEnumerable<DataRow> data, Numeric numeric );
+        double CalculateDeviation( IEnumerable<DataRow> dataRow, Numeric numeric );
 
         /// <summary>
         /// Calculates the standard deviations.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -47,14 +40,13 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        double CalculateDeviations( IEnumerable<DataRow> data, Field field,
-            Numeric numeric = Numeric.Amount );
+        double CalculateDeviations( IEnumerable<DataRow> dataRow, Field field, Numeric numeric = Numeric.Amount );
 
         /// <summary>
         /// Calculates the variance.
         /// </summary>
         /// <param name = "data" >
-        /// The data.
+        /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
         /// The numeric.
@@ -73,8 +65,8 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the variances.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -84,26 +76,26 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        double CalculateVariances( IEnumerable<DataRow> data, Field field, Numeric numeric = Numeric.Amount );
+        double CalculateVariances( IEnumerable<DataRow> dataRow, Field field, Numeric numeric = Numeric.Amount );
 
         /// <summary>
         /// Calculates the statistics.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
         /// The numeric.
         /// </param>
         /// <returns>
         /// </returns>
-        IEnumerable<double> CalculateStatistics( IEnumerable<DataRow> data, Numeric numeric );
+        IEnumerable<double> CalculateStatistics( IEnumerable<DataRow> dataRow, Numeric numeric );
 
         /// <summary>
         /// Calculates the statistics.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -113,7 +105,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        IDictionary<string, IEnumerable<double>> CalculateStatistics( IEnumerable<DataRow> data, Field field,
+        IDictionary<string, IEnumerable<double>> CalculateStatistics( IEnumerable<DataRow> dataRow, Field field,
             Numeric numeric = Numeric.Amount );
     }
 }

@@ -288,7 +288,6 @@
     </Compile>
     <Compile Include="writer\FileWriter.cs" />
     <None Include=".editorconfig" />
-    <None Include="BudgetExecution.DotSettings" />
     <None Include="fiscalyear\Year" />
     <None Include="App.config" />
     <None Include="packages.config" />

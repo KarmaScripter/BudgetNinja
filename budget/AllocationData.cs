@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -21,17 +17,13 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public class AllocationData : Authority
     {
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the funds.
         /// </summary>
         /// <value>
         /// The funds.
         /// </value>
-        private protected IEnumerable<IFund> Funds { get; set; }
+        private protected IEnumerable<IFund> _funds;
 
         /// <summary>
         /// Gets or sets the PRC.
@@ -39,7 +31,7 @@ namespace BudgetExecution
         /// <value>
         /// The PRC.
         /// </value>
-        private protected IEnumerable<IProgramResultsCode> ProgramResultCodes { get; set; }
+        private protected IEnumerable<IProgramResultsCode> _programResultCodes;
 
         /// <summary>
         /// Gets or sets the fte.
@@ -47,7 +39,7 @@ namespace BudgetExecution
         /// <value>
         /// The fte.
         /// </value>
-        private protected IEnumerable<IProgramResultsCode> FullTimeEquivalents { get; set; }
+        private protected IEnumerable<IProgramResultsCode> _fullTimeEquivalents;
 
         /// <summary>
         /// Gets or sets the org.
@@ -55,7 +47,7 @@ namespace BudgetExecution
         /// <value>
         /// The org.
         /// </value>
-        private protected IEnumerable<IOrganization> Organizations { get; set; }
+        private protected IEnumerable<IOrganization> _organizations;
 
         /// <summary>
         /// Gets or sets the ah.
@@ -63,7 +55,7 @@ namespace BudgetExecution
         /// <value>
         /// The ah.
         /// </value>
-        private protected IEnumerable<IAllowanceHolder> AllowanceHolders { get; set; }
+        private protected IEnumerable<IAllowanceHolder> _allowanceHolders;
 
         /// <summary>
         /// Gets or sets the boc.
@@ -71,7 +63,7 @@ namespace BudgetExecution
         /// <value>
         /// The boc.
         /// </value>
-        private protected IEnumerable<IBudgetObjectClass> ObjectClasses { get; set; }
+        private protected IEnumerable<IBudgetObjectClass> _objectClasses;
 
         /// <summary>
         /// Gets or sets the accounts.
@@ -79,7 +71,7 @@ namespace BudgetExecution
         /// <value>
         /// The accounts.
         /// </value>
-        private protected IEnumerable<IAccount> Accounts { get; set; }
+        private protected IEnumerable<IAccount> _accounts;
 
         /// <summary>
         /// Gets or sets the awards.
@@ -87,7 +79,7 @@ namespace BudgetExecution
         /// <value>
         /// The awards.
         /// </value>
-        private protected IEnumerable<ISupplemental> Awards { get; set; }
+        private protected IEnumerable<ISupplemental> _awards;
 
         /// <summary>
         /// Gets or sets the overtime.
@@ -95,7 +87,7 @@ namespace BudgetExecution
         /// <value>
         /// The overtime.
         /// </value>
-        private protected IEnumerable<ISupplemental> Overtime { get; set; }
+        private protected IEnumerable<ISupplemental> _overtime;
 
         /// <summary>
         /// Gets or sets the time off.
@@ -103,12 +95,8 @@ namespace BudgetExecution
         /// <value>
         /// The time off.
         /// </value>
-        private protected IEnumerable<ISupplemental> TimeOff { get; set; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        private protected IEnumerable<ISupplemental> _timeOff;
+        
         /// <summary>
         /// Gets the funds.
         /// </summary>
@@ -118,12 +106,14 @@ namespace BudgetExecution
         {
             try
             {
-                var builder = GetBuilder();
-                var boc = builder?.ProgramElements[ $"{Field.FundCode}" ];
-                var funds = boc?.Select( f => new Fund( f ) );
+                var _builder = GetBuilder();
 
-                return funds?.Any() == true
-                    ? funds
+                var _boc = _builder?.ProgramElements[ $"{Field.FundCode}" ];
+
+                var _select = _boc?.Select( f => new Fund( f ) );
+
+                return _select?.Any() == true
+                    ? _select
                     : default( IEnumerable<Fund> );
             }
             catch( Exception ex )
@@ -142,12 +132,12 @@ namespace BudgetExecution
         {
             try
             {
-                var builder = GetBuilder();
-                var codes = builder?.ProgramElements[ $"{Field.OrgCode}" ];
-                var orgs = codes?.Select( o => new Organization( o ) );
+                var _builder = GetBuilder();
+                var _codes = _builder?.ProgramElements[ $"{Field.OrgCode}" ];
+                var _select = _codes?.Select( o => new Organization( o ) );
 
-                return orgs?.Any() == true
-                    ? orgs
+                return _select?.Any() == true
+                    ? _select
                     : default( IEnumerable<Organization> );
             }
             catch( Exception ex )
@@ -166,12 +156,12 @@ namespace BudgetExecution
         {
             try
             {
-                var builder = GetBuilder();
-                var codes = builder?.ProgramElements[ $"{Field.BocCode}" ];
-                var ah = codes?.Select( a => new AllowanceHolder( a ) );
+                var _builder = GetBuilder();
+                var _codes = _builder?.ProgramElements[ $"{Field.BocCode}" ];
+                var _select = _codes?.Select( a => new AllowanceHolder( a ) );
 
-                return ah?.Any() == true
-                    ? ah
+                return _select?.Any() == true
+                    ? _select
                     : default( IEnumerable<AllowanceHolder> );
             }
             catch( Exception ex )
@@ -191,11 +181,11 @@ namespace BudgetExecution
             try
             {
                 var builder = GetBuilder();
-                var codes = builder?.ProgramElements[ $"{Field.BocCode}" ];
-                var boc = codes?.Select( b => new BudgetObjectClass( b ) );
+                var _codes = builder?.ProgramElements[ $"{Field.BocCode}" ];
+                var _select = _codes?.Select( b => new BudgetObjectClass( b ) );
 
-                return boc?.Any() == true
-                    ? boc
+                return _select?.Any() == true
+                    ? _select
                     : default( IEnumerable<BudgetObjectClass> );
             }
             catch( Exception ex )
@@ -214,12 +204,12 @@ namespace BudgetExecution
         {
             try
             {
-                var builder = GetBuilder();
-                var codes = builder?.ProgramElements[ $"{Field.AccountCode}" ];
-                var accounts = codes?.Select( c => new Account( c ) );
+                var _builder = GetBuilder();
+                var _codes = _builder?.ProgramElements[ $"{Field.AccountCode}" ];
+                var _select = _codes?.Select( c => new Account( c ) );
 
-                return accounts?.Any() == true
-                    ? accounts
+                return _select?.Any() == true
+                    ? _select
                     : default( IEnumerable<Account> );
             }
             catch( Exception ex )
@@ -238,7 +228,7 @@ namespace BudgetExecution
         {
             try
             {
-                var args = new Dictionary<string, object>
+                var _args = new Dictionary<string, object>
                 {
                     [ $"{Field.BudgetLevel}" ] = ( _budgetLevel as IElement )?.GetValue(),
                     [ $"{Field.BFY}" ] = _bfy?.GetValue(),
@@ -247,13 +237,14 @@ namespace BudgetExecution
                     [ $"{Field.RcCode}" ] = _rcCode?.GetValue()
                 };
 
-                var data = new DataBuilder( Source.PRC, args )?.GetData();
+                var _rows = new DataBuilder( Source.PRC, _args )
+                    ?.GetData();
 
-                var prc = data?.Where( p => p.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                var _prc = _rows?.Where( p => p.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.Select( p => new ProgramResultsCode( p ) );
 
-                return prc?.Any() == true
-                    ? prc
+                return _prc?.Any() == true
+                    ? _prc
                     : default( IEnumerable<ProgramResultsCode> );
             }
             catch( Exception ex )
@@ -272,13 +263,14 @@ namespace BudgetExecution
         {
             try
             {
-                var builder = GetBuilder();
-                var boc = builder?.ProgramElements[ $"{Field.BocCode}" ];
+                var _builder = GetBuilder();
 
-                if( boc?.Any() == true
-                    && boc.Contains( "17" ) )
+                var _boc = _builder?.ProgramElements[ $"{Field.BocCode}" ];
+
+                if( _boc?.Any() == true
+                    && _boc.Contains( "17" ) )
                 {
-                    var args = new Dictionary<string, object>
+                    var _args = new Dictionary<string, object>
                     {
                         [ $"{Field.BudgetLevel}" ] = ( _budgetLevel as IElement )?.GetValue(),
                         [ $"{Field.BFY}" ] = _budgetFiscalYear.GetFirstYear().GetValue(),
@@ -287,11 +279,11 @@ namespace BudgetExecution
                         [ $"{Field.RcCode}" ] = _rcCode.GetValue()
                     };
 
-                    var data = new DataBuilder( Source.FTE, args )?.GetData();
-                    var fte = data?.Select( p => new FullTimeEquivalent( p ) );
+                    var _rows = new DataBuilder( Source.FTE, _args )?.GetData();
+                    var _fte = _rows?.Select( p => new FullTimeEquivalent( p ) );
 
-                    return fte?.Any() == true
-                        ? fte
+                    return _fte?.Any() == true
+                        ? _fte
                         : default( IEnumerable<FullTimeEquivalent> );
                 }
 
@@ -315,20 +307,24 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var rc = GetResponsibilityCenter()?.GetCode()?.GetValue();
+                    var _rc = GetResponsibilityCenter()
+                        ?.GetCode()
+                        ?.GetValue();
 
-                    if( Verify.Input( rc ) )
+                    if( Verify.Input( _rc ) )
                     {
-                        var args = new Dictionary<string, object>
+                        var _args = new Dictionary<string, object>
                         {
-                            [ $"{Field.RcCode}" ] = rc
+                            [ $"{Field.RcCode}" ] = _rc
                         };
 
-                        var data = new DataBuilder( Source.Awards, args )?.GetData();
-                        var awards = data?.Select( r => new Awards( r ) );
+                        var _rows = new DataBuilder( Source.Awards, _args )
+                            ?.GetData();
 
-                        return awards?.Any() == true
-                            ? awards
+                        var _select = _rows?.Select( r => new Awards( r ) );
+
+                        return _select?.Any() == true
+                            ? _select
                             : default( IEnumerable<Awards> );
                     }
                 }
@@ -353,22 +349,23 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var rc = GetResponsibilityCenter()?.GetCode();
+                    var _rc = GetResponsibilityCenter()
+                        ?.GetCode();
 
-                    if( Verify.Input( rc?.GetValue() ) )
+                    if( Verify.Input( _rc?.GetValue() ) )
                     {
-                        var args = new Dictionary<string, object>
+                        var _args = new Dictionary<string, object>
                         {
                             {
-                                $"{Field.RcCode}", rc?.GetValue()
+                                $"{Field.RcCode}", _rc?.GetValue()
                             }
                         };
 
-                        var data = new Builder( Source.TimeOff, args )?.GetData();
-                        var timeoff = data?.Select( r => new TimeOff( r ) );
+                        var _rows = new Builder( Source.TimeOff, _args )?.GetData();
+                        var _select = _rows?.Select( r => new TimeOff( r ) );
 
-                        return timeoff?.Any() == true
-                            ? timeoff
+                        return _select?.Any() == true
+                            ? _select
                             : default( IEnumerable<TimeOff> );
                     }
                 }
@@ -393,22 +390,25 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var rc = GetResponsibilityCenter()?.GetCode();
+                    var _rc = GetResponsibilityCenter()
+                        ?.GetCode();
 
-                    if( Verify.Input( rc?.GetValue() ) )
+                    if( Verify.Input( _rc?.GetValue() ) )
                     {
-                        var args = new Dictionary<string, object>
+                        var _args = new Dictionary<string, object>
                         {
                             {
-                                $"{Field.RcCode}", rc?.GetValue()
+                                $"{Field.RcCode}", _rc?.GetValue()
                             }
                         };
 
-                        var data = new Builder( Source.Overtime, args )?.GetData();
-                        var overtime = data?.Select( r => new Overtime( r ) );
+                        var _rows = new Builder( Source.Overtime, _args )
+                            ?.GetData();
 
-                        return overtime?.Any() == true
-                            ? overtime
+                        var _select = _rows?.Select( r => new Overtime( r ) );
+
+                        return _select?.Any() == true
+                            ? _select
                             : default( IEnumerable<Overtime> );
                     }
                 }

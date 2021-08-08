@@ -92,7 +92,7 @@ namespace BudgetExecution
         IDictionary<string, object> ToDictionary();
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -101,8 +101,8 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the metric.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -112,7 +112,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        IDataMetric GetMetric( IEnumerable<DataRow> data, Field field, Numeric numeric = Numeric.Amount );
+        IDataMetric GetMetric( IEnumerable<DataRow> dataRow, Field field, Numeric numeric = Numeric.Amount );
 
         /// <summary>
         /// Gets the fiscal year availability of the authority.

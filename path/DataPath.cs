@@ -1,4 +1,4 @@
-﻿// // <copyright file=" <File Name> .cs" company="Terry D. Eppler">
+﻿// // <copyright file=" <File _name> .cs" company="Terry D. Eppler">
 // // Copyright (c) Terry Eppler. All rights reserved.
 // // </copyright>
 
@@ -14,38 +14,56 @@ namespace BudgetExecution
     /// 
     /// </summary>
     /// <seealso cref="BudgetExecution.IPath" />
-    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     public class DataPath : IPath
     {
-        /// <summary>The full name</summary>
+        /// <summary>
+        /// The full name
+        /// </summary>
         private protected readonly string _fullName;
 
-        /// <summary>The file name</summary>
+        /// <summary>
+        /// The file name
+        /// </summary>
         private protected readonly string _fileName;
 
-        /// <summary>The full path</summary>
+        /// <summary>
+        /// The full path
+        /// </summary>
         private protected readonly string _fullPath;
 
-        /// <summary>The file extension</summary>
+        /// <summary>
+        /// The file extension
+        /// </summary>
         private protected readonly string _fileExtension;
 
-        /// <summary>The path root</summary>
+        /// <summary>
+        /// The path root
+        /// </summary>
         private protected readonly string _pathRoot;
 
-        /// <summary>The input</summary>
+        /// <summary>
+        /// The input
+        /// </summary>
         private protected readonly string _input;
 
-        /// <summary>The current directory</summary>
+        /// <summary>
+        /// The current directory
+        /// </summary>
         public static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
 
-        /// <summary>The base directory</summary>
+        /// <summary>
+        /// The base directory
+        /// </summary>
         public static readonly string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-        /// <summary>The connection string</summary>
+        /// <summary>
+        /// The connection string
+        /// </summary>
         public static readonly ConnectionStringSettingsCollection ConnectionString =
             ConfigurationManager.ConnectionStrings;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DataPath"/> class.
         /// </summary>
@@ -66,8 +84,10 @@ namespace BudgetExecution
             _fileExtension = Path.GetExtension( _input );
             _pathRoot = Path.GetPathRoot( _input );
         }
-        
-        /// <summary>Gets the name.</summary>
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
         /// <returns></returns>
         public string GetFullName()
         {
@@ -84,7 +104,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Gets the name of the file.</summary>
+        /// <summary>
+        /// Gets the name of the file.
+        /// </summary>
         /// <returns></returns>
         public string GetFileName()
         {
@@ -101,7 +123,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Gets the extension.</summary>
+        /// <summary>
+        /// Gets the extension.
+        /// </summary>
         /// <returns></returns>
         public string GetFileExtension()
         {
@@ -118,7 +142,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Gets the root.</summary>
+        /// <summary>
+        /// Gets the root.
+        /// </summary>
         /// <returns></returns>
         public string GetPathRoot()
         {
@@ -135,7 +161,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Gets the full path.</summary>
+        /// <summary>
+        /// Gets the full path.
+        /// </summary>
         /// <returns></returns>
         public string GetFullPath()
         {
@@ -152,7 +180,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Changes the extension.</summary>
+        /// <summary>
+        /// Changes the extension.
+        /// </summary>
         /// <param name="ext">The ext.</param>
         /// <returns></returns>
         public string ChangeExtension( string ext )
@@ -170,7 +200,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Combines the specified first.</summary>
+        /// <summary>
+        /// Combines the specified first.
+        /// </summary>
         /// <param name="first">The first.</param>
         /// <param name="second">The second.</param>
         /// <returns></returns>
@@ -189,8 +221,12 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Converts to string.</summary>
-        /// <returns>A <see cref="System.String" /> that represents this instance.</returns>
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             try
@@ -206,7 +242,9 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary>Fails the specified ex.</summary>
+        /// <summary>
+        /// Fails the specified ex.
+        /// </summary>
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {

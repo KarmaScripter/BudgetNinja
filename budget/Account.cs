@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -22,19 +18,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     public class Account : AccountBase, IAccount, ISource
     {
-        // *************************************************************************************************************************
-        // ****************************************************     FIELDS    ******************************************************
-        // *************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
         private static readonly Source _source = Source.Accounts;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "Account"/> class.
         /// </summary>
@@ -50,56 +38,56 @@ namespace BudgetExecution
         /// </param>
         public Account( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AccountId );
-            Code = new Element( Record, Field.Code );
-            NpmCode = new Element( Record, Field.NpmCode );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            GoalCode = new Element( Record, Field.GoalCode );
-            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AccountId );
+            _code = new Element( _record, Field.Code );
+            _npmCode = new Element( _record, Field.NpmCode );
+            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _goalCode = new Element( _record, Field.GoalCode );
+            _objectiveCode = new Element( _record, Field.ObjectiveCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Account"/> class.
         /// </summary>
-        /// <param name = "builder" >
-        /// The builder.
+        /// <param name = "dataBuilder" >
+        /// The dataBuilder.
         /// </param>
-        public Account( IBuilder builder )
+        public Account( IBuilder dataBuilder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AccountId );
-            Code = new Element( Record, Field.Code );
-            NpmCode = new Element( Record, Field.NpmCode );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            GoalCode = new Element( Record, Field.GoalCode );
-            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Data = Record?.ToDictionary();
+            _record = dataBuilder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AccountId );
+            _code = new Element( _record, Field.Code );
+            _npmCode = new Element( _record, Field.NpmCode );
+            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _goalCode = new Element( _record, Field.GoalCode );
+            _objectiveCode = new Element( _record, Field.ObjectiveCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Account"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Account( DataRow data )
+        public Account( DataRow dataRow )
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.AccountId );
-            Code = new Element( Record, Field.Code );
-            NpmCode = new Element( Record, Field.NpmCode );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            GoalCode = new Element( Record, Field.GoalCode );
-            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Data = Record?.ToDictionary();
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.AccountId );
+            _code = new Element( _record, Field.Code );
+            _npmCode = new Element( _record, Field.NpmCode );
+            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _goalCode = new Element( _record, Field.GoalCode );
+            _objectiveCode = new Element( _record, Field.ObjectiveCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -110,22 +98,18 @@ namespace BudgetExecution
         /// </param>
         public Account( string code )
         {
-            Record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.AccountId );
-            Code = new Element( Record, Field.Code );
-            NpmCode = new Element( Record, Field.NpmCode );
-            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
-            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
-            GoalCode = new Element( Record, Field.GoalCode );
-            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
-            ActivityCode = new Element( Record, Field.ActivityCode );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.AccountId );
+            _code = new Element( _record, Field.Code );
+            _npmCode = new Element( _record, Field.NpmCode );
+            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
+            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
+            _goalCode = new Element( _record, Field.GoalCode );
+            _objectiveCode = new Element( _record, Field.ObjectiveCode );
+            _activityCode = new Element( _record, Field.ActivityCode );
+            _data = _record?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the account.
         /// </summary>
@@ -151,19 +135,19 @@ namespace BudgetExecution
         /// </returns>
         public IActivity GetActivity()
         {
-            if( Verify.Input( ActivityCode.GetValue() ) )
+            if( Verify.Input( _activityCode.GetValue() ) )
             {
                 try
                 {
-                    var dict = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.ActivityCode}" ] = ActivityCode.GetValue()
+                        [ $"{Field.ActivityCode}" ] = _activityCode.GetValue()
                     };
 
-                    var connection = new ConnectionBuilder( Source.Activity, Provider.SQLite );
-                    var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
-                    using var query = new Query( connection, sqlstatement );
-                    return new Activity( query ) ?? default( Activity );
+                    var _connection = new ConnectionBuilder( Source.Activity, Provider.SQLite );
+                    var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                    using var _query = new Query( _connection, _statement );
+                    return new Activity( _query ) ?? default( Activity );
                 }
                 catch( SystemException ex )
                 {
@@ -184,15 +168,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.NpmCode}" ] = NpmCode
+                    [ $"{Field.NpmCode}" ] = _npmCode
                 };
 
-                var connection = new ConnectionBuilder( Source.NationalPrograms, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new NationalProgram( query ) ?? default( NationalProgram );
+                var _connection = new ConnectionBuilder( Source.NationalPrograms, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new NationalProgram( _query ) ?? default( NationalProgram );
             }
             catch( Exception ex )
             {
@@ -210,15 +194,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = GoalCode
+                    [ $"{Field.Code}" ] = _goalCode
                 };
 
-                var connection = new ConnectionBuilder( Source.Goals, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new Goal( query ) ?? default( Goal );
+                var _connection = new ConnectionBuilder( Source.Goals, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new Goal( _query ) ?? default( Goal );
             }
             catch( Exception ex )
             {
@@ -236,15 +220,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = ObjectiveCode
+                    [ $"{Field.Code}" ] = _objectiveCode
                 };
 
-                var connection = new ConnectionBuilder( Source.Objectives, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new Objective( query ) ?? default( Objective );
+                var _connection = new ConnectionBuilder( Source.Objectives, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new Objective( _query ) ?? default( Objective );
             }
             catch( Exception ex )
             {
@@ -262,15 +246,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = ProgramProjectCode
+                    [ $"{Field.Code}" ] = _programProjectCode
                 };
 
-                var connection = new ConnectionBuilder( Source.ProgramProjects, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new ProgramProject( query ) ?? default( ProgramProject );
+                var _connection = new ConnectionBuilder( Source.ProgramProjects, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new ProgramProject( _query ) ?? default( ProgramProject );
             }
             catch( Exception ex )
             {
@@ -288,15 +272,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = ProgramAreaCode
+                    [ $"{Field.Code}" ] = _programAreaCode
                 };
 
-                var connection = new ConnectionBuilder( Source.ProgramAreas, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new ProgramArea( query ) ?? default( ProgramArea );
+                var _connection = new ConnectionBuilder( Source.ProgramAreas, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new ProgramArea( _query ) ?? default( ProgramArea );
             }
             catch( Exception ex )
             {
@@ -315,8 +299,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Code?.GetValue() )
-                    ? Code?.GetValue()
+                return Verify.Input( _code?.GetValue() )
+                    ? _code?.GetValue()
                     : string.Empty;
             }
             catch( SystemException ex )
@@ -335,8 +319,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -375,10 +359,11 @@ namespace BudgetExecution
         {
             try
             {
-                var name = GetProgramProject()?.GetName();
+                var _name = GetProgramProject()
+                    ?.GetName();
 
-                return Verify.Input( name?.GetValue() )
-                    ? name
+                return Verify.Input( _name?.GetValue() )
+                    ? _name
                     : default( IElement );
             }
             catch( SystemException ex )

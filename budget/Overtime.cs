@@ -1,4 +1,4 @@
-﻿// <copyright file = "Overtime.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "_overtime.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -41,7 +41,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly new Source _source = Source.Overtime;
+        private const Source _source = Source.Overtime;
 
         /// <summary>
         /// 
@@ -69,12 +69,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Overtime"/> class.
         /// </summary>
-        /// <param name = "databuilder" >
-        /// The databuilder.
+        /// <param name = "dataBuilder" >
+        /// The dataBuilder.
         /// </param>
-        public Overtime( IBuilder databuilder )
+        public Overtime( IBuilder dataBuilder )
         {
-            _records = databuilder.GetRecord();
+            _records = dataBuilder?.GetRecord();
             _id = new Key( _records, PrimaryKey.OvertimeId );
             _fundCode = new Element( _records, Field.FundCode );
             _boc = new Element( _records, Field.BocCode );
@@ -85,12 +85,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Overtime"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Overtime( DataRow data )
+        public Overtime( DataRow dataRow )
         {
-            _records = data;
+            _records = dataRow;
             _id = new Key( _records, PrimaryKey.OvertimeId );
             _fundCode = new Element( _records, Field.FundCode );
             _amount = GetAmount();

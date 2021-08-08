@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
 
@@ -32,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly new Source _source = Source.Supplemental;
+        private const Source _source = Source.Supplemental;
 
         /// <summary>
         /// Gets or sets the type.

@@ -1,13 +1,9 @@
-﻿// // <copyright file=" <File Name> .cs" company="Terry D. Eppler">
+﻿// // <copyright file=" <File _name> .cs" company="Terry D. Eppler">
 // // Copyright (c) Terry Eppler. All rights reserved.
 // // </copyright>
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************************   ASSEMBLIES   **************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -15,50 +11,53 @@ namespace BudgetExecution
     using System.Linq;
     using OfficeOpenXml;
 
-    /// <summary/>
-    /// <seealso cref = "ExcelConfig"/>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="BudgetExecution.ExcelConfig" />
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public abstract class BudgetConfig : ExcelConfig
     {
-        // **************************************************************************************************************************
-        // ******************************************************   PROPERTIES   ****************************************************
-        // **************************************************************************************************************************
+        /// <summary>
+        /// The name
+        /// </summary>
+        public string Name;
 
-        /// <summary> Gets or sets the name. </summary>
-        /// <value> The name. </value>
-        public string Name { get; set; }
+        /// <summary>
+        /// The title
+        /// </summary>
+        private protected Grid _title;
 
-        /// <summary> Gets or sets the title. </summary>
-        /// <value> The title. </value>
-        private protected Grid Title { get; set; }
+        /// <summary>
+        /// The control number
+        /// </summary>
+        private protected Grid _controlNumber;
 
-        /// <summary> Gets or sets the control number. </summary>
-        /// <value> The control number. </value>
-        private protected Grid ControlNumber { get; set; }
+        /// <summary>
+        /// The PRC
+        /// </summary>
+        private protected Grid _prc;
 
-        /// <summary> Gets or sets the PRC. </summary>
-        /// <value> The PRC. </value>
-        private protected Grid PRC { get; set; }
+        /// <summary>
+        /// The fte
+        /// </summary>
+        private protected Grid _fte;
 
-        /// <summary> Gets or sets the fte. </summary>
-        /// <value> The fte. </value>
-        private protected Grid FTE { get; set; }
+        /// <summary>
+        /// The awards
+        /// </summary>
+        private protected Grid _awards;
 
-        /// <summary> Gets or sets the awards. </summary>
-        /// <value> The awards. </value>
-        private protected Grid Awards { get; set; }
+        /// <summary>
+        /// The overtime
+        /// </summary>
+        private protected Grid _overtime;
 
-        /// <summary> Gets or sets the overtime. </summary>
-        /// <value> The overtime. </value>
-        private protected Grid Overtime { get; set; }
-
-        // **************************************************************************************************************************
-        // ******************************************************     METHODS   *****************************************************
-        // **************************************************************************************************************************
-
-        /// <summary> Adds the comment. </summary>
-        /// <param name = "grid" > </param>
-        /// <param name = "text" > The text. </param>
+        /// <summary>
+        /// Adds the comment.
+        /// </summary>
+        /// <param name="grid">The grid.</param>
+        /// <param name="text">The text.</param>
         public void AddComment( Grid grid, string text )
         {
             if( Validate.Grid( grid )
@@ -66,20 +65,20 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid?.GetRange();
-                    var comment = range?.AddComment( text, "Budget" );
+                    using var _range = grid?.GetRange();
+                    var _comment = _range?.AddComment( text, "Budget" );
 
-                    if( comment != null )
+                    if( _comment != null )
                     {
-                        comment.From.Row = range.Start.Row;
-                        comment.From.Column = range.Start.Column;
-                        comment.To.Row = range.End.Row;
-                        comment.To.Column = range.End.Column;
-                        comment.BackgroundColor = _primaryBackColor;
-                        comment.Font.FontName = "Consolas";
-                        comment.Font.Size = 8;
-                        comment.Font.Color = Color.Black;
-                        comment.Text = text;
+                        _comment.From.Row = _range.Start.Row;
+                        _comment.From.Column = _range.Start.Column;
+                        _comment.To.Row = _range.End.Row;
+                        _comment.To.Column = _range.End.Column;
+                        _comment.BackgroundColor = _primaryBackColor;
+                        _comment.Font.FontName = "Consolas";
+                        _comment.Font.Size = 8;
+                        _comment.Font.Color = Color.Black;
+                        _comment.Text = text;
                     }
                 }
                 catch( Exception ex )
@@ -89,28 +88,26 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Sets the caption text. </summary>
-        /// <param name = "grid" > The grid. </param>
+        /// <summary>
+        /// Sets the caption text.
+        /// </summary>
+        /// <param name="grid">The grid.</param>
         public void SetCaptionText( Grid grid )
         {
             if( Validate.Grid( grid ) )
             {
                 try
                 {
-                    using var worksheet = grid?.GetWorksheet();
-
-                    if( grid != null )
-                    {
-                        var row = grid.GetRange().Start.Row;
-                        var column = grid.GetRange().Start.Column;
-                        worksheet.Cells[ row, column ].Value = "Account";
-                        worksheet.Cells[ row, column + 1 ].Value = "Site";
-                        worksheet.Cells[ row, column + 2 ].Value = "Travel";
-                        worksheet.Cells[ row, column + 3 ].Value = "Expenses";
-                        worksheet.Cells[ row, column + 4 ].Value = "Contracts";
-                        worksheet.Cells[ row, column + 5 ].Value = "Grants";
-                        worksheet.Cells[ row, column + 6 ].Value = "Total";
-                    }
+                    using var _worksheet = grid.GetWorksheet();
+                    var _row = grid.GetRange().Start.Row;
+                    var _column = grid.GetRange().Start.Column;
+                    _worksheet.Cells[ _row, _column ].Value = "Account";
+                    _worksheet.Cells[ _row, _column + 1 ].Value = "Site";
+                    _worksheet.Cells[ _row, _column + 2 ].Value = "Travel";
+                    _worksheet.Cells[ _row, _column  + 3 ].Value = "Expenses";
+                    _worksheet.Cells[ _row, _column  + 4 ].Value = "Contracts";
+                    _worksheet.Cells[ _row, _column  + 5 ].Value = "Grants";
+                    _worksheet.Cells[ _row, _column  + 6 ].Value = "_total";
                 }
                 catch( Exception ex )
                 {
@@ -119,17 +116,20 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Sets the text. </summary>
-        /// <param name = "grid" > The grid. </param>
-        /// <param name = "text" > The text. </param>
+        /// <summary>
+        /// Sets the text.
+        /// </summary>
+        /// <param name="grid">The grid.</param>
+        /// <param name="text">The text.</param>
         public void SetText( Grid grid, IEnumerable<string> text )
         {
             if( Validate.Grid( grid )
-                && text?.Any() == true )
+                && text?.Any() == true 
+                && grid.GetRange().Any() )
             {
                 try
                 {
-                    foreach( var cell in grid?.GetRange() )
+                    foreach( var cell in grid.GetRange() )
                     {
                         foreach( var caption in text )
                         {
@@ -148,8 +148,10 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Sets the worksheet properties. </summary>
-        /// <param name = "worksheet" > The worksheet. </param>
+        /// <summary>
+        /// Sets the worksheet properties.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
         public void SetWorksheetProperties( ExcelWorksheet worksheet )
         {
             if( worksheet != null )
@@ -175,16 +177,18 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Sets the worksheet header text. </summary>
-        /// <param name = "headertext" > The headertext. </param>
-        public void SetHeaderFooterText( string headertext )
+        /// <summary>
+        /// Sets the header footer text.
+        /// </summary>
+        /// <param name="headerText">The header text.</param>
+        public void SetHeaderFooterText( string headerText )
         {
-            if( Verify.Input( headertext ) )
+            if( Verify.Input( headerText ) )
             {
                 try
                 {
-                    var header = Worksheet.HeaderFooter.FirstHeader;
-                    header.CenteredText = headertext;
+                    var _header = Worksheet.HeaderFooter.FirstHeader;
+                    _header.CenteredText = headerText;
                 }
                 catch( Exception ex )
                 {

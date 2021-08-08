@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -17,17 +13,13 @@ namespace BudgetExecution
     /// </summary>
     public abstract class ProgramBase
     {
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
         /// <summary>
         /// Gets the record.
         /// </summary>
         /// <value>
         /// The record.
         /// </value>
-        private protected DataRow Record { get; set; }
+        private protected DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -35,7 +27,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> Data { get; set; }
+        private protected IDictionary<string, object> _data;
 
         /// <summary>
         /// Gets the program project identifier.
@@ -43,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The program project identifier.
         /// </value>
-        private protected IKey ID { get; set; }
+        private protected IKey _id;
 
         /// <summary>
         /// Gets the code.
@@ -51,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private protected IElement Code { get; set; }
+        private protected IElement _code;
 
         /// <summary>
         /// Gets the name.
@@ -59,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected IElement Name { get; set; }
+        private protected IElement _name;
 
         /// <summary>
         /// Gets the definition.
@@ -67,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The definition.
         /// </value>
-        private protected IElement Definition { get; set; }
+        private protected IElement _definition;
 
         /// <summary>
         /// Gets the laws.
@@ -75,7 +67,7 @@ namespace BudgetExecution
         /// <value>
         /// The laws.
         /// </value>
-        private protected IElement Laws { get; set; }
+        private protected IElement _laws;
 
         /// <summary>
         /// Gets the title.
@@ -83,7 +75,7 @@ namespace BudgetExecution
         /// <value>
         /// The title.
         /// </value>
-        private protected IElement Title { get; set; }
+        private protected IElement _title;
 
         /// <summary>
         /// Gets the narrative.
@@ -91,7 +83,7 @@ namespace BudgetExecution
         /// <value>
         /// The narrative.
         /// </value>
-        private protected IElement Narrative { get; set; }
+        private protected IElement _narrative;
 
         /// <summary>
         /// Gets the program area code.
@@ -99,7 +91,7 @@ namespace BudgetExecution
         /// <value>
         /// The program area code.
         /// </value>
-        private protected IElement ProgramAreaCode { get; set; }
+        private protected IElement _programAreaCode;
 
         /// <summary>
         /// Gets the name of the program area.
@@ -107,21 +99,17 @@ namespace BudgetExecution
         /// <value>
         /// The name of the program area.
         /// </value>
-        private protected IElement ProgramAreaName { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        private protected IElement _programAreaName;
+        
         /// <summary>
         /// Get Error Dialog.
         /// </summary>
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

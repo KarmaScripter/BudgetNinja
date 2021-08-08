@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -23,9 +19,21 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class DataMetric : MetricBase, IDataMetric
     {
-        // ***************************************************************************************************************************
-        // ******************************************************  CONSTRUCTORS  *****************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the variance.
+        /// </summary>
+        /// <value>
+        /// The variance.
+        /// </value>
+        private readonly double _variance;
+
+        /// <summary>
+        /// Gets the deviation.
+        /// </summary>
+        /// <value>
+        /// The deviation.
+        /// </value>
+        private readonly double _deviation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "DataMetric"/> class.
@@ -37,29 +45,29 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "DataMetric"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
         /// The numeric.
         /// </param>
-        public DataMetric( IEnumerable<DataRow> data, Numeric numeric = Numeric.Amount )
+        public DataMetric( IEnumerable<DataRow> dataRow, Numeric numeric = Numeric.Amount )
         {
-            Data = data;
-            Field = Field.NS;
-            Numeric = numeric;
-            Count = Data.Count();
-            Total = CalculateTotals( Data, Numeric );
-            Average = CalculateAverage( Data, Numeric );
-            Variance = CalculateVariance( Data, Numeric );
-            Deviation = CalculateDeviation( Data, Numeric );
+            _data = dataRow;
+            _field = Field.NS;
+            _numeric = numeric;
+            _count = _data.Count();
+            _total = CalculateTotals( _data, _numeric );
+            _average = CalculateAverage( _data, _numeric );
+            _variance = CalculateVariance( _data, _numeric );
+            _deviation = CalculateDeviation( _data, _numeric );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "DataMetric"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -67,42 +75,18 @@ namespace BudgetExecution
         /// <param name = "numeric" >
         /// The numeric.
         /// </param>
-        public DataMetric( IEnumerable<DataRow> data, Field field, Numeric numeric = Numeric.Amount )
+        public DataMetric( IEnumerable<DataRow> dataRow, Field field, Numeric numeric = Numeric.Amount )
         {
-            Field = field;
-            Numeric = numeric;
-            Data = data;
-            Count = Data.Count();
-            Total = CalculateTotals( Data, Numeric );
-            Average = CalculateAverage( Data, Numeric );
-            Variance = CalculateVariance( Data, Numeric );
-            Deviation = CalculateDeviation( Data, Numeric );
-            Statistics = CalculateStatistics( Data, Field, Numeric );
+            _field = field;
+            _numeric = numeric;
+            _data = dataRow;
+            _count = _data.Count();
+            _total = CalculateTotals( _data, _numeric );
+            _average = CalculateAverage( _data, _numeric );
+            _variance = CalculateVariance( _data, _numeric );
+            _deviation = CalculateDeviation( _data, _numeric );
+            _statistics = CalculateStatistics( _data, _field, _numeric );
         }
-
-        // ***************************************************************************************************************************
-        // ************************************************  PROPERTIES **************************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets the variance.
-        /// </summary>
-        /// <value>
-        /// The variance.
-        /// </value>
-        private double Variance { get; }
-
-        /// <summary>
-        /// Gets the deviation.
-        /// </summary>
-        /// <value>
-        /// The deviation.
-        /// </value>
-        private double Deviation { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Gets the source.
@@ -113,12 +97,17 @@ namespace BudgetExecution
         {
             try
             {
-                var source = Data.Select( r => r ).FirstOrDefault();
-                var tablename = source?.Table?.TableName;
+                var _source = _data
+                    ?.Select( r => r )
+                    ?.FirstOrDefault();
 
-                return Verify.Input( tablename )
-                    ? source != null
-                        ? (Source)Enum.Parse( typeof( Source ), tablename )
+                var _name = _source
+                    ?.Table
+                    ?.TableName;
+
+                return Verify.Input( _name )
+                    ? _source != null
+                        ? (Source)Enum.Parse( typeof( Source ), _name )
                         : Source.NS
                     : Source.NS;
             }
@@ -132,27 +121,28 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the deviation.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
         /// The numeric.
         /// </param>
         /// <returns>
         /// </returns>
-        public double CalculateDeviation( IEnumerable<DataRow> data, Numeric numeric )
+        public double CalculateDeviation( IEnumerable<DataRow> dataRow, Numeric numeric )
         {
-            if( data.Any()
-                && data.HasNumeric()
-                && GetCount( data, numeric ) > 30 )
+            if( dataRow?.Any() == true
+                && dataRow.HasNumeric()
+                && GetCount( dataRow, numeric ) > 30 )
             {
                 try
                 {
-                    var query = data.Where( p => p.Field<double>( $"{numeric}" ) != 0d )
-                        .StandardDeviation( p => p.Field<double>( $"{numeric}" ) );
+                    var _query = dataRow
+                        ?.Where( p => p.Field<double>( $"{numeric}" ) != 0d )
+                        ?.StandardDeviation( p => p.Field<double>( $"{numeric}" ) );
 
-                    return query > 0.0d
-                        ? double.Parse( query.ToString( "N" ) )
+                    return _query > 0.0d
+                        ? double.Parse( _query.ToString() )
                         : 0.0d;
                 }
                 catch( Exception ex )
@@ -168,8 +158,8 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the standard deviations.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -179,27 +169,29 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        public double CalculateDeviations( IEnumerable<DataRow> data, Field field,
+        public double CalculateDeviations( IEnumerable<DataRow> dataRow, Field field,
             Numeric numeric = Numeric.Amount )
         {
-            if( data.Any()
-                && Enum.IsDefined( typeof( Field ), field )
-                && Enum.IsDefined( typeof( Numeric ), numeric ) )
+            if( dataRow?.Any() == true
+                && Validate.Field( field )
+                && Validate.Numeric( numeric ) )
+
             {
-                if( data.Count() < 30 )
+                if( dataRow?.Count() < 30 )
                 {
                     return 0.0d;
                 }
 
-                if( data.Count() > 30 )
+                if( dataRow.Count() > 30 )
                 {
                     try
                     {
-                        var query = data.Where( p => p.Field<double>( $"{numeric}" ) != 0d )
-                            .StandardDeviation( p => p.Field<double>( $"{numeric}" ) );
+                        var _query = dataRow
+                            ?.Where( p => p.Field<double>( $"{numeric}" ) != 0d )
+                            ?.StandardDeviation( p => p.Field<double>( $"{numeric}" ) );
 
-                        return query > 0.0d
-                            ? double.Parse( query.ToString( "N" ) )
+                        return _query > 0.0d
+                            ? double.Parse( _query.ToString() )
                             : 0.0d;
                     }
                     catch( Exception ex )
@@ -217,7 +209,7 @@ namespace BudgetExecution
         /// Calculates the variance.
         /// </summary>
         /// <param name = "data" >
-        /// The data.
+        /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
         /// The numeric.
@@ -226,20 +218,20 @@ namespace BudgetExecution
         /// </returns>
         public double CalculateVariance( IEnumerable<DataRow> data, Numeric numeric )
         {
-            if( data.Any()
+            if( data?.Any() == true
                 && data.HasNumeric()
                 && GetCount( data, numeric ) > 30 )
             {
-                var table = data.CopyToDataTable();
+                var _table = data.CopyToDataTable();
 
                 try
                 {
-                    var query = table.AsEnumerable()
-                        .Where( p => p.Field<double>( $"{numeric}" ) != 0d )
-                        .Variance( p => p.Field<double>( $"{numeric}" ) );
+                    var _query = _table?.AsEnumerable()
+                        ?.Where( p => p.Field<double>( $"{numeric}" ) != 0d )
+                        ?.Variance( p => p.Field<double>( $"{numeric}" ) );
 
-                    return query > 0.0d
-                        ? double.Parse( query.ToString( "N" ) )
+                    return _query > 0.0d
+                        ? double.Parse( _query.ToString() )
                         : 0.0d;
                 }
                 catch( Exception ex )
@@ -261,7 +253,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Statistics;
+                return _statistics;
             }
             catch( Exception ex )
             {
@@ -273,8 +265,8 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the variances.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -284,23 +276,23 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        public double CalculateVariances( IEnumerable<DataRow> data, Field field,
+        public double CalculateVariances( IEnumerable<DataRow> dataRow, Field field,
             Numeric numeric = Numeric.Amount )
         {
-            if( data.Any()
-                && Enum.IsDefined( typeof( Field ), field )
-                && Enum.IsDefined( typeof( Numeric ), numeric ) )
+            if( dataRow?.Any() == true
+                && Validate.Field( field )
+                && Validate.Numeric( numeric ) )
             {
-                var table = data.CopyToDataTable();
+                var _table = dataRow.CopyToDataTable();
 
                 try
                 {
-                    var query = table.AsEnumerable()
-                        .Where( p => p.Field<double>( $"{numeric}" ) != 0d )
-                        .Variance( p => p.Field<double>( $"{numeric}" ) );
+                    var _query = _table?.AsEnumerable()
+                        ?.Where( p => p.Field<double>( $"{numeric}" ) != 0d )
+                        ?.Variance( p => p.Field<double>( $"{numeric}" ) );
 
-                    return query > 0.0d
-                        ? double.Parse( query.ToString( "N" ) )
+                    return _query > 0.0d
+                        ? double.Parse( _query.ToString() )
                         : 0.0d;
                 }
                 catch( Exception ex )
@@ -316,8 +308,8 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the statistics.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
         /// The numeric.
@@ -325,24 +317,25 @@ namespace BudgetExecution
         /// <returns>
         /// </returns>
         [ SuppressMessage( "ReSharper", "BadListLineBreaks" ) ]
-        public IEnumerable<double> CalculateStatistics( IEnumerable<DataRow> data, Numeric numeric )
+        public IEnumerable<double> CalculateStatistics( IEnumerable<DataRow> dataRow, Numeric numeric )
         {
-            if( data.Any() )
+            if( dataRow?.Any() == true 
+                && Validate.Numeric( numeric ) )
             {
                 try
                 {
-                    var metrics = new[]
+                    var _metrics = new[ ]
                     {
-                        GetCount( data, numeric ),
-                        CalculateTotals( data, numeric ),
-                        CalculateAverage( data, numeric ),
-                        CalculateTotals( data, numeric ) / GetCount( data, numeric ),
-                        CalculateDeviation( data, numeric ),
-                        CalculateVariance( data, numeric )
+                        GetCount( dataRow, numeric ),
+                        CalculateTotals( dataRow, numeric ),
+                        CalculateAverage( dataRow, numeric ),
+                        CalculateTotals( dataRow, numeric ) / GetCount( dataRow, numeric ),
+                        CalculateDeviation( dataRow, numeric ),
+                        CalculateVariance( dataRow, numeric )
                     };
 
-                    return metrics.Any()
-                        ? metrics
+                    return _metrics.Any()
+                        ? _metrics
                         : default( double[ ] );
                 }
                 catch( Exception ex )
@@ -358,8 +351,8 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the statistics.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -369,33 +362,34 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        public IDictionary<string, IEnumerable<double>> CalculateStatistics( IEnumerable<DataRow> data,
+        public IDictionary<string, IEnumerable<double>> CalculateStatistics( IEnumerable<DataRow> dataRow,
             Field field, Numeric numeric = Numeric.Amount )
         {
-            if( Verify.Input( data )
-                && Enum.IsDefined( typeof( Field ), field )
-                && Enum.IsDefined( typeof( Numeric ), numeric ) )
+            if( dataRow?.Any() == true
+                && Validate.Field( field )
+                && Validate.Numeric( numeric ) )
             {
                 try
                 {
-                    var info = new Dictionary<string, IEnumerable<double>>();
-                    var filters = GetCodes( data, field );
+                    var _dictionary = new Dictionary<string, IEnumerable<double>>();
+                    var _codes = GetCodes( dataRow, field );
 
-                    if( filters?.Any() == true )
+                    if( _codes?.Any() == true )
                     {
-                        foreach( var filter in filters )
+                        foreach( var filter in _codes )
                         {
-                            var query = data.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
-                                .Select( p => p );
+                            var _select = dataRow
+                                ?.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
+                                ?.Select( p => p );
 
-                            if( CalculateTotals( query, numeric ) > 0 )
+                            if( CalculateTotals( _select, numeric ) > 0 )
                             {
-                                info.Add( filter, CalculateStatistics( query, numeric ).ToArray() );
+                                _dictionary.Add( filter, CalculateStatistics( _select, numeric )?.ToArray() );
                             }
                         }
 
-                        return info?.Count > 0.0
-                            ? info
+                        return _dictionary?.Count > 0.0
+                            ? _dictionary
                             : default( Dictionary<string, IEnumerable<double>> );
                     }
                 }

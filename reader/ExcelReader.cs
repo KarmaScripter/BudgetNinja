@@ -19,81 +19,92 @@ namespace BudgetExecution
     /// <seealso cref = "T:Badger.Query"/>
     /// <seealso cref = "T:Badger.IQueryBase"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "UnassignedReadonlyField" ) ]
     public class ExcelReader
     {
+        /// <summary>
+        /// The provider
+        /// </summary>
         private protected readonly Provider _provider = Provider.Excel;
 
+        /// <summary>
+        /// The XLS
+        /// </summary>
         private protected readonly string _xls = DataPath.ConnectionString[ "OleDb" ].ToString();
 
+        /// <summary>
+        /// The XLSX
+        /// </summary>
         private protected readonly string _xlsx = DataPath.ConnectionString[ "Excel" ].ToString();
 
+        /// <summary>
+        /// The CSV
+        /// </summary>
         private protected readonly string _csv = DataPath.ConnectionString[ "CSV" ].ToString();
 
+        /// <summary>
+        /// The accdb
+        /// </summary>
         private protected readonly string _accdb = DataPath.ConnectionString[ "Access" ].ToString();
 
+        /// <summary>
+        /// The MDB
+        /// </summary>
         private protected readonly string _mdb = DataPath.ConnectionString[ "OleDb" ].ToString();
         
-        public ExcelReader()
-        {
-        }
-
-        public ExcelReader( string filePath, IDictionary<string, object> dict )
-        {
-        }
-
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the r6.
         /// </summary>
         /// <value>
         /// The r6.
         /// </value>
-        private readonly DataSet _dataSet;
+        private protected readonly DataSet _dataSet;
 
         /// <summary>
-        /// Gets or sets the datatable.
+        /// Gets or sets the dataTable.
         /// </summary>
         /// <value>
-        /// The datatable.
+        /// The dataTable.
         /// </value>
-        private readonly DataTable _table;
+        private protected readonly DataTable _table;
 
         /// <summary>
-        /// Gets or sets the excel.
+        /// Initializes a new instance of the <see cref="ExcelReader"/> class.
         /// </summary>
-        /// <value>
-        /// The excel.
-        /// </value>
-        private readonly ExcelPackage _excel;
+        public ExcelReader()
+        {
+        }
 
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExcelReader"/> class.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <param name="dict">The dictionary.</param>
+        public ExcelReader( string filePath, IDictionary<string, object> dict )
+        {
+        }
+        
         /// <summary>
         /// Saves the file.
         /// </summary>
         /// <dict name = "workbook" >
         /// The workbook.
         /// </dict>
-        public void SaveFile( ExcelPackage excel )
+        public void SaveFile( ExcelPackage excelPackage )
         {
-            if( excel != null )
+            if( excelPackage != null )
             {
                 try
                 {
-                    using var dialog = new SaveFileDialog
+                    using var _fileDialog = new SaveFileDialog
                     {
                         Filter = "Excel files (*.xlsx)|*.xlsx",
                         FilterIndex = 1
                     };
 
-                    if( dialog.ShowDialog() == DialogResult.OK )
+                    if( _fileDialog.ShowDialog() == DialogResult.OK )
                     {
-                        excel.Save( dialog.FileName );
+                        excelPackage.Save( _fileDialog.FileName );
                         const string _msg = "Save Successful!";
                         using var _message = new Message( _msg );
                         _message?.ShowDialog();
@@ -107,35 +118,35 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Exports to excel.
+        /// Exports to excelPackage.
         /// </summary>
-        /// <dict name = "table" >
-        /// The datatable.
+        /// <dict name = "dataTable" >
+        /// The dataTable.
         /// </dict>
-        public void ExportToExcel( DataTable table, string filePath )
+        public void ExportToExcel( DataTable dataTable, string filePath )
         {
-            if( table?.Columns.Count > 0 
-                && table.Rows.Count > 0 
+            if( dataTable?.Columns?.Count > 0 
+                && dataTable.Rows?.Count > 0 
                 && Verify.Input( filePath ) )
             {
                 try
                 {
-                    using var _excelPackage = CreateExcelFile( filePath );
+                    using var _package = CreateExcelFile( filePath );
                     var _name = Path.GetFileNameWithoutExtension( filePath );
-                    var _worksheet = _excelPackage.Workbook.Worksheets.Add( _name );
-                    var _columns = table.Columns.Count;
-                    var _rows = table.Rows.Count;
+                    var _worksheet = _package.Workbook.Worksheets.Add( _name );
+                    var _columns = dataTable.Columns.Count;
+                    var _rows = dataTable.Rows.Count;
 
                     for( var column = 1; column <= _columns; column++ )
                     {
-                        _worksheet.Cells[ 1, column ].Value = table.Columns[ column - 1 ].ColumnName;
+                        _worksheet.Cells[ 1, column ].Value = dataTable.Columns[ column - 1 ].ColumnName;
                     }
 
                     for( var row = 1; row <= _rows; row++ )
                     {
                         for( var col = 0; col < _columns; col++ )
                         {
-                            _worksheet.Cells[ row + 1, col + 1 ].Value = table.Rows[ row - 1 ][ col ];
+                            _worksheet.Cells[ row + 1, col + 1 ].Value = dataTable.Rows[ row - 1 ][ col ];
                         }
                     }
                 }
@@ -147,7 +158,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Creates the excel file.
+        /// Creates the excelPackage file.
         /// </summary>
         /// <param name = "filePath" >
         /// The filePath.
@@ -184,7 +195,7 @@ namespace BudgetExecution
             {
                 var _name = "";
 
-                using var _dialog = new OpenFileDialog
+                using var _fileDialog = new OpenFileDialog
                 {
                     Title = "Excel File Dialog",
                     InitialDirectory = @"c:\",
@@ -193,9 +204,9 @@ namespace BudgetExecution
                     RestoreDirectory = true
                 };
 
-                if( _dialog.ShowDialog() == DialogResult.OK )
+                if( _fileDialog.ShowDialog() == DialogResult.OK )
                 {
-                    _name = _dialog.FileName;
+                    _name = _fileDialog.FileName;
                 }
 
                 return Verify.Input( _name ) && File.Exists( _name )
@@ -210,7 +221,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data datatable from excel file.
+        /// Gets the data dataTable from excelPackage file.
         /// </summary>
         /// <dict name = "sheetName" >
         /// The sheetName.
@@ -256,7 +267,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data datatable from CSV file.
+        /// Gets the data dataTable from CSV file.
         /// </summary>
         /// <dict name = "fileName" >
         /// The fileName.
@@ -277,7 +288,7 @@ namespace BudgetExecution
                     var _sql = "SELECT * FROM [" + sheetName + "]";
 
                     var _connectionString =
-                        $@"Provider=Microsoft.Jet.OLEDB.4.0;Data _source={Path.GetDirectoryName( fileName )};"
+                        $@"Provider=Microsoft.Jet.OLEDB.4.0;_data _source={Path.GetDirectoryName( fileName )};"
                         + @"Extended Properties='Text;HDR=YES;FMT=Delimited'";
 
                     using var connection = new OleDbConnection( _connectionString );
@@ -357,26 +368,26 @@ namespace BudgetExecution
         /// Checks if sheet name exists.
         /// </summary>
         /// <dict name = "sheetName" >
-        /// Name of the sheet.
+        /// _name of the sheet.
         /// </dict>
-        /// <dict name = "datatable" >
-        /// The dt datatable.
+        /// <dict name = "dataTable" >
+        /// The dt dataTable.
         /// </dict>
         /// <returns>
         /// </returns>
-        private bool SheetExists( string sheetname, DataTable datatable )
+        private bool SheetExists( string sheetName, DataTable dataTable )
         {
-            if( Verify.Input( sheetname ) 
-                && datatable?.Columns.Count > 0 
-                && datatable.Rows.Count > 0 )
+            if( Verify.Input( sheetName ) 
+                && dataTable?.Columns.Count > 0 
+                && dataTable.Rows.Count > 0 )
             {
                 try
                 {
-                    for( var i = 0; i < datatable.Rows.Count; i++ )
+                    for( var i = 0; i < dataTable.Rows.Count; i++ )
                     {
-                        var _row = datatable.Rows[ i ];
+                        var _row = dataTable.Rows[ i ];
 
-                        if( sheetname == _row[ "TABLENAME" ].ToString() )
+                        if( sheetName == _row[ "TABLENAME" ].ToString() )
                         {
                             return true;
                         }

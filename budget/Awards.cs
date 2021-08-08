@@ -1,4 +1,4 @@
-﻿// <copyright file = "Awards.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "_awards.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -31,7 +31,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly new Source _source = Source.Awards;
+        private const Source _source = Source.Awards;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Awards"/> class.
@@ -59,12 +59,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Awards"/> class.
         /// </summary>
-        /// <param name = "builder" >
+        /// <param name = "dataBuilder" >
         /// The databuilder.
         /// </param>
-        public Awards( IBuilder builder )
+        public Awards( IBuilder dataBuilder )
         {
-            _records = builder?.GetRecord();
+            _records = dataBuilder?.GetRecord();
             _id = new Key( _records, PrimaryKey.AwardsId );
             _fundCode = new Element( _records, Field.FundCode );
             _boc = new Element( _records, Field.BocCode );
@@ -75,12 +75,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Awards"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Awards( DataRow data )
+        public Awards( DataRow dataRow )
         {
-            _records = data;
+            _records = dataRow;
             _id = new Key( _records, PrimaryKey.AwardsId );
             _fundCode = new Element( _records, Field.FundCode );
             _boc = new Element( _records, Field.BocCode );
@@ -108,7 +108,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the awards data.
+        /// Gets the awards dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -118,10 +118,11 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var query = new Builder( _source, _data )?.GetData();
+                    var _rows = new Builder( Awards._source, _data )
+                        ?.GetData();
 
-                    return query?.Any() == true
-                        ? query
+                    return _rows?.Any() == true
+                        ? _rows
                         : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )

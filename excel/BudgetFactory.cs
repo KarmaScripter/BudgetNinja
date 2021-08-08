@@ -1,13 +1,9 @@
-﻿// // <copyright file=" <File Name> .cs" company="Terry D. Eppler">
-// // Copyright (c) Terry Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
+// Copyright (c) Terry Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // **********************************************************   ASSEMBLIES   ************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -22,19 +18,15 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     public class BudgetFactory
     {
-        // **************************************************************************************************************************
-        // ******************************************************      FIELDS    ****************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>The budget</summary>
+        /// <summary>
+        /// The budget
+        /// </summary>
         private readonly ExcelBudget _budget;
 
-        /// <summary>The worksheet</summary>
+        /// <summary>
+        /// The worksheet
+        /// </summary>
         private readonly ExcelWorksheet _worksheet;
-
-        // ***************************************************************************************************************************
-        // *******************************************************   CONSTRUCTORS ****************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BudgetFactory"/> class.
@@ -44,543 +36,419 @@ namespace BudgetExecution
         {
             _budget = excelbudget;
             _worksheet = _budget.GetWorkSheet();
-            Allocation = _budget.GetAllocation();
-            Authority = Allocation.GetAuthority();
+            _allocation = _budget.GetAllocation();
+            _authority = _allocation.GetAuthority();
         }
 
-        // ***************************************************************************************************************************
-        // *******************************************************  PROPERTIES  ******************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// The allocation
+        /// </summary>
+        private readonly IAllocation _allocation;
 
-        /// <summary>Gets the allocation.</summary>
-        /// <value>The allocation.</value>
-        private IAllocation Allocation { get; }
+        /// <summary>
+        /// The authority
+        /// </summary>
+        private readonly IAuthority _authority;
 
-        /// <summary>Gets the authority.</summary>
-        /// <value>The authority.</value>
-        private IAuthority Authority { get; }
-
-        // **************************************************************************************************************************
-        // ******************************************************     METHODS   *****************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>Gets the epm worksheet.</summary>
+        /// <summary>
+        /// Gets the epm worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetEpmWorksheet()
         {
-            var funds = Allocation.GetFunds();
-            var awards = Allocation.GetAwards();
-
-            if( funds.Any( p => p.GetCode().GetValue().StartsWith( $"{FundCode.B}" ) ) )
+            var _data = _allocation?.GetFunds();
+            var _awards = _allocation?.GetAwards();
+            var _enumerable = _allocation?.GetData();
+            var _grid = new Grid( _worksheet, ( 10, 2 ) );
+            var _header = _grid?.From.Row - 1;
+            var _start = _grid.From.Row;
+            var _fund = new Fund( $"{FundCode.B}" );
+            _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
+            _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation?.GetBudgetFiscalYear() );
+            
+            try
             {
-                try
+                var _lookup = _enumerable?.Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.B}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.ToLookup( f => f.Field<string>( $"{Field.AccountCode}" ), f => f );
+
+                if( _lookup != null )
                 {
-                    var grid = new Grid( _worksheet, ( 10, 2 ) );
-                    var hdr = grid.From.Row - 1;
-                    var fund = new Fund( $"{FundCode.B}" );
-                    _budget?.SetWorksheetProperties( grid.GetWorksheet() );
-                    _budget?.SetBudgetHeaderFormat( grid, fund, Allocation.GetBudgetFiscalYear() );
-
-                    var prcdata = Allocation.GetData() != null
-                        ? Allocation.GetData().Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.B}" ) ) != null
-                            ? Allocation.GetData().Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.B}" ) ).Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" ) != null
-                                ? Allocation.GetData().Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.B}" ) ).Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" ).ToLookup( f => f.Field<string>( $"{Field.AccountCode}" ), f => f )
-                                : null
-                            : null
-                        : null;
-
-                    var start = grid.From.Row;
-
-                    if( prcdata != null )
+                    foreach( var kvp in _lookup )
                     {
-                        foreach( var kvp in prcdata )
-                        {
-                            _budget?.SetAllocationTableFormat( grid, fund );
-                            _budget?.PopulateAccountRows( grid, prcdata, kvp );
-                            start++;
-                        }
+                        _budget?.SetAllocationTableFormat( _grid, _fund );
+                        _budget?.PopulateAccountRows( _grid, _lookup, kvp );
+                        _start++;
                     }
-
-                    var endrow = start;
-
-                    var query = awards?.Where( a => a.GetFundCode().Equals( $"{FundCode.B}" ) )
-                        .Select( a => a );
-
-                    if( query?.Any() ?? false )
-                    {
-                        _budget?.SetAwardsHeaderFormat( grid );
-                        _budget?.SetAwardRowsFormat( grid, fund );
-                    }
-
-                    return _worksheet;
                 }
-                catch( Exception ex )
+
+                var _end = _start;
+
+                var _select = _awards?.Where( a => a.GetFundCode().Equals( $"{FundCode.B}" ) )
+                    ?.Select( a => a );
+
+                if( _select?.Any() ?? false )
                 {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
+                    _budget?.SetAwardsHeaderFormat( _grid );
+                    _budget?.SetAwardRowsFormat( _grid, _fund );
                 }
+
+                return _worksheet;
             }
-
-            if( !funds.Any( p => p.GetCode().Equals( $"{FundCode.B}" ) ) )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the stag worksheet.</summary>
+        /// <summary>
+        /// Gets the stag worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetStagWorksheet()
         {
-            var prc = Allocation.GetData();
-            var funds = Allocation.GetFunds();
+            var _enumerable = _allocation?.GetData();
+            var _funds = _allocation?.GetFunds();
 
-            if( funds.Any( p => p.GetCode().GetValue().StartsWith( $"{FundCode.E}" ) ) )
+            try
             {
-                try
-                {
-                    var code = prc?.Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.E}" ) )
-                        ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
-            }
+                var _lookup = _enumerable
+                    ?.Where( f =>
+                        f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.E}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
 
-            if( !funds.Any( p => p.GetCode().GetValue().StartsWith( $"{FundCode.E}" ) ) )
+                return _worksheet;
+            }
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the lust worksheet.</summary>
+        /// <summary>
+        /// Gets the lust worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetLustWorksheet()
         {
-            var prc = Allocation.GetData();
-            var awards = Allocation.GetAwards();
-            var funds = Allocation.GetFunds();
+            var _enumerable = _allocation.GetData();
+            var awards = _allocation.GetAwards();
+            var funds = _allocation.GetFunds();
 
-            if( funds.Any( p => p.GetCode().Equals( $"{FundCode.F}" ) ) )
+            try
             {
-                try
-                {
-                    var code = prc?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.F}" ) )
-                        .Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        .ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
+                var code = _enumerable?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.F}" ) )
+                    .Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    .ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
 
-                    if( awards.Where( a => a.GetFundCode().Equals( $"{FundCode.F}" ) )
-                        .Select( a => a )
-                        .Any() )
-                    {
-                    }
-
-                    return _worksheet;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
+                return _worksheet;
             }
-
-            if( !funds.Any( p => p.Equals( $"{FundCode.F}" ) ) )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the oil worksheet.</summary>
+        /// <summary>
+        /// Gets the oil worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetOilWorksheet()
         {
-            var prc = Allocation.GetData();
-            var awards = Allocation.GetAwards();
-            var funds = Allocation.GetFunds();
+            var _enumerable = _allocation?.GetData();
+            var _awards = _allocation?.GetAwards();
+            var _funds = _allocation?.GetFunds();
+            var _fund = new Fund( $"{FundCode.H}" );
 
-            if( funds.Any( p => p.GetCode().Equals( $"{FundCode.H}" ) ) )
+            try
             {
-                try
-                {
-                    var fund = new Fund( $"{FundCode.H}" );
+                var _lookup = _enumerable?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.H}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
 
-                    var code = prc?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.H}" ) )
-                        .Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        .ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
-
-                    if( awards.Where( a => a.GetFundCode().Equals( $"{FundCode.H}" ) )
-                        .Select( a => a )
-                        .Any() )
-                    {
-                    }
-
-                    return _worksheet;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
+                return _worksheet;
             }
-
-            if( !funds.Any( p => p.GetCode().Equals( $"{FundCode.H}" ) ) )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the deep water horizon worksheet.</summary>
+        /// <summary>
+        /// Gets the deep water horizon worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetDeepWaterHorizonWorksheet()
         {
-            var prc = Allocation.GetData();
-            var funds = Allocation.GetFunds();
+            var _enumerable = _allocation?.GetData();
+            var _data = _allocation?.GetFunds();
+            var _grid = new Grid( _worksheet, ( 10, 2 ) );
+            var _row = _grid.From.Row;
+            var _first = _row - 1;
+            var _fund = new Fund( $"{FundCode.ZL}" );
+            _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
+            _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation?.GetBudgetFiscalYear() );
 
-            if( funds.Any( p => p.GetCode().Equals( $"{FundCode.ZL}" ) ) )
+            try
             {
-                try
+                var _lookup = _enumerable?.Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.ZL}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.Select( f => f )?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ),
+                        p => p );
+
+                if( _lookup != null )
                 {
-                    var _grid = new Grid( _worksheet, ( 10, 2 ) );
-                    var _row = _grid.From.Row;
-                    var _hdr = _row - 1;
-                    var _fund = new Fund( $"{FundCode.ZL}" );
-                    _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
-                    _budget?.SetBudgetHeaderFormat( _grid, _fund, Allocation?.GetBudgetFiscalYear() );
-
-                    var _lookup = prc?.Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.ZL}" ) )
-                        .Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        .Select( f => f )
-                        .ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
-
-                    if( _lookup != null )
+                    foreach( var kvp in _lookup )
                     {
-                        foreach( var kvp in _lookup )
-                        {
-                            _budget?.SetAllocationTableFormat( _grid, _fund );
-                            _budget?.PopulateAccountRows( _grid, _lookup, kvp );
-                            _row++;
-                        }
+                        _budget?.SetAllocationTableFormat( _grid, _fund );
+                        _budget?.PopulateAccountRows( _grid, _lookup, kvp );
+                        _row++;
                     }
+                }
 
-                    _budget?.SetSummaryFormat( _grid );
-                    return _worksheet;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
+                _budget?.SetSummaryFormat( _grid );
+                return _worksheet;
             }
-
-            if( !funds.Any( p => p.GetCode().Equals( $"{FundCode.ZL}" ) ) )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the superfund worksheet.</summary>
+        /// <summary>
+        /// Gets the superfund worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSuperfundWorksheet()
         {
-            var prc = Allocation.GetData();
-            var awards = Allocation.GetAwards();
-            var funds = Allocation.GetFunds();
+            var _enumerable = _allocation.GetData();
+            var _supplementals = _allocation.GetAwards();
+            var _funds = _allocation.GetFunds();
+            var _grid = new Grid( _worksheet, ( 10, 2 ) );
+            var _first = _grid?.From.Row;
+            var _header = _first - 1;
+            var _fund = new Fund( $"{FundCode.T}" );
+            _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
+            _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation.GetBudgetFiscalYear() );
 
-            if( funds.Any( p => p.GetCode().GetValue().StartsWith( $"{FundCode.T}" ) ) )
+            try
             {
-                try
+                var _lookup = _enumerable
+                    ?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "06" ) )
+                    ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.T}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
+
+                if( _lookup != null )
                 {
-                    var _grid = new Grid( _worksheet, ( 10, 2 ) );
-                    var _fromRow = _grid.From.Row;
-                    var _hdr = _fromRow - 1;
-                    var _fund = new Fund( $"{FundCode.T}" );
-                    _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
-                    _budget?.SetBudgetHeaderFormat( _grid, _fund, Allocation.GetBudgetFiscalYear() );
-
-                    var _lookup = prc?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "06" ) )
-                        .Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.T}" ) )
-                        .Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        .ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
-
-                    if( _lookup != null )
+                    foreach( var kvv in _lookup )
                     {
-                        foreach( var kvv in _lookup )
-                        {
-                            _budget?.SetAllocationTableFormat( _grid, _fund );
-                            _budget?.PopulateAccountRows( _grid, _lookup, kvv );
-                            _fromRow++;
-                        }
+                        _budget?.SetAllocationTableFormat( _grid, _fund );
+                        _budget?.PopulateAccountRows( _grid, _lookup, kvv );
+                        _first++;
                     }
-
-                    var _endrow = _fromRow;
-                    _budget?.SetSummaryFormat( _grid );
-
-                    if( awards.Where( a => a.GetFundCode().Equals( $"{FundCode.H}" ) )
-                        .Select( a => a )
-                        .Any() )
-                    {
-                        _budget?.SetAwardsHeaderFormat( _grid );
-                        _budget?.SetAwardRowsFormat( _grid, _fund );
-                    }
-
-                    return _worksheet;
                 }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
+
+                var _last = _first;
+                _budget?.SetSummaryFormat( _grid );
+                return _worksheet;
             }
-
-            if( !funds.Any( p => p.GetCode().GetValue().StartsWith( $"{FundCode.T}" ) ) )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the s f6 a worksheet.</summary>
+        /// <summary>
+        /// Gets the s f6 a worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSF6AWorksheet()
         {
-            var _data = Allocation.GetData();
-            var _enumerable = Allocation.GetBuilder().ProgramElements[ Field.AhCode.ToString() ];
+            var _data = _allocation?.GetData();
+            var _grid = new Grid( _worksheet, ( 10, 2 ) );
+            var _first = _grid.From.Row;
+            var _header = _first - 1;
+            var _fund = new Fund( $"{FundCode.T}" );
+            var _enumerable = _allocation?.GetBuilder()?.ProgramElements[ Field.AhCode.ToString() ];
+            _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
+            _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation?.GetBudgetFiscalYear() );
 
-            if( _enumerable.Any( f => f.Equals( "6A" ) ) )
+            try
             {
-                try
+                var _lookup = _data?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "6A" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.ToLookup( p => p.Field<string>( $"{Field.OrgCode}" ), p => p );
+
+                if( _lookup != null )
                 {
-                    var _grid = new Grid( _worksheet, ( 10, 2 ) );
-                    var _fromRow = _grid.From.Row;
-                    var _hdr = _fromRow - 1;
-                    var _fund = new Fund( $"{FundCode.T}" );
-                    _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
-                    _budget?.SetBudgetHeaderFormat( _grid, _fund, Allocation.GetBudgetFiscalYear() );
-
-                    var _code = _data?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "6A" ) )
-                        .Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        .ToLookup( p => p.Field<string>( $"{Field.OrgCode}" ), p => p );
-
-                    if ( _code != null )
+                    foreach( var kvp in _lookup )
                     {
-                        foreach( var kvp in _code )
+                        var _dictionary = new Dictionary<string, object>
                         {
-                            var _dictionary = new Dictionary<string, object>
-                            {
-                                [ $"{Field.AhCode}" ] = "6A"
-                            };
+                            [ $"{Field.AhCode}" ] = "6A"
+                        };
 
-                            var _builder = new ConnectionBuilder( Source.AllowanceHolders,
-                                Provider.SQLite );
-
-                            var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
-                            var _query = new Query( _builder, _statement );
-
-                            _budget?.SetAllocationTableFormat( _grid, _fund,
-                                new AllowanceHolder( _query ) );
-
-                            _budget?.PopulateAccountRows( _grid, _code, kvp );
-                            _fromRow++;
-                        }
+                        var _builder = new ConnectionBuilder( Source.AllowanceHolders, Provider.SQLite );
+                        var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                        var _query = new Query( _builder, _statement );
+                        _budget?.SetAllocationTableFormat( _grid, _fund, new AllowanceHolder( _query ) );
+                        _budget?.PopulateAccountRows( _grid, _lookup, kvp );
+                        _first++;
                     }
+                }
 
-                    _budget?.SetSummaryFormat( _grid );
-                    return _worksheet;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
+                _budget?.SetSummaryFormat( _grid );
+                return _worksheet;
             }
-
-            if( !_enumerable.Any( f => f.Equals( "6A" ) ) )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the special accounts worksheet.</summary>
+        /// <summary>
+        /// Gets the special accounts worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSpecialAccountsWorksheet()
         {
-            var prc = Allocation.GetData();
-            var funds = Allocation.GetFunds();
+            var _enumerable = _allocation?.GetData();
+            var _data = _allocation?.GetFunds();
+            var _grid = new Grid( _worksheet, ( 10, 2 ) );
+            var _first = _grid.From.Row;
+            var _header = _first - 1;
+            var _fund = new Fund( $"{FundCode.TR}" );
+            _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
+            _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation?.GetBudgetFiscalYear() );
 
-            if( funds.Any( p => p.GetCode().GetValue().Contains( $"{FundCode.TR}" ) ) )
+            try
             {
-                try
-                {
-                    var _grid = new Grid( _worksheet, ( 10, 2 ) );
-                    var _fromRow = _grid.From.Row;
-                    var _hdr = _fromRow - 1;
+                var _rows = _enumerable?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Contains( $"{FundCode.TR}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.Select( p => p )?.ToArray();
 
-                    var _codes = prc?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Contains( $"{FundCode.TR}" ) )
+                for( var i = 0; i < _rows?.Length; i++ )
+                {
+                    var _lookup = _enumerable?.Where( p => p.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.TR}" ) )
                         ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                         ?.Select( p => p )
-                        ?.ToArray();
+                        ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
 
-                    var _fund = new Fund( $"{FundCode.TR}" );
-                    _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
-                    _budget?.SetBudgetHeaderFormat( _grid, _fund, Allocation.GetBudgetFiscalYear() );
-
-                    for( var i = 0; i < _codes?.Length; i++ )
+                    foreach( var kvp in _lookup )
                     {
-                        var _ = _codes[ i ];
-
-                        var _lookup = prc
-                            ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.TR}" ) )
-                            ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                            ?.Select( p => p )
-                            ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
-
-                        foreach( var kvp in _lookup )
-                        {
-                            _budget?.SetAllocationTableFormat( _grid, _fund );
-                            _budget?.PopulateAccountRows( _grid, _lookup, kvp );
-                            _fromRow++;
-                        }
-
-                        var _endrow = _fromRow;
-                        _budget?.SetSummaryFormat( _grid );
+                        _budget?.SetAllocationTableFormat( _grid, _fund );
+                        _budget?.PopulateAccountRows( _grid, _lookup, kvp );
+                        _first++;
                     }
 
-                    return _worksheet;
+                    var _last = _first;
+                    _budget?.SetSummaryFormat( _grid );
                 }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
-            }
 
-            if( !funds.Any( p => p.GetCode().GetValue().Contains( $"{FundCode.TR}" ) ) )
+                return _worksheet;
+            }
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the superfund supplement worksheet.</summary>
+        /// <summary>
+        /// Gets the superfund supplement worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSuperfundSupplementWorksheet()
         {
-            var _data = Allocation.GetData();
-            var _funds = Allocation.GetFunds();
+            var _data = _allocation?.GetData();
+            var _enumerable = _allocation?.GetFunds();
+            var _grid = new Grid( _worksheet, ( 10, 2 ) );
+            var _first = _grid.From.Row;
+            var _header = _first - 1;
+            var _fund = new Fund( $"{FundCode.TS3}" );
+            _budget?.SetWorksheetProperties( _grid?.GetWorksheet() );
+            _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation?.GetBudgetFiscalYear() );
 
-            if( _funds.Any( p => p.GetCode().Equals( $"{FundCode.TS3}" ) ) )
+            try
             {
-                try
+                var _lookup = _data?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.TS3}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
+
+                if( _lookup != null )
                 {
-                    var _grid = new Grid( _worksheet, ( 10, 2 ) );
-                    var _fromRow = _grid.From.Row;
-                    var _hdr = _fromRow - 1;
-                    var _fund = new Fund( $"{FundCode.TS3}" );
-                    _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
-                    _budget?.SetBudgetHeaderFormat( _grid, _fund, Allocation.GetBudgetFiscalYear() );
-
-                    var _lookup = _data?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.TS3}" ) )
-                        ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
-
-                    if ( _lookup != null )
+                    foreach( var kvp in _lookup )
                     {
-                        foreach( var kvp in _lookup )
-                        {
-                            _budget?.SetNonSiteHeaderFormat( _grid, _fund );
-                            _budget?.PopulateAccountRows( _grid, _lookup, kvp );
-                            _fromRow++;
-                        }
+                        _budget?.SetNonSiteHeaderFormat( _grid, _fund );
+                        _budget?.PopulateAccountRows( _grid, _lookup, kvp );
+                        _first++;
                     }
+                }
 
-                    _budget?.SetSummaryFormat( _grid );
-                    return _worksheet;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
+                _budget?.SetSummaryFormat( _grid );
+                return _worksheet;
             }
-
-            if( !_funds.Any( p => p.GetCode().Equals( $"{FundCode.TS3}" ) ) )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Gets the lust supplemental worksheet.</summary>
+        /// <summary>
+        /// Gets the lust supplemental worksheet.
+        /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetLustSupplementalWorksheet()
         {
-            var _data = Allocation.GetData();
-            var _funds = Allocation.GetFunds();
+            var _enumerable = _allocation?.GetData();
+            var _data = _allocation?.GetFunds();
+            var _fund = new Fund( $"{FundCode.FS3}" );
+            var _grid = new Grid( _worksheet, ( 10, 2 ) );
+            var _first = _grid?.From.Row;
+            var _header = _first - 1;
+            _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
 
-            if( _funds?.Any( p => p.GetCode().Equals( $"{FundCode.FS3}" ) ) ?? false )
+            try
             {
-                try
+                var _rows = _enumerable?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.FS3}" ) )
+                    ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
+                    ?.Select( f => f )?.ToArray();
+
+                var _lookup = _rows?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
+
+                if( _lookup != null )
                 {
-                    var _grid = new Grid( _worksheet, ( 10, 2 ) );
-                    var _fromRow = _grid.From.Row;
-                    var _hdr = _fromRow - 1;
-                    _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
-                    var _fund = new Fund( $"{FundCode.FS3}" );
-
-                    var _rows = _data?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.FS3}" ) )
-                        ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
-                        ?.Select( f => f )
-                        ?.ToArray();
-
-                    var _lookup = _rows
-                        ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
-
-                    if ( _lookup != null )
+                    foreach( var group in _lookup )
                     {
-                        foreach( var group in _lookup )
-                        {
-                            _budget?.SetNonSiteHeaderFormat( _grid, _fund );
-                            _budget?.PopulateAccountRows( _grid, _lookup, group );
-                            _fromRow++;
-                        }
+                        _budget?.SetNonSiteHeaderFormat( _grid, _fund );
+                        _budget?.PopulateAccountRows( _grid, _lookup, group );
+                        _first++;
                     }
+                }
 
-                    _budget?.SetSummaryFormat( _grid );
-                    return _worksheet;
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return default( ExcelWorksheet );
-                }
+                _budget?.SetSummaryFormat( _grid );
+                return _worksheet;
             }
-
-            if( !_funds?.Any( p => p.GetCode().Equals( $"{FundCode.FS3}" ) ) ?? false )
+            catch( Exception ex )
             {
-                _budget.HideWorksheet();
+                Fail( ex );
+                return default( ExcelWorksheet );
             }
-
-            return default( ExcelWorksheet );
         }
 
-        /// <summary>Fails the specified ex.</summary>
+        /// <summary>
+        /// Fails the specified ex.
+        /// </summary>
         /// <param name="ex">The ex.</param>
         private static void Fail( Exception ex )
         {

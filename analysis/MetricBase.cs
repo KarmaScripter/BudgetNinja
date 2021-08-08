@@ -1,68 +1,69 @@
-﻿// // <copyright file=" <File Name> .cs" company="Terry D. Eppler">
-// // Copyright (c) Terry Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
+// Copyright (c) Terry Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    /// <summary> </summary>
-    /// <seealso cref = "IMetric"/>
-    /// <seealso cref = "IDataFilter"/>
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="BudgetExecution.IMetric" />
+    /// <seealso cref="BudgetExecution.IDataFilter" />
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "BadListLineBreaks" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public abstract class MetricBase : IMetric, IDataFilter
     {
-        // ***************************************************************************************************************************
-        // ************************************************  PROPERTIES **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// The field
+        /// </summary>
+        private protected Field _field;
 
-        /// <summary> Gets or sets the field. </summary>
-        /// <value> The field. </value>
-        private protected Field Field { get; set; }
+        /// <summary>
+        /// The numeric
+        /// </summary>
+        private protected Numeric _numeric;
 
-        /// <summary> Gets or sets the numeric. </summary>
-        /// <value> The numeric. </value>
-        private protected Numeric Numeric { get; set; }
+        /// <summary>
+        /// The count
+        /// </summary>
+        private protected int _count;
 
-        /// <summary> Gets or sets the count. </summary>
-        /// <value> The count. </value>
-        private protected int Count { get; set; }
+        /// <summary>
+        /// The data
+        /// </summary>
+        private protected IEnumerable<DataRow> _data;
 
-        /// <summary> Gets or sets the data. </summary>
-        /// <value> The data. </value>
-        private protected IEnumerable<DataRow> Data { get; set; }
+        /// <summary>
+        /// The total
+        /// </summary>
+        private protected double _total;
 
-        /// <summary> Gets or sets the total. </summary>
-        /// <value> The total. </value>
-        private protected double Total { get; set; }
+        /// <summary>
+        /// The average
+        /// </summary>
+        private protected double _average;
 
-        /// <summary> Gets or sets the average. </summary>
-        /// <value> The average. </value>
-        private protected double Average { get; set; }
+        /// <summary>
+        /// The statistics
+        /// </summary>
+        private protected IDictionary<string, IEnumerable<double>> _statistics;
 
-        /// <summary> Gets or sets the statistics. </summary>
-        /// <value> The statistics. </value>
-        private protected IDictionary<string, IEnumerable<double>> Statistics { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary> Gets the field. </summary>
-        /// <returns> </returns>
+        /// <summary>
+        /// Gets the field.
+        /// </summary>
+        /// <returns></returns>
         public Field GetField()
         {
             try
             {
-                return Field;
+                return _field;
             }
             catch( Exception ex )
             {
@@ -71,13 +72,17 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Gets the numeric. </summary>
-        /// <returns> </returns>
+        /// <summary>
+        /// Gets the numeric.
+        /// </summary>
+        /// <returns></returns>
         public Numeric GetNumeric()
         {
             try
             {
-                return Numeric;
+                return Validate.Numeric( _numeric ) 
+                    ? _numeric 
+                    : default( Numeric );
             }
             catch( Exception ex )
             {
@@ -86,14 +91,16 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Gets the data. </summary>
-        /// <returns> </returns>
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<DataRow> GetData()
         {
             try
             {
-                return Verify.Rows( Data )
-                    ? Data
+                return Verify.Rows( _data )
+                    ? _data
                     : default( IEnumerable<DataRow> );
             }
             catch( Exception ex )
@@ -103,10 +110,12 @@ namespace BudgetExecution
             }
         }
 
-        /// <summary> Gets the data. </summary>
-        /// <param name = "field" > The field. </param>
-        /// <param name = "filter" > </param>
-        /// <returns> </returns>
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <param name="field">The field.</param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
         public IEnumerable<DataRow> FilterData( Field field, string filter )
         {
             if( Validate.Field( field )
@@ -114,11 +123,12 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var query = Data?.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
+                    var _query = _data
+                        ?.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
                         ?.Select( p => p );
 
-                    return query?.Any() == true
-                        ? query
+                    return _query?.Any() == true
+                        ? _query
                         : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )
@@ -131,10 +141,12 @@ namespace BudgetExecution
             return default( IEnumerable<DataRow> );
         }
 
-        /// <summary> Gets the codes. </summary>
-        /// <param name = "data" > The data. </param>
-        /// <param name = "field" > The field. </param>
-        /// <returns> </returns>
+        /// <summary>
+        /// Gets the codes.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="field">The field.</param>
+        /// <returns></returns>
         public static IEnumerable<string> GetCodes( IEnumerable<DataRow> data, Field field )
         {
             if( data.Any()
@@ -142,10 +154,13 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var query = data?.Select( p => p.Field<string>( $"{field}" ) )?.Distinct()?.ToArray();
+                    var _query = data
+                        ?.Select( p => p.Field<string>( $"{field}" ) )
+                        ?.Distinct()
+                        ?.ToArray();
 
-                    return query.Length > 0
-                        ? query
+                    return _query.Length > 0
+                        ? _query
                         : default( string[ ] );
                 }
                 catch( Exception ex )
@@ -158,20 +173,24 @@ namespace BudgetExecution
             return default( IEnumerable<string> );
         }
 
-        /// <summary> Gets the count. </summary>
-        /// <param name = "data" > The data. </param>
-        /// <param name = "numeric" > The numeric. </param>
-        /// <returns> </returns>
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="numeric">The numeric.</param>
+        /// <returns></returns>
         public int GetCount( IEnumerable<DataRow> data, Numeric numeric = Numeric.Amount )
         {
             if( data.Any() )
             {
                 try
                 {
-                    var query = data?.Where( p => p.Field<double>( $"{numeric}" ) != 0.0D )?.Select( p => p );
+                    var _select = data
+                        ?.Where( p => p.Field<double>( $"{numeric}" ) != 0.0D )
+                        ?.Select( p => p );
 
-                    return query.Any()
-                        ? query.Count()
+                    return _select.Any()
+                        ? _select.Count()
                         : default( int );
                 }
                 catch( Exception ex )
@@ -184,20 +203,23 @@ namespace BudgetExecution
             return 0;
         }
 
-        /// <summary> Calculates the totals. </summary>
-        /// <param name = "data" > The data. </param>
-        /// <param name = "numeric" > The numeric. </param>
-        /// <returns> </returns>
+        /// <summary>
+        /// Calculates the totals.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="numeric">The numeric.</param>
+        /// <returns></returns>
         public double CalculateTotals( IEnumerable<DataRow> data, Numeric numeric = Numeric.Amount )
         {
-            if( data.Any() )
+            if( data?.Any() == true )
             {
                 try
                 {
-                    var query = data?.Select( p => p.Field<double>( $"{numeric}" ) );
+                    var _select = data
+                        ?.Select( p => p.Field<double>( $"{numeric}" ) );
 
-                    return query.Any() && query?.Sum() > 0
-                        ? query.Sum()
+                    return _select.Any() && _select?.Sum() > 0
+                        ? _select.Sum()
                         : 0.0d;
                 }
                 catch( Exception ex )
@@ -209,38 +231,40 @@ namespace BudgetExecution
             return default( double );
         }
 
-        /// <summary> Calculates the totals. </summary>
-        /// <param name = "data" > The data. </param>
-        /// <param name = "field" > The field. </param>
-        /// <param name = "numeric" > The numeric. </param>
-        /// <returns> </returns>
-        public IDictionary<string, double> CalculateTotals( IEnumerable<DataRow> data, Field field,
+        /// <summary>
+        /// Calculates the totals.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="numeric">The numeric.</param>
+        /// <returns></returns>
+        public IDictionary<string, double> CalculateTotals( IEnumerable<DataRow> data, Field field, 
             Numeric numeric = Numeric.Amount )
         {
-            if( data.Any()
+            if( data?.Any() == true
                 && Enum.IsDefined( typeof( Field ), field )
                 && Enum.IsDefined( typeof( Numeric ), numeric ) )
             {
                 try
                 {
-                    var dict = new Dictionary<string, double>();
-                    var filters = GetCodes( data, field );
+                    var _dictionary = new Dictionary<string, double>();
+                    var _codes = GetCodes( data, field );
 
-                    if( filters.Any() )
+                    if( _codes.Any() )
                     {
-                        foreach( var filter in filters )
+                        foreach( var filter in _codes )
                         {
-                            var query = data.Filter( field.ToString(), filter )
-                                .Sum( p => p.Field<double>( $"{numeric}" ) );
+                            var _query = data.Filter( field.ToString(), filter )
+                                ?.Sum( p => p.Field<double>( $"{numeric}" ) );
 
-                            if( query > 0.0d )
+                            if( _query > 0.0d )
                             {
-                                dict?.Add( filter, double.Parse( query.ToString( "N" ) ) );
+                                _dictionary?.Add( filter, double.Parse( _query?.ToString() ) );
                             }
                         }
 
-                        return dict.Any()
-                            ? dict
+                        return _dictionary?.Any() == true
+                            ? _dictionary
                             : default( Dictionary<string, double> );
                     }
                 }
@@ -254,24 +278,26 @@ namespace BudgetExecution
             return default( IDictionary<string, double> );
         }
 
-        /// <summary> Calculates the average. </summary>
-        /// <param name = "data" > The data. </param>
-        /// <param name = "numeric" > The numeric. </param>
-        /// <returns> </returns>
-        private protected double CalculateAverage( IEnumerable<DataRow> data,
-            Numeric numeric = Numeric.Amount )
+        /// <summary>
+        /// Calculates the average.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="numeric">The numeric.</param>
+        /// <returns></returns>
+        private protected double CalculateAverage( IEnumerable<DataRow> data, Numeric numeric = Numeric.Amount )
         {
-            if( data.Any()
+            if( data?.Any() == true
                 && Enum.IsDefined( typeof( Numeric ), numeric ) )
             {
                 try
                 {
-                    var query = data.Where( p => p.Field<double>( $"{numeric}" ) != 0.0 )
-                        .Select( p => p.Field<double>( $"{numeric}" ) )
-                        .Average();
+                    var _query = data
+                        .Where( p => p.Field<double>( $"{numeric}" ) != 0.0 )
+                        ?.Select( p => p.Field<double>( $"{numeric}" ) )
+                        ?.Average();
 
-                    return query > 0d
-                        ? double.Parse( query.ToString( "N" ) )
+                    return _query > 0d
+                        ? double.Parse( _query?.ToString() )
                         : 0.0d;
                 }
                 catch( Exception ex )
@@ -284,42 +310,44 @@ namespace BudgetExecution
             return 0.0d;
         }
 
-        /// <summary> Calculates the averages. </summary>
-        /// <param name = "data" > The data. </param>
-        /// <param name = "field" > The field. </param>
-        /// <param name = "numeric" > The numeric. </param>
-        /// <returns> </returns>
+        /// <summary>
+        /// Calculates the averages.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="field">The field.</param>
+        /// <param name="numeric">The numeric.</param>
+        /// <returns></returns>
         public IDictionary<string, double> CalculateAverages( IEnumerable<DataRow> data, Field field,
             Numeric numeric = Numeric.Amount )
         {
-            if( data.Any()
+            if( data?.Any() == true
                 && Enum.IsDefined( typeof( Field ), field )
                 && Enum.IsDefined( typeof( Numeric ), numeric ) )
             {
                 try
                 {
-                    var dict = new Dictionary<string, double>();
-                    var filters = GetCodes( data, field );
+                    var _dictionary = new Dictionary<string, double>();
+                    var _filters = GetCodes( data, field );
 
-                    if( filters.Any() )
+                    if( _filters.Any() )
                     {
-                        foreach( var filter in filters )
+                        foreach( var filter in _filters )
                         {
-                            var query = data?.Filter( field.ToString(), filter );
+                            var _query = data?.Filter( field.ToString(), filter );
 
-                            if( query.Any() )
+                            if( _query?.Any() == true )
                             {
-                                var average = CalculateAverage( query, numeric );
+                                var _value = CalculateAverage( _query, numeric );
 
-                                if( average > 0.0d )
+                                if( _value > 0.0d )
                                 {
-                                    dict?.Add( filter, average );
+                                    _dictionary?.Add( filter, _value );
                                 }
                             }
                         }
 
-                        return dict.Any()
-                            ? dict
+                        return _dictionary.Any()
+                            ? _dictionary
                             : default( Dictionary<string, double> );
                     }
                 }
@@ -333,13 +361,15 @@ namespace BudgetExecution
             return default( IDictionary<string, double> );
         }
 
-        /// <summary> Get Error Dialog. </summary>
-        /// <param name = "ex" > The ex. </param>
+        /// <summary>
+        /// Fails the specified ex.
+        /// </summary>
+        /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

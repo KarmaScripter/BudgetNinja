@@ -37,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected Source _source = Source.PRC;
+        private const Source _source = Source.Allocations;
 
         /// <summary>
         /// Gets the amount.
@@ -399,7 +399,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Source( _source )
+                return Validate.Source( _source )
                     ? _source
                     : default( Source );
             }
