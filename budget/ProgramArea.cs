@@ -4,33 +4,64 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     public class ProgramArea : IProgramArea, IProgramElement, ISource
     {
-        // **************************************************************************************************************************
-        // ****************************************************     FIELDS    *******************************************************
-        // **************************************************************************************************************************
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        private readonly DataRow _record;
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        private readonly IDictionary<string, object> _data;
+
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        private readonly IElement _code;
+
+        /// <summary>
+        /// Gets the program area identifier.
+        /// </summary>
+        /// <value>
+        /// The program area identifier.
+        /// </value>
+        private readonly IKey _id;
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        private readonly IElement _name;
 
         /// <summary>
         /// The source
         /// </summary>
         private static readonly Source _source = Source.ProgramAreas;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramArea"/> class.
         /// </summary>
@@ -46,11 +77,11 @@ namespace BudgetExecution
         /// </param>
         public ProgramArea( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ProgramAreaId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ProgramAreaId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -61,11 +92,11 @@ namespace BudgetExecution
         /// </param>
         public ProgramArea( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ProgramAreaId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ProgramAreaId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -77,11 +108,11 @@ namespace BudgetExecution
         public ProgramArea( DataRow data )
             : this()
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.ProgramAreaId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.ProgramAreaId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -92,61 +123,13 @@ namespace BudgetExecution
         /// </param>
         public ProgramArea( string code )
         {
-            Record = new DataBuilder( _source, SetArgs( code ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ProgramAreaId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( _source, SetArgs( code ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ProgramAreaId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private DataRow Record { get; }
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private IDictionary<string, object> Data { get; }
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        private IElement Code { get; }
-
-        /// <summary>
-        /// Gets the program area identifier.
-        /// </summary>
-        /// <value>
-        /// The program area identifier.
-        /// </value>
-        private IKey ID { get; }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private IElement Name { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Sets the arguments.
         /// </summary>
@@ -186,8 +169,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code.GetValue()
+                return Verify.Element( _code )
+                    ? _code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -206,8 +189,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -226,8 +209,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -246,8 +229,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -266,8 +249,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )

@@ -14,6 +14,30 @@ namespace BudgetExecution
     public class DivisionAuthority : Authority
     {
         /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private const Source _source = Source.DivisionAuthority;
+
+        /// <summary>
+        /// Gets or sets the total.
+        /// </summary>
+        /// <value>
+        /// The total.
+        /// </value>
+        public double _total;
+
+        /// <summary>
+        /// Gets or sets the average.
+        /// </summary>
+        /// <value>
+        /// The average.
+        /// </value>
+        public double _average;
+
+        /// <summary>
         /// Initializes a new instance of the  class.
         /// </summary>
         /// <param name = "query" >
@@ -41,34 +65,6 @@ namespace BudgetExecution
             _data = _records?.ToDictionary();
         }
         
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        private protected readonly new Source _source = Source.DivisionAuthority;
-
-        /// <summary>
-        /// Gets or sets the total.
-        /// </summary>
-        /// <value>
-        /// The total.
-        /// </value>
-        public double _total;
-
-        /// <summary>
-        /// Gets or sets the average.
-        /// </summary>
-        /// <value>
-        /// The average.
-        /// </value>
-        public double _average;
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Calculates the percentage.
         /// </summary>

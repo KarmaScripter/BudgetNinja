@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -22,20 +18,61 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Local" ) ]
+    [ SuppressMessage( "ReSharper", "UnassignedReadonlyField" ) ]
     public class FinanceObjectClass : IFinanceObjectClass, IProgramElement, ISource
     {
-        // **************************************************************************************************************************
-        // ****************************************************     FIELDS    *******************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.FinanceObjectClass;
+        private const Source _source = Source.FinanceObjectClass;
 
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        private readonly DataRow _record;
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        private readonly IDictionary<string, object> _data;
+
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        private readonly IElement _code;
+
+        /// <summary>
+        /// Gets the finance object class identifier.
+        /// </summary>
+        /// <value>
+        /// The finance object class identifier.
+        /// </value>
+        private readonly IKey _id;
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        private readonly IElement _name;
+
+        /// <summary>
+        /// Gets or sets the category.
+        /// </summary>
+        /// <value>
+        /// The category.
+        /// </value>
+        private protected readonly BOC _category;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "FinanceObjectClass"/> class.
@@ -52,11 +89,11 @@ namespace BudgetExecution
         /// </param>
         public FinanceObjectClass( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.FinanceObjectClassId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Args = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.FinanceObjectClassId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -67,11 +104,11 @@ namespace BudgetExecution
         /// </param>
         public FinanceObjectClass( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.FinanceObjectClassId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Args = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.FinanceObjectClassId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -82,11 +119,11 @@ namespace BudgetExecution
         /// </param>
         public FinanceObjectClass( DataRow datarow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.FinanceObjectClassId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Args = Record?.ToDictionary();
+            _record = datarow;
+            _id = new Key( _record, PrimaryKey.FinanceObjectClassId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -97,68 +134,12 @@ namespace BudgetExecution
         /// </param>
         public FinanceObjectClass( string foccode )
         {
-            Record = new DataBuilder( _source, GetArgs( foccode ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.FinanceObjectClassId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Args = Record?.ToDictionary();
+            _record = new DataBuilder( _source, GetArgs( foccode ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.FinanceObjectClassId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private DataRow Record { get; }
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private IDictionary<string, object> Args { get; }
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        private IElement Code { get; }
-
-        /// <summary>
-        /// Gets the finance object class identifier.
-        /// </summary>
-        /// <value>
-        /// The finance object class identifier.
-        /// </value>
-        private IKey ID { get; }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private IElement Name { get; }
-
-        /// <summary>
-        /// Gets or sets the category.
-        /// </summary>
-        /// <value>
-        /// The category.
-        /// </value>
-        public BOC Category { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Sets the arguments.
@@ -199,8 +180,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code.GetValue()
+                return Verify.Element( _code )
+                    ? _code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -219,8 +200,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -229,11 +210,7 @@ namespace BudgetExecution
                 return default( IDictionary<string, object> );
             }
         }
-
-        // ***************************************************************************************************************************
-        // ******************************************* INTERFACE IMPLIMENTATIONS *****************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the finance object class identifier.
         /// </summary>
@@ -243,8 +220,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -263,8 +240,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -283,8 +260,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -338,9 +315,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

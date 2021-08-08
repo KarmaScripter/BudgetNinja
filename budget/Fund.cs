@@ -4,33 +4,80 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Local" ) ]
     public class Fund : IFund, ISource
     {
-        // **************************************************************************************************************************
-        // ****************************************************     FIELDS    *******************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.Funds;
+        private const Source _source = Source.Funds;
 
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        private readonly DataRow _record;
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        private readonly IDictionary<string, object> _data;
+
+        /// <summary>
+        /// Gets the treasury symbol.
+        /// </summary>
+        /// <value>
+        /// The treasury symbol.
+        /// </value>
+        private readonly IElement _treasurySymbol;
+
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        private readonly IElement _code;
+
+        /// <summary>
+        /// Gets the fund identifier.
+        /// </summary>
+        /// <value>
+        /// The fund identifier.
+        /// </value>
+        private readonly IKey _id;
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        private readonly IElement _name;
+
+        /// <summary>
+        /// Gets the title.
+        /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
+        private readonly IElement _title;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Fund"/> class.
@@ -47,13 +94,13 @@ namespace BudgetExecution
         /// </param>
         public Fund( FundCode fundcode )
         {
-            Record = new DataBuilder( _source, GetArgs( fundcode ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.FundId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            TreasurySymbol = new Element( Record, Field.TreasurySymbol );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( _source, GetArgs( fundcode ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.FundId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _treasurySymbol = new Element( _record, Field.TreasurySymbol );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -64,13 +111,13 @@ namespace BudgetExecution
         /// </param>
         public Fund( string code )
         {
-            Record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.FundId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            TreasurySymbol = new Element( Record, Field.TreasurySymbol );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.FundId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _treasurySymbol = new Element( _record, Field.TreasurySymbol );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -81,13 +128,13 @@ namespace BudgetExecution
         /// </param>
         public Fund( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.FundId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            TreasurySymbol = new Element( Record, Field.TreasurySymbol );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.FundId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _treasurySymbol = new Element( _record, Field.TreasurySymbol );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -98,13 +145,13 @@ namespace BudgetExecution
         /// </param>
         public Fund( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.FundId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            TreasurySymbol = new Element( Record, Field.TreasurySymbol );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.FundId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _treasurySymbol = new Element( _record, Field.TreasurySymbol );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -116,78 +163,14 @@ namespace BudgetExecution
         public Fund( DataRow data )
             : this()
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.FundId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Title = new Element( Record, Field.Title );
-            TreasurySymbol = new Element( Record, Field.TreasurySymbol );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.FundId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _title = new Element( _record, Field.Title );
+            _treasurySymbol = new Element( _record, Field.TreasurySymbol );
+            _data = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private DataRow Record { get; }
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private IDictionary<string, object> Data { get; }
-
-        /// <summary>
-        /// Gets the treasury symbol.
-        /// </summary>
-        /// <value>
-        /// The treasury symbol.
-        /// </value>
-        private IElement TreasurySymbol { get; }
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        private IElement Code { get; }
-
-        /// <summary>
-        /// Gets the fund identifier.
-        /// </summary>
-        /// <value>
-        /// The fund identifier.
-        /// </value>
-        private IKey ID { get; }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private IElement Name { get; }
-
-        /// <summary>
-        /// Gets the title.
-        /// </summary>
-        /// <value>
-        /// The title.
-        /// </value>
-        private IElement Title { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Converts to dictionary.
@@ -198,8 +181,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -219,8 +202,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code?.GetValue()
+                return Verify.Element( _code )
+                    ? _code?.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -316,8 +299,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -336,8 +319,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -356,8 +339,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -376,8 +359,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Title )
-                    ? Title
+                return Verify.Element( _title )
+                    ? _title
                     : Element.Default;
             }
             catch( Exception ex )
@@ -396,8 +379,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( TreasurySymbol )
-                    ? TreasurySymbol
+                return Verify.Element( _treasurySymbol )
+                    ? _treasurySymbol
                     : Element.Default;
             }
             catch( Exception ex )

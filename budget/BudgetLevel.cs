@@ -4,29 +4,48 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // **************************************************   ASSEMBLIES   ********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class BudgetLevel : IBudgetLevel
     {
-        // **********************************************************************************************************************
-        // ***********************************************  CONSTRUCTORS  *******************************************************
-        // **********************************************************************************************************************
+        /// <summary>
+        /// Gets the level.
+        /// </summary>
+        /// <value>
+        /// The level.
+        /// </value>
+        private readonly Level _level;
+
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        private readonly string _code;
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        private readonly string _name;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "BudgetLevel"/> class.
         /// </summary>
         public BudgetLevel()
         {
-            Level = Level.Region;
-            Code = ( (int)Level ).ToString();
-            Name = Level.ToString();
+            _level = Level.Region;
+            _code = ( (int)_level ).ToString();
+            _name = _level.ToString();
         }
 
         /// <summary>
@@ -37,9 +56,9 @@ namespace BudgetExecution
         /// </param>
         public BudgetLevel( string budgetlevel )
         {
-            Level = GetLevel( budgetlevel );
-            Code = ( (int)Level ).ToString();
-            Name = Level.ToString();
+            _level = GetLevel( budgetlevel );
+            _code = ( (int)_level ).ToString();
+            _name = _level.ToString();
         }
 
         /// <summary>
@@ -50,42 +69,10 @@ namespace BudgetExecution
         /// </param>
         private BudgetLevel( Level level )
         {
-            Level = level;
-            Code = ( (int)Level ).ToString();
-            Name = Level.ToString();
+            _level = level;
+            _code = ( (int)_level ).ToString();
+            _name = _level.ToString();
         }
-
-        // **********************************************************************************************************************
-        // **************************************************   PROPERTIES   ****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets the level.
-        /// </summary>
-        /// <value>
-        /// The level.
-        /// </value>
-        private Level Level { get; }
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        private string Code { get; }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private string Name { get; }
-
-        // **********************************************************************************************************************
-        // **************************************************  METHODS   ********************************************************
-        // **********************************************************************************************************************
 
         /// <summary>
         /// Gets the level number.
@@ -96,8 +83,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( Level ), Level.ToString() )
-                    ? (int)Enum.Parse( typeof( Level ), Level.ToString() )
+                return Enum.IsDefined( typeof( Level ), _level.ToString() )
+                    ? (int)Enum.Parse( typeof( Level ), _level.ToString() )
                     : (int)Level.Region;
             }
             catch( Exception ex )
@@ -116,8 +103,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Name )
-                    ? Name
+                return Verify.Input( _name )
+                    ? _name
                     : default( string );
             }
             catch( Exception ex )
@@ -136,8 +123,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( Level ), Level )
-                    ? Level
+                return Enum.IsDefined( typeof( Level ), _level )
+                    ? _level
                     : Level.NS;
             }
             catch( Exception ex )
@@ -183,8 +170,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Code )
-                    ? Code
+                return Verify.Input( _code )
+                    ? _code
                     : string.Empty;
             }
             catch( Exception ex )
@@ -201,17 +188,17 @@ namespace BudgetExecution
         /// </returns>
         public IDictionary<string, object> ToDictionary()
         {
-            if( Enum.IsDefined( typeof( Level ), Level )
-                && Verify.Input( Code )
-                && Verify.Input( Name ) )
+            if( Enum.IsDefined( typeof( Level ), _level )
+                && Verify.Input( _code )
+                && Verify.Input( _name ) )
             {
                 try
                 {
                     return new Dictionary<string, object>()
                     {
-                        [ $"{Level}" ] = Level.ToString(),
-                        [ $"{Code}" ] = Code,
-                        [ $"{Name}" ] = Name
+                        [ $"{_level}" ] = _level.ToString(),
+                        [ $"{_code}" ] = _code,
+                        [ $"{_name}" ] = _name
                     };
                 }
                 catch( Exception ex )
@@ -248,9 +235,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.Goals;
+        private const Source _source = Source.Goals;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "Goal"/> class.
@@ -66,12 +66,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Goal"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Goal( DataRow data )
+        public Goal( DataRow dataRow )
         {
-            _record = data;
+            _record = dataRow;
             _id = new Key( _record, PrimaryKey.GoalId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );
@@ -99,7 +99,7 @@ namespace BudgetExecution
         /// <value>
         /// The record.
         /// </value>
-        private readonly DataRow _record;
+        private protected readonly DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -107,7 +107,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private readonly IDictionary<string, object> _data;
+        private protected readonly IDictionary<string, object> _data;
 
         /// <summary>
         /// Gets the code.
@@ -115,7 +115,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private readonly IElement _code;
+        private protected readonly IElement _code;
 
         /// <summary>
         /// Gets the goal identifier.
@@ -123,7 +123,7 @@ namespace BudgetExecution
         /// <value>
         /// The goal identifier.
         /// </value>
-        private readonly IKey _id;
+        private protected readonly IKey _id;
 
         /// <summary>
         /// Gets the name.
@@ -131,7 +131,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private readonly IElement _name;
+        private protected readonly IElement _name;
         
         /// <summary>
         /// Converts to dictionary.
