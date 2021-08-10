@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -24,100 +20,18 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     public class ResourcePlanningOffice : IResourcePlanningOffice, IProgramElement, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************     FIELDS    ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.ResourcePlanningOffices;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        private const Source _source = Source.ResourcePlanningOffices;
+        
         /// <summary>
-        /// Initializes a new instance of the <see cref = "ResourcePlanningOffice"/> class.
-        /// </summary>
-        public ResourcePlanningOffice()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "ResourcePlanningOffice"/> class.
-        /// </summary>
-        /// <param name = "query" >
-        /// The query.
-        /// </param>
-        public ResourcePlanningOffice( IQuery query )
-            : this()
-        {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ResourcePlanningOfficeId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "ResourcePlanningOffice"/> class.
-        /// </summary>
-        /// <param name = "builder" >
-        /// The builder.
-        /// </param>
-        public ResourcePlanningOffice( IBuilder builder )
-        {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ResourcePlanningOfficeId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "ResourcePlanningOffice"/> class.
-        /// </summary>
-        /// <param name = "data" >
-        /// The data.
-        /// </param>
-        public ResourcePlanningOffice( DataRow data )
-            : this()
-        {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.ResourcePlanningOfficeId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref = "ResourcePlanningOffice"/> class.
-        /// </summary>
-        /// <param name = "rpiocode" >
-        /// The rpiocode.
-        /// </param>
-        public ResourcePlanningOffice( string rpiocode )
-            : this()
-        {
-            Record = new DataBuilder( _source, SetArgs( rpiocode ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ResourcePlanningOfficeId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            Data = Record?.ToDictionary();
-        }
-
-        // ***************************************************************************************************************************
-        // ************************************************  PROPERTIES   ************************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The dataRow.
         /// </value>
-        private DataRow Record { get; }
+        private protected readonly DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -125,7 +39,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private IDictionary<string, object> Data { get; }
+        private protected readonly IDictionary<string, object> _data;
 
         /// <summary>
         /// Gets the code.
@@ -133,7 +47,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private IElement Code { get; }
+        private protected readonly IElement _code;
 
         /// <summary>
         /// Gets the resource planning office identifier.
@@ -141,7 +55,7 @@ namespace BudgetExecution
         /// <value>
         /// The resource planning office identifier.
         /// </value>
-        private IKey ID { get; }
+        private protected readonly IKey _id;
 
         /// <summary>
         /// Gets the name.
@@ -149,11 +63,82 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private IElement Name { get; }
+        private protected readonly IElement _name;
 
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref = "ResourcePlanningOffice"/> class.
+        /// </summary>
+        public ResourcePlanningOffice()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref = "ResourcePlanningOffice"/> class.
+        /// </summary>
+        /// <param name = "query" >
+        /// The query.
+        /// </param>
+        public ResourcePlanningOffice( IQuery query )
+            : this()
+        {
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ResourcePlanningOfficeId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref = "ResourcePlanningOffice"/> class.
+        /// </summary>
+        /// <param name = "builder" >
+        /// The builder.
+        /// </param>
+        public ResourcePlanningOffice( IBuilder builder )
+        {
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ResourcePlanningOfficeId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref = "ResourcePlanningOffice"/> class.
+        /// </summary>
+        /// <param name = "dataRow" >
+        /// The dataRow.
+        /// </param>
+        public ResourcePlanningOffice( DataRow dataRow )
+            : this()
+        {
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.ResourcePlanningOfficeId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref = "ResourcePlanningOffice"/> class.
+        /// </summary>
+        /// <param name = "rpioCode" >
+        /// The rpioCode.
+        /// </param>
+        public ResourcePlanningOffice( string rpioCode )
+            : this()
+        {
+            _record = new DataBuilder( _source, SetArgs( rpioCode ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ResourcePlanningOfficeId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _data = _record?.ToDictionary();
+        }
 
         /// <summary>
         /// Sets the arguments.
@@ -194,8 +179,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code.GetValue()
+                return Verify.Element( _code )
+                    ? _code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -214,8 +199,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -234,8 +219,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -254,8 +239,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -274,8 +259,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )

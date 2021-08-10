@@ -1,4 +1,4 @@
-﻿// <copyright file = "Requisition.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "Requisition.cs" company = "Terry D. Eppler">private protected readonly new
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -22,7 +22,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly new Source _source = Source.Requisitions;
+        private const Source _source = Source.Requisitions;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Requisition"/> class.
@@ -59,13 +59,13 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Requisition"/> class.
         /// </summary>
-        /// <param name = "db" >
+        /// <param name = "builder" >
         /// The builder.
         /// </param>
-        public Requisition( IBuilder db )
-            : base( db )
+        public Requisition( IBuilder builder )
+            : base( builder )
         {
-            _records = db.GetRecord();
+            _records = builder.GetRecord();
             _id = new Key( _records, PrimaryKey.RequisitionId );
             _dcn = new Element( _records, Field.DCN );
             _requestNumber = new Element( _records, Field.RequestNumber );

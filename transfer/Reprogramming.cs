@@ -40,7 +40,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly new Source _source = Source.Transfers;
+        private const Source _source = Source.Transfers;
 
         /// <summary>
         /// Gets the date.

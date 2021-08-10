@@ -60,7 +60,7 @@ namespace BudgetExecution
             ClosedDate = new Time( _records, EventDate.ClosedDate );
             _amount = new Amount( _records, Numeric.Amount );
             Expended = new Amount( _records, Numeric.Expended );
-            ULO = new Amount( _records, Numeric.ULO );
+            _ulo = new Amount( _records, Numeric.ULO );
             _data = _records?.ToDictionary();
         }
 
@@ -88,7 +88,7 @@ namespace BudgetExecution
             ClosedDate = new Time( _records, EventDate.ClosedDate );
             _amount = new Amount( _records, Numeric.Amount );
             Expended = new Amount( _records, Numeric.Expended );
-            ULO = new Amount( _records, Numeric.ULO );
+            _ulo = new Amount( _records, Numeric.ULO );
             _data = _records?.ToDictionary();
         }
 
@@ -116,7 +116,7 @@ namespace BudgetExecution
             ClosedDate = new Time( _records, EventDate.ClosedDate );
             _amount = new Amount( _records, Numeric.Amount );
             Expended = new Amount( _records, Numeric.Expended );
-            ULO = new Amount( _records, Numeric.ULO );
+            _ulo = new Amount( _records, Numeric.ULO );
             _data = _records?.ToDictionary();
         }
         
@@ -330,8 +330,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Amount( ULO )
-                    ? ULO
+                return Verify.Amount( _ulo )
+                    ? _ulo
                     : default( IAmount );
             }
             catch( Exception ex )

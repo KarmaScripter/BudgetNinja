@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -19,20 +15,13 @@ namespace BudgetExecution
     /// <seealso cref = "IProgramElement"/>
     /// <seealso cref = "ISource"/>
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public abstract class DivisionBase : ISource
     {
-        // **************************************************************************************************************************
-        // ********************************************      FIELDS     *************************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
         private protected readonly Source _source = Source.Divisions;
-
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
 
         /// <summary>
         /// Gets or sets the record.
@@ -40,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The record.
         /// </value>
-        private protected DataRow Record { get; set; }
+        private protected DataRow _record;
 
         /// <summary>
         /// Gets or sets the division identifier.
@@ -48,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The division identifier.
         /// </value>
-        private protected IKey ID { get; set; }
+        private protected IKey _id;
 
         /// <summary>
         /// Gets or sets the code.
@@ -56,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private protected IElement Code { get; set; }
+        private protected IElement _code;
 
         /// <summary>
         /// Gets or sets the name.
@@ -64,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected IElement Name { get; set; }
+        private protected IElement _name;
 
         /// <summary>
         /// Gets or sets the caption.
@@ -72,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The caption.
         /// </value>
-        private protected IElement Caption { get; set; }
+        private protected IElement _caption;
 
         /// <summary>
         /// Gets or sets the title.
@@ -80,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The title.
         /// </value>
-        private protected IElement Title { get; set; }
+        private protected IElement _title;
 
         /// <summary>
         /// Gets or sets the arguments.
@@ -88,12 +77,8 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> Args { get; set; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        private protected IDictionary<string, object> _args;
+        
         /// <summary>
         /// Gets the division code.
         /// </summary>
@@ -103,8 +88,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Code?.GetValue() )
-                    ? Code
+                return Verify.Input( _code?.GetValue() )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -123,8 +108,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Name?.GetValue() )
-                    ? Name
+                return Verify.Input( _name?.GetValue() )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -143,8 +128,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Caption )
-                    ? Caption
+                return Verify.Element( _caption )
+                    ? _caption
                     : Element.Default;
             }
             catch( Exception ex )
@@ -163,8 +148,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Title )
-                    ? Title
+                return Verify.Element( _title )
+                    ? _title
                     : Element.Default;
             }
             catch( Exception ex )
@@ -184,8 +169,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code.GetValue()
+                return Verify.Element( _code )
+                    ? _code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -204,8 +189,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
+                return Verify.Map( _args )
+                    ? _args
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -244,8 +229,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -261,9 +246,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

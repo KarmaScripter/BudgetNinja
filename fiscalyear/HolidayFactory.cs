@@ -4,52 +4,25 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class HolidayFactory : IFederalHoliday
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
-        public HolidayFactory()
-        {
-        }
-
-        public HolidayFactory( DataRow datarow )
-        {
-            Record = datarow;
-            NewYears = new Element( Record, Field.NewYears );
-            MartinLutherKing = new Element( Record, Field.MartinLutherKing );
-            Presidents = new Element( Record, Field.Presidents );
-            Memorial = new Element( Record, Field.Memorial );
-            Veterans = new Element( Record, Field.Veterans );
-            Labor = new Element( Record, Field.Labor );
-            Independence = new Element( Record, Field.Independence );
-            Columbus = new Element( Record, Field.Columbus );
-            Thanksgiving = new Element( Record, Field.Thanksgiving );
-            Christmas = new Element( Record, Field.Christmas );
-            Args = Record?.ToDictionary();
-        }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <value>
         /// The data.
         /// </value>
-        private DataRow Record { get; }
+        private protected readonly DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -57,7 +30,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private IDictionary<string, object> Args { get; }
+        private protected readonly IDictionary<string, object> _args;
 
         /// <summary>
         /// Creates new years.
@@ -65,7 +38,7 @@ namespace BudgetExecution
         /// <value>
         /// The new years.
         /// </value>
-        private protected IElement NewYears { get; }
+        private protected readonly IElement _newYears;
 
         /// <summary>
         /// Gets the martin luther king.
@@ -73,7 +46,7 @@ namespace BudgetExecution
         /// <value>
         /// The martin luther king.
         /// </value>
-        private protected IElement MartinLutherKing { get; }
+        private protected readonly IElement _martinLutherKing;
 
         /// <summary>
         /// Gets the presidents.
@@ -89,7 +62,7 @@ namespace BudgetExecution
         /// <value>
         /// The memorial.
         /// </value>
-        private protected IElement Memorial { get; }
+        private protected readonly IElement _memorial;
 
         /// <summary>
         /// Gets the veterans.
@@ -97,7 +70,7 @@ namespace BudgetExecution
         /// <value>
         /// The veterans.
         /// </value>
-        private protected IElement Veterans { get; }
+        private protected readonly IElement _veterans;
 
         /// <summary>
         /// Gets the labor.
@@ -105,7 +78,7 @@ namespace BudgetExecution
         /// <value>
         /// The labor.
         /// </value>
-        private protected IElement Labor { get; }
+        private protected readonly IElement _labor;
 
         /// <summary>
         /// Gets the independence.
@@ -113,7 +86,7 @@ namespace BudgetExecution
         /// <value>
         /// The independence.
         /// </value>
-        private protected IElement Independence { get; }
+        private protected readonly IElement _independence;
 
         /// <summary>
         /// Gets the columbus.
@@ -121,7 +94,7 @@ namespace BudgetExecution
         /// <value>
         /// The columbus.
         /// </value>
-        private protected IElement Columbus { get; }
+        private protected readonly IElement _columbus;
 
         /// <summary>
         /// Gets the thanksgiving.
@@ -129,7 +102,7 @@ namespace BudgetExecution
         /// <value>
         /// The thanksgiving.
         /// </value>
-        private protected IElement Thanksgiving { get; }
+        private protected readonly IElement _thanksgiving;
 
         /// <summary>
         /// Gets the christmas.
@@ -137,11 +110,34 @@ namespace BudgetExecution
         /// <value>
         /// The christmas.
         /// </value>
-        private protected IElement Christmas { get; }
+        private protected readonly IElement _christmas;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public HolidayFactory()
+        {
+        }
 
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataRow"></param>
+        public HolidayFactory( DataRow dataRow )
+        {
+            _record = dataRow;
+            _newYears = new Element( _record, Field.NewYears );
+            _martinLutherKing = new Element( _record, Field.MartinLutherKing );
+            Presidents = new Element( _record, Field.Presidents );
+            _memorial = new Element( _record, Field.Memorial );
+            _veterans = new Element( _record, Field.Veterans );
+            _labor = new Element( _record, Field.Labor );
+            _independence = new Element( _record, Field.Independence );
+            _columbus = new Element( _record, Field.Columbus );
+            _thanksgiving = new Element( _record, Field.Thanksgiving );
+            _christmas = new Element( _record, Field.Christmas );
+            _args = _record?.ToDictionary();
+        }
 
         /// <summary>
         /// Gets the new years day.
@@ -152,7 +148,7 @@ namespace BudgetExecution
         {
             try
             {
-                return NewYears;
+                return _newYears;
             }
             catch( Exception ex )
             {
@@ -170,7 +166,7 @@ namespace BudgetExecution
         {
             try
             {
-                return MartinLutherKing;
+                return _martinLutherKing;
             }
             catch( Exception ex )
             {
@@ -206,7 +202,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Memorial;
+                return _memorial;
             }
             catch( Exception ex )
             {
@@ -224,7 +220,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Veterans;
+                return _veterans;
             }
             catch( Exception ex )
             {
@@ -242,7 +238,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Labor;
+                return _labor;
             }
             catch( Exception ex )
             {
@@ -260,7 +256,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Independence;
+                return _independence;
             }
             catch( Exception ex )
             {
@@ -278,7 +274,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Columbus;
+                return _columbus;
             }
             catch( Exception ex )
             {
@@ -296,7 +292,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Thanksgiving;
+                return _thanksgiving;
             }
             catch( Exception ex )
             {
@@ -314,7 +310,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Christmas;
+                return _christmas;
             }
             catch( Exception ex )
             {
@@ -335,15 +331,15 @@ namespace BudgetExecution
         {
             try
             {
-                var holiday = new Dictionary<string, DateTime>();
+                var _holiday = new Dictionary<string, DateTime>();
 
                 foreach( var kvp in dict )
                 {
-                    holiday.Add( kvp.Key, DateTime.Parse( kvp.Value ) );
+                    _holiday.Add( kvp.Key, DateTime.Parse( kvp.Value ) );
                 }
 
-                return holiday.Any()
-                    ? holiday
+                return _holiday.Any()
+                    ? _holiday
                     : default( Dictionary<string, DateTime> );
             }
             catch( Exception ex )
@@ -365,15 +361,15 @@ namespace BudgetExecution
         {
             try
             {
-                var holiday = new Dictionary<string, DateTime>();
+                var _holiday = new Dictionary<string, DateTime>();
 
                 foreach( var kvp in dict )
                 {
-                    holiday.Add( kvp.Key, DateTime.Parse( kvp.Value ) );
+                    _holiday.Add( kvp.Key, DateTime.Parse( kvp.Value ) );
                 }
 
-                return holiday.Any()
-                    ? holiday
+                return _holiday.Any()
+                    ? _holiday
                     : default( Dictionary<string, DateTime> );
             }
             catch( Exception ex )
@@ -392,8 +388,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
+                return Verify.Map( _args )
+                    ? _args
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -409,9 +405,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

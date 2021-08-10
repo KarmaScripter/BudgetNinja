@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -22,18 +18,18 @@ namespace BudgetExecution
         /// <summary>
         /// The PRC
         /// </summary>
-        private protected readonly IProgramResultsCode _prc;
+        private readonly IProgramResultsCode _prc;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "CostAccount"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public CostAccount( DataRow data )
+        public CostAccount( DataRow dataRow )
         {
-            _records = data;
-            _prc = new ProgramResultsCode( data );
+            _records = dataRow;
+            _prc = new ProgramResultsCode( dataRow );
             _id = new Key( _records, PrimaryKey.PrcId );
             _npmCode = new Element( _records, Field.NpmCode );
             _programProjectCode = new Element( _records, Field.ProgramProjectCode );
@@ -43,24 +39,20 @@ namespace BudgetExecution
             _documentType = new Element( _records, Field.DocumentType );
             _documentPrefix = new Element( _records, Field.DocumentPrefix );
             _dcn = new Element( _records, Field.DocumentType );
-            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
             _obligatingDocumentNumber = new Element( _records, Field.ObligatingDocumentNumber );
             _system = new Element( _records, Field.System );
             _transactionNumber = new Element( _records, Field.TransactionNumber );
             _grantNumber = new Element( _records, Field.GrantNumber );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Balance = new Amount( _records, Numeric.Balance );
+            _commitments = new Amount( _records, Numeric.Commitments );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _obligations = new Amount( _records, Numeric.Obligations );
+            _deobligations = new Amount( _records, Numeric.Deobligations );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _balance = new Amount( _records, Numeric.Balance );
             _data = _records?.ToDictionary();
         }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the PRC identifier.
         /// </summary>
@@ -90,10 +82,10 @@ namespace BudgetExecution
         {
             try
             {
-                var code = _focCode?.GetValue();
+                var _code = _focCode?.GetValue();
 
-                return Verify.Input( code )
-                    ? new FinanceObjectClass( code )
+                return Verify.Input( _code )
+                    ? new FinanceObjectClass( _code )
                     : default( FinanceObjectClass );
             }
             catch( Exception ex )

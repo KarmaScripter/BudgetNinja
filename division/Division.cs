@@ -6,10 +6,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -27,9 +23,13 @@ namespace BudgetExecution
     /// <seealso cref = "ISource"/>
     public class Division : DivisionBase, IDivision, ISource
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the rc.
+        /// </summary>
+        /// <value>
+        /// The rc.
+        /// </value>
+        public RC RC;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Division"/> class.
@@ -46,14 +46,14 @@ namespace BudgetExecution
         /// </param>
         public Division( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.DivisionId );
-            Title = new Element( Record, Field.Title );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            Caption = new Element( Record, Field.Caption );
-            Args = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name?.GetValue() );
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.DivisionId );
+            _title = new Element( _record, Field.Title );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _caption = new Element( _record, Field.Caption );
+            _args = _record?.ToDictionary();
+            RC = (RC)Enum.Parse( typeof( RC ), _name?.GetValue() );
         }
 
         /// <summary>
@@ -65,14 +65,14 @@ namespace BudgetExecution
         public Division( IBuilder builder )
             : this()
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.DivisionId );
-            Title = new Element( Record, Field.Title );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            Caption = new Element( Record, Field.Caption );
-            Args = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name?.GetValue() );
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.DivisionId );
+            _title = new Element( _record, Field.Title );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _caption = new Element( _record, Field.Caption );
+            _args = _record?.ToDictionary();
+            RC = (RC)Enum.Parse( typeof( RC ), _name?.GetValue() );
         }
 
         /// <summary>
@@ -84,69 +84,53 @@ namespace BudgetExecution
         public Division( IResponsibilityCenter rc )
             : this()
         {
-            Record = new DataBuilder( _source, GetArgs( rc ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.DivisionId );
-            Title = new Element( Record, Field.Title );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            Caption = new Element( Record, Field.Caption );
-            Args = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name?.GetValue() );
+            _record = new DataBuilder( _source, GetArgs( rc ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.DivisionId );
+            _title = new Element( _record, Field.Title );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _caption = new Element( _record, Field.Caption );
+            _args = _record?.ToDictionary();
+            RC = (RC)Enum.Parse( typeof( RC ), _name?.GetValue() );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Division"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Division( DataRow data )
+        public Division( DataRow dataRow )
             : this()
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.DivisionId );
-            Title = new Element( Record, Field.Title );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            Caption = new Element( Record, Field.Caption );
-            Args = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name?.GetValue() );
+            _record = dataRow;
+            _id = new Key( _record, PrimaryKey.DivisionId );
+            _title = new Element( _record, Field.Title );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _caption = new Element( _record, Field.Caption );
+            _args = _record?.ToDictionary();
+            RC = (RC)Enum.Parse( typeof( RC ), _name?.GetValue() );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Division"/> class.
         /// </summary>
-        /// <param name = "rccode" >
-        /// The rccode.
+        /// <param name = "rcCode" >
+        /// The rcCode.
         /// </param>
-        public Division( string rccode )
+        public Division( string rcCode )
             : this()
         {
-            Record = new DataBuilder( _source, GetArgs( rccode ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.DivisionId );
-            Title = new Element( Record, Field.Title );
-            Code = new Element( Record, Field.Code );
-            Name = new Element( Record, Field.Name );
-            Caption = new Element( Record, Field.Caption );
-            Args = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name?.GetValue() );
+            _record = new DataBuilder( _source, GetArgs( rcCode ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.DivisionId );
+            _title = new Element( _record, Field.Title );
+            _code = new Element( _record, Field.Code );
+            _name = new Element( _record, Field.Name );
+            _caption = new Element( _record, Field.Caption );
+            _args = _record?.ToDictionary();
+            RC = (RC)Enum.Parse( typeof( RC ), _name?.GetValue() );
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the rc.
-        /// </summary>
-        /// <value>
-        /// The rc.
-        /// </value>
-        public RC RC { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Gets the responsibility center.
@@ -157,15 +141,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = Code
+                    [ $"{Field.Code}" ] = _code
                 };
 
-                var connectbuilder = new ConnectionBuilder( Source.ResponsibilityCenters, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connectbuilder, dict, SQL.SELECT );
-                using var query = new Query( connectbuilder, sqlstatement );
-                return new ResponsibilityCenter( query );
+                var _connectionBuilder = new ConnectionBuilder( Source.ResponsibilityCenters, Provider.SQLite );
+                var _sqlStatement = new SqlStatement( _connectionBuilder, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connectionBuilder, _sqlStatement );
+                return new ResponsibilityCenter( _query );
             }
             catch( Exception ex )
             {
@@ -175,7 +159,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the control number data.
+        /// Gets the control number dataRow.
         /// </summary>
         /// <param name = "bfy" >
         /// </param>
@@ -187,19 +171,21 @@ namespace BudgetExecution
             {
                 try
                 {
-                    if( !Args?.ContainsKey( Field.BFY.ToString() ) == true )
+                    if( !_args?.ContainsKey( Field.BFY.ToString() ) == true )
                     {
-                        Args?.Add( Field.BFY.ToString(), bfy?.GetFirstYear() );
+                        _args?.Add( Field.BFY.ToString(), bfy?.GetFirstYear() );
                     }
 
-                    var data = new Builder( Source.ControlNumbers, Args )?.GetData();
+                    var _enumerable = new Builder( Source.ControlNumbers, _args )
+                        ?.GetData();
 
-                    if( Verify.Rows( data ) )
+                    if( Verify.Rows( _enumerable ) )
                     {
-                        var controlnumber = data?.Select( dr => new ControlNumber( dr ) );
+                        var _select = _enumerable
+                            ?.Select( dr => new ControlNumber( dr ) );
 
-                        return controlnumber?.Any() == true
-                            ? controlnumber
+                        return _select?.Any() == true
+                            ? _select
                             : default( IEnumerable<ControlNumber> );
                     }
                 }
@@ -214,7 +200,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the work code data.
+        /// Gets the work code dataRow.
         /// </summary>
         /// <param name = "bfy" >
         /// </param>
@@ -223,22 +209,25 @@ namespace BudgetExecution
         public IEnumerable<IWorkCode> GetWorkCodes( IBudgetFiscalYear bfy )
         {
             if( bfy != null
-                && Verify.Input( Code?.GetValue() )
+                && Verify.Input( _code?.GetValue() )
                 && Resource.DivisionSources?.Contains( _source ) == true )
             {
                 try
                 {
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.RcCode}" ] = Code,
+                        [ $"{Field.RcCode}" ] = _code,
                         [ $"{Field.BFY}" ] = bfy.GetFirstYear()
                     };
 
-                    var workcodedata = new Builder( Source.WorkCodes, args )?.GetData();
-                    var workcodes = workcodedata?.Select( r => new WorkCode( r ) );
+                    var _enumerable = new Builder( Source.WorkCodes, _dictionary )
+                        ?.GetData();
 
-                    return workcodes?.Any() == true
-                        ? workcodes.ToList()
+                    var _select = _enumerable
+                        ?.Select( r => new WorkCode( r ) );
+
+                    return _select?.Any() == true
+                        ? _select.ToList()
                         : default( List<WorkCode> );
                 }
                 catch( Exception ex )
@@ -252,7 +241,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the hr org code data.
+        /// Gets the hr org code dataRow.
         /// </summary>
         /// <param name = "bfy" >
         /// </param>
@@ -261,21 +250,24 @@ namespace BudgetExecution
         public IEnumerable<IHumanResourceOrganization> GetHumanResourceOrganizations( IBudgetFiscalYear bfy )
         {
             if( bfy != null
-                && Verify.Input( Code?.GetValue() )
+                && Verify.Input( _code?.GetValue() )
                 && Resource.DivisionSources?.Contains( _source ) == true )
             {
                 try
                 {
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.RcCode}" ] = Code?.GetValue()
+                        [ $"{Field.RcCode}" ] = _code?.GetValue()
                     };
 
-                    var data = new DataBuilder( Source.HumanResourceOrganizations, args )?.GetData();
-                    var hrorg = data?.Select( r => new HumanResourceOrganization( r ) );
+                    var _enumerable = new DataBuilder( Source.HumanResourceOrganizations, _dictionary )
+                        ?.GetData();
 
-                    return hrorg?.Any() == true
-                        ? hrorg
+                    var _select = _enumerable
+                        ?.Select( r => new HumanResourceOrganization( r ) );
+
+                    return _select?.Any() == true
+                        ? _select
                         : default( IEnumerable<HumanResourceOrganization> );
                 }
                 catch( Exception ex )
@@ -345,10 +337,10 @@ namespace BudgetExecution
         /// </returns>
         private IDictionary<string, object> GetArgs( IResponsibilityCenter rc )
         {
-            var code = rc?.GetCode()?.GetValue();
+            var _value = rc?.GetCode()?.GetValue();
 
-            if( Verify.Input( code )
-                && code.StartsWith( "06", StringComparison.Ordinal ) == true )
+            if( Verify.Input( _value )
+                && _value.StartsWith( "06", StringComparison.Ordinal ) == true )
             {
                 try
                 {
@@ -375,11 +367,11 @@ namespace BudgetExecution
         /// </returns>
         public override string ToString()
         {
-            if( Verify.Input( Code.GetValue() ) )
+            if( Verify.Input( _code.GetValue() ) )
             {
                 try
                 {
-                    return Code.GetValue();
+                    return _code.GetValue();
                 }
                 catch( Exception ex )
                 {

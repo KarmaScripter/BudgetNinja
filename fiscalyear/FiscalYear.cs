@@ -24,7 +24,7 @@ namespace BudgetExecution
         /// <value>
         /// The bfy.
         /// </value>
-        public BFY BFY;
+        private protected BFY _bfy;
 
         /// <summary>
         /// Gets or sets the fiscal year identifier.
@@ -123,8 +123,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.BFY( BFY )
-                    ? BFY
+                return Validate.BFY( _bfy )
+                    ? _bfy
                     : default( BFY );
             }
             catch( Exception ex )
@@ -203,20 +203,20 @@ namespace BudgetExecution
             {
                 if( int.Parse( _startDate.GetValue() ) == GetCurrentYear() )
                 {
-                    BFY = BFY.Current;
-                    _bbfy = new Element( Record, Field.BBFY );
-                    _firstYear = new Element( Record, Field.FirstYear );
-                    _lastYear = new Element( Record, Field.EBFY );
-                    _expiringYear = new Element( Record, Field.ExpiringYear );
+                    _bfy = BFY.Current;
+                    _bbfy = new Element( _record, Field.BBFY );
+                    _firstYear = new Element( _record, Field.FirstYear );
+                    _lastYear = new Element( _record, Field.EBFY );
+                    _expiringYear = new Element( _record, Field.ExpiringYear );
                 }
 
                 if( int.Parse( _startDate.GetValue() ) <= GetCurrentYear() - 1 )
                 {
-                    BFY = BFY.CarryOver;
-                    _bbfy = new Element( Record, Field.BBFY );
-                    _firstYear = new Element( Record, Field.FirstYear );
-                    _lastYear = new Element( Record, Field.EBFY );
-                    _expiringYear = new Element( Record, Field.ExpiringYear );
+                    _bfy = BFY.CarryOver;
+                    _bbfy = new Element( _record, Field.BBFY );
+                    _firstYear = new Element( _record, Field.FirstYear );
+                    _lastYear = new Element( _record, Field.EBFY );
+                    _expiringYear = new Element( _record, Field.ExpiringYear );
                 }
             }
             catch( Exception ex )
@@ -242,7 +242,7 @@ namespace BudgetExecution
         {
             try
             {
-                return BFY != 0 && BFY == BFY.Current;
+                return _bfy != 0 && _bfy == BFY.Current;
             }
             catch( Exception ex )
             {

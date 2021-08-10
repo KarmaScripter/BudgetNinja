@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -21,10 +17,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
     public abstract class TimeBase : UnitBase
     {
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Sets the name.
         /// </summary>
@@ -57,7 +49,7 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the name.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The data.
         /// </param>
         /// <param name = "name" >
@@ -65,17 +57,18 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected string SetName( DataRow datarow, string name )
+        private protected string SetName( DataRow dataRow, string name )
         {
-            if( datarow != null
+            if( dataRow != null
                 && Verify.Input( name )
-                && Enum.GetNames( typeof( EventDate ) )?.Contains( name ) == true )
+                && Enum.GetNames( typeof( EventDate ) )
+                    ?.Contains( name ) == true )
             {
                 try
                 {
-                    var columns = datarow.Table?.GetColumnNames();
+                    var _columns = dataRow.Table?.GetColumnNames();
 
-                    return columns?.Contains( name ) == true
+                    return _columns?.Contains( name ) == true
                         ? name
                         : EventDate.NS.ToString();
                 }
@@ -115,7 +108,7 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the name.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The data.
         /// </param>
         /// <param name = "date" >
@@ -123,16 +116,17 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected string SetName( DataRow datarow, EventDate date )
+        private protected string SetName( DataRow dataRow, EventDate date )
         {
-            if( Verify.Row( datarow )
+            if( Verify.Row( dataRow )
                 && Verify.EventDate( date ) )
             {
                 try
                 {
-                    var names = datarow.Table?.GetColumnNames();
+                    var _names = dataRow.Table
+                        ?.GetColumnNames();
 
-                    return names?.Contains( date.ToString() ) == true
+                    return _names?.Contains( date.ToString() ) == true
                         ? date.ToString()
                         : EventDate.NS.ToString();
                 }
@@ -161,10 +155,10 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var date = (EventDate)Enum.Parse( typeof( EventDate ), name );
+                    var _date = (EventDate)Enum.Parse( typeof( EventDate ), name );
 
-                    return Enum.IsDefined( typeof( EventDate ), date )
-                        ? date
+                    return Enum.IsDefined( typeof( EventDate ), _date )
+                        ? _date
                         : default( EventDate );
                 }
                 catch( Exception ex )
@@ -180,7 +174,7 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the date.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The data.
         /// </param>
         /// <param name = "name" >
@@ -188,21 +182,21 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected EventDate SetDate( DataRow datarow, string name )
+        private protected EventDate SetDate( DataRow dataRow, string name )
         {
-            if( datarow != null
+            if( dataRow != null
                 && Verify.Input( name ) )
             {
                 try
                 {
-                    var date = (EventDate)Enum.Parse( typeof( EventDate ), name );
-                    var columns = datarow.Table?.GetColumnNames();
+                    var _date = (EventDate)Enum.Parse( typeof( EventDate ), name );
+                    var _columns = dataRow.Table?.GetColumnNames();
 
-                    if( columns?.Any() == true
-                        && columns?.Contains( $"{date}" ) == true )
+                    if( _columns?.Any() == true
+                        && _columns?.Contains( $"{_date}" ) == true )
                     {
-                        return Enum.GetNames( typeof( EventDate ) )?.Contains( $"{date}" ) == true
-                            ? date
+                        return Enum.GetNames( typeof( EventDate ) )?.Contains( $"{_date}" ) == true
+                            ? _date
                             : EventDate.NS;
                     }
                 }
@@ -219,7 +213,7 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the date.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The data.
         /// </param>
         /// <param name = "date" >
@@ -227,18 +221,19 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected EventDate SetDate( DataRow datarow, EventDate date )
+        private protected EventDate SetDate( DataRow dataRow, EventDate date )
         {
-            if( datarow != null
+            if( dataRow != null
                 && Verify.EventDate( date ) )
             {
                 try
                 {
-                    var names = datarow.Table?.GetColumnNames();
+                    var _names = dataRow.Table
+                        ?.GetColumnNames();
 
-                    if( names?.Any() == true )
+                    if( _names?.Any() == true )
                     {
-                        return names?.Contains( date.ToString() ) == true
+                        return _names?.Contains( date.ToString() ) == true
                             ? date
                             : EventDate.NS;
                     }
@@ -279,7 +274,7 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the value.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The data.
         /// </param>
         /// <param name = "column" >
@@ -287,20 +282,23 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected DateTime SetDay( DataRow datarow, string column )
+        private protected DateTime SetDay( DataRow dataRow, string column )
         {
-            if( datarow != null
+            if( dataRow != null
                 && Verify.Input( column )
                 && Enum.GetNames( typeof( EventDate ) )?.Contains( column ) == true )
             {
                 try
                 {
-                    var names = datarow.Table?.GetColumnNames();
-                    var value = datarow[ column ]?.ToString();
+                    var _names = dataRow.Table
+                        ?.GetColumnNames();
 
-                    return names?.Contains( column ) == true && Verify.Input( value )
-                        ? DateTime.Parse( value )
-                        : default( DateTime );
+                    var _value = dataRow[ column ]?.ToString();
+
+                    return _names?.Contains( column ) == true 
+                        && Verify.Input( _value )
+                            ? DateTime.Parse( _value )
+                            : default( DateTime );
                 }
                 catch( Exception ex )
                 {
@@ -315,7 +313,7 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the value.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The data.
         /// </param>
         /// <param name = "date" >
@@ -323,14 +321,14 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private protected DateTime SetDay( DataRow datarow, EventDate date )
+        private protected DateTime SetDay( DataRow dataRow, EventDate date )
         {
-            if( datarow != null
+            if( dataRow != null
                 && Verify.EventDate( date ) )
             {
                 try
                 {
-                    var value = datarow[ $"{date}" ]?.ToString();
+                    var value = dataRow[ $"{date}" ]?.ToString();
 
                     return DateTime.Parse( value ) != null
                         ? DateTime.Parse( value )
@@ -372,27 +370,27 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the value.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "column" >
         /// The column.
         /// </param>
         /// <returns>
         /// </returns>
-        private protected string SetValue( DataRow datarow, string column )
+        private protected string SetValue( DataRow dataRow, string column )
         {
-            if( datarow != null
+            if( dataRow != null
                 && Verify.Input( column )
                 && Enum.GetNames( typeof( EventDate ) )?.Contains( column ) == true )
             {
                 try
                 {
-                    var names = datarow.Table?.GetColumnNames();
-                    var value = datarow[ column ]?.ToString();
+                    var _names = dataRow.Table?.GetColumnNames();
+                    var _value = dataRow[ column ]?.ToString();
 
-                    return names?.Contains( column ) == true && Verify.Input( value )
-                        ? datarow[ column ].ToString()
+                    return _names?.Contains( column ) == true && Verify.Input( _value )
+                        ? dataRow[ column ].ToString()
                         : string.Empty;
                 }
                 catch( Exception ex )
@@ -408,25 +406,25 @@ namespace BudgetExecution
         /// <summary>
         /// Sets the value.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "date" >
         /// The date.
         /// </param>
         /// <returns>
         /// </returns>
-        private protected string SetValue( DataRow datarow, EventDate date )
+        private protected string SetValue( DataRow dataRow, EventDate date )
         {
-            if( datarow != null
+            if( dataRow != null
                 && Verify.EventDate( date ) )
             {
                 try
                 {
-                    var value = datarow[ $"{date}" ]?.ToString();
+                    var _value = dataRow[ $"{date}" ]?.ToString();
 
-                    return DateTime.Parse( value ) != null
-                        ? datarow[ $"{date}" ]?.ToString()
+                    return DateTime.Parse( _value ) != null
+                        ? dataRow[ $"{date}" ]?.ToString()
                         : string.Empty;
                 }
                 catch( Exception ex )
@@ -445,9 +443,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

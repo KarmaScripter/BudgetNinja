@@ -106,12 +106,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Employee"/> class.
         /// </summary>
-        /// <param name = "epanumber" >
-        /// The epanumber.
+        /// <param name = "epaNumber" >
+        /// The epaNumber.
         /// </param>
-        public Employee( string epanumber )
+        public Employee( string epaNumber )
         {
-            _records = new DataBuilder( _source, SetArgs( epanumber ) )?.GetRecord();
+            _records = new DataBuilder( _source, SetArgs( epaNumber ) )?.GetRecord();
             _id = new Key( _records, PrimaryKey.EmployeeId );
             _section = new Element( _records, Field.Section );
             _firstName = new Element( _records, Field.FirstName );

@@ -19,6 +19,14 @@ namespace BudgetExecution
     public class Expenditure : Obligation
     {
         /// <summary>
+        /// Gets or sets the _source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private const Source _source = Source.Expenditures;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref = "Expenditure"/> class.
         /// </summary>
         public Expenditure()
@@ -36,10 +44,10 @@ namespace BudgetExecution
         {
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.ExpenditureId );
-            OriginalActionDate = GetOriginalActionDate();
-            Expenditures = GetExpenditures();
+            _originalActionDate = GetOriginalActionDate();
+            _expenditures = GetExpenditures();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Expenditure;
+            _type = OutlayType.Expenditure;
         }
 
         /// <summary>
@@ -53,10 +61,10 @@ namespace BudgetExecution
         {
             _records = builder?.GetRecord();
             _id = new Key( _records, PrimaryKey.ExpenditureId );
-            OriginalActionDate = GetOriginalActionDate();
-            Expenditures = GetExpenditures();
+            _originalActionDate = GetOriginalActionDate();
+            _expenditures = GetExpenditures();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Expenditure;
+            _type = OutlayType.Expenditure;
         }
 
         /// <summary>
@@ -70,20 +78,12 @@ namespace BudgetExecution
         {
             _records = dataRow;
             _id = new Key( _records, PrimaryKey.ExpenditureId );
-            OriginalActionDate = GetOriginalActionDate();
-            Expenditures = GetExpenditures();
+            _originalActionDate = GetOriginalActionDate();
+            _expenditures = GetExpenditures();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Expenditure;
+            _type = OutlayType.Expenditure;
         }
         
-        /// <summary>
-        /// Gets or sets the _source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected new Source _source = Source.Expenditures;
-
         /// <summary>
         /// Gets the outlay identifier.
         /// </summary>
@@ -114,8 +114,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Expenditures?.GetFunding() > -1
-                    ? Expenditures
+                return _expenditures?.GetFunding() > -1
+                    ? _expenditures
                     : default( IAmount );
             }
             catch( Exception ex )

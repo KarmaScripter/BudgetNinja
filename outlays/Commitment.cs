@@ -28,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly Source _source = Source.Commitments;
+        private const Source _source = Source.Commitments;
         
         /// <summary>
         /// Gets or sets the amount.
@@ -55,24 +55,24 @@ namespace BudgetExecution
         {
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.CommitmentId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Commitment;
+            _type = OutlayType.Commitment;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Commitment"/> class.
         /// </summary>
-        /// <param name = "db" >
+        /// <param name = "builder" >
         /// The database.
         /// </param>
-        public Commitment( IBuilder db )
+        public Commitment( IBuilder builder )
         {
-            _records = db.GetRecord();
+            _records = builder.GetRecord();
             _id = new Key( _records, PrimaryKey.CommitmentId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Commitment;
+            _type = OutlayType.Commitment;
         }
 
         /// <summary>
@@ -85,9 +85,9 @@ namespace BudgetExecution
         {
             _records = dataRow;
             _id = new Key( _records, PrimaryKey.CommitmentId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Commitment;
+            _type = OutlayType.Commitment;
         }
         
         /// <summary>
@@ -139,8 +139,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Commitments?.GetFunding() > -1
-                    ? Commitments
+                return _commitments?.GetFunding() > -1
+                    ? _commitments
                     : default( IAmount );
             }
             catch( Exception ex )

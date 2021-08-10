@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -17,19 +13,16 @@ namespace BudgetExecution
     /// </summary>
     /// <seealso cref = "ICalendarYear"/>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public abstract class CalendarYear : ICalendarYear
     {
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the data.
         /// </summary>
         /// <value>
         /// The data.
         /// </value>
-        private protected DataRow Record { get; set; }
+        private protected DataRow _record;
 
         /// <summary>
         /// Gets or sets the work days.
@@ -37,7 +30,7 @@ namespace BudgetExecution
         /// <value>
         /// The work days.
         /// </value>
-        private protected IElement WorkDays { get; set; }
+        private protected IElement _workDays;
 
         /// <summary>
         /// Gets or sets the week days.
@@ -45,7 +38,7 @@ namespace BudgetExecution
         /// <value>
         /// The week days.
         /// </value>
-        private protected IElement WeekDays { get; set; }
+        private protected IElement _weekDays;
 
         /// <summary>
         /// Gets or sets the week ends.
@@ -53,7 +46,7 @@ namespace BudgetExecution
         /// <value>
         /// The week ends.
         /// </value>
-        private protected IElement WeekEnds { get; set; }
+        private protected IElement _weekEnds;
 
         /// <summary>
         /// Gets the current date.
@@ -61,7 +54,7 @@ namespace BudgetExecution
         /// <value>
         /// The current date.
         /// </value>
-        private protected DateTime CurrentDate { get; } = DateTime.Today;
+        private protected DateTime _currentDate = DateTime.Today;
 
         /// <summary>
         /// Gets the current month.
@@ -69,7 +62,7 @@ namespace BudgetExecution
         /// <value>
         /// The current month.
         /// </value>
-        private protected int CurrentMonth { get; } = DateTime.Now.Month;
+        private protected readonly int _currentMonth = DateTime.Now.Month;
 
         /// <summary>
         /// Gets the current day.
@@ -77,7 +70,7 @@ namespace BudgetExecution
         /// <value>
         /// The current day.
         /// </value>
-        private protected int CurrentDay { get; } = DateTime.Now.Day;
+        private protected readonly int _currentDay = DateTime.Now.Day;
 
         /// <summary>
         /// Gets the current year.
@@ -85,12 +78,8 @@ namespace BudgetExecution
         /// <value>
         /// The current year.
         /// </value>
-        private protected int CurrentYear { get; } = DateTime.Now.Year;
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private protected readonly int _currentYear = DateTime.Now.Year;
+        
         /// <summary>
         /// Gets the current date.
         /// </summary>
@@ -100,7 +89,7 @@ namespace BudgetExecution
         {
             try
             {
-                return CurrentDate;
+                return _currentDate;
             }
             catch( Exception ex )
             {
@@ -118,7 +107,7 @@ namespace BudgetExecution
         {
             try
             {
-                return CurrentMonth;
+                return _currentMonth;
             }
             catch( Exception ex )
             {
@@ -136,7 +125,7 @@ namespace BudgetExecution
         {
             try
             {
-                return CurrentYear;
+                return _currentYear;
             }
             catch( Exception ex )
             {
@@ -154,7 +143,7 @@ namespace BudgetExecution
         {
             try
             {
-                return CurrentDay;
+                return _currentDay;
             }
             catch( Exception ex )
             {
@@ -172,7 +161,7 @@ namespace BudgetExecution
         {
             try
             {
-                return new Element( Record, Field.WorkDays );
+                return new Element( _record, Field.WorkDays );
             }
             catch( Exception ex )
             {
@@ -190,7 +179,7 @@ namespace BudgetExecution
         {
             try
             {
-                return new Element( Record, Field.WeekDays );
+                return new Element( _record, Field.WeekDays );
             }
             catch( Exception ex )
             {
@@ -208,7 +197,7 @@ namespace BudgetExecution
         {
             try
             {
-                return new Element( Record, Field.WeekEnds );
+                return new Element( _record, Field.WeekEnds );
             }
             catch( Exception ex )
             {
@@ -223,9 +212,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

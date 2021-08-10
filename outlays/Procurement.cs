@@ -59,13 +59,13 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Procurement"/> class.
         /// </summary>
-        /// <param name = "databuilder" >
+        /// <param name = "dataBuilder" >
         /// The builder.
         /// </param>
-        public Procurement( IBuilder databuilder )
-            : base( databuilder )
+        public Procurement( IBuilder dataBuilder )
+            : base( dataBuilder )
         {
-            _records = databuilder.GetRecord();
+            _records = dataBuilder.GetRecord();
             _id = new Key( _records, PrimaryKey.ProcurementId );
             _title = new Element( _records, Field.Title );
             _requestedBy = new Element( _records, Field.RequestedBy );

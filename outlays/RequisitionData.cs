@@ -128,9 +128,9 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref="RequisitionData"/> class.
         /// </summary>
-        /// <param name="db">The database.</param>
-        public RequisitionData( IBuilder db )
-            : base( db )
+        /// <param name="builder">The database.</param>
+        public RequisitionData( IBuilder builder )
+            : base( builder )
         {
         }
     }

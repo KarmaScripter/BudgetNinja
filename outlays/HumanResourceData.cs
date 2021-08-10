@@ -23,8 +23,80 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private readonly static Source _source = Source.WorkforceData;
+        private const Source _source = Source.WorkforceData;
         
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        private readonly DataRow _records;
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        private readonly IDictionary<string, object> _args;
+
+        /// <summary>
+        /// Gets the workforce data identifier.
+        /// </summary>
+        /// <value>
+        /// The workforce data identifier.
+        /// </value>
+        private readonly IKey _id;
+
+        /// <summary>
+        /// Gets the status.
+        /// </summary>
+        /// <value>
+        /// The status.
+        /// </value>
+        private readonly IElement _status;
+
+        /// <summary>
+        /// Gets the job title.
+        /// </summary>
+        /// <value>
+        /// The job title.
+        /// </value>
+        private readonly IElement _jobTitle;
+
+        /// <summary>
+        /// Gets the occupational series.
+        /// </summary>
+        /// <value>
+        /// The occupational series.
+        /// </value>
+        private readonly IElement _occupationalSeries;
+
+        /// <summary>
+        /// Gets the grade.
+        /// </summary>
+        /// <value>
+        /// The grade.
+        /// </value>
+        private readonly IElement _grade;
+
+        /// <summary>
+        /// Gets the step.
+        /// </summary>
+        /// <value>
+        /// The step.
+        /// </value>
+        private readonly IElement _step;
+
+        /// <summary>
+        /// Gets the compensation rate.
+        /// </summary>
+        /// <value>
+        /// The compensation rate.
+        /// </value>
+        private readonly IAmount _compensationRate;
+
         /// <summary>
         /// Initializes a new instance of the <see cref = "HumanResourceData"/> class.
         /// </summary>
@@ -131,82 +203,6 @@ namespace BudgetExecution
             _compensationRate = new Amount( _records, Numeric.CompensationRate );
             _args = _records.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private readonly DataRow _records;
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private readonly IDictionary<string, object> _args;
-
-        /// <summary>
-        /// Gets the workforce data identifier.
-        /// </summary>
-        /// <value>
-        /// The workforce data identifier.
-        /// </value>
-        private readonly IKey _id;
-
-        /// <summary>
-        /// Gets the status.
-        /// </summary>
-        /// <value>
-        /// The status.
-        /// </value>
-        private readonly IElement _status;
-
-        /// <summary>
-        /// Gets the job title.
-        /// </summary>
-        /// <value>
-        /// The job title.
-        /// </value>
-        private readonly IElement _jobTitle;
-
-        /// <summary>
-        /// Gets the occupational series.
-        /// </summary>
-        /// <value>
-        /// The occupational series.
-        /// </value>
-        private readonly IElement _occupationalSeries;
-
-        /// <summary>
-        /// Gets the grade.
-        /// </summary>
-        /// <value>
-        /// The grade.
-        /// </value>
-        private readonly IElement _grade;
-
-        /// <summary>
-        /// Gets the step.
-        /// </summary>
-        /// <value>
-        /// The step.
-        /// </value>
-        private readonly IElement _step;
-
-        /// <summary>
-        /// Gets the compensation rate.
-        /// </summary>
-        /// <value>
-        /// The compensation rate.
-        /// </value>
-        private readonly IAmount _compensationRate;
         
         /// <summary>
         /// Converts to string.
@@ -308,15 +304,15 @@ namespace BudgetExecution
         {
             try
             {
-                var args = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
                     [ $"{Field.HumanResourceOrganizationCode}" ] = _humanResourceOrganizationCode
                 };
 
-                var connection = new ConnectionBuilder( Source.HumanResourceOrganizations, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new HumanResourceOrganization( query );
+                var _connection = new ConnectionBuilder( Source.HumanResourceOrganizations, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new HumanResourceOrganization( _query );
             }
             catch( Exception ex )
             {

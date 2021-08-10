@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected Source _source = Source.Reimbursables;
+        private const Source _source = Source.Reimbursables;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reimbursable"/> class.
@@ -49,9 +49,9 @@ namespace BudgetExecution
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.ReimbursableId );
             _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            ULO = new Amount( _records, Numeric.ULO );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
 
@@ -67,27 +67,27 @@ namespace BudgetExecution
             _records = builder?.GetRecord();
             _id = new Key( _records, PrimaryKey.ReimbursableId );
             _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            ULO = new Amount( _records, Numeric.ULO );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reimbursable"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Reimbursable( DataRow data )
-            : base( data )
+        public Reimbursable( DataRow dataRow )
+            : base( dataRow )
         {
-            _records = data;
+            _records = dataRow;
             _id = new Key( _records, PrimaryKey.ReimbursableId );
             _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            ULO = new Amount( _records, Numeric.ULO );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
         

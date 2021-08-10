@@ -18,6 +18,22 @@ namespace BudgetExecution
     public class Purchase : Obligation
     {
         /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private const Source _source = Source.Purchases;
+
+        /// <summary>
+        /// Gets the purchase identifier.
+        /// </summary>
+        /// <value>
+        /// The purchase identifier.
+        /// </value>
+        private protected readonly IKey _iD;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref = "Purchase"/> class.
         /// </summary>
         /// <inheritdoc/>
@@ -49,26 +65,26 @@ namespace BudgetExecution
             _focCode = new Element( _records, Field.FocCode );
             _focName = new Element( _records, Field.FocName );
             _transactionNumber = new Element( _records, Field.TransactionNumber );
-            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _commitments = new Amount( _records, Numeric.Commitments );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _obligations = new Amount( _records, Numeric.Obligations );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _deobligations = new Amount( _records, Numeric.Deobligations );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Purchase"/> class.
         /// </summary>
-        /// <param name = "db" >
+        /// <param name = "builder" >
         /// The builder.
         /// </param>
-        public Purchase( IBuilder db )
-            : base( db )
+        public Purchase( IBuilder builder )
+            : base( builder )
         {
-            _records = db?.GetRecord();
+            _records = builder?.GetRecord();
             _iD = new Key( _records, PrimaryKey.PurchaseId );
             _npmCode = new Element( _records, Field.NpmCode );
             _documentType = new Element( _records, Field.DocumentType );
@@ -84,26 +100,26 @@ namespace BudgetExecution
             _focCode = new Element( _records, Field.FocCode );
             _focName = new Element( _records, Field.FocName );
             _transactionNumber = new Element( _records, Field.TransactionNumber );
-            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _commitments = new Amount( _records, Numeric.Commitments );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _obligations = new Amount( _records, Numeric.Obligations );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _deobligations = new Amount( _records, Numeric.Deobligations );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Purchase"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Purchase( DataRow data )
-            : base( data )
+        public Purchase( DataRow dataRow )
+            : base( dataRow )
         {
-            _records = data;
+            _records = dataRow;
             _iD = new Key( _records, PrimaryKey.PurchaseId );
             _npmCode = new Element( _records, Field.NpmCode );
             _documentType = new Element( _records, Field.DocumentType );
@@ -119,31 +135,15 @@ namespace BudgetExecution
             _focCode = new Element( _records, Field.FocCode );
             _focName = new Element( _records, Field.FocName );
             _transactionNumber = new Element( _records, Field.TransactionNumber );
-            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _commitments = new Amount( _records, Numeric.Commitments );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _obligations = new Amount( _records, Numeric.Obligations );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _deobligations = new Amount( _records, Numeric.Deobligations );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
-        
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected new  Source _source = Source.Purchases;
-
-        /// <summary>
-        /// Gets the purchase identifier.
-        /// </summary>
-        /// <value>
-        /// The purchase identifier.
-        /// </value>
-        private protected readonly IKey _iD;
         
         /// <summary>
         /// Gets the purchase identifier.

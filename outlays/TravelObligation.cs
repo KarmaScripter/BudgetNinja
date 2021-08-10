@@ -22,7 +22,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected Source _source = Source.TravelObligations;
+        private const Source _source = Source.TravelObligations;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "TravelObligation"/> class.
@@ -55,7 +55,7 @@ namespace BudgetExecution
             _endDate = new Time( _records, EventDate.EndDate );
             _amount = new Amount( _records, Numeric.Amount );
             _data = _records?.ToDictionary();
-            Type = OutlayType.Obligation;
+            _type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace BudgetExecution
             _endDate = new Time( _records, EventDate.EndDate );
             _amount = new Amount( _records, Numeric.Amount );
             _data = _records?.ToDictionary();
-            Type = OutlayType.Obligation;
+            _type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace BudgetExecution
             _endDate = new Time( _records, EventDate.EndDate );
             _amount = new Amount( _records, Numeric.Amount );
             _data = _records?.ToDictionary();
-            Type = OutlayType.Obligation;
+            _type = OutlayType.Obligation;
         }
         
         /// <summary>

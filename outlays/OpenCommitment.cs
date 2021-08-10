@@ -37,25 +37,25 @@ namespace BudgetExecution
         {
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.OpenCommitmentId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _data = _records?.ToDictionary();
-            Type = OutlayType.OpenCommitment;
+            _type = OutlayType.OpenCommitment;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "OpenCommitment"/> class.
         /// </summary>
-        /// <param name = "db" >
+        /// <param name = "builder" >
         /// The builder.
         /// </param>
-        public OpenCommitment( IBuilder db )
-            : base( db )
+        public OpenCommitment( IBuilder builder )
+            : base( builder )
         {
-            _records = db?.GetRecord();
+            _records = builder?.GetRecord();
             _id = new Key( _records, PrimaryKey.OpenCommitmentId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _data = _records?.ToDictionary();
-            Type = OutlayType.OpenCommitment;
+            _type = OutlayType.OpenCommitment;
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace BudgetExecution
         {
             _records = dataRow;
             _id = new Key( _records, PrimaryKey.OpenCommitmentId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _data = _records?.ToDictionary();
-            Type = OutlayType.OpenCommitment;
+            _type = OutlayType.OpenCommitment;
         }
         
         /// <summary>
@@ -123,8 +123,8 @@ namespace BudgetExecution
         {
             try
             {
-                return OpenCommitments.GetFunding() > -1
-                    ? OpenCommitments
+                return _openCommitments.GetFunding() > -1
+                    ? _openCommitments
                     : default( IAmount );
             }
             catch( Exception ex )

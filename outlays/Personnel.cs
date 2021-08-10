@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -26,18 +22,42 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "PrivateFieldCanBeConvertedToLocalVariable" ) ]
     public class Personnel : Employee
     {
-        // ***************************************************************************************************************************
-        // *********************************************    FIELDS      **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The employee
         /// </summary>
-        private readonly IEmployee _employee;
+        private protected readonly IEmployee _employee;
+        
+        /// <summary>
+        /// Gets the personnel dataRow.
+        /// </summary>
+        /// <value>
+        /// The personnel dataRow.
+        /// </value>
+        private protected readonly IEmployee _contactData;
 
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the workforce dataRow.
+        /// </summary>
+        /// <value>
+        /// The workforce dataRow.
+        /// </value>
+        private protected readonly IHumanResourceData _humanResourceData;
+
+        /// <summary>
+        /// Gets or sets the payroll dataRow.
+        /// </summary>
+        /// <value>
+        /// The payroll dataRow.
+        /// </value>
+        private protected readonly IPayrollBase _payrollData;
+
+        /// <summary>
+        /// Gets the leave information.
+        /// </summary>
+        /// <value>
+        /// The leave information.
+        /// </value>
+        private protected readonly ILeave _leaveData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Personnel"/> class.
@@ -56,10 +76,10 @@ namespace BudgetExecution
             : base( query )
         {
             _employee = new Employee( query );
-            ContactData = GetContactData( _employee );
-            HumanResourceData = GetHumanResourceData( _employee );
-            PayrollData = GetPayrollData( _employee );
-            LeaveData = GetLeaveData( _employee );
+            _contactData = GetContactData( _employee );
+            _humanResourceData = GetHumanResourceData( _employee );
+            _payrollData = GetPayrollData( _employee );
+            _leaveData = GetLeaveData( _employee );
         }
 
         /// <summary>
@@ -72,10 +92,10 @@ namespace BudgetExecution
             : base( builder )
         {
             _employee = new Employee( builder );
-            ContactData = new ContactFactory( _employee );
-            HumanResourceData = GetHumanResourceData( _employee );
-            PayrollData = GetPayrollData( _employee );
-            LeaveData = GetLeaveData( _employee );
+            _contactData = new ContactFactory( _employee );
+            _humanResourceData = GetHumanResourceData( _employee );
+            _payrollData = GetPayrollData( _employee );
+            _leaveData = GetLeaveData( _employee );
         }
 
         /// <inheritdoc/>
@@ -83,74 +103,34 @@ namespace BudgetExecution
         /// Initializes a new instance of the <see cref = "T:BudgetExecution.Employee"/>
         /// class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Personnel( DataRow data )
-            : base( data )
+        public Personnel( DataRow dataRow )
+            : base( dataRow )
         {
-            _employee = new Employee( data );
-            ContactData = new ContactFactory( _employee );
-            HumanResourceData = GetHumanResourceData( _employee );
-            PayrollData = GetPayrollData( _employee );
-            LeaveData = GetLeaveData( _employee );
+            _employee = new Employee( dataRow );
+            _contactData = new ContactFactory( _employee );
+            _humanResourceData = GetHumanResourceData( _employee );
+            _payrollData = GetPayrollData( _employee );
+            _leaveData = GetLeaveData( _employee );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Personnel"/> class.
         /// </summary>
-        /// <param name = "epanumber" >
-        /// The epanumber.
+        /// <param name = "epaNumber" >
+        /// The epaNumber.
         /// </param>
-        public Personnel( string epanumber )
-            : base( epanumber )
+        public Personnel( string epaNumber )
+            : base( epaNumber )
         {
-            _employee = new Employee( epanumber );
-            ContactData = new ContactFactory( _employee );
-            HumanResourceData = GetHumanResourceData( _employee );
-            PayrollData = GetPayrollData( _employee );
-            LeaveData = GetLeaveData( _employee );
+            _employee = new Employee( epaNumber );
+            _contactData = new ContactFactory( _employee );
+            _humanResourceData = GetHumanResourceData( _employee );
+            _payrollData = GetPayrollData( _employee );
+            _leaveData = GetLeaveData( _employee );
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets the personnel data.
-        /// </summary>
-        /// <value>
-        /// The personnel data.
-        /// </value>
-        private protected IEmployee ContactData { get; set; }
-
-        /// <summary>
-        /// Gets or sets the workforce data.
-        /// </summary>
-        /// <value>
-        /// The workforce data.
-        /// </value>
-        private protected IHumanResourceData HumanResourceData { get; set; }
-
-        /// <summary>
-        /// Gets or sets the payroll data.
-        /// </summary>
-        /// <value>
-        /// The payroll data.
-        /// </value>
-        private protected IPayrollBase PayrollData { get; set; }
-
-        /// <summary>
-        /// Gets the leave information.
-        /// </summary>
-        /// <value>
-        /// The leave information.
-        /// </value>
-        private protected ILeave LeaveData { get; set; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Converts to string.
@@ -223,25 +203,25 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the arguments.
         /// </summary>
-        /// <param name = "firstname" >
-        /// The firstname.
+        /// <param name = "firstName" >
+        /// The firstName.
         /// </param>
-        /// <param name = "lastname" >
-        /// The lastname.
+        /// <param name = "lastName" >
+        /// The lastName.
         /// </param>
         /// <returns>
         /// </returns>
-        public IDictionary<string, object> GetArgs( string firstname, string lastname )
+        public IDictionary<string, object> GetArgs( string firstName, string lastName )
         {
-            if( Verify.Input( firstname )
-                && Verify.Input( lastname ) )
+            if( Verify.Input( firstName )
+                && Verify.Input( lastName ) )
             {
                 try
                 {
                     return new Dictionary<string, object>
                     {
-                        [ Field.FirstName.ToString() ] = firstname,
-                        [ Field.LastName.ToString() ] = lastname
+                        [ Field.FirstName.ToString() ] = firstName,
+                        [ Field.LastName.ToString() ] = lastName
                     };
                 }
                 catch( Exception ex )
@@ -255,7 +235,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Sets the contact data.
+        /// Sets the contact dataRow.
         /// </summary>
         /// <param name = "person" >
         /// The person.
@@ -266,13 +246,13 @@ namespace BudgetExecution
         {
             try
             {
-                var firstname = person?.GetFirstName();
-                var lastname = person?.GetLastName();
-                var args = GetArgs( firstname?.GetValue(), lastname?.GetValue() );
-                var connection = new ConnectionBuilder( Source.Employees, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new Employee( query );
+                var _firstname = person?.GetFirstName();
+                var _lastname = person?.GetLastName();
+                var _dictionary = GetArgs( _firstname?.GetValue(), _lastname?.GetValue() );
+                var _connection = new ConnectionBuilder( Source.Employees, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new Employee( _query );
             }
             catch( Exception ex )
             {
@@ -282,7 +262,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the contact data.
+        /// Gets the contact dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -290,7 +270,7 @@ namespace BudgetExecution
         {
             try
             {
-                return ContactData ?? default( IEmployee );
+                return _contactData ?? default( IEmployee );
             }
             catch( Exception ex )
             {
@@ -300,7 +280,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Sets the leave data.
+        /// Sets the leave dataRow.
         /// </summary>
         /// <param name = "person" >
         /// The person.
@@ -311,13 +291,13 @@ namespace BudgetExecution
         {
             try
             {
-                var firstname = person.GetFirstName();
-                var lastname = person.GetLastName();
-                var args = GetArgs( firstname?.GetValue(), lastname?.GetValue() );
-                var connection = new ConnectionBuilder( Source.LeaveProjections, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new Leave( query );
+                var _firstname = person.GetFirstName();
+                var _lastname = person.GetLastName();
+                var _dictionary = GetArgs( _firstname?.GetValue(), _lastname?.GetValue() );
+                var _connection = new ConnectionBuilder( Source.LeaveProjections, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new Leave( _query );
             }
             catch( Exception ex )
             {
@@ -327,7 +307,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the leave data.
+        /// Gets the leave dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -335,7 +315,7 @@ namespace BudgetExecution
         {
             try
             {
-                return LeaveData ?? default( ILeave );
+                return _leaveData ?? default( ILeave );
             }
             catch( Exception ex )
             {
@@ -345,7 +325,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Sets the human resource data.
+        /// Sets the human resource dataRow.
         /// </summary>
         /// <param name = "person" >
         /// The person.
@@ -356,13 +336,13 @@ namespace BudgetExecution
         {
             try
             {
-                var firstname = person.GetFirstName();
-                var lastname = person.GetLastName();
-                var args = GetArgs( firstname?.GetValue(), lastname?.GetValue() );
-                var connection = new ConnectionBuilder( Source.WorkforceData, Provider.SQLite );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new HumanResourceData( query );
+                var _firstname = person.GetFirstName();
+                var _lastname = person.GetLastName();
+                var _dictionary = GetArgs( _firstname?.GetValue(), _lastname?.GetValue() );
+                var _connection = new ConnectionBuilder( Source.WorkforceData, Provider.SQLite );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new HumanResourceData( _query );
             }
             catch( Exception ex )
             {
@@ -372,7 +352,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the workforce data.
+        /// Gets the workforce dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -380,7 +360,7 @@ namespace BudgetExecution
         {
             try
             {
-                return HumanResourceData ?? default( IHumanResourceData );
+                return _humanResourceData ?? default( IHumanResourceData );
             }
             catch( Exception ex )
             {
@@ -390,7 +370,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the payroll data.
+        /// Gets the payroll dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -398,7 +378,7 @@ namespace BudgetExecution
         {
             try
             {
-                return PayrollData ?? default( IPayrollBase );
+                return _payrollData ?? default( IPayrollBase );
             }
             catch( Exception ex )
             {
@@ -408,7 +388,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Sets the payroll data.
+        /// Sets the payroll dataRow.
         /// </summary>
         /// <param name = "person" >
         /// The person.
@@ -424,10 +404,10 @@ namespace BudgetExecution
                     [ $"{Field.EmployeeNumber}" ] = person.GetEmployeeNumber()
                 };
 
-                var conection = new ConnectionBuilder( Source.PayrollHours, Provider.SQLite );
-                var sqlstatement = new SqlStatement( conection, args, SQL.SELECT );
-                using var query = new Query( conection, sqlstatement );
-                return new PayrollFactory( query );
+                var _conection = new ConnectionBuilder( Source.PayrollHours, Provider.SQLite );
+                var _statement = new SqlStatement( _conection, args, SQL.SELECT );
+                using var _query = new Query( _conection, _statement );
+                return new PayrollFactory( _query );
             }
             catch( Exception ex )
             {

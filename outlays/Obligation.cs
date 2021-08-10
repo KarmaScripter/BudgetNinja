@@ -31,7 +31,7 @@ namespace BudgetExecution
         /// <summary>
         /// 
         /// </summary>
-        private protected readonly Source _source = Source.Obligations;
+        private const Source _source = Source.Obligations;
 
         /// <inheritdoc/>
         /// <summary>
@@ -51,10 +51,10 @@ namespace BudgetExecution
         {
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.ObligationId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _amount = new Amount( _records, Numeric.Obligations );
             _data = _records?.ToDictionary();
-            Type = OutlayType.Obligation;
+            _type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -67,10 +67,10 @@ namespace BudgetExecution
         {
             _records = builder?.GetRecord();
             _id = new Key( _records, PrimaryKey.ObligationId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _amount = new Amount( _records, Numeric.Obligations );
             _data = _records?.ToDictionary();
-            Type = OutlayType.Obligation;
+            _type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -84,10 +84,10 @@ namespace BudgetExecution
         {
             _records = dataRow;
             _id = new Key( _records, PrimaryKey.ObligationId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _amount = new Amount( _records, Numeric.Obligations );
             _data = _records?.ToDictionary();
-            Type = OutlayType.Obligation;
+            _type = OutlayType.Obligation;
         }
         
         /// <summary>

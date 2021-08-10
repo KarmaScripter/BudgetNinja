@@ -4,89 +4,30 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Local" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     public class ResponsibilityCenter : IResponsibilityCenter, IProgramElement, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************     FIELDS    ********************************************************
-        // ***************************************************************************************************************************
-
-        private static readonly Source _source = Source.ResponsibilityCenters;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
-        public ResponsibilityCenter()
-        {
-        }
-
-        public ResponsibilityCenter( IQuery query )
-            : this()
-        {
-            Record = new DataBuilder( query )?.GetRecord();
-            ResponsibilityCenterId = new Key( Record, PrimaryKey.ResponsibilityCenterId );
-            Name = new Element( Record, Field.Name );
-            RcCode = new Element( Record, Field.RcCode );
-            Data = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name.GetValue() );
-        }
-
-        public ResponsibilityCenter( IBuilder builder )
-        {
-            Record = builder?.GetRecord();
-            ResponsibilityCenterId = new Key( Record, PrimaryKey.ResponsibilityCenterId );
-            Name = new Element( Record, Field.Name );
-            RcCode = new Element( Record, Field.RcCode );
-            Data = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name.GetValue() );
-        }
-
-        public ResponsibilityCenter( DataRow data )
-            : this()
-        {
-            Record = data;
-            ResponsibilityCenterId = new Key( Record, PrimaryKey.ResponsibilityCenterId );
-            Name = new Element( Record, Field.Name );
-            RcCode = new Element( Record, Field.RcCode );
-            Data = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name.GetValue() );
-        }
-
-        public ResponsibilityCenter( string rccode )
-            : this()
-        {
-            Record = new DataBuilder( _source, SetArgs( rccode ) )?.GetRecord();
-            ResponsibilityCenterId = new Key( Record, PrimaryKey.ResponsibilityCenterId );
-            Name = new Element( Record, Field.Name );
-            RcCode = new Element( Record, Field.RcCode );
-            Data = Record?.ToDictionary();
-            RC = (RC)Enum.Parse( typeof( RC ), Name.GetValue() );
-        }
-
-        // ***************************************************************************************************************************
-        // ************************************************  PROPERTIES **************************************************************
-        // ***************************************************************************************************************************
-
+        /// <summary>The source</summary>
+        private const Source _source = Source.ResponsibilityCenters;
+        
         /// <summary>
         /// Gets the record.
         /// </summary>
         /// <value>
         /// The record.
         /// </value>
-        private DataRow Record { get; }
+        private protected readonly DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -94,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private IDictionary<string, object> Data { get; }
+        private protected readonly IDictionary<string, object> _data;
 
         /// <summary>
         /// Gets the responsibility center identifier.
@@ -102,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The responsibility center identifier.
         /// </value>
-        private IKey ResponsibilityCenterId { get; }
+        private protected readonly IKey _responsibilityCenterId;
 
         /// <summary>
         /// Gets the rc code.
@@ -110,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The rc code.
         /// </value>
-        private IElement RcCode { get; }
+        private protected readonly IElement _rcCode;
 
         /// <summary>
         /// Gets the name.
@@ -118,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private IElement Name { get; }
+        private protected readonly IElement _name;
 
         /// <summary>
         /// Gets the rc.
@@ -126,11 +67,77 @@ namespace BudgetExecution
         /// <value>
         /// The rc.
         /// </value>
-        public RC RC { get; }
+        private protected RC _rc;
 
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="ResponsibilityCenter"/> class.
+        /// </summary>
+        public ResponsibilityCenter()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="ResponsibilityCenter"/> class.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        public ResponsibilityCenter( IQuery query )
+            : this()
+        {
+            _record = new DataBuilder( query )?.GetRecord();
+            _responsibilityCenterId = new Key( _record, PrimaryKey.ResponsibilityCenterId );
+            _name = new Element( _record, Field.Name );
+            _rcCode = new Element( _record, Field.RcCode );
+            _data = _record?.ToDictionary();
+            _rc = (RC)Enum.Parse( typeof( RC ), _name.GetValue() );
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="ResponsibilityCenter"/> class.
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        public ResponsibilityCenter( IBuilder builder )
+        {
+            _record = builder?.GetRecord();
+            _responsibilityCenterId = new Key( _record, PrimaryKey.ResponsibilityCenterId );
+            _name = new Element( _record, Field.Name );
+            _rcCode = new Element( _record, Field.RcCode );
+            _data = _record?.ToDictionary();
+            _rc = (RC)Enum.Parse( typeof( RC ), _name.GetValue() );
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="ResponsibilityCenter"/> class.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        public ResponsibilityCenter( DataRow data )
+            : this()
+        {
+            _record = data;
+            _responsibilityCenterId = new Key( _record, PrimaryKey.ResponsibilityCenterId );
+            _name = new Element( _record, Field.Name );
+            _rcCode = new Element( _record, Field.RcCode );
+            _data = _record?.ToDictionary();
+            _rc = (RC)Enum.Parse( typeof( RC ), _name.GetValue() );
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ResponsibilityCenter"/> class.
+        /// </summary>
+        /// <param name="rccode">The rccode.</param>
+        public ResponsibilityCenter( string rccode )
+            : this()
+        {
+            _record = new DataBuilder( _source, SetArgs( rccode ) )?.GetRecord();
+            _responsibilityCenterId = new Key( _record, PrimaryKey.ResponsibilityCenterId );
+            _name = new Element( _record, Field.Name );
+            _rcCode = new Element( _record, Field.RcCode );
+            _data = _record?.ToDictionary();
+            _rc = (RC)Enum.Parse( typeof( RC ), _name.GetValue() );
+        }
 
         /// <summary>
         /// Sets the arguments.
@@ -171,8 +178,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( RcCode )
-                    ? RcCode.GetValue()
+                return Verify.Element( _rcCode )
+                    ? _rcCode.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -191,8 +198,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Data )
-                    ? Data
+                return Verify.Map( _data )
+                    ? _data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -201,11 +208,7 @@ namespace BudgetExecution
                 return default( IDictionary<string, object> );
             }
         }
-
-        // ***************************************************************************************************************************
-        // ******************************************* INTERFACE IMPLIMENTATIONS *****************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the responsibility center identifier.
         /// </summary>
@@ -215,8 +218,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ResponsibilityCenterId )
-                    ? ResponsibilityCenterId
+                return Verify.Key( _responsibilityCenterId )
+                    ? _responsibilityCenterId
                     : Key.Default;
             }
             catch( Exception ex )
@@ -235,8 +238,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( RcCode )
-                    ? RcCode
+                return Verify.Element( _rcCode )
+                    ? _rcCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -255,8 +258,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -310,9 +313,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

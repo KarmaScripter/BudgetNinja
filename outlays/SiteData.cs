@@ -42,9 +42,9 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref="SiteData"/> class.
         /// </summary>
-        /// <param name="db">The database.</param>
-        public SiteData( IBuilder db )
-            : base( db )
+        /// <param name="builder">The database.</param>
+        public SiteData( IBuilder builder )
+            : base( builder )
         {
         }
 

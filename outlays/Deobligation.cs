@@ -25,14 +25,14 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        protected new Source _source = Source.Deobligations;
+        private const Source _source = Source.Deobligations;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Deobligation"/> class.
         /// </summary>
         public Deobligation()
         {
-            Type = OutlayType.Deobligation;
+            _type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -43,10 +43,10 @@ namespace BudgetExecution
         {
             _records = new DataBuilder( query )?.GetRecord();
             _id = new Key( _records, PrimaryKey.DeobligationId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _amount = GetDeobligations();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Deobligation;
+            _type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -60,10 +60,10 @@ namespace BudgetExecution
         {
             _records = db.GetRecord();
             _id = new Key( _records, PrimaryKey.DeobligationId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _amount = GetDeobligations();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Deobligation;
+            _type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -77,10 +77,10 @@ namespace BudgetExecution
         {
             _records = dataRow;
             _id = new Key( _records, PrimaryKey.DeobligationId );
-            OriginalActionDate = GetOriginalActionDate();
+            _originalActionDate = GetOriginalActionDate();
             _amount = GetDeobligations();
             _data = _records?.ToDictionary();
-            Type = OutlayType.Deobligation;
+            _type = OutlayType.Deobligation;
         }
         
         /// <summary>
@@ -113,8 +113,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Deobligations.GetFunding() > -1.0D
-                    ? Deobligations
+                return _deobligations.GetFunding() > -1.0D
+                    ? _deobligations
                     : default( IAmount );
             }
             catch( Exception ex )

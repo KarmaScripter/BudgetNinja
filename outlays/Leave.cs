@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -29,10 +25,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class Leave : LeaveBase, ILeave
     {
-        // ***************************************************************************************************************************
-        // ****************************************************  CONSTRUCTORS ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "Leave"/> class.
         /// </summary>
@@ -97,13 +89,13 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Leave"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow <see cref = "DataRow"/>
+        /// <param name = "dataRow" >
+        /// The dataRow <see cref = "DataRow"/>
         /// </param>
-        public Leave( DataRow datarow )
+        public Leave( DataRow dataRow )
             : this()
         {
-            _records = datarow;
+            _records = dataRow;
             _id = new Key( _records, PrimaryKey.LeaveProjectionId );
             _rpioCode = new Element( _records, Field.RpioCode );
             _employeeNumber = new Element( _records, Field.EmployeeNumber );
@@ -121,11 +113,7 @@ namespace BudgetExecution
             _availableHours = new Amount( _records, Numeric.AvailableHours );
             _args = _records.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// The GetYearToDateEarned.
         /// </summary>
@@ -340,15 +328,15 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
                         [ $"{Field.WorkCode}" ] = _workCode?.GetValue()
                     };
 
-                    var connection = new ConnectionBuilder( Source.WorkCodes, Provider.SQLite );
-                    var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                    using var query = new Query( connection, sqlstatement );
-                    return new WorkCode( query );
+                    var _connection = new ConnectionBuilder( Source.WorkCodes, Provider.SQLite );
+                    var _sqlstatement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                    using var _query = new Query( _connection, _sqlstatement );
+                    return new WorkCode( _query );
                 }
                 catch( Exception ex )
                 {
@@ -397,17 +385,17 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var dict = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
                         [ $"{Field.RpioCode}" ] = _rpioCode?.GetValue()
                     };
 
-                    var connectbuilder =
+                    var _builder =
                         new ConnectionBuilder( Source.ResourcePlanningOffices, Provider.SQLite );
 
-                    var sqlstatement = new SqlStatement( connectbuilder, dict, SQL.SELECT );
-                    using var query = new Query( connectbuilder, sqlstatement );
-                    return new ResourcePlanningOffice( query );
+                    var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                    using var _query = new Query( _builder, _statement );
+                    return new ResourcePlanningOffice( _query );
                 }
                 catch( Exception ex )
                 {

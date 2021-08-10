@@ -26,7 +26,7 @@ namespace BudgetExecution
         /// <inheritdoc/>
         public UnliquidatedObligation()
         {
-            Type = OutlayType.ULO;
+            _type = OutlayType.ULO;
         }
 
         /// <summary>
@@ -39,8 +39,8 @@ namespace BudgetExecution
         {
             _records = new DataBuilder()?.GetRecord();
             _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
-            OriginalActionDate = GetOriginalActionDate();
-            ULO = new Amount( _records, Numeric.ULO );
+            _originalActionDate = GetOriginalActionDate();
+            _ulo = new Amount( _records, Numeric.ULO );
             _data = _records?.ToDictionary();
         }
 
@@ -55,8 +55,8 @@ namespace BudgetExecution
         {
             _records = builder?.GetRecord();
             _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
-            OriginalActionDate = GetOriginalActionDate();
-            ULO = new Amount( _records, Numeric.ULO );
+            _originalActionDate = GetOriginalActionDate();
+            _ulo = new Amount( _records, Numeric.ULO );
             _data = _records?.ToDictionary();
         }
 
@@ -70,8 +70,8 @@ namespace BudgetExecution
         {
             _records = datarow;
             _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
-            OriginalActionDate = GetOriginalActionDate();
-            ULO = new Amount( _records, Numeric.ULO );
+            _originalActionDate = GetOriginalActionDate();
+            _ulo = new Amount( _records, Numeric.ULO );
             _data = _records?.ToDictionary();
         }
         
@@ -132,8 +132,8 @@ namespace BudgetExecution
         {
             try
             {
-                return ULO.GetFunding() > -1.0
-                    ? ULO
+                return _ulo.GetFunding() > -1.0
+                    ? _ulo
                     : default( IAmount );
             }
             catch( Exception ex )

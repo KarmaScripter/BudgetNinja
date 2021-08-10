@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -20,19 +16,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class ContactFactory : IEmployee
     {
-        // ***************************************************************************************************************************
-        // *********************************************    FIELDS      **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The employee
         /// </summary>
         private readonly IEmployee _employee;
-
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref = "ContactFactory"/> class.
         /// </summary>
@@ -69,18 +57,14 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "ContactFactory"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public ContactFactory( DataRow datarow )
+        public ContactFactory( DataRow dataRow )
         {
-            _employee = new Employee( datarow );
+            _employee = new Employee( dataRow );
         }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the employee identifier.
         /// </summary>
@@ -90,10 +74,10 @@ namespace BudgetExecution
         {
             try
             {
-                var id = _employee?.GetId();
+                var _id = _employee?.GetId();
 
-                return id?.GetIndex() > 0
-                    ? id
+                return _id?.GetIndex() > 0
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -112,10 +96,10 @@ namespace BudgetExecution
         {
             try
             {
-                var lastname = _employee?.GetFirstName();
+                var _lastname = _employee?.GetFirstName();
 
-                return Verify.Input( lastname?.GetValue() )
-                    ? lastname
+                return Verify.Input( _lastname?.GetValue() )
+                    ? _lastname
                     : Element.Default;
             }
             catch( Exception ex )
@@ -134,10 +118,10 @@ namespace BudgetExecution
         {
             try
             {
-                var lastname = _employee?.GetLastName();
+                var _lastname = _employee?.GetLastName();
 
-                return Verify.Input( lastname?.GetValue() )
-                    ? lastname
+                return Verify.Input( _lastname?.GetValue() )
+                    ? _lastname
                     : Element.Default;
             }
             catch( Exception ex )
@@ -174,10 +158,10 @@ namespace BudgetExecution
         {
             try
             {
-                var eid = _employee?.GetEmployeeNumber();
+                var _eid = _employee?.GetEmployeeNumber();
 
-                return Verify.Input( eid?.GetValue() )
-                    ? eid
+                return Verify.Input( _eid?.GetValue() )
+                    ? _eid
                     : Element.Default;
             }
             catch( Exception ex )
@@ -196,10 +180,10 @@ namespace BudgetExecution
         {
             try
             {
-                var office = _employee?.GetOffice();
+                var _office = _employee?.GetOffice();
 
-                return Verify.Input( office?.GetValue() )
-                    ? office
+                return Verify.Input( _office?.GetValue() )
+                    ? _office
                     : Element.Default;
             }
             catch( Exception ex )
@@ -218,10 +202,10 @@ namespace BudgetExecution
         {
             try
             {
-                var number = _employee?.GetPhoneNumber();
+                var _number = _employee?.GetPhoneNumber();
 
-                return Verify.Input( number?.GetValue() )
-                    ? number
+                return Verify.Input( _number?.GetValue() )
+                    ? _number
                     : Element.Default;
             }
             catch( Exception ex )
@@ -262,10 +246,10 @@ namespace BudgetExecution
         {
             try
             {
-                var email = _employee?.GetEmail();
+                var _email = _employee?.GetEmail();
 
-                return Verify.Input( email?.GetValue() )
-                    ? email
+                return Verify.Input( _email?.GetValue() )
+                    ? _email
                     : Element.Default;
             }
             catch( Exception ex )
@@ -284,10 +268,10 @@ namespace BudgetExecution
         {
             try
             {
-                var status = _employee?.GetEmployementStatus();
+                var _status = _employee?.GetEmployementStatus();
 
-                return Verify.Input( status?.GetValue() )
-                    ? status
+                return Verify.Input( _status?.GetValue() )
+                    ? _status
                     : Element.Default;
             }
             catch( Exception ex )
@@ -303,9 +287,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

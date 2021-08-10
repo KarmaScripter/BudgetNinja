@@ -18,6 +18,14 @@ namespace BudgetExecution
     public class Site : SiteData
     {
         /// <summary>
+        /// The source
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        private const Source _source = Source.Sites;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref = "Site"/> class.
         /// </summary>
         /// <inheritdoc/>
@@ -51,27 +59,27 @@ namespace BudgetExecution
             StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
             StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
             ZipCode = new Element( _records, Field.ZipCode );
-            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
             LastActionDate = new Time( _records, EventDate.LastActionDate );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _commitments = new Amount( _records, Numeric.Commitments );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _obligations = new Amount( _records, Numeric.Obligations );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _deobligations = new Amount( _records, Numeric.Deobligations );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Site"/> class.
         /// </summary>
-        /// <param name = "db" >
+        /// <param name = "builder" >
         /// The builder.
         /// </param>
-        public Site( IBuilder db )
-            : base( db )
+        public Site( IBuilder builder )
+            : base( builder )
         {
-            _records = db?.GetRecord();
+            _records = builder?.GetRecord();
             _id = new Key( _records, PrimaryKey.SiteId );
             _programProjectCode = new Element( _records, Field.ProgramProjectCode );
             _focCode = new Element( _records, Field.FocCode );
@@ -88,26 +96,26 @@ namespace BudgetExecution
             StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
             StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
             ZipCode = new Element( _records, Field.ZipCode );
-            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
             LastActionDate = new Time( _records, EventDate.LastActionDate );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _commitments = new Amount( _records, Numeric.Commitments );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _obligations = new Amount( _records, Numeric.Obligations );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _deobligations = new Amount( _records, Numeric.Deobligations );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Site"/> class.
         /// </summary>
-        /// <param name = "datarow" >
+        /// <param name = "dataRow" >
         /// The dr.
         /// </param>
-        public Site( DataRow datarow )
+        public Site( DataRow dataRow )
         {
-            _records = datarow;
+            _records = dataRow;
             _id = new Key( _records, PrimaryKey.SiteId );
             _programProjectCode = new Element( _records, Field.ProgramProjectCode );
             _focCode = new Element( _records, Field.FocCode );
@@ -124,28 +132,16 @@ namespace BudgetExecution
             StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
             StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
             ZipCode = new Element( _records, Field.ZipCode );
-            OriginalActionDate = new Time( _records, EventDate.OriginalActionDate );
+            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
             LastActionDate = new Time( _records, EventDate.LastActionDate );
-            Commitments = new Amount( _records, Numeric.Commitments );
-            OpenCommitments = new Amount( _records, Numeric.OpenCommitments );
-            Obligations = new Amount( _records, Numeric.Obligations );
-            ULO = new Amount( _records, Numeric.ULO );
-            Deobligations = new Amount( _records, Numeric.Deobligations );
-            Expenditures = new Amount( _records, Numeric.Expenditures );
+            _commitments = new Amount( _records, Numeric.Commitments );
+            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
+            _obligations = new Amount( _records, Numeric.Obligations );
+            _ulo = new Amount( _records, Numeric.ULO );
+            _deobligations = new Amount( _records, Numeric.Deobligations );
+            _expenditures = new Amount( _records, Numeric.Expenditures );
             _data = _records?.ToDictionary();
         }
-
-        // ***************************************************************************************************************************
-        // *************************************************   PROPERTIES   **********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// The source
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected new  Source _source = Source.Sites;
         
         /// <summary>
         /// Gets the Superfund identifier.

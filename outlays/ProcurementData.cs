@@ -171,9 +171,9 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref="ProcurementData"/> class.
         /// </summary>
-        /// <param name="databuilder">The databuilder.</param>
-        public ProcurementData( IBuilder databuilder )
-            : base( databuilder )
+        /// <param name="dataBuilder">The dataBuilder.</param>
+        public ProcurementData( IBuilder dataBuilder )
+            : base( dataBuilder )
         {
         }
 
