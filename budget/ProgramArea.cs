@@ -60,7 +60,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.ProgramAreas;
+        private const Source _source = Source.ProgramAreas;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramArea"/> class.
