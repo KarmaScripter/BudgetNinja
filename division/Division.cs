@@ -32,6 +32,11 @@ namespace BudgetExecution
         public RC RC;
 
         /// <summary>
+        /// The source
+        /// </summary>
+        private const Source _source = Source.Divisions; 
+
+        /// <summary>
         /// Initializes a new instance of the <see cref = "Division"/> class.
         /// </summary>
         public Division()

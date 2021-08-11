@@ -88,12 +88,12 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var query = GetData()
+                    var _select = GetData()
                         ?.Where( p => p.Field<string>( $"{numeric}" ).Equals( filter ) )
                         ?.Select( p => p );
 
-                    return query?.Any() == true
-                        ? query
+                    return _select?.Any() == true
+                        ? _select
                         : default( IEnumerable<DataRow> );
                 }
                 catch( Exception ex )

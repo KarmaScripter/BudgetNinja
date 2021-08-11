@@ -18,10 +18,10 @@ namespace BudgetExecution
     public class ProgramArea : IProgramArea, IProgramElement, ISource
     {
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The dataRow.
         /// </value>
         private readonly DataRow _record;
 
@@ -102,13 +102,13 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramArea"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public ProgramArea( DataRow data )
+        public ProgramArea( DataRow dataRow )
             : this()
         {
-            _record = data;
+            _record = dataRow;
             _id = new Key( _record, PrimaryKey.ProgramAreaId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );
@@ -304,9 +304,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

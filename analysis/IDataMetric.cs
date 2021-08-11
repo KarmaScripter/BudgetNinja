@@ -45,7 +45,7 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the variance.
         /// </summary>
-        /// <param name = "data" >
+        /// <param name = "dataRow" >
         /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
@@ -53,7 +53,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        double CalculateVariance( IEnumerable<DataRow> data, Numeric numeric );
+        double CalculateVariance( IEnumerable<DataRow> dataRow, Numeric numeric );
 
         /// <summary>
         /// Calculates the statistics.

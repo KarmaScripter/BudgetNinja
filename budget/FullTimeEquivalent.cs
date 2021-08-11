@@ -2,10 +2,9 @@
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
-using System;
-
 namespace BudgetExecution
 {
+    using System;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
@@ -22,6 +21,11 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class FullTimeEquivalent : ProgramResultsCode, IFullTimeEquivalent
     {
+        /// <summary>
+        /// The source
+        /// </summary>
+        private const Source _source = Source.FTE;
+
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref = "T:BudgetExecution.FullTimeEquivalent"/> class.
@@ -68,11 +72,6 @@ namespace BudgetExecution
             _id = new Key( _records, PrimaryKey.PrcId );
             _amount = new Amount( _records, Numeric.Amount );
         }
-        
-        /// <summary>
-        /// The source
-        /// </summary>
-        protected new Source _source = Source.FTE;
         
         /// <summary>
         /// Gets the PRC identifier.

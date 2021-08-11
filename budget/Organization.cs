@@ -23,10 +23,10 @@ namespace BudgetExecution
         private const Source _source = Source.Organizations;
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The dataRow.
         /// </value>
         private readonly DataRow _record;
 
@@ -117,12 +117,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Organization"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Organization( DataRow data )
+        public Organization( DataRow dataRow )
         {
-            _record = data;
+            _record = dataRow;
             _id = new Key( _record, PrimaryKey.OrganizationId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );
@@ -303,9 +303,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

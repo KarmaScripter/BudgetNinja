@@ -12,6 +12,7 @@ namespace BudgetExecution
     /// 
     /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class BudgetLevel : IBudgetLevel
     {
         /// <summary>
@@ -51,12 +52,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "BudgetLevel"/> class.
         /// </summary>
-        /// <param name = "budgetlevel" >
-        /// The budgetlevel.
+        /// <param name = "budgetLevel" >
+        /// The budgetLevel.
         /// </param>
-        public BudgetLevel( string budgetlevel )
+        public BudgetLevel( string budgetLevel )
         {
-            _level = GetLevel( budgetlevel );
+            _level = GetLevel( budgetLevel );
             _code = ( (int)_level ).ToString();
             _name = _level.ToString();
         }
@@ -137,20 +138,20 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the level.
         /// </summary>
-        /// <param name = "budgetlevel" >
-        /// The budgetlevel.
+        /// <param name = "budgetLevel" >
+        /// The budgetLevel.
         /// </param>
         /// <returns>
         /// </returns>
-        private Level GetLevel( string budgetlevel )
+        private Level GetLevel( string budgetLevel )
         {
             try
             {
-                return Verify.Input( budgetlevel )
-                    && int.Parse( budgetlevel ) < 9
-                    && int.Parse( budgetlevel ) > 6
-                    && !Enum.IsDefined( typeof( Level ), int.Parse( budgetlevel ) )
-                        ? (Level)Enum.Parse( typeof( Level ), budgetlevel )
+                return Verify.Input( budgetLevel )
+                    && int.Parse( budgetLevel ) < 9
+                    && int.Parse( budgetLevel ) > 6
+                    && !Enum.IsDefined( typeof( Level ), int.Parse( budgetLevel ) )
+                        ? (Level)Enum.Parse( typeof( Level ), budgetLevel )
                         : Level.NS;
             }
             catch( Exception ex )

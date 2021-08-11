@@ -32,6 +32,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Local" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class Activity : IActivity, IProgramElement, ISource
     {
         /// <summary>
@@ -40,13 +41,13 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private readonly static Source _source = Source.Activity;
+        private const Source _source = Source.Activity;
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The dataRow.
         /// </value>
         private readonly DataRow _record;
 
@@ -124,13 +125,13 @@ namespace BudgetExecution
         /// Initializes a new instance of the <see cref = "T:BudgetExecution.Activity"/>
         /// class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Activity( DataRow data )
+        public Activity( DataRow dataRow )
             : this()
         {
-            _record = data;
+            _record = dataRow;
             _id = new Key( _record, PrimaryKey.ActivityId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );
@@ -330,9 +331,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

@@ -82,15 +82,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
                     [ $"{Field.Code}" ] = _rpioCode?.GetValue()
                 };
 
-                var connection = new ConnectionBuilder( Source.ResourcePlanningOffices );
-                var sqlstatement = new SqlStatement( connection, dict, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new ResourcePlanningOffice( query );
+                var _connection = new ConnectionBuilder( Source.ResourcePlanningOffices );
+                var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                using var _query = new Query( _connection, _statement );
+                return new ResourcePlanningOffice( _query );
             }
             catch( Exception ex )
             {
@@ -108,15 +108,15 @@ namespace BudgetExecution
         {
             try
             {
-                var dict = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
                     [ $"{Field.Code}" ] = _ahCode?.GetValue()
                 };
 
-                var connectbuilder = new ConnectionBuilder( Source.AllowanceHolders );
-                var sqlstatement = new SqlStatement( connectbuilder, dict, SQL.SELECT );
-                using var query = new Query( connectbuilder, sqlstatement );
-                return new AllowanceHolder( query );
+                var _builder = new ConnectionBuilder( Source.AllowanceHolders );
+                var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                using var _query = new Query( _builder, _statement );
+                return new AllowanceHolder( _query );
             }
             catch( Exception ex )
             {
@@ -154,15 +154,15 @@ namespace BudgetExecution
         {
             try
             {
-                var args = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
                     [ $"{Field.Code}" ] = _orgCode?.GetValue()
                 };
 
-                var connection = new ConnectionBuilder( Source.Organizations );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new Organization( query );
+                var _builder = new ConnectionBuilder( Source.Organizations );
+                var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                using var _query = new Query( _builder, _statement );
+                return new Organization( _query );
             }
             catch( Exception ex )
             {
@@ -180,15 +180,15 @@ namespace BudgetExecution
         {
             try
             {
-                var args = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
                     [ $"{Field.Code}" ] = _accountCode?.GetValue()
                 };
 
-                var connection = new ConnectionBuilder( Source.Accounts );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new Account( query );
+                var _builder = new ConnectionBuilder( Source.Accounts );
+                var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                using var _query = new Query( _builder, _statement );
+                return new Account( _query );
             }
             catch( Exception ex )
             {
@@ -206,15 +206,15 @@ namespace BudgetExecution
         {
             try
             {
-                var args = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
                     [ $"{Field.Code}" ] = _bocCode?.GetValue()
                 };
 
-                var connection = new ConnectionBuilder( Source.BudgetObjectClass );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new BudgetObjectClass( query );
+                var _builder = new ConnectionBuilder( Source.BudgetObjectClass );
+                var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                using var _query = new Query( _builder, _statement );
+                return new BudgetObjectClass( _query );
             }
             catch( Exception ex )
             {
@@ -232,15 +232,15 @@ namespace BudgetExecution
         {
             try
             {
-                var args = new Dictionary<string, object>
+                var _dictionary = new Dictionary<string, object>
                 {
                     [ $"{Field.Code}" ] = _rcCode?.GetValue()
                 };
 
-                var connection = new ConnectionBuilder( Source.ResponsibilityCenters );
-                var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                using var query = new Query( connection, sqlstatement );
-                return new ResponsibilityCenter( query );
+                var _builder = new ConnectionBuilder( Source.ResponsibilityCenters );
+                var _statement = new SqlStatement( _builder, _dictionary, SQL.SELECT );
+                using var _query = new Query( _builder, _statement );
+                return new ResponsibilityCenter( _query );
             }
             catch( Exception ex )
             {

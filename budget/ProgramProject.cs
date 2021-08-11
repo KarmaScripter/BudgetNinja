@@ -18,7 +18,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private readonly Source _source = Source.ProgramProjects;
+        private const Source _source = Source.ProgramProjects;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramProject"/> class.

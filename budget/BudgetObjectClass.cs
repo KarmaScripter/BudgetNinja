@@ -115,7 +115,7 @@ namespace BudgetExecution
         public BudgetObjectClass( BOC boc )
             : this()
         {
-            _dataRow = new DataBuilder( BudgetObjectClass._source, SetArgs( boc ) )?.GetRecord();
+            _dataRow = new DataBuilder( _source, SetArgs( boc ) )?.GetRecord();
             _id = new Key( _dataRow, PrimaryKey.BudgetObjectClassId );
             _name = new Element( _dataRow, Field.BudgetObjectClassName );
             _code = new Element( _dataRow, Field.BudgetObjectClassCode );
@@ -132,7 +132,7 @@ namespace BudgetExecution
         public BudgetObjectClass( string code )
             : this()
         {
-            _dataRow = new DataBuilder( BudgetObjectClass._source, SetArgs( code ) )?.GetRecord();
+            _dataRow = new DataBuilder( _source, SetArgs( code ) )?.GetRecord();
             _id = new Key( _dataRow, PrimaryKey.BudgetObjectClassId );
             _name = new Element( _dataRow, Field.BudgetObjectClassName );
             _code = new Element( _dataRow, Field.BudgetObjectClassCode );
@@ -367,9 +367,10 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _code?.GetValue() ) && _code?.GetValue()?.Length < 3
-                    ? _code
-                    : default( IElement );
+                return Verify.Input( _code?.GetValue() ) 
+                    && _code?.GetValue()?.Length < 3
+                        ? _code
+                        : default( IElement );
             }
             catch( Exception ex )
             {
@@ -417,9 +418,10 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _name?.GetValue() ) && Enum.IsDefined( typeof( BOC ), _name?.GetValue() )
-                    ? (BOC)Enum.Parse( typeof( BOC ), _name?.GetValue() )
-                    : BOC.NS;
+                return Verify.Input( _name?.GetValue() ) 
+                    && Enum.IsDefined( typeof( BOC ), _name?.GetValue() )
+                        ? (BOC)Enum.Parse( typeof( BOC ), _name?.GetValue() )
+                        : BOC.NS;
             }
             catch( SystemException ex )
             {
@@ -437,8 +439,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( BudgetObjectClass._source )
-                    ? BudgetObjectClass._source
+                return Validate.Source( _source )
+                    ? _source
                     : default( Source );
             }
             catch( Exception ex )

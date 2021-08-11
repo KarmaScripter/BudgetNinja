@@ -101,13 +101,13 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Objective"/> class.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Objective( DataRow data )
+        public Objective( DataRow dataRow )
             : this()
         {
-            _record = data;
+            _record = dataRow;
             _id = new Key( _record, PrimaryKey.ObjectiveId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );

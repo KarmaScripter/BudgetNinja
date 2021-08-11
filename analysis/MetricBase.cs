@@ -36,7 +36,7 @@ namespace BudgetExecution
         private protected int _count;
 
         /// <summary>
-        /// The data
+        /// The dataRow
         /// </summary>
         private protected IEnumerable<DataRow> _data;
 
@@ -92,7 +92,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<DataRow> GetData()
@@ -111,7 +111,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <param name="field">The field.</param>
         /// <param name="filter"></param>
@@ -144,17 +144,17 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the codes.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="dataRow">The dataRow.</param>
         /// <param name="field">The field.</param>
         /// <returns></returns>
-        public static IEnumerable<string> GetCodes( IEnumerable<DataRow> data, Field field )
+        public static IEnumerable<string> GetCodes( IEnumerable<DataRow> dataRow, Field field )
         {
-            if( data.Any()
+            if( dataRow.Any()
                 && Verify.Input( $"{field}" ) )
             {
                 try
                 {
-                    var _query = data
+                    var _query = dataRow
                         ?.Select( p => p.Field<string>( $"{field}" ) )
                         ?.Distinct()
                         ?.ToArray();
@@ -176,16 +176,16 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the count.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="dataRow">The dataRow.</param>
         /// <param name="numeric">The numeric.</param>
         /// <returns></returns>
-        public int GetCount( IEnumerable<DataRow> data, Numeric numeric = Numeric.Amount )
+        public int GetCount( IEnumerable<DataRow> dataRow, Numeric numeric = Numeric.Amount )
         {
-            if( data.Any() )
+            if( dataRow.Any() )
             {
                 try
                 {
-                    var _select = data
+                    var _select = dataRow
                         ?.Where( p => p.Field<double>( $"{numeric}" ) != 0.0D )
                         ?.Select( p => p );
 
@@ -206,16 +206,16 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the totals.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="dataRow">The dataRow.</param>
         /// <param name="numeric">The numeric.</param>
         /// <returns></returns>
-        public double CalculateTotals( IEnumerable<DataRow> data, Numeric numeric = Numeric.Amount )
+        public double CalculateTotals( IEnumerable<DataRow> dataRow, Numeric numeric = Numeric.Amount )
         {
-            if( data?.Any() == true )
+            if( dataRow?.Any() == true )
             {
                 try
                 {
-                    var _select = data
+                    var _select = dataRow
                         ?.Select( p => p.Field<double>( $"{numeric}" ) );
 
                     return _select.Any() && _select?.Sum() > 0
@@ -234,27 +234,27 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the totals.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="dataRow">The dataRow.</param>
         /// <param name="field">The field.</param>
         /// <param name="numeric">The numeric.</param>
         /// <returns></returns>
-        public IDictionary<string, double> CalculateTotals( IEnumerable<DataRow> data, Field field, 
+        public IDictionary<string, double> CalculateTotals( IEnumerable<DataRow> dataRow, Field field, 
             Numeric numeric = Numeric.Amount )
         {
-            if( data?.Any() == true
+            if( dataRow?.Any() == true
                 && Enum.IsDefined( typeof( Field ), field )
                 && Enum.IsDefined( typeof( Numeric ), numeric ) )
             {
                 try
                 {
                     var _dictionary = new Dictionary<string, double>();
-                    var _codes = GetCodes( data, field );
+                    var _codes = GetCodes( dataRow, field );
 
                     if( _codes.Any() )
                     {
                         foreach( var filter in _codes )
                         {
-                            var _query = data.Filter( field.ToString(), filter )
+                            var _query = dataRow.Filter( field.ToString(), filter )
                                 ?.Sum( p => p.Field<double>( $"{numeric}" ) );
 
                             if( _query > 0.0d )
@@ -281,17 +281,17 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the average.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="dataRow">The dataRow.</param>
         /// <param name="numeric">The numeric.</param>
         /// <returns></returns>
-        private protected double CalculateAverage( IEnumerable<DataRow> data, Numeric numeric = Numeric.Amount )
+        private protected double CalculateAverage( IEnumerable<DataRow> dataRow, Numeric numeric = Numeric.Amount )
         {
-            if( data?.Any() == true
+            if( dataRow?.Any() == true
                 && Enum.IsDefined( typeof( Numeric ), numeric ) )
             {
                 try
                 {
-                    var _query = data
+                    var _query = dataRow
                         .Where( p => p.Field<double>( $"{numeric}" ) != 0.0 )
                         ?.Select( p => p.Field<double>( $"{numeric}" ) )
                         ?.Average();
@@ -313,27 +313,27 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the averages.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="dataRow">The dataRow.</param>
         /// <param name="field">The field.</param>
         /// <param name="numeric">The numeric.</param>
         /// <returns></returns>
-        public IDictionary<string, double> CalculateAverages( IEnumerable<DataRow> data, Field field,
+        public IDictionary<string, double> CalculateAverages( IEnumerable<DataRow> dataRow, Field field,
             Numeric numeric = Numeric.Amount )
         {
-            if( data?.Any() == true
+            if( dataRow?.Any() == true
                 && Enum.IsDefined( typeof( Field ), field )
                 && Enum.IsDefined( typeof( Numeric ), numeric ) )
             {
                 try
                 {
                     var _dictionary = new Dictionary<string, double>();
-                    var _filters = GetCodes( data, field );
+                    var _filters = GetCodes( dataRow, field );
 
                     if( _filters.Any() )
                     {
                         foreach( var filter in _filters )
                         {
-                            var _query = data?.Filter( field.ToString(), filter );
+                            var _query = dataRow?.Filter( field.ToString(), filter );
 
                             if( _query?.Any() == true )
                             {

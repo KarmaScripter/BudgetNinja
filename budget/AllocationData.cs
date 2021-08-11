@@ -107,9 +107,7 @@ namespace BudgetExecution
             try
             {
                 var _builder = GetBuilder();
-
                 var _boc = _builder?.ProgramElements[ $"{Field.FundCode}" ];
-
                 var _select = _boc?.Select( f => new Fund( f ) );
 
                 return _select?.Any() == true

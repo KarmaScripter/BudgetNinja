@@ -118,7 +118,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var _rows = new Builder( Awards._source, _data )
+                    var _rows = new Builder( _source, _data )
                         ?.GetData();
 
                     return _rows?.Any() == true

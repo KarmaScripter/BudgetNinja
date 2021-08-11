@@ -51,7 +51,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private protected readonly Source _source = Source.AllowanceHolders;
+        private const Source _source = Source.AllowanceHolders;
 
         /// <summary>
         /// Gets or sets the dict.
@@ -339,9 +339,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

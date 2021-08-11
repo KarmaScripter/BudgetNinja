@@ -21,7 +21,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.Accounts;
+        private const Source _source = Source.Accounts;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "Account"/> class.

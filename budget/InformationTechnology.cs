@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -22,20 +18,85 @@ namespace BudgetExecution
     /// <seealso cref = "IInformationTechnology"/>
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class InformationTechnology : IInformationTechnology, ISource
     {
-        // ***************************************************************************************************************************
-        // ****************************************************     FIELDS    ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The source
         /// </summary>
-        private static readonly Source _source = Source.InformationTechnology;
+        private const Source _source = Source.InformationTechnology;
+        
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        private readonly DataRow _record;
 
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        private IDictionary<string, object> _data;
+
+        /// <summary>
+        /// Gets the information technology identifier.
+        /// </summary>
+        /// <value>
+        /// The information technology identifier.
+        /// </value>
+        private readonly IKey _id;
+
+        /// <summary>
+        /// Gets the project code.
+        /// </summary>
+        /// <value>
+        /// The project code.
+        /// </value>
+        private readonly IElement _projectCode;
+
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        private readonly IElement _code;
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        private readonly IElement _name;
+
+        /// <summary>
+        /// Gets the cost area code.
+        /// </summary>
+        /// <value>
+        /// The cost area code.
+        /// </value>
+        private readonly IElement _costAreaCode;
+
+        /// <summary>
+        /// Gets the name of the cost area.
+        /// </summary>
+        /// <value>
+        /// The name of the cost area.
+        /// </value>
+        private readonly IElement _costAreaName;
+
+        /// <summary>
+        /// Gets the name of the project.
+        /// </summary>
+        /// <value>
+        /// The name of the project.
+        /// </value>
+        private protected readonly IElement _projectName;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "InformationTechnology"/> class.
@@ -52,15 +113,15 @@ namespace BudgetExecution
         /// </param>
         public InformationTechnology( IQuery query )
         {
-            Record = new Builder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.InformationTechnologyId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            ProjectName = new Element( Record, Field.ProjectName );
-            CostAreaCode = new Element( Record, Field.CostAreaCode );
-            CostAreaName = new Element( Record, Field.CostAreaName );
-            Data = Record?.ToDictionary();
+            _record = new Builder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.InformationTechnologyId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            _projectName = new Element( _record, Field.ProjectName );
+            _costAreaCode = new Element( _record, Field.CostAreaCode );
+            _costAreaName = new Element( _record, Field.CostAreaName );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -72,15 +133,15 @@ namespace BudgetExecution
         public InformationTechnology( IBuilder builder )
             : this()
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.InformationTechnologyId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            ProjectName = new Element( Record, Field.ProjectName );
-            CostAreaCode = new Element( Record, Field.CostAreaCode );
-            CostAreaName = new Element( Record, Field.CostAreaName );
-            Data = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.InformationTechnologyId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            _projectName = new Element( _record, Field.ProjectName );
+            _costAreaCode = new Element( _record, Field.CostAreaCode );
+            _costAreaName = new Element( _record, Field.CostAreaName );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -91,15 +152,15 @@ namespace BudgetExecution
         public InformationTechnology( DataRow data )
             : this()
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.InformationTechnologyId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            ProjectName = new Element( Record, Field.ProjectName );
-            CostAreaCode = new Element( Record, Field.CostAreaCode );
-            CostAreaName = new Element( Record, Field.CostAreaName );
-            Data = Record?.ToDictionary();
+            _record = data;
+            _id = new Key( _record, PrimaryKey.InformationTechnologyId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            _projectName = new Element( _record, Field.ProjectName );
+            _costAreaCode = new Element( _record, Field.CostAreaCode );
+            _costAreaName = new Element( _record, Field.CostAreaName );
+            _data = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -110,97 +171,17 @@ namespace BudgetExecution
         /// </param>
         public InformationTechnology( string itcode )
         {
-            Record = new DataBuilder( _source, GetArgs( itcode ) )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.InformationTechnologyId );
-            Name = new Element( Record, Field.Name );
-            Code = new Element( Record, Field.Code );
-            ProjectCode = new Element( Record, Field.ProjectCode );
-            ProjectName = new Element( Record, Field.ProjectName );
-            CostAreaCode = new Element( Record, Field.CostAreaCode );
-            CostAreaName = new Element( Record, Field.CostAreaName );
-            Data = Record?.ToDictionary();
+            _record = new DataBuilder( _source, GetArgs( itcode ) )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.InformationTechnologyId );
+            _name = new Element( _record, Field.Name );
+            _code = new Element( _record, Field.Code );
+            _projectCode = new Element( _record, Field.ProjectCode );
+            _projectName = new Element( _record, Field.ProjectName );
+            _costAreaCode = new Element( _record, Field.CostAreaCode );
+            _costAreaName = new Element( _record, Field.CostAreaName );
+            _data = _record?.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
-
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private DataRow Record { get; }
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private IDictionary<string, object> Data { get; }
-
-        /// <summary>
-        /// Gets the information technology identifier.
-        /// </summary>
-        /// <value>
-        /// The information technology identifier.
-        /// </value>
-        private IKey ID { get; }
-
-        /// <summary>
-        /// Gets the project code.
-        /// </summary>
-        /// <value>
-        /// The project code.
-        /// </value>
-        private IElement ProjectCode { get; }
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        private IElement Code { get; }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private IElement Name { get; }
-
-        /// <summary>
-        /// Gets the cost area code.
-        /// </summary>
-        /// <value>
-        /// The cost area code.
-        /// </value>
-        private IElement CostAreaCode { get; }
-
-        /// <summary>
-        /// Gets the name of the cost area.
-        /// </summary>
-        /// <value>
-        /// The name of the cost area.
-        /// </value>
-        private IElement CostAreaName { get; }
-
-        /// <summary>
-        /// Gets the name of the project.
-        /// </summary>
-        /// <value>
-        /// The name of the project.
-        /// </value>
-        private IElement ProjectName { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Sets the arguments.
         /// </summary>
@@ -239,8 +220,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ProjectCode )
-                    ? ProjectCode
+                return Verify.Element( _projectCode )
+                    ? _projectCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -259,8 +240,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( ProjectName )
-                    ? ProjectName
+                return Verify.Element( _projectName )
+                    ? _projectName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -279,8 +260,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( CostAreaCode )
-                    ? CostAreaCode
+                return Verify.Element( _costAreaCode )
+                    ? _costAreaCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -299,8 +280,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( CostAreaName )
-                    ? CostAreaName
+                return Verify.Element( _costAreaName )
+                    ? _costAreaName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -317,17 +298,17 @@ namespace BudgetExecution
         /// </returns>
         public IDictionary<string, object> ToDictionary()
         {
-            if( Verify.Element( Name )
-                && Verify.Element( Code )
-                && Verify.Key( ID ) )
+            if( Verify.Element( _name )
+                && Verify.Element( _code )
+                && Verify.Key( _id ) )
             {
                 try
                 {
                     return new Dictionary<string, object>
                     {
-                        [ PrimaryKey.InformationTechnologyId.ToString() ] = ID.GetIndex(),
-                        [ Field.Name.ToString() ] = Name.GetValue(),
-                        [ Field.Code.ToString() ] = Code.GetValue()
+                        [ PrimaryKey.InformationTechnologyId.ToString() ] = _id.GetIndex(),
+                        [ Field.Name.ToString() ] = _name.GetValue(),
+                        [ Field.Code.ToString() ] = _code.GetValue()
                     };
                 }
                 catch( Exception ex )
@@ -349,8 +330,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : Key.Default;
             }
             catch( Exception ex )
@@ -369,8 +350,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Code )
-                    ? Code
+                return Verify.Element( _code )
+                    ? _code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -389,8 +370,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( Name )
-                    ? Name
+                return Verify.Element( _name )
+                    ? _name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -446,12 +427,12 @@ namespace BudgetExecution
         /// </returns>
         public override string ToString()
         {
-            if( Code != null
-                && Verify.Input( Code.GetValue() ) )
+            if( _code != null
+                && Verify.Input( _code.GetValue() ) )
             {
                 try
                 {
-                    return Code.GetValue();
+                    return _code.GetValue();
                 }
                 catch( Exception ex )
                 {
@@ -469,9 +450,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

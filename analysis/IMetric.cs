@@ -21,7 +21,7 @@ namespace BudgetExecution
         // ***************************************************************************************************************************
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -30,8 +30,8 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the totals.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -41,14 +41,14 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        IDictionary<string, double> CalculateTotals( IEnumerable<DataRow> data, Field field,
+        IDictionary<string, double> CalculateTotals( IEnumerable<DataRow> dataRow, Field field,
             Numeric numeric = Numeric.Amount );
 
         /// <summary>
         /// Calculates the averages.
         /// </summary>
-        /// <param name = "data" >
-        /// The data.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
         /// <param name = "field" >
         /// The field.
@@ -58,7 +58,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        IDictionary<string, double> CalculateAverages( IEnumerable<DataRow> data, Field field,
+        IDictionary<string, double> CalculateAverages( IEnumerable<DataRow> dataRow, Field field,
             Numeric numeric = Numeric.Amount );
     }
 }

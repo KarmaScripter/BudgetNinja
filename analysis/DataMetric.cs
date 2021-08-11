@@ -208,7 +208,7 @@ namespace BudgetExecution
         /// <summary>
         /// Calculates the variance.
         /// </summary>
-        /// <param name = "data" >
+        /// <param name = "dataRow" >
         /// The dataRow.
         /// </param>
         /// <param name = "numeric" >
@@ -216,13 +216,13 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        public double CalculateVariance( IEnumerable<DataRow> data, Numeric numeric )
+        public double CalculateVariance( IEnumerable<DataRow> dataRow, Numeric numeric )
         {
-            if( data?.Any() == true
-                && data.HasNumeric()
-                && GetCount( data, numeric ) > 30 )
+            if( dataRow?.Any() == true
+                && dataRow.HasNumeric()
+                && GetCount( dataRow, numeric ) > 30 )
             {
-                var _table = data.CopyToDataTable();
+                var _table = dataRow.CopyToDataTable();
 
                 try
                 {

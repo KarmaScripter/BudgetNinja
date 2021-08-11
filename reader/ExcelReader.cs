@@ -288,7 +288,7 @@ namespace BudgetExecution
                     var _sql = "SELECT * FROM [" + sheetName + "]";
 
                     var _connectionString =
-                        $@"Provider=Microsoft.Jet.OLEDB.4.0;_data _source={Path.GetDirectoryName( fileName )};"
+                        $@"Provider=Microsoft.Jet.OLEDB.4.0;_dataRow _source={Path.GetDirectoryName( fileName )};"
                         + @"Extended Properties='Text;HDR=YES;FMT=Delimited'";
 
                     using var connection = new OleDbConnection( _connectionString );

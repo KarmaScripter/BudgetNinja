@@ -19,6 +19,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Local" ) ]
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Local" ) ]
     [ SuppressMessage( "ReSharper", "UnassignedReadonlyField" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class FinanceObjectClass : IFinanceObjectClass, IProgramElement, ISource
     {
         /// <summary>
@@ -114,12 +115,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "FinanceObjectClass"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public FinanceObjectClass( DataRow datarow )
+        public FinanceObjectClass( DataRow dataRow )
         {
-            _record = datarow;
+            _record = dataRow;
             _id = new Key( _record, PrimaryKey.FinanceObjectClassId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );
@@ -129,12 +130,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "FinanceObjectClass"/> class.
         /// </summary>
-        /// <param name = "foccode" >
-        /// The foccode.
+        /// <param name = "focCode" >
+        /// The focCode.
         /// </param>
-        public FinanceObjectClass( string foccode )
+        public FinanceObjectClass( string focCode )
         {
-            _record = new DataBuilder( _source, GetArgs( foccode ) )?.GetRecord();
+            _record = new DataBuilder( _source, GetArgs( focCode ) )?.GetRecord();
             _id = new Key( _record, PrimaryKey.FinanceObjectClassId );
             _name = new Element( _record, Field.Name );
             _code = new Element( _record, Field.Code );

@@ -21,7 +21,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private protected readonly Source _source = Source.Divisions;
+        private const Source _source = Source.Divisions;
 
         /// <summary>
         /// Gets or sets the record.

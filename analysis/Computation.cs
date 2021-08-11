@@ -4,27 +4,25 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     /// <summary>
     /// 
     /// </summary>
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class Computation : Builder, IDataFilter
     {
-        // **************************************************************************************************************************
-        // ********************************************      FIELDS     *************************************************************
-        // **************************************************************************************************************************
-
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        private protected IEnumerable<DataRow> _dataRow;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Computation"/> class.
@@ -41,24 +39,8 @@ namespace BudgetExecution
         /// </param>
         public Computation( IDataAccess data )
         {
-            Data = data.GetData();
+            _dataRow = data.GetData();
         }
-
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private IEnumerable<DataRow> Data { get; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
 
         /// <summary>
         /// Gets the data.
@@ -78,12 +60,12 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var query = GetData()
-                        .Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
-                        .Select( p => p );
+                    var _select = GetData()
+                        ?.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
+                        ?.Select( p => p );
 
-                    return query.Any()
-                        ? query.ToArray()
+                    return _select?.Any() == true 
+                        ? _select.ToArray()
                         : default( DataRow[ ] );
                 }
                 catch( Exception ex )
@@ -102,9 +84,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

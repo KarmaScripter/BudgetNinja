@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -22,10 +18,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeInternal" ) ]
     public class Utilization
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "Utilization"/> class.
         /// </summary>
@@ -41,26 +33,26 @@ namespace BudgetExecution
         /// </param>
         public Utilization( IQuery query )
         {
-            Record = new Builder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.UtilizationId );
-            RPIO = Record[ $"{Field.RpioCode}" ].ToString();
-            BFY = Record[ $"{Field.BFY}" ].ToString();
-            FundCode = Record[ $"{Field.FundCode}" ].ToString();
-            AhCode = Record[ $"{Field.AhCode}" ].ToString();
-            OrgCode = Record[ $"{Field.OrgCode}" ].ToString();
-            AccountCode = Record[ $"{Field.AccountCode}" ].ToString();
-            RcCode = Record[ $"{Field.RcCode}" ].ToString();
-            BocCode = Record[ $"{Field.BocCode}" ].ToString();
-            Authority = new Amount( Record, Numeric.Authority );
-            Budgeted = new Amount( Record, Numeric.Budgeted );
-            Posted = new Amount( Record, Numeric.Posted );
-            CarryIn = new Amount( Record, Numeric.CarryIn );
-            CarryOut = new Amount( Record, Numeric.CarryOut );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Rate = new Amount( Record, Numeric.Rate );
+            _record = new Builder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.UtilizationId );
+            _rpio = _record[ $"{Field.RpioCode}" ].ToString();
+            _bfy = _record[ $"{Field.BFY}" ].ToString();
+            _fundCode = _record[ $"{Field.FundCode}" ].ToString();
+            _ahCode = _record[ $"{Field.AhCode}" ].ToString();
+            _orgCode = _record[ $"{Field.OrgCode}" ].ToString();
+            _accountCode = _record[ $"{Field.AccountCode}" ].ToString();
+            _rcCode = _record[ $"{Field.RcCode}" ].ToString();
+            _bocCode = _record[ $"{Field.BocCode}" ].ToString();
+            _authority = new Amount( _record, Numeric.Authority );
+            _budgeted = new Amount( _record, Numeric.Budgeted );
+            _posted = new Amount( _record, Numeric.Posted );
+            _carryIn = new Amount( _record, Numeric.CarryIn );
+            _carryOut = new Amount( _record, Numeric.CarryOut );
+            _commitments = new Amount( _record, Numeric.Commitments );
+            _openCommitments = new Amount( _record, Numeric.OpenCommitments );
+            _obligations = new Amount( _record, Numeric.Obligations );
+            _ulo = new Amount( _record, Numeric.ULO );
+            _rate = new Amount( _record, Numeric.Rate );
         }
 
         /// <summary>
@@ -72,27 +64,27 @@ namespace BudgetExecution
         public Utilization( IDataAccess databuilder )
             : this()
         {
-            Record = databuilder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.UtilizationId );
-            RPIO = Record?[ $"{Field.RpioCode}" ].ToString();
-            BFY = Record?[ $"{Field.BFY}" ].ToString();
-            FundCode = Record?[ $"{Field.FundCode}" ].ToString();
-            AhCode = Record?[ $"{Field.AhCode}" ].ToString();
-            OrgCode = Record?[ $"{Field.OrgCode}" ].ToString();
-            AccountCode = Record?[ $"{Field.AccountCode}" ].ToString();
-            RcCode = Record?[ $"{Field.RcCode}" ].ToString();
-            BocCode = Record?[ $"{Field.BocCode}" ].ToString();
-            Authority = new Amount( Record, Numeric.Authority );
-            Budgeted = new Amount( Record, Numeric.Budgeted );
-            Posted = new Amount( Record, Numeric.Posted );
-            CarryIn = new Amount( Record, Numeric.CarryIn );
-            CarryOut = new Amount( Record, Numeric.CarryOut );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Rate = new Amount( Record, Numeric.Rate );
-            Args = Record?.ToDictionary();
+            _record = databuilder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.UtilizationId );
+            _rpio = _record?[ $"{Field.RpioCode}" ].ToString();
+            _bfy = _record?[ $"{Field.BFY}" ].ToString();
+            _fundCode = _record?[ $"{Field.FundCode}" ].ToString();
+            _ahCode = _record?[ $"{Field.AhCode}" ].ToString();
+            _orgCode = _record?[ $"{Field.OrgCode}" ].ToString();
+            _accountCode = _record?[ $"{Field.AccountCode}" ].ToString();
+            _rcCode = _record?[ $"{Field.RcCode}" ].ToString();
+            _bocCode = _record?[ $"{Field.BocCode}" ].ToString();
+            _authority = new Amount( _record, Numeric.Authority );
+            _budgeted = new Amount( _record, Numeric.Budgeted );
+            _posted = new Amount( _record, Numeric.Posted );
+            _carryIn = new Amount( _record, Numeric.CarryIn );
+            _carryOut = new Amount( _record, Numeric.CarryOut );
+            _commitments = new Amount( _record, Numeric.Commitments );
+            _openCommitments = new Amount( _record, Numeric.OpenCommitments );
+            _obligations = new Amount( _record, Numeric.Obligations );
+            _ulo = new Amount( _record, Numeric.ULO );
+            _rate = new Amount( _record, Numeric.Rate );
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -104,26 +96,26 @@ namespace BudgetExecution
         public Utilization( DataRow data )
             : this()
         {
-            Record = data;
-            ID = new Key( Record, PrimaryKey.UtilizationId );
-            RPIO = Record[ $"{Field.RpioCode}" ].ToString();
-            BFY = Record[ $"{Field.BFY}" ].ToString();
-            FundCode = Record[ $"{Field.FundCode}" ].ToString();
-            AhCode = Record[ $"{Field.AhCode}" ].ToString();
-            OrgCode = Record[ $"{Field.OrgCode}" ].ToString();
-            AccountCode = Record[ $"{Field.AccountCode}" ].ToString();
-            RcCode = Record[ $"{Field.RcCode}" ].ToString();
-            BocCode = Record[ $"{Field.BocCode}" ].ToString();
-            Authority = new Amount( Record, Numeric.Authority );
-            Budgeted = new Amount( Record, Numeric.Budgeted );
-            Posted = new Amount( Record, Numeric.Posted );
-            CarryIn = new Amount( Record, Numeric.CarryIn );
-            CarryOut = new Amount( Record, Numeric.CarryOut );
-            Commitments = new Amount( Record, Numeric.Commitments );
-            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
-            Obligations = new Amount( Record, Numeric.Obligations );
-            ULO = new Amount( Record, Numeric.ULO );
-            Rate = new Amount( Record, Numeric.Rate );
+            _record = data;
+            _id = new Key( _record, PrimaryKey.UtilizationId );
+            _rpio = _record[ $"{Field.RpioCode}" ].ToString();
+            _bfy = _record[ $"{Field.BFY}" ].ToString();
+            _fundCode = _record[ $"{Field.FundCode}" ].ToString();
+            _ahCode = _record[ $"{Field.AhCode}" ].ToString();
+            _orgCode = _record[ $"{Field.OrgCode}" ].ToString();
+            _accountCode = _record[ $"{Field.AccountCode}" ].ToString();
+            _rcCode = _record[ $"{Field.RcCode}" ].ToString();
+            _bocCode = _record[ $"{Field.BocCode}" ].ToString();
+            _authority = new Amount( _record, Numeric.Authority );
+            _budgeted = new Amount( _record, Numeric.Budgeted );
+            _posted = new Amount( _record, Numeric.Posted );
+            _carryIn = new Amount( _record, Numeric.CarryIn );
+            _carryOut = new Amount( _record, Numeric.CarryOut );
+            _commitments = new Amount( _record, Numeric.Commitments );
+            _openCommitments = new Amount( _record, Numeric.OpenCommitments );
+            _obligations = new Amount( _record, Numeric.Obligations );
+            _ulo = new Amount( _record, Numeric.ULO );
+            _rate = new Amount( _record, Numeric.Rate );
         }
 
         // **********************************************************************************************************************
@@ -136,7 +128,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected virtual Source Source { get; set; } = Source.Utilization;
+        private const Source _source = Source.Utilization;
 
         /// <summary>
         /// Gets the arguments.
@@ -144,7 +136,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> Args { get; }
+        private protected IDictionary<string, object> _args;
 
         /// <summary>
         /// Gets the rc code.
@@ -152,7 +144,7 @@ namespace BudgetExecution
         /// <value>
         /// The rc code.
         /// </value>
-        public string RcCode { get; }
+        private protected string _rcCode;
 
         /// <summary>
         /// Gets the data.
@@ -160,7 +152,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private DataRow Record { get; }
+        private protected readonly DataRow _record;
 
         /// <summary>
         /// Gets or sets the outlays.
@@ -168,7 +160,7 @@ namespace BudgetExecution
         /// <value>
         /// The outlays.
         /// </value>
-        private IEnumerable<T> Outlays { get; set; }
+        private protected IEnumerable<T> _outlays;
 
         /// <summary>
         /// Gets the identifier.
@@ -176,7 +168,7 @@ namespace BudgetExecution
         /// <value>
         /// The identifier.
         /// </value>
-        private protected IKey ID { get; }
+        private protected IKey _id;
 
         /// <summary>
         /// Gets the rpio.
@@ -184,7 +176,7 @@ namespace BudgetExecution
         /// <value>
         /// The rpio.
         /// </value>
-        private string RPIO { get; }
+        private string _rpio;
 
         /// <summary>
         /// Gets the ah code.
@@ -192,7 +184,7 @@ namespace BudgetExecution
         /// <value>
         /// The ah code.
         /// </value>
-        private string AhCode { get; }
+        private protected string _ahCode;
 
         /// <summary>
         /// Gets the org code.
@@ -200,7 +192,7 @@ namespace BudgetExecution
         /// <value>
         /// The org code.
         /// </value>
-        private string OrgCode { get; }
+        private protected string _orgCode;
 
         /// <summary>
         /// Gets the account code.
@@ -208,7 +200,7 @@ namespace BudgetExecution
         /// <value>
         /// The account code.
         /// </value>
-        private string AccountCode { get; }
+        private protected string _accountCode;
 
         /// <summary>
         /// Gets the bfy.
@@ -216,7 +208,7 @@ namespace BudgetExecution
         /// <value>
         /// The bfy.
         /// </value>
-        private string BFY { get; }
+        private protected string _bfy;
 
         /// <summary>
         /// Gets the fund code.
@@ -224,7 +216,7 @@ namespace BudgetExecution
         /// <value>
         /// The fund code.
         /// </value>
-        private string FundCode { get; }
+        private protected string _fundCode;
 
         /// <summary>
         /// Gets or sets the program project code.
@@ -232,7 +224,7 @@ namespace BudgetExecution
         /// <value>
         /// The program project code.
         /// </value>
-        private string ProgramProjectCode { get; set; }
+        private protected string _programProjectCode;
 
         /// <summary>
         /// Gets or sets the program area code.
@@ -240,7 +232,7 @@ namespace BudgetExecution
         /// <value>
         /// The program area code.
         /// </value>
-        private string ProgramAreaCode { get; set; }
+        private protected string _programAreaCode;
 
         /// <summary>
         /// Gets the boc code.
@@ -248,7 +240,7 @@ namespace BudgetExecution
         /// <value>
         /// The boc code.
         /// </value>
-        private string BocCode { get; }
+        private protected string _bocCode;
 
         /// <summary>
         /// Gets or sets the foc code.
@@ -256,7 +248,7 @@ namespace BudgetExecution
         /// <value>
         /// The foc code.
         /// </value>
-        private string FocCode { get; set; }
+        private protected string _focCode;
 
         /// <summary>
         /// Gets or sets the balance.
@@ -264,7 +256,7 @@ namespace BudgetExecution
         /// <value>
         /// The balance.
         /// </value>
-        private IAmount Balance { get; set; }
+        private protected IAmount _balance;
 
         /// <summary>
         /// Gets the authority.
@@ -272,7 +264,7 @@ namespace BudgetExecution
         /// <value>
         /// The authority.
         /// </value>
-        private IAmount Authority { get; }
+        private protected IAmount _authority;
 
         /// <summary>
         /// Gets the budgeted.
@@ -280,7 +272,7 @@ namespace BudgetExecution
         /// <value>
         /// The budgeted.
         /// </value>
-        private IAmount Budgeted { get; }
+        private protected IAmount _budgeted;
 
         /// <summary>
         /// Gets the posted.
@@ -288,7 +280,7 @@ namespace BudgetExecution
         /// <value>
         /// The posted.
         /// </value>
-        private IAmount Posted { get; }
+        private protected IAmount _posted;
 
         /// <summary>
         /// Gets the carry in.
@@ -296,7 +288,7 @@ namespace BudgetExecution
         /// <value>
         /// The carry in.
         /// </value>
-        private IAmount CarryIn { get; }
+        private protected IAmount _carryIn;
 
         /// <summary>
         /// Gets the carry out.
@@ -304,7 +296,7 @@ namespace BudgetExecution
         /// <value>
         /// The carry out.
         /// </value>
-        private IAmount CarryOut { get; }
+        private protected IAmount _carryOut;
 
         /// <summary>
         /// Gets the commitments.
@@ -312,7 +304,7 @@ namespace BudgetExecution
         /// <value>
         /// The commitments.
         /// </value>
-        private IAmount Commitments { get; }
+        private protected IAmount _commitments;
 
         /// <summary>
         /// Gets the open commitments.
@@ -320,7 +312,7 @@ namespace BudgetExecution
         /// <value>
         /// The open commitments.
         /// </value>
-        private IAmount OpenCommitments { get; }
+        private protected IAmount _openCommitments;
 
         /// <summary>
         /// Gets the obligations.
@@ -328,7 +320,7 @@ namespace BudgetExecution
         /// <value>
         /// The obligations.
         /// </value>
-        private IAmount Obligations { get; }
+        private protected IAmount _obligations;
 
         /// <summary>
         /// Gets the ulo.
@@ -336,7 +328,7 @@ namespace BudgetExecution
         /// <value>
         /// The ulo.
         /// </value>
-        private IAmount ULO { get; }
+        private protected IAmount _ulo;
 
         /// <summary>
         /// Gets the rate.
@@ -344,12 +336,8 @@ namespace BudgetExecution
         /// <value>
         /// The rate.
         /// </value>
-        private IAmount Rate { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private protected readonly IAmount _rate;
+        
         /// <summary>
         /// Converts to string.
         /// </summary>
@@ -360,8 +348,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Rate.GetFunding() > -1.0
-                    ? Rate.GetFunding().ToString( "P" )
+                return _rate.GetFunding() > -1.0
+                    ? _rate.GetFunding().ToString( "P" )
                     : string.Empty;
             }
             catch( Exception ex )
@@ -378,12 +366,12 @@ namespace BudgetExecution
         /// </returns>
         public IDictionary<string, object> GetArgs()
         {
-            if( Record != null )
+            if( _record != null )
             {
                 try
                 {
-                    return Record.ToDictionary().Any()
-                        ? Record.ToDictionary()
+                    return _record.ToDictionary().Any()
+                        ? _record.ToDictionary()
                         : default( IDictionary<string, object> );
                 }
                 catch( SystemException ex )
@@ -402,9 +390,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }
