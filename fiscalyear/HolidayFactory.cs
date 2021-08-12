@@ -54,7 +54,7 @@ namespace BudgetExecution
         /// <value>
         /// The presidents.
         /// </value>
-        private protected IElement Presidents { get; }
+        private protected readonly IElement _presidents;
 
         /// <summary>
         /// Gets the memorial.
@@ -128,7 +128,7 @@ namespace BudgetExecution
             _record = dataRow;
             _newYears = new Element( _record, Field.NewYears );
             _martinLutherKing = new Element( _record, Field.MartinLutherKing );
-            Presidents = new Element( _record, Field.Presidents );
+            _presidents = new Element( _record, Field.Presidents );
             _memorial = new Element( _record, Field.Memorial );
             _veterans = new Element( _record, Field.Veterans );
             _labor = new Element( _record, Field.Labor );
@@ -148,7 +148,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _newYears;
+                return Verify.Element( _newYears )
+                    ? _newYears
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -166,7 +168,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _martinLutherKing;
+                return Verify.Element( _martinLutherKing )
+                    ? _martinLutherKing
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -184,7 +188,9 @@ namespace BudgetExecution
         {
             try
             {
-                return Presidents;
+                return Verify.Element( _presidents )
+                    ? _presidents
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -202,7 +208,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _memorial;
+                return Verify.Element( _memorial )
+                    ? _memorial
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -220,7 +228,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _veterans;
+                return Verify.Element( _veterans )
+                    ? _veterans
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -238,7 +248,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _labor;
+                return Verify.Element( _labor )
+                    ? _labor
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -256,7 +268,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _independence;
+                return Verify.Element( _independence )
+                    ? _independence
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -274,7 +288,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _columbus;
+                return Verify.Element( _columbus )
+                    ? _columbus
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -292,7 +308,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _thanksgiving;
+                return Verify.Element( _thanksgiving )
+                    ? _thanksgiving
+                    : default( IElement );
             }
             catch( Exception ex )
             {
@@ -310,7 +328,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _christmas;
+                return Verify.Element( _christmas )
+                    ? _christmas
+                    : default( IElement );
             }
             catch( Exception ex )
             {

@@ -39,7 +39,7 @@ namespace BudgetExecution
             _hasParent = CheckParent();
             _length = _fileInfo.Length;
             _attributes = _fileInfo.Attributes;
-            Security = _fileInfo.GetAccessControl();
+            _security = _fileInfo.GetAccessControl();
             _creationDate = _fileInfo.CreationTime;
             _changedDate = _fileInfo.LastWriteTime;
         }
@@ -56,7 +56,7 @@ namespace BudgetExecution
             _hasParent = CheckParent();
             _length = _fileInfo.Length;
             _attributes = _fileInfo.Attributes;
-            Security = _fileInfo.GetAccessControl();
+            _security = _fileInfo.GetAccessControl();
             _creationDate = _fileInfo.CreationTime;
             _changedDate = _fileInfo.LastWriteTime;
         }

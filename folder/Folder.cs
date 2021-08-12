@@ -69,9 +69,10 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( fullName ) && !Directory.Exists( fullName )
-                    ? Directory.CreateDirectory( fullName )
-                    : default( DirectoryInfo );
+                return Verify.Input( fullName ) 
+                    && !Directory.Exists( fullName )
+                        ? Directory.CreateDirectory( fullName )
+                        : default( DirectoryInfo );
             }
             catch( Exception ex )
             {

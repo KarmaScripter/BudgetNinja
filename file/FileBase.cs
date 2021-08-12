@@ -92,7 +92,7 @@ namespace BudgetExecution
         /// <value>
         /// The security.
         /// </value>
-        private protected FileSecurity Security { get; set; }
+        private protected FileSecurity _security;
         
         /// <summary>
         /// Gets the input.
@@ -248,12 +248,12 @@ namespace BudgetExecution
         {
             try
             {
-                var file = _path?.GetFullName();
+                var _file = _path?.GetFullName();
 
-                if( Verify.Input( file )
-                    && File.Exists( file ) )
+                if( Verify.Input( _file )
+                    && File.Exists( _file ) )
                 {
-                    File.Delete( file );
+                    File.Delete( _file );
                 }
             }
             catch( IOException ex )
@@ -310,7 +310,7 @@ namespace BudgetExecution
         {
             try
             {
-                return Security;
+                return _security ?? default( FileSecurity );
             }
             catch( IOException ex )
             {
@@ -327,7 +327,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _attributes;
+                return Verify.Element( _attributes )
+                    ? _attributes
+                    : default( FileAttributes );
             }
             catch( IOException ex )
             {
@@ -344,7 +346,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _creationDate;
+                return Verify.DateTime( _creationDate )
+                    ? _creationDate
+                    : default( DateTime );
             }
             catch( IOException ex )
             {
@@ -361,7 +365,9 @@ namespace BudgetExecution
         {
             try
             {
-                return _changedDate;
+                return Verify.DateTime( _changedDate )
+                    ? _changedDate
+                    : default( DateTime );
             }
             catch( IOException ex )
             {
