@@ -25,9 +25,9 @@ namespace BudgetExecution
         /// <summary>
         /// Creates the sub directory.
         /// </summary>
-        /// <param name="foldername">The foldername.</param>
+        /// <param name="folderName">The folderName.</param>
         /// <returns></returns>
-        DirectoryInfo CreateSubDirectory( string foldername );
+        DirectoryInfo CreateSubDirectory( string folderName );
 
         /// <summary>
         /// Gets the path data.
@@ -42,10 +42,10 @@ namespace BudgetExecution
         IEnumerable<IFile> GetDataFiles();
 
         /// <summary>
-        /// Moves the specified folderpath.
+        /// Moves the specified fullName.
         /// </summary>
-        /// <param name="folderpath">The folderpath.</param>
-        void Move( string folderpath );
+        /// <param name="fullName">The fullName.</param>
+        void Move( string fullName );
 
         /// <summary>
         /// Sets the access control.
@@ -78,16 +78,16 @@ namespace BudgetExecution
         DateTime GetChangedDate();
 
         /// <summary>
-        /// Zips the specified filepaht.
+        /// Zips the specified destinationPath.
         /// </summary>
-        /// <param name="filepaht">The filepaht.</param>
-        void Zip( string filepaht );
+        /// <param name="destinationPath">The destinationPath.</param>
+        void Zip( string destinationPath );
 
         /// <summary>
         /// Uns the zip.
         /// </summary>
-        /// <param name="filepath">The filepath.</param>
-        void UnZip( string filepath );
+        /// <param name="zipPath">The zipPath.</param>
+        void UnZip( string zipPath );
 
         /// <summary>
         /// Gets the special folders.

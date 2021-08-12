@@ -16,6 +16,7 @@ namespace BudgetExecution
     /// <seealso cref="BudgetExecution.IPath" />
     [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ArrangeModifiersOrder" ) ]
     public class DataPath : IPath
     {
         /// <summary>
@@ -189,9 +190,10 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( ext ) && Enum.GetNames( typeof( EXT ) ).Contains( ext )
-                    ? Path.ChangeExtension( _fullPath, ext )
-                    : string.Empty;
+                return Verify.Input( ext ) 
+                    && Enum.GetNames( typeof( EXT ) ).Contains( ext )
+                        ? Path.ChangeExtension( _fullPath, ext )
+                        : string.Empty;
             }
             catch( Exception ex )
             {
@@ -210,9 +212,10 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( first ) && Verify.Input( second )
-                    ? Path.Combine( first, second )
-                    : string.Empty;
+                return Verify.Input( first ) 
+                    && Verify.Input( second )
+                        ? Path.Combine( first, second )
+                        : string.Empty;
             }
             catch( Exception ex )
             {

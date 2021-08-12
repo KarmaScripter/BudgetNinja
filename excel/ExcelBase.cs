@@ -28,17 +28,13 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public abstract class ExcelBase : ExcelSettings
     {
-        // **************************************************************************************************************************
-        // ******************************************************   PROPERTIES   ****************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the file information.
         /// </summary>
         /// <value>
         /// The file information.
         /// </value>
-        private protected FileInfo FileInfo { get; set; }
+        private protected FileInfo _fileInfo;
 
         /// <summary>
         /// Gets or sets the excel.
@@ -46,7 +42,7 @@ namespace BudgetExecution
         /// <value>
         /// The excel.
         /// </value>
-        private protected ExcelPackage Excel { get; set; }
+        private protected ExcelPackage _excel;
 
         /// <summary>
         /// Gets or sets the workbook.
@@ -54,15 +50,15 @@ namespace BudgetExecution
         /// <value>
         /// The workbook.
         /// </value>
-        private protected ExcelWorkbook Workbook { get; set; }
+        private protected ExcelWorkbook _workbook;
 
         /// <summary>
-        /// Gets or sets the worksheet.
+        /// Gets or sets the workSheet.
         /// </summary>
         /// <value>
-        /// The worksheet.
+        /// The workSheet.
         /// </value>
-        private protected ExcelWorksheet Worksheet { get; set; }
+        private protected ExcelWorksheet _worksheet;
 
         /// <summary>
         /// Gets or sets the comment.
@@ -70,7 +66,7 @@ namespace BudgetExecution
         /// <value>
         /// The comment.
         /// </value>
-        private protected IEnumerable<ExcelComment> Comment { get; set; }
+        private protected IEnumerable<ExcelComment> _comment;
 
         /// <summary>
         /// Gets or sets the data.
@@ -78,12 +74,8 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private protected IEnumerable<DataRow> Data { get; set; }
-
-        // **************************************************************************************************************************
-        // ******************************************************     METHODS   *****************************************************
-        // **************************************************************************************************************************
-
+        private protected IEnumerable<DataRow> _data;
+        
         /// <summary>
         /// Sets the width of the column.
         /// </summary>
@@ -100,8 +92,8 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.AutoFitColumns( width );
+                    using var _range = grid.GetRange();
+                    _range.AutoFitColumns( width );
                 }
                 catch( Exception ex )
                 {
@@ -127,10 +119,10 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor( color );
-                    range.Style.HorizontalAlignment = _left;
+                    using var _range = grid.GetRange();
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( color );
+                    _range.Style.HorizontalAlignment = _left;
                 }
                 catch( Exception ex )
                 {
@@ -156,8 +148,8 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.Font.SetFromFont( font );
+                    using var _range = grid.GetRange();
+                    _range.Style.Font.SetFromFont( font );
                 }
                 catch( Exception ex )
                 {
@@ -183,9 +175,9 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.Font.Color.SetColor( color );
-                    range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                    using var _range = grid.GetRange();
+                    _range.Style.Font.Color.SetColor( color );
+                    _range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
                 }
                 catch( Exception ex )
                 {
@@ -215,37 +207,37 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
+                    using var _range = grid.GetRange();
 
                     switch( side )
                     {
                         case BorderSide.Top:
                         {
-                            range.Style.Border.Top.Style = style;
+                            _range.Style.Border.Top.Style = style;
                             break;
                         }
 
                         case BorderSide.Bottom:
                         {
-                            range.Style.Border.Bottom.Style = style;
+                            _range.Style.Border.Bottom.Style = style;
                             break;
                         }
 
                         case BorderSide.Right:
                         {
-                            range.Style.Border.Right.Style = style;
+                            _range.Style.Border.Right.Style = style;
                             break;
                         }
 
                         case BorderSide.Left:
                         {
-                            range.Style.Border.Left.Style = style;
+                            _range.Style.Border.Left.Style = style;
                             break;
                         }
 
                         default:
                         {
-                            range.Style.Border.BorderAround( ExcelBorderStyle.None );
+                            _range.Style.Border.BorderAround( ExcelBorderStyle.None );
                             break;
                         }
                     }
@@ -274,8 +266,8 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.HorizontalAlignment = align;
+                    using var _range = grid.GetRange();
+                    _range.Style.HorizontalAlignment = align;
                 }
                 catch( Exception ex )
                 {
@@ -300,8 +292,8 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.VerticalAlignment = align;
+                    using var _range = grid.GetRange();
+                    _range.Style.VerticalAlignment = align;
                 }
                 catch( Exception ex )
                 {
@@ -323,8 +315,8 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Merge = true;
+                    using var _range = grid.GetRange();
+                    _range.Merge = true;
                 }
                 catch( Exception ex )
                 {
@@ -339,9 +331,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

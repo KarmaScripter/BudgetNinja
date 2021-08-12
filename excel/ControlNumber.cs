@@ -6,10 +6,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -22,10 +18,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public class ControlNumber : BudgetNumber, IControlNumber
     {
-        // ***************************************************************************************************************************
-        // *********************************************   CONSTRUCTORS **************************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref = "ControlNumber"/> class.
         /// </summary>
@@ -40,19 +32,19 @@ namespace BudgetExecution
         /// </summary>
         public ControlNumber( IQuery query )
         {
-            Record = new DataBuilder( query )?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ControlNumberId );
-            RPIO = new Element( Record, Field.RpioCode );
-            FundCode = new Element( Record, Field.FundCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BFY = new Element( Record, Field.BFY );
-            DivisionName = new Element( Record, Field.DivisionName );
-            DateIssued = new Time( Record, EventDate.DateIssued );
-            RegionControlNumber = new Element( Record, Field.RegionControlNumber );
-            FundControlNumber = new Element( Record, Field.FundControlNumber );
-            DivisionControlNumber = new Element( Record, Field.DivisionControlNumber );
-            BudgetControlNumber = SetBudgetControlNumber();
-            Args = Record?.ToDictionary();
+            _record = new DataBuilder( query )?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ControlNumberId );
+            _rpio = new Element( _record, Field.RpioCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bfy = new Element( _record, Field.BFY );
+            _divisionName = new Element( _record, Field.DivisionName );
+            _dateIssued = new Time( _record, EventDate.DateIssued );
+            _regionControlNumber = new Element( _record, Field.RegionControlNumber );
+            _fundControlNumber = new Element( _record, Field.FundControlNumber );
+            _divisionControlNumber = new Element( _record, Field.DivisionControlNumber );
+            _budgetControlNumber = SetBudgetControlNumber();
+            _args = _record?.ToDictionary();
         }
 
         /// <inheritdoc/>
@@ -62,19 +54,19 @@ namespace BudgetExecution
         /// </summary>
         public ControlNumber( IBuilder builder )
         {
-            Record = builder?.GetRecord();
-            ID = new Key( Record, PrimaryKey.ControlNumberId );
-            RPIO = new Element( Record, Field.RpioCode );
-            FundCode = new Element( Record, Field.FundCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BFY = new Element( Record, Field.BFY );
-            DivisionName = new Element( Record, Field.DivisionName );
-            DateIssued = new Time( Record, EventDate.DateIssued );
-            RegionControlNumber = new Element( Record, Field.RegionControlNumber );
-            FundControlNumber = new Element( Record, Field.FundControlNumber );
-            DivisionControlNumber = new Element( Record, Field.DivisionControlNumber );
-            BudgetControlNumber = SetBudgetControlNumber();
-            Args = Record?.ToDictionary();
+            _record = builder?.GetRecord();
+            _id = new Key( _record, PrimaryKey.ControlNumberId );
+            _rpio = new Element( _record, Field.RpioCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bfy = new Element( _record, Field.BFY );
+            _divisionName = new Element( _record, Field.DivisionName );
+            _dateIssued = new Time( _record, EventDate.DateIssued );
+            _regionControlNumber = new Element( _record, Field.RegionControlNumber );
+            _fundControlNumber = new Element( _record, Field.FundControlNumber );
+            _divisionControlNumber = new Element( _record, Field.DivisionControlNumber );
+            _budgetControlNumber = SetBudgetControlNumber();
+            _args = _record?.ToDictionary();
         }
 
         /// <summary>
@@ -85,24 +77,20 @@ namespace BudgetExecution
         /// </param>
         public ControlNumber( DataRow datarow )
         {
-            Record = datarow;
-            ID = new Key( Record, PrimaryKey.ControlNumberId );
-            RPIO = new Element( Record, Field.RpioCode );
-            FundCode = new Element( Record, Field.FundCode );
-            RcCode = new Element( Record, Field.RcCode );
-            BFY = new Element( Record, Field.BFY );
-            DivisionName = new Element( Record, Field.DivisionName );
-            DateIssued = new Time( Record, EventDate.DateIssued );
-            RegionControlNumber = new Element( Record, Field.RegionControlNumber );
-            FundControlNumber = new Element( Record, Field.FundControlNumber );
-            DivisionControlNumber = new Element( Record, Field.DivisionControlNumber );
-            BudgetControlNumber = SetBudgetControlNumber();
-            Args = datarow.ToDictionary();
+            _record = datarow;
+            _id = new Key( _record, PrimaryKey.ControlNumberId );
+            _rpio = new Element( _record, Field.RpioCode );
+            _fundCode = new Element( _record, Field.FundCode );
+            _rcCode = new Element( _record, Field.RcCode );
+            _bfy = new Element( _record, Field.BFY );
+            _divisionName = new Element( _record, Field.DivisionName );
+            _dateIssued = new Time( _record, EventDate.DateIssued );
+            _regionControlNumber = new Element( _record, Field.RegionControlNumber );
+            _fundControlNumber = new Element( _record, Field.FundControlNumber );
+            _divisionControlNumber = new Element( _record, Field.DivisionControlNumber );
+            _budgetControlNumber = SetBudgetControlNumber();
+            _args = datarow.ToDictionary();
         }
-
-        // **********************************************************************************************************************
-        // *************************************************   PROPERTIES   *****************************************************
-        // **********************************************************************************************************************
 
         /// <summary>
         /// Gets the budget control number.
@@ -110,12 +98,8 @@ namespace BudgetExecution
         /// <value>
         /// The budget control number.
         /// </value>
-        private string BudgetControlNumber { get; }
-
-        // ***************************************************************************************************************************
-        // ************************************************  METHODS   ***************************************************************
-        // ***************************************************************************************************************************
-
+        private readonly string _budgetControlNumber;
+        
         /// <summary>
         /// Sets the budget control number.
         /// </summary>
@@ -125,9 +109,20 @@ namespace BudgetExecution
         {
             try
             {
+                var _year = _bfy?.GetValue()
+                    ?.Substring( 2, 2 );
+
+                var _fund = _fundControlNumber
+                    ?.ToString()
+                    ?.PadLeft( 3, '0' );
+
+                var _division = _divisionControlNumber
+                    ?.ToString()
+                    ?.PadLeft( 3, '0' );
+
                 return
-                    $@"{RPIO}-{BFY}-{BFY.GetValue().Substring( 2, 2 )}{FundCode}-{FundControlNumber.ToString().PadLeft( 3, '0' )}"
-                    + $@"-{DivisionName}-{DivisionControlNumber.ToString().PadLeft( 3, '0' )}"
+                    $@"{_rpio}-{_bfy}-{_year}{_fundCode}-{_fund}"
+                    + $@"-{_divisionName}-{_division}"
                     ?? string.Empty;
             }
             catch( Exception ex )
@@ -146,8 +141,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( BudgetControlNumber )
-                    ? BudgetControlNumber
+                return Verify.Input( _budgetControlNumber )
+                    ? _budgetControlNumber
                     : default( string );
             }
             catch( Exception ex )
@@ -166,11 +161,11 @@ namespace BudgetExecution
         /// </returns>
         public override string ToString()
         {
-            if( Record != null )
+            if( _record != null )
             {
                 try
                 {
-                    return BudgetControlNumber;
+                    return _budgetControlNumber;
                 }
                 catch( Exception ex )
                 {
@@ -191,8 +186,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( ID )
-                    ? ID
+                return Verify.Key( _id )
+                    ? _id
                     : default( IKey );
             }
             catch( Exception ex )
@@ -211,8 +206,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( BFY.GetValue() )
-                    ? new BudgetFiscalYear( BFY.GetValue() )
+                return Verify.Input( _bfy.GetValue() )
+                    ? new BudgetFiscalYear( _bfy.GetValue() )
                     : default( BudgetFiscalYear );
             }
             catch( Exception ex )
@@ -229,21 +224,21 @@ namespace BudgetExecution
         /// </returns>
         public IResourcePlanningOffice GetResourcePlanningOffice()
         {
-            if( Verify.Input( RPIO.GetValue() ) )
+            if( Verify.Input( _rpio.GetValue() ) )
             {
                 try
                 {
-                    var args = new Dictionary<string, object>
+                    var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.RpioCode}" ] = RPIO.GetValue()
+                        [ $"{Field.RpioCode}" ] = _rpio.GetValue()
                     };
 
-                    var connection = new ConnectionBuilder( Source.ResourcePlanningOffices, Provider.SQLite );
-                    var sqlstatement = new SqlStatement( connection, args, SQL.SELECT );
-                    using var query = new Query( connection, sqlstatement );
+                    var _connection = new ConnectionBuilder( Source.ResourcePlanningOffices, Provider.SQLite );
+                    var _statement = new SqlStatement( _connection, _dictionary, SQL.SELECT );
+                    using var _query = new Query( _connection, _statement );
 
-                    return query != null
-                        ? new ResourcePlanningOffice( query )
+                    return _query != null
+                        ? new ResourcePlanningOffice( _query )
                         : default( ResourcePlanningOffice );
                 }
                 catch( Exception ex )

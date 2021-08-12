@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
@@ -22,18 +18,20 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     public class FileWriter
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// The file
         /// </summary>
-        private readonly IFile _dataFile;
+        private protected readonly IFile _dataFile;
+        
+        /// <summary>
+        /// Gets or sets the data.
+        /// </summary>
+        private protected readonly FileStream _fileStream;
 
-        // ***************************************************************************************************************************
-        // ****************************************************  CONSTRUCTORS ********************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// The file information
+        /// </summary>
+        private protected readonly FileInfo _fileInfo;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileWriter"/> class.
@@ -45,31 +43,13 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref="FileWriter"/> class.
         /// </summary>
-        /// <param name="datafile">The file.</param>
-        public FileWriter( IFile datafile )
+        /// <param name="file">The file.</param>
+        public FileWriter( IFile file )
         {
-            _dataFile = datafile;
-            FileStream = _dataFile.GetBaseStream();
-            FileInfo = _dataFile.GetFileInfo();
+            _dataFile = file;
+            _fileStream = _dataFile.GetBaseStream();
+            _fileInfo = _dataFile.GetFileInfo();
         }
-
-        // ***************************************************************************************************************************
-        // ****************************************************  PROPERTIES   ********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private protected FileStream FileStream { get; set; }
-
-        private protected FileInfo FileInfo { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Reads all text.
@@ -78,13 +58,13 @@ namespace BudgetExecution
         {
             try
             {
-                var path = FileInfo.FullName;
-                var writer = File.ReadAllText( path );
+                var _path = _fileInfo.FullName;
+                var _writer = File.ReadAllText( _path );
 
-                if( Verify.Input( path )
-                    && Verify.Input( writer ) )
+                if( Verify.Input( _path )
+                    && Verify.Input( _writer ) )
                 {
-                    File.WriteAllText( FileInfo.FullName, writer );
+                    File.WriteAllText( _fileInfo.FullName, _writer );
                 }
             }
             catch( IOException ex )
@@ -100,15 +80,15 @@ namespace BudgetExecution
         {
             try
             {
-                var file = FileInfo?.FullName;
+                var _file = _fileInfo?.FullName;
 
-                if( Verify.Input( file ) )
+                if( Verify.Input( _file ) )
                 {
-                    var text = File.ReadAllLines( file );
+                    var text = File.ReadAllLines( _file );
 
                     if( text?.Any() == true )
                     {
-                        File.WriteAllLines( file, text );
+                        File.WriteAllLines( _file, text );
                     }
                 }
             }
@@ -125,15 +105,15 @@ namespace BudgetExecution
         {
             try
             {
-                var path = FileInfo?.FullName;
+                var _path = _fileInfo?.FullName;
 
-                if( Verify.Input( path ) )
+                if( Verify.Input( _path ) )
                 {
-                    var stream = File.ReadAllBytes( path );
+                    var stream = File.ReadAllBytes( _path );
 
                     if( stream?.Any() == true )
                     {
-                        File.WriteAllBytes( path, stream );
+                        File.WriteAllBytes( _path, stream );
                     }
                 }
             }
@@ -173,12 +153,12 @@ namespace BudgetExecution
         /// Writes the binary.
         /// </summary>
         /// <param name="data">The data.</param>
-        public void WriteData( ref byte[] data )
+        public void WriteData( ref byte[ ] data )
         {
             try
             {
-                using var filestream = FileInfo?.Create();
-                filestream?.Write( data, 0, data.Length );
+                using var _stream = _fileInfo?.Create();
+                _stream?.Write( data, 0, data.Length );
             }
             catch( IOException ex )
             {
@@ -196,8 +176,8 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var streamwriter = FileInfo?.AppendText();
-                    streamwriter?.Write( text );
+                    using var _writer = _fileInfo?.AppendText();
+                    _writer?.Write( text );
                 }
                 catch( IOException ex )
                 {
@@ -213,13 +193,13 @@ namespace BudgetExecution
         {
             try
             {
-                var binarydata = File.ReadAllBytes( FileInfo.FullName );
+                var _bytes = File.ReadAllBytes( _fileInfo.FullName );
 
-                if( binarydata?.Any() == true )
+                if( _bytes?.Any() == true )
                 {
-                    var length = binarydata.Length;
-                    using var zipper = new GZipStream( FileStream, CompressionMode.Compress );
-                    zipper?.Write( binarydata, 0, length );
+                    var _length = _bytes.Length;
+                    using var _stream = new GZipStream( _fileStream, CompressionMode.Compress );
+                    _stream?.Write( _bytes, 0, _length );
                 }
             }
             catch( IOException ex )
@@ -236,12 +216,12 @@ namespace BudgetExecution
         {
             try
             {
-                var binarydata = File.ReadAllBytes( _dataFile.GetFilePath() );
+                var _bytes = File.ReadAllBytes( _dataFile.GetFilePath() );
 
-                if( binarydata?.Any() == true )
+                if( _bytes?.Any() == true )
                 {
-                    var stream = new MemoryStream( binarydata );
-                    stream?.Read( binarydata, 0, binarydata.Length );
+                    var _stream = new MemoryStream( _bytes );
+                    _stream?.Read( _bytes, 0, _bytes.Length );
                 }
             }
             catch( IOException ex )
@@ -256,9 +236,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -22,10 +18,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
     public abstract class FolderBase
     {
-        // ***************************************************************************************************************************
-        // ****************************************************  PROPERTIES   ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the data file.
         /// </summary>
@@ -37,7 +29,7 @@ namespace BudgetExecution
         /// <summary>
         /// The base stream
         /// </summary>
-        private protected DirectoryInfo DirectoryInfo { get; set; }
+        private protected DirectoryInfo _directoryInfo;
 
         /// <summary>
         /// Gets or sets the name.
@@ -45,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected string FileName { get; set; }
+        private protected string _fileName;
 
         /// <summary>
         /// Gets or sets the name.
@@ -53,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected string FolderName { get; set; }
+        private protected string _folderName;
 
         /// <summary>
         /// Gets the folder path.
@@ -61,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The folder path.
         /// </value>
-        private protected string FolderPath { get; set; }
+        private protected string _folderPath;
 
         /// <summary>
         /// Gets or sets the files.
@@ -69,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The files.
         /// </value>
-        private protected IEnumerable<string> Files { get; set; }
+        private protected IEnumerable<string> _files;
 
         /// <summary>
         /// Gets the file security.
@@ -77,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The attributes.
         /// </value>
-        private protected DirectorySecurity DirectorySecurity { get; set; }
+        private protected DirectorySecurity _directorySecurity;
 
         /// <summary>
         /// Gets or sets the creation date.
@@ -85,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The creation date.
         /// </value>
-        private protected DateTime CreationDate { get; set; }
+        private protected DateTime _creationDate;
 
         /// <summary>
         /// Gets or sets the changed date.
@@ -93,12 +85,8 @@ namespace BudgetExecution
         /// <value>
         /// The changed date.
         /// </value>
-        private protected DateTime ChangedDate { get; set; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        private protected DateTime _changedDate;
+        
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -107,8 +95,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FolderName )
-                    ? FolderName
+                return Verify.Input( _folderName )
+                    ? _folderName
                     : string.Empty;
             }
             catch( IOException ex )
@@ -126,8 +114,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( FolderPath )
-                    ? FolderPath
+                return Verify.Input( _folderPath )
+                    ? _folderPath
                     : string.Empty;
             }
             catch( Exception ex )
@@ -145,10 +133,12 @@ namespace BudgetExecution
         {
             try
             {
-                var file = _dataFile?.GetFileInfo()?.Directory;
+                var _file = _dataFile
+                    ?.GetFileInfo()
+                    ?.Directory;
 
-                return Verify.Input( file?.FullName )
-                    ? Directory.CreateDirectory( file?.FullName )
+                return Verify.Input( _file?.FullName )
+                    ? Directory.CreateDirectory( _file?.FullName )
                     : default( DirectoryInfo );
             }
             catch( IOException ex )
@@ -166,7 +156,9 @@ namespace BudgetExecution
         {
             try
             {
-                return CreationDate;
+                return Verify.DateTime( _creationDate ) 
+                    ? _creationDate 
+                    : default( DateTime );
             }
             catch( IOException ex )
             {
@@ -183,7 +175,9 @@ namespace BudgetExecution
         {
             try
             {
-                return ChangedDate;
+                return Verify.DateTime( _changedDate )
+                    ? _changedDate
+                    : default( DateTime );
             }
             catch( IOException ex )
             {
@@ -200,8 +194,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Files?.Any() == true
-                    ? Files
+                return _files?.Any() == true
+                    ? _files
                     : default( IEnumerable<string> );
             }
             catch( IOException ex )
@@ -219,10 +213,10 @@ namespace BudgetExecution
         {
             try
             {
-                var data = DirectoryInfo?.EnumerateFiles( FolderPath );
+                var _enumerable = _directoryInfo?.EnumerateFiles( _folderPath );
 
-                return Verify.Input( data )
-                    ? data
+                return Verify.Sequence(  _enumerable )
+                    ? _enumerable
                     : default( IEnumerable<FileInfo> );
             }
             catch( IOException ex )
@@ -240,10 +234,10 @@ namespace BudgetExecution
         {
             try
             {
-                var folders = Enum.GetNames( typeof( Environment.SpecialFolder ) );
+                var _folders = Enum.GetNames( typeof( Environment.SpecialFolder ) );
 
-                return folders?.Any() == true
-                    ? folders
+                return _folders?.Any() == true
+                    ? _folders
                     : default( string[ ] );
             }
             catch( IOException ex )
@@ -261,10 +255,10 @@ namespace BudgetExecution
         {
             try
             {
-                var folders = DirectoryInfo?.GetDirectories();
+                var _folders = _directoryInfo?.GetDirectories();
 
-                return folders?.Any() != true
-                    ? folders
+                return _folders?.Any() != true
+                    ? _folders
                     : default( DirectoryInfo[ ] );
             }
             catch( Exception ex )
@@ -277,16 +271,16 @@ namespace BudgetExecution
         /// <summary>
         /// Creats the zip file.
         /// </summary>
-        /// <param name="sourcepath">The sourcepath.</param>
-        /// <param name="destinationpath">The destinationpath.</param>
-        public static void CreateZipFile( string sourcepath, string destinationpath )
+        /// <param name="sourcePath">The sourcePath.</param>
+        /// <param name="destinationPath">The destinationPath.</param>
+        public static void CreateZipFile( string sourcePath, string destinationPath )
         {
             try
             {
-                if( Verify.Input( destinationpath )
-                    && Verify.Input( sourcepath ) )
+                if( Verify.Input( destinationPath )
+                    && Verify.Input( sourcePath ) )
                 {
-                    ZipFile.CreateFromDirectory( sourcepath, destinationpath );
+                    ZipFile.CreateFromDirectory( sourcePath, destinationPath );
                 }
             }
             catch( Exception ex )
@@ -301,9 +295,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

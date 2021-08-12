@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -22,10 +18,6 @@ namespace BudgetExecution
     /// <seealso cref="IFolder" />
     public class Folder : FolderBase, IFolder
     {
-        // ***************************************************************************************************************************
-        // ****************************************************  CONSTRUCTORS ********************************************************
-        // ***************************************************************************************************************************
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Folder"/> class.
         /// </summary>
@@ -40,19 +32,15 @@ namespace BudgetExecution
         public Folder( IFile file )
         {
             _dataFile = file;
-            DirectoryInfo = GetBaseDirectory();
-            FolderName = DirectoryInfo.Name;
-            FolderPath = DirectoryInfo.FullName;
-            Files = Directory.GetFiles( FolderPath );
-            DirectorySecurity = DirectoryInfo.GetAccessControl();
-            CreationDate = DirectoryInfo.CreationTime;
-            ChangedDate = DirectoryInfo.LastWriteTime;
+            _directoryInfo = GetBaseDirectory();
+            _folderName = _directoryInfo.Name;
+            _folderPath = _directoryInfo.FullName;
+            _files = Directory.GetFiles( _folderPath );
+            _directorySecurity = _directoryInfo.GetAccessControl();
+            _creationDate = _directoryInfo.CreationTime;
+            _changedDate = _directoryInfo.LastWriteTime;
         }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the current directory.
         /// </summary>
@@ -75,14 +63,14 @@ namespace BudgetExecution
         /// <summary>
         /// Creates the specified filepath.
         /// </summary>
-        /// <param name="fullname">The filepath.</param>
+        /// <param name="fullName">The filepath.</param>
         /// <returns></returns>
-        public static DirectoryInfo Create( string fullname )
+        public static DirectoryInfo Create( string fullName )
         {
             try
             {
-                return Verify.Input( fullname ) && !Directory.Exists( fullname )
-                    ? Directory.CreateDirectory( fullname )
+                return Verify.Input( fullName ) && !Directory.Exists( fullName )
+                    ? Directory.CreateDirectory( fullName )
                     : default( DirectoryInfo );
             }
             catch( Exception ex )
@@ -93,17 +81,17 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Deletes the specified foldername.
+        /// Deletes the specified folderName.
         /// </summary>
-        /// <param name="foldername">The foldername.</param>
-        public static void Delete( string foldername )
+        /// <param name="folderName">The folderName.</param>
+        public static void Delete( string folderName )
         {
             try
             {
-                if( Verify.Input( foldername )
-                    && Directory.Exists( foldername ) )
+                if( Verify.Input( folderName )
+                    && Directory.Exists( folderName ) )
                 {
-                    Directory.Delete( foldername, true );
+                    Directory.Delete( folderName, true );
                 }
             }
             catch( Exception ex )
@@ -115,26 +103,27 @@ namespace BudgetExecution
         /// <summary>
         /// Creates the sub folder.
         /// </summary>
-        /// <param name="foldername">The foldername.</param>
+        /// <param name="folderName">The folderName.</param>
         /// <returns></returns>
-        public DirectoryInfo CreateSubDirectory( string foldername )
+        public DirectoryInfo CreateSubDirectory( string folderName )
         {
-            if( string.IsNullOrEmpty( foldername ) )
+            if( string.IsNullOrEmpty( folderName ) )
             {
                 return default( DirectoryInfo );
             }
 
-            if( Verify.Input( foldername )
-                && Directory.Exists( foldername ) )
+            if( Verify.Input( folderName )
+                && Directory.Exists( folderName ) )
             {
-                Directory.Delete( foldername );
+                Directory.Delete( folderName );
             }
 
             try
             {
-                return Verify.Input( foldername ) && !Directory.Exists( foldername )
-                    ? DirectoryInfo?.CreateSubdirectory( foldername )
-                    : default( DirectoryInfo );
+                return Verify.Input( folderName ) 
+                    && !Directory.Exists( folderName )
+                        ? _directoryInfo?.CreateSubdirectory( folderName )
+                        : default( DirectoryInfo );
             }
             catch( Exception ex )
             {
@@ -151,10 +140,12 @@ namespace BudgetExecution
         {
             try
             {
-                var paths = Files?.Select( fd => new DataPath( fd ) )?.ToArray();
+                var _paths = _files
+                    ?.Select( fd => new DataPath( fd ) )
+                    ?.ToArray();
 
-                return paths?.Any() == true
-                    ? paths
+                return _paths?.Any() == true
+                    ? _paths
                     : default( DataPath[ ] );
             }
             catch( Exception ex )
@@ -172,11 +163,16 @@ namespace BudgetExecution
         {
             try
             {
-                var paths = Files?.Select( f => new DataPath( f ) )?.ToArray();
-                var data = paths?.Select( d => new DataFile( d ) )?.ToArray();
+                var _paths = _files
+                    ?.Select( f => new DataPath( f ) )
+                    ?.ToArray();
 
-                return Verify.Input( data )
-                    ? data
+                var _data = _paths
+                    ?.Select( d => new DataFile( d ) )
+                    ?.ToArray();
+
+                return Verify.Input( _data )
+                    ? _data
                     : default( DataFile[ ] );
             }
             catch( IOException ex )
@@ -189,21 +185,21 @@ namespace BudgetExecution
         /// <summary>
         /// Moves the specified folderpath.
         /// </summary>
-        /// <param name="fullname">The folderpath.</param>
-        public void Move( string fullname )
+        /// <param name="fullName">The folderpath.</param>
+        public void Move( string fullName )
         {
             try
             {
-                if( Verify.Input( fullname )
-                    && !Directory.Exists( fullname ) )
+                if( Verify.Input( fullName )
+                    && !Directory.Exists( fullName ) )
                 {
-                    DirectoryInfo?.MoveTo( fullname );
+                    _directoryInfo?.MoveTo( fullName );
                 }
-                else if( Verify.Input( fullname )
-                    && Directory.Exists( fullname ) )
+                else if( Verify.Input( fullName )
+                    && Directory.Exists( fullName ) )
                 {
-                    Directory.CreateDirectory( fullname );
-                    DirectoryInfo?.MoveTo( fullname );
+                    Directory.CreateDirectory( fullName );
+                    _directoryInfo?.MoveTo( fullName );
                 }
             }
             catch( Exception ex )
@@ -215,14 +211,14 @@ namespace BudgetExecution
         /// <summary>
         /// Zips the specified filepath.
         /// </summary>
-        /// <param name="destinationpath">The filepath.</param>
-        public void Zip( string destinationpath )
+        /// <param name="destinationPath">The filepath.</param>
+        public void Zip( string destinationPath )
         {
             try
             {
-                if( Verify.Input( destinationpath ) )
+                if( Verify.Input( destinationPath ) )
                 {
-                    ZipFile.CreateFromDirectory( FolderPath, destinationpath );
+                    ZipFile.CreateFromDirectory( _folderPath, destinationPath );
                 }
             }
             catch( Exception ex )
@@ -234,15 +230,15 @@ namespace BudgetExecution
         /// <summary>
         /// Uns the zip.
         /// </summary>
-        /// <param name="zippath">The zippath.</param>
-        public void UnZip( string zippath )
+        /// <param name="zipPath">The zipPath.</param>
+        public void UnZip( string zipPath )
         {
             try
             {
-                if( Verify.Input( zippath )
-                    && File.Exists( zippath ) )
+                if( Verify.Input( zipPath )
+                    && File.Exists( zipPath ) )
                 {
-                    ZipFile.ExtractToDirectory( zippath, FolderPath );
+                    ZipFile.ExtractToDirectory( zipPath, _folderPath );
                 }
             }
             catch( Exception ex )
@@ -261,7 +257,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    DirectoryInfo?.SetAccessControl( security );
+                    _directoryInfo?.SetAccessControl( security );
                 }
                 catch( Exception ex )
                 {

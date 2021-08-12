@@ -19,19 +19,15 @@ namespace BudgetExecution
     /// <seealso cref = "ControlInfo"/>
     /// <seealso cref = "ISource"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
-    public abstract class BudgetNumber : ControlInfo, ISource
+    public abstract class BudgetNumber : ControlInfo
     {
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// Gets or sets the builder.
         /// </summary>
         /// <value>
         /// The builder.
         /// </value>
-        private DataBuilder Builder { get; set; }
+        private protected DataBuilder _builder;
 
         /// <summary>
         /// Gets the control number identifier.
@@ -39,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The control number identifier.
         /// </value>
-        private protected IKey ID { get; set; }
+        private protected IKey _id;
 
         /// <summary>
         /// Gets the date issued.
@@ -47,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The date issued.
         /// </value>
-        private protected ITime DateIssued { get; set; }
+        private protected ITime _dateIssued;
 
         /// <summary>
         /// Gets the region control number.
@@ -55,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The region control number.
         /// </value>
-        private protected IElement RegionControlNumber { get; set; }
+        private protected IElement _regionControlNumber;
 
         /// <summary>
         /// Gets the name of the division.
@@ -63,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the division.
         /// </value>
-        private protected IElement DivisionName { get; set; }
+        private protected IElement _divisionName;
 
         /// <summary>
         /// Gets the fund control number.
@@ -71,7 +67,7 @@ namespace BudgetExecution
         /// <value>
         /// The fund control number.
         /// </value>
-        private protected IElement FundControlNumber { get; set; }
+        private protected IElement _fundControlNumber;
 
         /// <summary>
         /// Gets the division control number.
@@ -79,12 +75,8 @@ namespace BudgetExecution
         /// <value>
         /// The division control number.
         /// </value>
-        private protected IElement DivisionControlNumber { get; set; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        private protected IElement _divisionControlNumber;
+        
         /// <summary>
         /// Gets the date issued.
         /// </summary>
@@ -94,8 +86,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( DateIssued )
-                    ? DateIssued
+                return Verify.Time( _dateIssued )
+                    ? _dateIssued
                     : Time.Default;
             }
             catch( Exception ex )
@@ -112,19 +104,19 @@ namespace BudgetExecution
         /// </returns>
         public IElement GetFundCount()
         {
-            if( Verify.Element( FundCode ) )
+            if( Verify.Element( _fundCode ) )
             {
                 try
                 {
-                    var funds = Builder?.GetData()
-                        ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( FundCode?.GetValue() ) )
-                        ?.Where( p => p.Field<string>( $"{Field.BFY}" ).Equals( BFY?.GetValue() ) )
-                        ?.Where( p => p.Field<string>( $"{Field.RcCode}" ).Equals( RcCode?.GetValue() ) )
+                    var _enumerable = _builder?.GetData()
+                        ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( _fundCode?.GetValue() ) )
+                        ?.Where( p => p.Field<string>( $"{Field.BFY}" ).Equals( _bfy?.GetValue() ) )
+                        ?.Where( p => p.Field<string>( $"{Field.RcCode}" ).Equals( _rcCode?.GetValue() ) )
                         ?.Select( p => p )
                         ?.Distinct();
 
-                    return funds?.Any() == true
-                        ? new Element( Record, funds.Count().ToString() )
+                    return _enumerable?.Any() == true
+                        ? new Element( _record, _enumerable.Count().ToString() )
                         : Element.Default;
                 }
                 catch( Exception ex )
@@ -146,11 +138,11 @@ namespace BudgetExecution
         {
             try
             {
-                var fundcontrolnumber = GetFundCount().GetValue();
-                var number = int.Parse( fundcontrolnumber ) + 1;
+                var _value = GetFundCount().GetValue();
+                var _number = int.Parse( _value ) + 1;
 
-                return int.Parse( fundcontrolnumber ) > 0
-                    ? new Element( Record, number.ToString() )
+                return int.Parse( _value ) > 0
+                    ? new Element( _record, _number.ToString() )
                     : Element.Default;
             }
             catch( Exception ex )
@@ -169,17 +161,17 @@ namespace BudgetExecution
         {
             try
             {
-                var division = Builder?.GetData()
-                    ?.Where( p => p.Field<string>( $"{Field.BFY}" ).Equals( BFY?.GetValue() ) )
-                    ?.Where( p => p.Field<string>( $"{Field.RcCode}" ).Equals( RcCode?.GetValue() ) )
-                    ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( FundCode?.GetValue() ) )
+                var _enumerable = _builder?.GetData()
+                    ?.Where( p => p.Field<string>( $"{Field.BFY}" ).Equals( _bfy?.GetValue() ) )
+                    ?.Where( p => p.Field<string>( $"{Field.RcCode}" ).Equals( _rcCode?.GetValue() ) )
+                    ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( _fundCode?.GetValue() ) )
                     ?.Select( p => p )
                     ?.Distinct();
 
-                var count = division?.Count();
+                var _count = _enumerable?.Count();
 
-                return count > 0
-                    ? new Element( Record, count.ToString() )
+                return _count > 0
+                    ? new Element( _record, _count.ToString() )
                     : Element.Default;
             }
             catch( Exception ex )
@@ -198,11 +190,11 @@ namespace BudgetExecution
         {
             try
             {
-                var number = GetDivisionControlNumber();
-                var count = int.Parse( number.GetValue() ) + 1;
+                var _number = GetDivisionControlNumber();
+                var _count = int.Parse( _number.GetValue() ) + 1;
 
-                return Verify.Element( number )
-                    ? new Element( Record, count.ToString() )
+                return Verify.Element( _number )
+                    ? new Element( _record, _count.ToString() )
                     : Element.Default;
             }
             catch( Exception ex )
@@ -221,18 +213,18 @@ namespace BudgetExecution
         {
             try
             {
-                var rpio = Builder?.GetData()
-                    ?.Where( p => p.Field<string>( $"{Field.RpioCode}" ).Equals( RPIO?.GetValue() ) )
-                    ?.Where( p => p.Field<string>( $"{Field.BFY}" ).Equals( BFY?.GetValue() ) )
-                    ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( FundCode?.GetValue() ) )
+                var _enumerable = _builder?.GetData()
+                    ?.Where( p => p.Field<string>( $"{Field.RpioCode}" ).Equals( _rpio?.GetValue() ) )
+                    ?.Where( p => p.Field<string>( $"{Field.BFY}" ).Equals( _bfy?.GetValue() ) )
+                    ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Equals( _fundCode?.GetValue() ) )
                     ?.Select( p => p )
                     ?.Distinct();
 
-                var count = rpio?.Count();
-                var region = count + 1;
+                var _count = _enumerable?.Count();
+                var _region = _count + 1;
 
-                return count > 0
-                    ? new Element( Record, region.ToString() )
+                return _count > 0
+                    ? new Element( _record, _region.ToString() )
                     : Element.Default;
             }
             catch( Exception ex )
@@ -251,36 +243,16 @@ namespace BudgetExecution
         {
             try
             {
-                var count = int.Parse( RegionControlNumber.GetValue() ) + 1;
+                var _count = int.Parse( _regionControlNumber.GetValue() ) + 1;
 
-                return count > 0
-                    ? new Element( Record, count.ToString() )
+                return _count > 0
+                    ? new Element( _record, _count.ToString() )
                     : Element.Default;
             }
             catch( Exception ex )
             {
                 Fail( ex );
                 return Element.Default;
-            }
-        }
-
-        /// <summary>
-        /// Gets the source.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        public Source GetSource()
-        {
-            try
-            {
-                return Validate.Source( Source )
-                    ? Source
-                    : Source.NS;
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return Source.NS;
             }
         }
     }

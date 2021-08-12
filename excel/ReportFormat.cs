@@ -76,9 +76,9 @@ namespace BudgetExecution
         /// </summary>
         public ReportFormat()
         {
-            FileInfo = new FileInfo( _filePath );
-            Excel = new ExcelPackage( FileInfo );
-            Workbook = Excel.Workbook;
+            _fileInfo = new FileInfo( _filePath );
+            _excel = new ExcelPackage( _fileInfo );
+            _workbook = _excel.Workbook;
         }
 
         /// <summary>
@@ -90,25 +90,25 @@ namespace BudgetExecution
         public ReportFormat( DataTable dataTable )
             : this()
         {
-            Data = dataTable.AsEnumerable();
-            Worksheet = Workbook.Worksheets.Add( dataTable.TableName );
-            Worksheet.View.ShowGridLines = false;
-            Worksheet.View.ZoomScale = _zoomLevel;
-            Worksheet.View.PageLayoutView = true;
-            Worksheet.View.ShowHeaders = true;
-            Worksheet.DefaultRowHeight = _rowHeight;
-            Worksheet.DefaultColWidth = _columnWidth;
-            Worksheet.PrinterSettings.ShowHeaders = false;
-            Worksheet.PrinterSettings.ShowGridLines = false;
-            Worksheet.PrinterSettings.LeftMargin = _leftMargin;
-            Worksheet.PrinterSettings.RightMargin = _rightMargin;
-            Worksheet.PrinterSettings.TopMargin = _topMargin;
-            Worksheet.PrinterSettings.BottomMargin = _bottomMarging;
-            Worksheet.PrinterSettings.HorizontalCentered = true;
-            Worksheet.PrinterSettings.VerticalCentered = true;
-            Worksheet.PrinterSettings.FitToPage = true;
-            Worksheet.HeaderFooter.AlignWithMargins = true;
-            Worksheet.HeaderFooter.ScaleWithDocument = true;
+            _data = dataTable.AsEnumerable();
+            _worksheet = _workbook.Worksheets.Add( dataTable.TableName );
+            _worksheet.View.ShowGridLines = false;
+            _worksheet.View.ZoomScale = _zoomLevel;
+            _worksheet.View.PageLayoutView = true;
+            _worksheet.View.ShowHeaders = true;
+            _worksheet.DefaultRowHeight = _rowHeight;
+            _worksheet.DefaultColWidth = _columnWidth;
+            _worksheet.PrinterSettings.ShowHeaders = false;
+            _worksheet.PrinterSettings.ShowGridLines = false;
+            _worksheet.PrinterSettings.LeftMargin = _leftMargin;
+            _worksheet.PrinterSettings.RightMargin = _rightMargin;
+            _worksheet.PrinterSettings.TopMargin = _topMargin;
+            _worksheet.PrinterSettings.BottomMargin = _bottomMarging;
+            _worksheet.PrinterSettings.HorizontalCentered = true;
+            _worksheet.PrinterSettings.VerticalCentered = true;
+            _worksheet.PrinterSettings.FitToPage = true;
+            _worksheet.HeaderFooter.AlignWithMargins = true;
+            _worksheet.HeaderFooter.ScaleWithDocument = true;
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace BudgetExecution
         /// </param>
         private protected void SetAlternatingRowColor( ExcelRange excelRange )
         {
-            if( Worksheet != null
+            if( _worksheet != null
                 && excelRange?.Start?.Row > -1
                 && excelRange.Start.Column > -1
                 && excelRange.End?.Row > -1
@@ -248,7 +248,7 @@ namespace BudgetExecution
                 try
                 {
                     var _prc = 
-                        Worksheet.Cells[ excelRange.Start.Row, excelRange.Start.Column,
+                        _worksheet.Cells[ excelRange.Start.Row, excelRange.Start.Column,
                             excelRange.End.Row, excelRange.End.Column ];
 
                     for( var i = excelRange.Start.Row; i < excelRange.End.Row; i++ )
@@ -281,7 +281,7 @@ namespace BudgetExecution
         /// </param>
         private protected void SetNumericRowFormat( ExcelRange excelRange )
         {
-            if( Worksheet != null
+            if( _worksheet != null
                 && excelRange.Start.Row > -1
                 && excelRange.Start.Column > -1
                 && excelRange.End.Row > -1
@@ -338,7 +338,7 @@ namespace BudgetExecution
         /// </param>
         private protected void SetTotalRowFormat( ExcelRange excelRange )
         {
-            if( Worksheet != null
+            if( _worksheet != null
                 && excelRange.Start.Row > -1
                 && excelRange.Start.Column > -1
                 && excelRange.End.Row > -1
@@ -346,10 +346,10 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var _total = Worksheet.Cells[ excelRange.Start.Row, excelRange.Start.Column, 
+                    var _total = _worksheet.Cells[ excelRange.Start.Row, excelRange.Start.Column, 
                         excelRange.Start.Row, excelRange.Start.Column + 6 ];
 
-                    var _range = Worksheet.Cells[ excelRange.Start.Row, excelRange.Start.Column + 1, 
+                    var _range = _worksheet.Cells[ excelRange.Start.Row, excelRange.Start.Column + 1, 
                         excelRange.Start.Row, excelRange.Start.Column + 6 ];
 
                     _total.Style.Fill.PatternType = ExcelFillStyle.Solid;

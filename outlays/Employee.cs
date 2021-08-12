@@ -28,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly Source _source = Source.Employees;
+        private const Source _source = Source.Employees;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "Employee"/> class.
@@ -84,12 +84,12 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Employee"/> class.
         /// </summary>
-        /// <param name = "datarow" >
-        /// The datarow.
+        /// <param name = "dataRow" >
+        /// The dataRow.
         /// </param>
-        public Employee( DataRow datarow )
+        public Employee( DataRow dataRow )
         {
-            _records = datarow;
+            _records = dataRow;
             _id = new Key( _records, PrimaryKey.EmployeeId );
             _section = new Element( _records, Field.Section );
             _firstName = new Element( _records, Field.FirstName );

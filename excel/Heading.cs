@@ -4,32 +4,42 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Local" ) ]
     public class Heading : Grid
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the span.
+        /// </summary>
+        /// <value>
+        /// The span.
+        /// </value>
+        private protected readonly int _span;
 
         /// <summary>
-        /// The depth
+        /// Gets or sets from.
         /// </summary>
-        private readonly int _depth = 1;
+        /// <value>
+        /// From.
+        /// </value>
+        private protected (int Row, int Column) _anchor;
 
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
+        /// <summary>
+        /// Gets or sets the caption.
+        /// </summary>
+        /// <value>
+        /// The caption.
+        /// </value>
+        private protected readonly IDictionary<int, string> _caption;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Heading"/> class.
@@ -38,54 +48,31 @@ namespace BudgetExecution
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="grid"></param>
         public Heading( IGrid grid )
         {
-            Worksheet = grid.GetWorksheet();
-            Range = grid.GetRange();
-            Address = grid.GetAddress();
-            From = ( Range.Start.Row, Range.Start.Column );
-            To = ( Range.Start.Row, Range.End.Column );
-            Anchor = ( From.Row, From.Column );
+            _worksheet = grid.GetWorksheet();
+            _range = grid.GetRange();
+            _address = grid.GetAddress();
+            _from = ( _range.Start.Row, _range.Start.Column );
+            _to = ( _range.Start.Row, _range.End.Column );
+            _anchor = ( _from.Row, _from.Column );
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Heading"/> class.
+        /// </summary>
+        /// <param name="grid">The grid.</param>
+        /// <param name="caption">The caption.</param>
         public Heading( IGrid grid, IDictionary<int, string> caption )
             : this( grid )
         {
-            Caption = caption;
-            Span = Range.Columns;
+            _caption = caption;
+            _span = _range.Columns;
         }
-
-        // ***************************************************************************************************************************
-        // ****************************************************  PROPERTIES   ********************************************************
-        // ***************************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets the span.
-        /// </summary>
-        /// <value>
-        /// The span.
-        /// </value>
-        private int Span { get; set; }
-
-        /// <summary>
-        /// Gets or sets from.
-        /// </summary>
-        /// <value>
-        /// From.
-        /// </value>
-        private (int Row, int Column) Anchor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the caption.
-        /// </summary>
-        /// <value>
-        /// The caption.
-        /// </value>
-        private IDictionary<int, string> Caption { get; set; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
 
         /// <summary>
         /// Gets the span.
@@ -95,8 +82,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Span > 0
-                    ? Span
+                return _span > 0
+                    ? _span
                     : 0;
             }
             catch( Exception ex )
@@ -114,9 +101,10 @@ namespace BudgetExecution
         {
             try
             {
-                return Anchor.Row > 0 && Anchor.Column > 0
-                    ? Anchor
-                    : ( 0, 0 );
+                return _anchor.Row > 0 
+                    && _anchor.Column > 0
+                        ? _anchor
+                        : ( 0, 0 );
             }
             catch( Exception ex )
             {
@@ -133,8 +121,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Caption?.Any() == true
-                    ? Caption
+                return _caption?.Any() == true
+                    ? _caption
                     : default( IDictionary<int, string> );
             }
             catch( Exception ex )

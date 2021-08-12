@@ -25,10 +25,6 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "ConvertToConstant.Global" ) ]
     public abstract class ExcelSettings
     {
-        // **************************************************************************************************************************
-        // ******************************************************      FIELDS    ****************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// The index
         /// </summary>
@@ -131,12 +127,16 @@ namespace BudgetExecution
         /// </summary>
         public enum BorderSide
         {
+            /// <summary>The top</summary>
             Top,
 
+            /// <summary>The bottom</summary>
             Bottom,
 
+            /// <summary>The left</summary>
             Left,
 
+            /// <summary>The right</summary>
             Right
         };
     }

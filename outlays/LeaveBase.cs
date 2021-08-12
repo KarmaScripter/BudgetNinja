@@ -14,7 +14,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source.
         /// </summary>
-        private protected Source _source = Source.LeaveProjections;
+        private const Source _source = Source.LeaveProjections;
         
         /// <summary>
         /// Gets or sets the RpioCode Gets the RpioCode Gets the RpioCode.

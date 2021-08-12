@@ -16,14 +16,14 @@ namespace BudgetExecution
         ExcelAddress GetAddress();
 
         /// <summary>
-        /// Gets the range.
+        /// Gets the _range.
         /// </summary>
         /// <returns>
         /// </returns>
         ExcelRange GetRange();
 
         /// <summary>
-        /// Gets the worksheet.
+        /// Gets the workSheet.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -32,12 +32,12 @@ namespace BudgetExecution
         /// <summary>
         /// Counts the cells.
         /// </summary>
-        /// <param name = "range" >
-        /// The range.
+        /// <param name = "_range" >
+        /// The _range.
         /// </param>
         /// <returns>
         /// </returns>
-        int CountCells( ExcelRange range );
+        int CountCells( ExcelRange _range );
 
         /// <summary>
         /// Gets the row count.

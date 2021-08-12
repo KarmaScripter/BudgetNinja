@@ -4,30 +4,57 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Local" ) ]
     public class Section : Grid
     {
-        // ***************************************************************************************************************************
-        // ****************************************************    FIELDS     ********************************************************
-        // ***************************************************************************************************************************
-
+        /// <summary>
+        /// The grid
+        /// </summary>
         private readonly IGrid _grid;
-
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
+        
+        /// <summary>
+        /// Gets or sets from.
+        /// </summary>
+        /// <value>
+        /// From.
+        /// </value>
+        public (int Row, int Column) Anchor { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "Heading"/> class.
+        /// Gets the span.
+        /// </summary>
+        /// <value>
+        /// The span.
+        /// </value>
+        public int Span { get; set; }
+
+        /// <summary>
+        /// Gets the depth.
+        /// </summary>
+        /// <value>
+        /// The depth.
+        /// </value>
+        public int Depth { get; set; }
+
+        /// <summary>
+        /// Gets the dimensions.
+        /// </summary>
+        /// <value>
+        /// The dimensions.
+        /// </value>
+        public ( int Depth, int Span ) Area { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref = "Heading"/> class.
         /// </summary>
         public Section()
         {
@@ -41,55 +68,15 @@ namespace BudgetExecution
 
         {
             _grid = grid;
-            Worksheet = _grid.GetWorksheet();
-            Range = _grid.GetRange();
-            Address = _grid.GetAddress();
-            From = ( Range.Start.Row, Range.Start.Column );
-            To = ( Range.End.Row, Range.End.Column );
-            Span = Range.Columns;
-            Depth = Range.Rows;
+            _worksheet = _grid.GetWorksheet();
+            _range = _grid.GetRange();
+            _address = _grid.GetAddress();
+            _from = ( _range.Start.Row, _range.Start.Column );
+            _to = ( _range.End.Row, _range.End.Column );
+            Span = _range.Columns;
+            Depth = _range.Rows;
             Area = ( Depth, Span );
         }
-
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>
-        /// Gets or sets from.
-        /// </summary>
-        /// <value>
-        /// From.
-        /// </value>
-        private (int Row, int Column) Anchor { get; set; }
-
-        /// <summary>
-        /// Gets the span.
-        /// </summary>
-        /// <value>
-        /// The span.
-        /// </value>
-        private int Span { get; }
-
-        /// <summary>
-        /// Gets the depth.
-        /// </summary>
-        /// <value>
-        /// The depth.
-        /// </value>
-        private int Depth { get; }
-
-        /// <summary>
-        /// Gets the dimensions.
-        /// </summary>
-        /// <value>
-        /// The dimensions.
-        /// </value>
-        private ( int Depth, int Span ) Area { get; }
-
-        // ***************************************************************************************************************************
-        // ****************************************************     METHODS   ********************************************************
-        // ***************************************************************************************************************************
 
         /// <summary>
         /// Gets the anchor.

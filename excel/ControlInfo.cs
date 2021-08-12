@@ -4,27 +4,21 @@
 
 namespace BudgetExecution
 {
-    // ********************************************************************************************************************************
-    // *********************************************************  ASSEMBLIES   ********************************************************
-    // ********************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     public abstract class ControlInfo
     {
-        // **************************************************************************************************************************
-        // ********************************************      FIELDS     *************************************************************
-        // **************************************************************************************************************************
-
-        private protected static Source Source { get; } = Source.ControlNumbers;
-
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
+        /// <summary>
+        /// 
+        /// </summary>
+        private const Source _source  = Source.ControlNumbers;
 
         /// <summary>
         /// Gets the data.
@@ -32,7 +26,7 @@ namespace BudgetExecution
         /// <value>
         /// The data.
         /// </value>
-        private protected DataRow Record { get; set; }
+        private protected DataRow _record;
 
         /// <summary>
         /// Gets the arguments.
@@ -40,7 +34,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> Args { get; set; }
+        private protected IDictionary<string, object> _args;
 
         /// <summary>
         /// Gets the rpio.
@@ -48,7 +42,7 @@ namespace BudgetExecution
         /// <value>
         /// The rpio.
         /// </value>
-        private protected IElement RPIO { get; set; }
+        private protected IElement _rpio;
 
         /// <summary>
         /// Gets the rc code.
@@ -56,7 +50,7 @@ namespace BudgetExecution
         /// <value>
         /// The rc code.
         /// </value>
-        private protected IElement RcCode { get; set; }
+        private protected IElement _rcCode;
 
         /// <summary>
         /// Gets the bfy.
@@ -64,7 +58,7 @@ namespace BudgetExecution
         /// <value>
         /// The bfy.
         /// </value>
-        private protected IElement BFY { get; set; }
+        private protected IElement _bfy;
 
         /// <summary>
         /// Gets the fund code.
@@ -72,12 +66,8 @@ namespace BudgetExecution
         /// <value>
         /// The fund code.
         /// </value>
-        private protected IElement FundCode { get; set; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        private protected IElement _fundCode;
+        
         /// <summary>
         /// Gets the responsibility center code.
         /// </summary>
@@ -87,8 +77,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( RcCode )
-                    ? RcCode
+                return Verify.Element( _rcCode )
+                    ? _rcCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -107,8 +97,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( RPIO )
-                    ? RPIO
+                return Verify.Element( _rpio )
+                    ? _rpio
                     : Element.Default;
             }
             catch( Exception ex )
@@ -127,8 +117,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( FundCode )
-                    ? FundCode
+                return Verify.Element( _fundCode )
+                    ? _fundCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -147,8 +137,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( BFY )
-                    ? BFY
+                return Verify.Element( _bfy )
+                    ? _bfy
                     : Element.Default;
             }
             catch( Exception ex )
@@ -167,8 +157,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( Args )
-                    ? Args
+                return Verify.Map( _args )
+                    ? _args
                     : default( IDictionary<string, object> );
             }
             catch( SystemException ex )
@@ -184,9 +174,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

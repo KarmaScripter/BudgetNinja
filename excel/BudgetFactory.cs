@@ -16,25 +16,20 @@ namespace BudgetExecution
     /// </summary>
     [ SuppressMessage( "ReSharper", "UnusedVariable" ) ]
     [ SuppressMessage( "ReSharper", "UnusedType.Global" ) ]
-    public class BudgetFactory
+    public class BudgetFactory : ExcelBudget
     {
         /// <summary>
         /// The budget
         /// </summary>
         private readonly ExcelBudget _budget;
-
-        /// <summary>
-        /// The worksheet
-        /// </summary>
-        private readonly ExcelWorksheet _worksheet;
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="BudgetFactory"/> class.
         /// </summary>
-        /// <param name="excelbudget">The excelbudget.</param>
-        public BudgetFactory( ExcelBudget excelbudget )
+        /// <param name="excelBudget">The excelBudget.</param>
+        public BudgetFactory( ExcelBudget excelBudget )
         {
-            _budget = excelbudget;
+            _budget = excelBudget;
             _worksheet = _budget.GetWorkSheet();
             _allocation = _budget.GetAllocation();
             _authority = _allocation.GetAuthority();
@@ -51,24 +46,25 @@ namespace BudgetExecution
         private readonly IAuthority _authority;
 
         /// <summary>
-        /// Gets the epm worksheet.
+        /// Gets the epm workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetEpmWorksheet()
         {
-            var _data = _allocation?.GetFunds();
-            var _awards = _allocation?.GetAwards();
+            var _funds = _allocation?.GetFunds();
+            var _supplementals = _allocation?.GetAwards();
             var _enumerable = _allocation?.GetData();
             var _grid = new Grid( _worksheet, ( 10, 2 ) );
-            var _header = _grid?.From.Row - 1;
-            var _start = _grid.From.Row;
+            var _header = _grid.GetFrom().Row  - 1;
+            var _start = _grid.GetFrom().Row;
             var _fund = new Fund( $"{FundCode.B}" );
             _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
             _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation?.GetBudgetFiscalYear() );
             
             try
             {
-                var _lookup = _enumerable?.Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.B}" ) )
+                var _lookup = _enumerable
+                    ?.Where( f => f.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.B}" ) )
                     ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.ToLookup( f => f.Field<string>( $"{Field.AccountCode}" ), f => f );
 
@@ -84,7 +80,7 @@ namespace BudgetExecution
 
                 var _end = _start;
 
-                var _select = _awards?.Where( a => a.GetFundCode().Equals( $"{FundCode.B}" ) )
+                var _select = _supplementals?.Where( a => a.GetFundCode().Equals( $"{FundCode.B}" ) )
                     ?.Select( a => a );
 
                 if( _select?.Any() ?? false )
@@ -103,7 +99,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the stag worksheet.
+        /// Gets the stag workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetStagWorksheet()
@@ -129,7 +125,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the lust worksheet.
+        /// Gets the lust workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetLustWorksheet()
@@ -154,13 +150,13 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the oil worksheet.
+        /// Gets the oil workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetOilWorksheet()
         {
             var _enumerable = _allocation?.GetData();
-            var _awards = _allocation?.GetAwards();
+            var _supplementals = _allocation?.GetAwards();
             var _funds = _allocation?.GetFunds();
             var _fund = new Fund( $"{FundCode.H}" );
 
@@ -180,15 +176,15 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the deep water horizon worksheet.
+        /// Gets the deep water horizon workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetDeepWaterHorizonWorksheet()
         {
-            var _enumerable = _allocation?.GetData();
-            var _data = _allocation?.GetFunds();
+            var _enumerable = _allocation.GetData();
+            var _list = _allocation.GetFunds();
             var _grid = new Grid( _worksheet, ( 10, 2 ) );
-            var _row = _grid.From.Row;
+            var _row = _grid.GetFrom().Row;
             var _first = _row - 1;
             var _fund = new Fund( $"{FundCode.ZL}" );
             _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
@@ -222,7 +218,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the superfund worksheet.
+        /// Gets the superfund workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSuperfundWorksheet()
@@ -231,7 +227,7 @@ namespace BudgetExecution
             var _supplementals = _allocation.GetAwards();
             var _funds = _allocation.GetFunds();
             var _grid = new Grid( _worksheet, ( 10, 2 ) );
-            var _first = _grid?.From.Row;
+            var _first = _grid?.GetFrom().Row;
             var _header = _first - 1;
             var _fund = new Fund( $"{FundCode.T}" );
             _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
@@ -267,14 +263,14 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the s f6 a worksheet.
+        /// Gets the s f6 a workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSF6AWorksheet()
         {
-            var _data = _allocation?.GetData();
+            var _rows = _allocation?.GetData();
             var _grid = new Grid( _worksheet, ( 10, 2 ) );
-            var _first = _grid.From.Row;
+            var _first = _grid.GetFrom().Row;
             var _header = _first - 1;
             var _fund = new Fund( $"{FundCode.T}" );
             var _enumerable = _allocation?.GetBuilder()?.ProgramElements[ Field.AhCode.ToString() ];
@@ -283,7 +279,7 @@ namespace BudgetExecution
 
             try
             {
-                var _lookup = _data?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "6A" ) )
+                var _lookup = _rows?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "6A" ) )
                     ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.ToLookup( p => p.Field<string>( $"{Field.OrgCode}" ), p => p );
 
@@ -316,15 +312,15 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the special accounts worksheet.
+        /// Gets the special accounts workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSpecialAccountsWorksheet()
         {
             var _enumerable = _allocation?.GetData();
-            var _data = _allocation?.GetFunds();
+            var _funds = _allocation?.GetFunds();
             var _grid = new Grid( _worksheet, ( 10, 2 ) );
-            var _first = _grid.From.Row;
+            var _first = _grid.GetFrom().Row;
             var _header = _first - 1;
             var _fund = new Fund( $"{FundCode.TR}" );
             _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
@@ -364,15 +360,15 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the superfund supplement worksheet.
+        /// Gets the superfund supplement workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetSuperfundSupplementWorksheet()
         {
-            var _data = _allocation?.GetData();
+            var _rows = _allocation?.GetData();
             var _enumerable = _allocation?.GetFunds();
             var _grid = new Grid( _worksheet, ( 10, 2 ) );
-            var _first = _grid.From.Row;
+            var _first = _grid.GetFrom().Row;
             var _header = _first - 1;
             var _fund = new Fund( $"{FundCode.TS3}" );
             _budget?.SetWorksheetProperties( _grid?.GetWorksheet() );
@@ -380,7 +376,7 @@ namespace BudgetExecution
 
             try
             {
-                var _lookup = _data?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.TS3}" ) )
+                var _lookup = _rows?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.TS3}" ) )
                     ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
 
@@ -405,16 +401,16 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the lust supplemental worksheet.
+        /// Gets the lust supplemental workSheet.
         /// </summary>
         /// <returns></returns>
         public ExcelWorksheet GetLustSupplementalWorksheet()
         {
             var _enumerable = _allocation?.GetData();
-            var _data = _allocation?.GetFunds();
+            var _funds = _allocation?.GetFunds();
             var _fund = new Fund( $"{FundCode.FS3}" );
             var _grid = new Grid( _worksheet, ( 10, 2 ) );
-            var _first = _grid?.From.Row;
+            var _first = _grid?.GetFrom().Row;
             var _header = _first - 1;
             _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
 
@@ -444,17 +440,6 @@ namespace BudgetExecution
                 Fail( ex );
                 return default( ExcelWorksheet );
             }
-        }
-
-        /// <summary>
-        /// Fails the specified ex.
-        /// </summary>
-        /// <param name="ex">The ex.</param>
-        private static void Fail( Exception ex )
-        {
-            using var _error = new Error( ex );
-            _error?.SetText();
-            _error?.ShowDialog();
         }
     }
 }

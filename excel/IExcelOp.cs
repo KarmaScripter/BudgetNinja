@@ -82,7 +82,7 @@ namespace BudgetExecution
         ExcelWorkbook GetWorkbook();
 
         /// <summary>
-        /// Gets the excel worksheet.
+        /// Gets the excel workSheet.
         /// </summary>
         /// <returns>
         /// </returns>

@@ -4,23 +4,50 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using OfficeOpenXml;
 
+    /// <summary>
+    /// 
+    /// </summary>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Local" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBeProtected.Global" ) ]
     public class Grid : ExcelCellBase, IGrid
     {
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
+        /// <summary>
+        /// The range
+        /// </summary>
+        private protected ExcelRange _range;
+
+        /// <summary>
+        /// The workSheet
+        /// </summary>
+        private protected ExcelWorksheet _worksheet;
+
+        /// <summary>
+        /// The address
+        /// </summary>
+        private protected ExcelAddress _address;
+
+        /// <summary>
+        /// Gets or sets from.
+        /// </summary>
+        /// <value>
+        /// From.
+        /// </value>
+        private protected (int Row, int Column) _from;
+
+        /// <summary>
+        /// Gets or sets to.
+        /// </summary>
+        /// <value>
+        /// To.
+        /// </value>
+        private protected (int Row, int Column) _to;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Grid"/> class.
@@ -32,89 +59,92 @@ namespace BudgetExecution
         /// <summary>
         /// Initializes a new instance of the <see cref = "Grid"/> class.
         /// </summary>
-        /// <param name = "worksheet" >
+        /// <param name = "workSheet" >
         /// </param>
         /// <param name = "range" >
         /// The range.
         /// </param>
-        public Grid( ExcelWorksheet worksheet, ExcelRange range )
+        public Grid( ExcelWorksheet workSheet, ExcelRange range )
         {
-            Worksheet = worksheet;
-            Range = range;
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row, Range.End.Row );
-            From = ( Address.Start.Row, Address.Start.Column );
-            To = ( Address.End.Row, Address.End.Column );
+            _worksheet = workSheet;
+            _range = range;
+
+            _address = new ExcelAddress( _range.Start.Row, _range.Start.Column, 
+                _range.End.Row, _range.End.Row );
+
+            _from = ( _address.Start.Row, _address.Start.Column );
+            _to = ( _address.End.Row, _address.End.Column );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Grid"/> class.
         /// </summary>
-        /// <param name = "worksheet" >
-        /// The worksheet.
+        /// <param name = "workSheet" >
+        /// The workSheet.
         /// </param>
         /// <param name = "address" >
         /// The address.
         /// </param>
-        public Grid( ExcelWorksheet worksheet, ExcelAddress address )
+        public Grid( ExcelWorksheet workSheet, ExcelAddress address )
         {
-            Worksheet = worksheet;
-            Address = address;
-            From = ( Address.Start.Row, Address.Start.Column );
-            To = ( Address.End.Row, Address.End.Column );
-            Range = Worksheet.Cells[ From.Row, From.Column, To.Row, To.Column ];
+            _worksheet = workSheet;
+            _address = address;
+            _from = ( _address.Start.Row, _address.Start.Column );
+            _to = ( _address.End.Row, _address.End.Column );
+            _range = _worksheet.Cells[ _from.Row, _from.Column, _to.Row, _to.Column ];
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Grid"/> class.
         /// </summary>
-        /// <param name = "worksheet" >
+        /// <param name = "workSheet" >
         /// </param>
-        /// <param name = "fromrow" >
-        /// The fromrow.
+        /// <param name = "fromRow" >
+        /// The fromRow.
         /// </param>
-        /// <param name = "fromcolumn" >
-        /// The fromcolumn.
+        /// <param name = "fromColumn" >
+        /// The fromColumn.
         /// </param>
-        /// <param name = "torow" >
-        /// The torow.
+        /// <param name = "toRow" >
+        /// The toRow.
         /// </param>
-        /// <param name = "tocolumn" >
-        /// The tocolumn.
+        /// <param name = "toColumn" >
+        /// The toColumn.
         /// </param>
-        public Grid( ExcelWorksheet worksheet, int fromrow = 1, int fromcolumn = 1,
-            int torow = 55, int tocolumn = 12 )
+        public Grid( ExcelWorksheet workSheet, int fromRow = 1, int fromColumn = 1,
+            int toRow = 55, int toColumn = 12 )
         {
-            Worksheet = worksheet;
-            Range = Worksheet.Cells[ fromrow, fromcolumn, torow, tocolumn ];
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row, Range.End.Row );
-            From = ( Address.Start.Row, Address.Start.Column );
-            To = ( Address.End.Row, Address.End.Column );
+            _worksheet = workSheet;
+            _range = _worksheet.Cells[ fromRow, fromColumn, toRow, toColumn ];
+            _address = new ExcelAddress( _range.Start.Row, _range.Start.Column, _range.End.Row, _range.End.Row );
+            _from = ( _address.Start.Row, _address.Start.Column );
+            _to = ( _address.End.Row, _address.End.Column );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Grid"/> class.
         /// </summary>
-        /// <param name = "worksheet" >
+        /// <param name = "workSheet" >
         /// </param>
         /// <param name = "cell" >
         /// The cell.
         /// </param>
-        public Grid( ExcelWorksheet worksheet, IReadOnlyList<int> cell )
+        public Grid( ExcelWorksheet workSheet, IReadOnlyList<int> cell )
         {
-            Worksheet = worksheet;
-            Range = Worksheet.Cells[ cell[ 0 ], cell[ 1 ], cell[ 2 ], cell[ 3 ] ];
+            _worksheet = workSheet;
+            _range = _worksheet.Cells[ cell[ 0 ], cell[ 1 ], cell[ 2 ], cell[ 3 ] ];
 
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row,
-                Range.End.Column );
+            _address = new ExcelAddress( _range.Start.Row, _range.Start.Column, _range.End.Row,
+                _range.End.Column );
 
-            From = ( Address.Start.Row, Address.Start.Column );
-            To = ( Address.End.Row, Address.End.Column );
+            _from = ( _address.Start.Row, _address.Start.Column );
+            _to = ( _address.End.Row, _address.End.Column );
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Grid"/> class.
         /// </summary>
-        /// <param name = "worksheet" >
+        /// <param name = "workSheet" >
         /// </param>
         /// <param name = "from" >
         /// From.
@@ -122,66 +152,36 @@ namespace BudgetExecution
         /// <param name = "to" >
         /// To.
         /// </param>
-        public Grid( ExcelWorksheet worksheet, (int Row, int Column) from, (int Row, int Column) to )
+        public Grid( ExcelWorksheet workSheet, (int Row, int Column) from, (int Row, int Column) to )
         {
-            Worksheet = worksheet;
-            Range = Worksheet.Cells[ from.Row, from.Column, to.Row, to.Column ];
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.End.Row, Range.End.Row );
-            From = from;
-            To = to;
+            _worksheet = workSheet;
+            _range = _worksheet.Cells[ from.Row, from.Column, to.Row, to.Column ];
+            _address = new ExcelAddress( _range.Start.Row, _range.Start.Column, _range.End.Row, _range.End.Row );
+            _from = from;
+            _to = to;
         }
 
-        public Grid( ExcelWorksheet worksheet, (int Row, int Column) from )
-        {
-            Worksheet = worksheet;
-            Range = Worksheet.Cells[ from.Row, from.Column ];
-
-            Address = new ExcelAddress( Range.Start.Row, Range.Start.Column, Range.Start.Row,
-                Range.Start.Column );
-
-            From = from;
-            To = From;
-        }
-
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
-        /// <summary>
-        /// The range
+        /// <summary>Initializes a new instance of the
+        /// <see cref="Grid"/> class.
         /// </summary>
-        private protected ExcelRange Range { get; set; }
-
-        /// <summary>
-        /// The worksheet
-        /// </summary>
-        private protected ExcelWorksheet Worksheet { get; set; }
-
-        /// <summary>
-        /// The address
-        /// </summary>
-        private protected ExcelAddress Address { get; set; }
-
-        /// <summary>
-        /// Gets or sets from.
-        /// </summary>
-        /// <value>
+        /// <param name="workSheet">
+        /// The work sheet.
+        /// </param>
+        /// <param name="from">
         /// From.
-        /// </value>
-        public (int Row, int Column) From { get; set; }
+        /// </param>
+        public Grid( ExcelWorksheet workSheet, (int Row, int Column) from )
+        {
+            _worksheet = workSheet;
+            _range = _worksheet.Cells[ from.Row, from.Column ];
 
-        /// <summary>
-        /// Gets or sets to.
-        /// </summary>
-        /// <value>
-        /// To.
-        /// </value>
-        public (int Row, int Column) To { get; set; }
+            _address = new ExcelAddress( _range.Start.Row, _range.Start.Column, _range.Start.Row,
+                _range.Start.Column );
 
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+            _from = from;
+            _to = _from;
+        }
+        
         /// <summary>
         /// Gets the address.
         /// </summary>
@@ -191,8 +191,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Address.Columns > 0
-                    ? Address
+                return _address.Columns > 0
+                    ? _address
                     : default( ExcelAddress );
             }
             catch( Exception ex )
@@ -211,8 +211,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Range.Columns > 0
-                    ? Range
+                return _range.Columns > 0
+                    ? _range
                     : default( ExcelRange );
             }
             catch( Exception ex )
@@ -223,7 +223,47 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the worksheet.
+        /// Gets from.
+        /// </summary>
+        /// <returns>
+        /// </returns>
+        public (int Row, int Column) GetFrom()
+        {
+            try
+            {
+                return _from.Row > 0 && _from.Column  > 0
+                    ? ( _from.Row, _from.Column )
+                    : default( (int, int) );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( (int, int) );
+            }
+        }
+
+        /// <summary>
+        /// Gets to.
+        /// </summary>
+        /// <returns>
+        /// </returns>
+        public (int Row, int Column) GetTo()
+        {
+            try
+            {
+                return _to.Row > 0 && _to.Column > 0
+                    ? ( _to.Row, _to.Column )
+                    : default( (int, int) );
+            }
+            catch( Exception ex )
+            {
+                Fail( ex );
+                return default( (int, int) );
+            }
+        }
+
+        /// <summary>
+        /// Gets the workSheet.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -231,8 +271,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( Worksheet.Name )
-                    ? Worksheet
+                return Verify.Input( _worksheet.Name )
+                    ? _worksheet
                     : default( ExcelWorksheet );
             }
             catch( Exception ex )
@@ -274,8 +314,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Range.Rows > 0
-                    ? Range.Rows
+                return _range.Rows > 0
+                    ? _range.Rows
                     : 0;
             }
             catch( Exception ex )
@@ -294,8 +334,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Range.Columns > 0
-                    ? Range.Columns
+                return _range.Columns > 0
+                    ? _range.Columns
                     : 0;
             }
             catch( Exception ex )
@@ -311,9 +351,9 @@ namespace BudgetExecution
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
-            using var error = new Error( ex );
-            error?.SetText();
-            error?.ShowDialog();
+            using var _error = new Error( ex );
+            _error?.SetText();
+            _error?.ShowDialog();
         }
     }
 }

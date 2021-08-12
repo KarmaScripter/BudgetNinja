@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ******************************   ASSEMBLIES   ****************************************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
@@ -24,14 +20,10 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
     public abstract class ExcelConfig : ExcelBase
     {
-        // **************************************************************************************************************************
-        // ******************************************************      FIELDS    ****************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// The font color
         /// </summary>
-        private protected readonly Color _fontColor = Color.Black;
+        private protected Color _fontColor = Color.Black;
 
         /// <summary>
         /// The data font
@@ -67,11 +59,7 @@ namespace BudgetExecution
         /// The footer image height
         /// </summary>
         private protected readonly double _footerImageHeight = 0.70;
-
-        // **************************************************************************************************************************
-        // ******************************************************   PROPERTIES   ****************************************************
-        // **************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets or sets the header image.
         /// </summary>
@@ -87,11 +75,7 @@ namespace BudgetExecution
         /// The footer image.
         /// </value>
         private protected Image FooterImage { get; set; }
-
-        // **************************************************************************************************************************
-        // ******************************************************     METHODS   *****************************************************
-        // **************************************************************************************************************************
-
+        
         /// <summary>
         /// Sets the table format.
         /// </summary>
@@ -104,7 +88,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var font = _dataFont;
+                    using var _font = _dataFont;
                     SetFontColor( grid, _fontColor );
                     SetBackgroudColor( grid, _primaryBackColor );
                     SetHorizontalAligment( grid, _left );
@@ -151,14 +135,14 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.Font.Color.SetColor( Color.Black );
-                    using var font = _dataFont;
-                    range.Style.Font.SetFromFont( _dataFont );
-                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
-                    range.Style.HorizontalAlignment = _center;
-                    range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                    using var _range = grid.GetRange();
+                    _range.Style.Font.Color.SetColor( Color.Black );
+                    using var _font = _dataFont;
+                    _range.Style.Font.SetFromFont( _dataFont );
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
+                    _range.Style.HorizontalAlignment = _center;
+                    _range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
                 }
                 catch( Exception ex )
                 {
@@ -179,14 +163,14 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.Font.Color.SetColor( _fontColor );
-                    using var font = _dataFont;
-                    range.Style.Font.SetFromFont( _dataFont );
-                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor( Color.White );
-                    range.Style.HorizontalAlignment = _center;
-                    range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
+                    using var _range = grid.GetRange();
+                    _range.Style.Font.Color.SetColor( _fontColor );
+                    using var _font = _dataFont;
+                    _range.Style.Font.SetFromFont( _dataFont );
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( Color.White );
+                    _range.Style.HorizontalAlignment = _center;
+                    _range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
                 }
                 catch( Exception ex )
                 {
@@ -207,10 +191,10 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var worksheet = grid.GetWorksheet();
-                    using var range = grid.GetRange();
+                    using var _excelWorksheet = grid.GetWorksheet();
+                    using var _range = grid.GetRange();
 
-                    for( var i = range.Start.Row; i < range.End.Row; i++ )
+                    for( var i = _range.Start.Row; i < _range.End.Row; i++ )
                     {
                         if( i % 2 == 0 )
                         {
@@ -244,9 +228,9 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
-                    range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                    range.Style.Numberformat.Format = "#,###";
+                    using var _range = grid.GetRange();
+                    _range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    _range.Style.Numberformat.Format = "#,###";
                 }
                 catch( Exception ex )
                 {
@@ -274,14 +258,14 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var range = grid.GetRange();
+                    using var _range = grid.GetRange();
                     SetCaptionFormat( grid );
-                    using var titlefont = _headerFont;
-                    range.Style.Font.SetFromFont( font );
-                    range.Style.Border.BorderAround( borderstyle );
-                    range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    range.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
-                    range.Style.HorizontalAlignment = _center;
+                    using var _font = _headerFont;
+                    _range.Style.Font.SetFromFont( font );
+                    _range.Style.Border.BorderAround( borderstyle );
+                    _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _range.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
+                    _range.Style.HorizontalAlignment = _center;
                 }
                 catch( Exception ex )
                 {
@@ -302,17 +286,17 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var worksheet = grid.GetWorksheet();
-                    using var range = grid.GetRange();
+                    using var _excelWorksheet = grid.GetWorksheet();
+                    using var _range = grid.GetRange();
 
-                    var total = worksheet.Cells[ range.Start.Row, range.Start.Column, range.Start.Row,
-                        range.Start.Column + 6 ];
+                    var _total = _excelWorksheet.Cells[ _range.Start.Row, _range.Start.Column, 
+                        _range.Start.Row, _range.Start.Column + 6 ];
 
-                    total.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    total?.Style?.Fill?.BackgroundColor?.SetColor( _primaryBackColor );
+                    _total.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    _total?.Style?.Fill?.BackgroundColor?.SetColor( _primaryBackColor );
 
-                    var data = worksheet.Cells[ range.Start.Row, range.Start.Column + 1, range.Start.Row,
-                        range.Start.Column + 6 ];
+                    var data = _excelWorksheet.Cells[ _range.Start.Row, _range.Start.Column + 1, _range.Start.Row,
+                        _range.Start.Column + 6 ];
 
                     data.Style.Border.Bottom.Style = ExcelBorderStyle.Double;
                 }

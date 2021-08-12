@@ -1,6 +1,6 @@
-﻿// // <copyright file=" <File _name> .cs" company="Terry D. Eppler">
-// // Copyright (c) Terry Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
+// Copyright (c) Terry Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -16,12 +16,13 @@ namespace BudgetExecution
     /// </summary>
     /// <seealso cref="BudgetExecution.ExcelConfig" />
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "LoopCanBePartlyConvertedToQuery" ) ]
     public abstract class BudgetConfig : ExcelConfig
     {
         /// <summary>
         /// The name
         /// </summary>
-        public string Name;
+        private protected string _name;
 
         /// <summary>
         /// The title
@@ -66,19 +67,19 @@ namespace BudgetExecution
                 try
                 {
                     using var _range = grid?.GetRange();
-                    var _comment = _range?.AddComment( text, "Budget" );
+                    var _excelComment = _range?.AddComment( text, "Budget" );
 
-                    if( _comment != null )
+                    if( _excelComment != null )
                     {
-                        _comment.From.Row = _range.Start.Row;
-                        _comment.From.Column = _range.Start.Column;
-                        _comment.To.Row = _range.End.Row;
-                        _comment.To.Column = _range.End.Column;
-                        _comment.BackgroundColor = _primaryBackColor;
-                        _comment.Font.FontName = "Consolas";
-                        _comment.Font.Size = 8;
-                        _comment.Font.Color = Color.Black;
-                        _comment.Text = text;
+                        _excelComment.From.Row = _range.Start.Row;
+                        _excelComment.From.Column = _range.Start.Column;
+                        _excelComment.To.Row = _range.End.Row;
+                        _excelComment.To.Column = _range.End.Column;
+                        _excelComment.BackgroundColor = _primaryBackColor;
+                        _excelComment.Font.FontName = "Consolas";
+                        _excelComment.Font.Size = 8;
+                        _excelComment.Font.Color = Color.Black;
+                        _excelComment.Text = text;
                     }
                 }
                 catch( Exception ex )
@@ -98,16 +99,16 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var _worksheet = grid.GetWorksheet();
+                    using var _sheet = grid.GetWorksheet();
                     var _row = grid.GetRange().Start.Row;
                     var _column = grid.GetRange().Start.Column;
-                    _worksheet.Cells[ _row, _column ].Value = "Account";
-                    _worksheet.Cells[ _row, _column + 1 ].Value = "Site";
-                    _worksheet.Cells[ _row, _column + 2 ].Value = "Travel";
-                    _worksheet.Cells[ _row, _column  + 3 ].Value = "Expenses";
-                    _worksheet.Cells[ _row, _column  + 4 ].Value = "Contracts";
-                    _worksheet.Cells[ _row, _column  + 5 ].Value = "Grants";
-                    _worksheet.Cells[ _row, _column  + 6 ].Value = "_total";
+                    _sheet.Cells[ _row, _column ].Value = "Account";
+                    _sheet.Cells[ _row, _column + 1 ].Value = "Site";
+                    _sheet.Cells[ _row, _column + 2 ].Value = "Travel";
+                    _sheet.Cells[ _row, _column  + 3 ].Value = "Expenses";
+                    _sheet.Cells[ _row, _column  + 4 ].Value = "Contracts";
+                    _sheet.Cells[ _row, _column  + 5 ].Value = "Grants";
+                    _sheet.Cells[ _row, _column  + 6 ].Value = "_total";
                 }
                 catch( Exception ex )
                 {
@@ -149,31 +150,31 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Sets the worksheet properties.
+        /// Sets the workSheet properties.
         /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        public void SetWorksheetProperties( ExcelWorksheet worksheet )
+        /// <param name="workSheet">The workSheet.</param>
+        public void SetWorksheetProperties( ExcelWorksheet workSheet )
         {
-            if( worksheet != null )
+            if( workSheet != null )
             {
-                worksheet = Workbook.Worksheets[ 1 ];
-                worksheet.View.ShowGridLines = false;
-                worksheet.View.ZoomScale = _zoomLevel;
-                worksheet.View.PageLayoutView = true;
-                worksheet.View.ShowHeaders = true;
-                worksheet.DefaultRowHeight = _rowHeight;
-                worksheet.DefaultColWidth = _columnWidth;
-                worksheet.PrinterSettings.ShowHeaders = false;
-                worksheet.PrinterSettings.ShowGridLines = false;
-                worksheet.PrinterSettings.LeftMargin = _leftMargin;
-                worksheet.PrinterSettings.RightMargin = _rightMargin;
-                worksheet.PrinterSettings.TopMargin = _topMargin;
-                worksheet.PrinterSettings.BottomMargin = _bottomMarging;
-                worksheet.PrinterSettings.HorizontalCentered = true;
-                worksheet.PrinterSettings.VerticalCentered = true;
-                worksheet.PrinterSettings.FitToPage = true;
-                worksheet.HeaderFooter.AlignWithMargins = true;
-                worksheet.HeaderFooter.ScaleWithDocument = true;
+                workSheet = _workbook.Worksheets[ 1 ];
+                workSheet.View.ShowGridLines = false;
+                workSheet.View.ZoomScale = _zoomLevel;
+                workSheet.View.PageLayoutView = true;
+                workSheet.View.ShowHeaders = true;
+                workSheet.DefaultRowHeight = _rowHeight;
+                workSheet.DefaultColWidth = _columnWidth;
+                workSheet.PrinterSettings.ShowHeaders = false;
+                workSheet.PrinterSettings.ShowGridLines = false;
+                workSheet.PrinterSettings.LeftMargin = _leftMargin;
+                workSheet.PrinterSettings.RightMargin = _rightMargin;
+                workSheet.PrinterSettings.TopMargin = _topMargin;
+                workSheet.PrinterSettings.BottomMargin = _bottomMarging;
+                workSheet.PrinterSettings.HorizontalCentered = true;
+                workSheet.PrinterSettings.VerticalCentered = true;
+                workSheet.PrinterSettings.FitToPage = true;
+                workSheet.HeaderFooter.AlignWithMargins = true;
+                workSheet.HeaderFooter.ScaleWithDocument = true;
             }
         }
 
@@ -187,7 +188,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var _header = Worksheet.HeaderFooter.FirstHeader;
+                    var _header = _worksheet.HeaderFooter.FirstHeader;
                     _header.CenteredText = headerText;
                 }
                 catch( Exception ex )
