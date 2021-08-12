@@ -291,12 +291,12 @@ namespace BudgetExecution
                         $@"Provider=Microsoft.Jet.OLEDB.4.0;_dataRow _source={Path.GetDirectoryName( fileName )};"
                         + @"Extended Properties='Text;HDR=YES;FMT=Delimited'";
 
-                    using var connection = new OleDbConnection( _connectionString );
-                    var schema = connection.GetOleDbSchemaTable( OleDbSchemaGuid.Tables, null );
+                    using var _connection = new OleDbConnection( _connectionString );
+                    var _schema = _connection.GetOleDbSchemaTable( OleDbSchemaGuid.Tables, null );
 
                     if( Verify.Input( sheetName ) )
                     {
-                        if( !SheetExists( sheetName, schema ) )
+                        if( !SheetExists( sheetName, _schema ) )
                         {
                             var _msg = $"{sheetName} in {fileName} Does Not Exist!";
                             using var _message = new Message( _msg );
@@ -305,10 +305,10 @@ namespace BudgetExecution
                     }
                     else
                     {
-                        sheetName = schema?.Rows[ 0 ][ "TABLENAME" ].ToString();
+                        sheetName = _schema?.Rows[ 0 ][ "TABLENAME" ].ToString();
                     }
 
-                    using var _adapter = new OleDbDataAdapter( _sql, connection );
+                    using var _adapter = new OleDbDataAdapter( _sql, _connection );
                     _adapter.Fill( _data );
                     return _data.Tables[ 0 ];
                 }
