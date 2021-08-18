@@ -56,20 +56,21 @@ namespace BudgetExecution
         /// </summary>
         public void WriteAllText()
         {
-            try
+            if( File.Exists( _fileInfo.FullName ) )
             {
-                var _path = _fileInfo.FullName;
-                var _writer = File.ReadAllText( _path );
-
-                if( Verify.Input( _path )
-                    && Verify.Input( _writer ) )
+                try
                 {
-                    File.WriteAllText( _fileInfo.FullName, _writer );
+                    var _writer = File.ReadAllText( _fileInfo.FullName );
+
+                    if( Verify.Input( _writer ) )
+                    {
+                        File.WriteAllText( _fileInfo.FullName, _writer );
+                    }
                 }
-            }
-            catch( IOException ex )
-            {
-                Fail( ex );
+                catch( IOException ex )
+                {
+                    Fail( ex );
+                }
             }
         }
 
@@ -82,7 +83,7 @@ namespace BudgetExecution
             {
                 var _file = _fileInfo?.FullName;
 
-                if( Verify.Input( _file ) )
+                if( File.Exists( _file ) )
                 {
                     var text = File.ReadAllLines( _file );
 
@@ -107,7 +108,7 @@ namespace BudgetExecution
             {
                 var _path = _fileInfo?.FullName;
 
-                if( Verify.Input( _path ) )
+                if( File.Exists( _path ) )
                 {
                     var stream = File.ReadAllBytes( _path );
 
@@ -130,7 +131,7 @@ namespace BudgetExecution
         /// <param name="destination">The destination.</param>
         public static void Overwrite( string source, string destination )
         {
-            if( Verify.Input( source )
+            if( File.Exists( source )
                 && Verify.Input( destination ) )
             {
                 if( File.Exists( destination ) )
