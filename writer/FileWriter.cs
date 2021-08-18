@@ -41,9 +41,12 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileWriter"/> class.
+        /// Initializes a new instance of the 
+        /// <see cref="FileWriter" /> class.
         /// </summary>
-        /// <param name="file">The file.</param>
+        /// <param name="file">
+        /// The file.
+        /// </param>
         public FileWriter( IFile file )
         {
             _dataFile = file;
