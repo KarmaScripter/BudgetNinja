@@ -1,2 +1,2 @@
 # BudgetExecution
-Data access layer used in Budget Execution.
+The data access layer used in the Budget Execution tool.
