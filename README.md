@@ -1,2 +1,2 @@
 # BudgetExecution
-Data models used in Budget Execution
+Data access layer used in Budget Execution.
