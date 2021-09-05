@@ -1,2 +1,2 @@
 # BudgetExecution
-The data access layer for the Budget Execution tool.
+Budget models (Business layer) for the Budget Execution tool.
