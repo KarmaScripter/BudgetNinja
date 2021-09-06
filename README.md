@@ -1,2 +1,2 @@
 # BudgetExecution
-Budget models (business layer) used in the Budget Execution tool.
+The budget models used in Budget Execution.
