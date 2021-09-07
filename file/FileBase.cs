@@ -60,7 +60,7 @@ namespace BudgetExecution
         /// <value>
         ///   <c>true</c> if this instance has parent; otherwise, <c>false</c>.
         /// </value>
-        private protected  bool _hasParent;
+        private protected bool _hasParent;
 
         /// <summary>
         /// Gets or sets the creation date.
