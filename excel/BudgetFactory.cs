@@ -1,4 +1,4 @@
-﻿// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
+// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
 // Copyright (c) Terry Eppler. All rights reserved.
 // </copyright>
 
@@ -273,13 +273,14 @@ namespace BudgetExecution
             var _first = _grid.GetFrom().Row;
             var _header = _first - 1;
             var _fund = new Fund( $"{FundCode.T}" );
-            var _enumerable = _allocation?.GetBuilder()?.ProgramElements[ Field.AhCode.ToString() ];
+            var _enumerable = _allocation?.GetBuilder()?.GetData();
             _budget?.SetWorksheetProperties( _grid.GetWorksheet() );
             _budget?.SetBudgetHeaderFormat( _grid, _fund, _allocation?.GetBudgetFiscalYear() );
 
             try
             {
-                var _lookup = _rows?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "6A" ) )
+                var _lookup = _rows
+                    ?.Where( p => p.Field<string>( $"{Field.AhCode}" ).Equals( "6A" ) )
                     ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.ToLookup( p => p.Field<string>( $"{Field.OrgCode}" ), p => p );
 
@@ -328,13 +329,15 @@ namespace BudgetExecution
 
             try
             {
-                var _rows = _enumerable?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Contains( $"{FundCode.TR}" ) )
+                var _rows = _enumerable
+                    ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).Contains( $"{FundCode.TR}" ) )
                     ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.Select( p => p )?.ToArray();
 
                 for( var i = 0; i < _rows?.Length; i++ )
                 {
-                    var _lookup = _enumerable?.Where( p => p.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.TR}" ) )
+                    var _lookup = _enumerable
+                        ?.Where( p => p.Field<string>( $"{Field.FundCode}" ).StartsWith( $"{FundCode.TR}" ) )
                         ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                         ?.Select( p => p )
                         ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
@@ -376,7 +379,8 @@ namespace BudgetExecution
 
             try
             {
-                var _lookup = _rows?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.TS3}" ) )
+                var _lookup = _rows
+                    ?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.TS3}" ) )
                     ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.ToLookup( p => p.Field<string>( $"{Field.AccountCode}" ), p => p );
 
@@ -416,7 +420,8 @@ namespace BudgetExecution
 
             try
             {
-                var _rows = _enumerable?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.FS3}" ) )
+                var _rows = _enumerable
+                    ?.Where( f => f.Field<string>( $"{Field.FundCode}" ).Equals( $"{FundCode.FS3}" ) )
                     ?.Where( f => f.Field<string>( $"{Field.BocCode}" ) != $"{BOC.FTE}" )
                     ?.Select( f => f )?.ToArray();
 

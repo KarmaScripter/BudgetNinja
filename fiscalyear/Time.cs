@@ -1,13 +1,9 @@
-﻿// <copyright file = "Time.cs" company = "Terry D. Eppler">
+// <copyright file = "Time.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ********************************************      ASSEMBLIES    **********************************************************
-    // **************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -20,21 +16,15 @@ namespace BudgetExecution
     /// <seealso cref="ITime" />
     /// <seealso cref="TimeBase" />
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "ArrangeModifiersOrder" ) ]
     public class Time : TimeBase, ITime
     {
-        // **************************************************************************************************************************
-        // ********************************************      FIELDS     *************************************************************
-        // **************************************************************************************************************************
-
         /// <summary>
         /// The default
         /// </summary>
         public static readonly Time Default = new Time( EventDate.NS );
-
-        // **************************************************************************************************************************
-        // ********************************************   CONSTRUCTORS     **********************************************************
-        // **************************************************************************************************************************
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="Time" /> class.
         /// </summary>
@@ -48,10 +38,10 @@ namespace BudgetExecution
         /// <param name="kvp">The KVP.</param>
         public Time( KeyValuePair<string, object> kvp )
         {
-            Name = SetName( kvp.Key );
-            Date = SetDate( kvp.Key );
-            Day = SetDay( kvp.Value?.ToString() );
-            Data = Day.ToString();
+            _name = SetName( kvp.Key );
+            _date = SetDate( kvp.Key );
+            _day = SetDay( kvp.Value?.ToString() );
+            _data = _day.ToString();
         }
 
         /// <summary>
@@ -61,10 +51,10 @@ namespace BudgetExecution
         /// <param name="value">The value.</param>
         public Time( string name, string value = "" )
         {
-            Name = SetName( name );
-            Date = SetDate( name );
-            Day = SetDay( value );
-            Data = Day.ToString();
+            _name = SetName( name );
+            _date = SetDate( name );
+            _day = SetDay( value );
+            _data = _day.ToString();
         }
 
         /// <summary>
@@ -74,62 +64,58 @@ namespace BudgetExecution
         /// <param name="value">The value.</param>
         public Time( EventDate date, string value = "" )
         {
-            Name = SetName( date );
-            Date = SetDate( date.ToString() );
-            Day = SetDay( value );
-            Data = Day.ToString();
+            _name = SetName( date );
+            _date = SetDate( date.ToString() );
+            _day = SetDay( value );
+            _data = _day.ToString();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Time" /> class.
         /// </summary>
-        /// <param name="datarow">The data.</param>
+        /// <param name="dataRow">The data.</param>
         /// <param name="date">The date.</param>
-        public Time( DataRow datarow, EventDate date )
+        public Time( DataRow dataRow, EventDate date )
         {
-            Date = SetDate( datarow, date );
-            Name = SetName( datarow, date );
-            Day = SetDay( datarow, date );
-            Data = Day.ToString();
+            _date = SetDate( dataRow, date );
+            _name = SetName( dataRow, date );
+            _day = SetDay( dataRow, date );
+            _data = _day.ToString();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Time" /> class.
         /// </summary>
-        /// <param name="datarow">The data.</param>
+        /// <param name="dataRow">The data.</param>
         /// <param name="value">The value.</param>
-        public Time( DataRow datarow, string value )
+        public Time( DataRow dataRow, string value )
         {
-            Date = SetDate( datarow, value );
-            Name = SetName( datarow, value );
-            Day = SetDay( datarow, value );
-            Data = Day.ToString();
+            _date = SetDate( dataRow, value );
+            _name = SetName( dataRow, value );
+            _day = SetDay( dataRow, value );
+            _data = _day.ToString();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Time" /> class.
         /// </summary>
-        /// <param name="datarow">The data.</param>
+        /// <param name="dataRow">The data.</param>
         /// <param name="column">The column.</param>
-        public Time( DataRow datarow, DataColumn column )
+        public Time( DataRow dataRow, DataColumn column )
         {
-            Date = SetDate( datarow, column.ColumnName );
-            Name = SetName( datarow, column.ColumnName );
-            Day = SetDay( datarow, datarow[ column ]?.ToString() );
-            Data = Day.ToString();
+            _date = SetDate( dataRow, column.ColumnName );
+            _name = SetName( dataRow, column.ColumnName );
+            _day = SetDay( dataRow, dataRow[ column ]?.ToString() );
+            _data = _day.ToString();
         }
-
-        // **************************************************************************************************************************
-        // ********************************************      PROPERTIES    **********************************************************
-        // **************************************************************************************************************************
-
+        
         /// <summary>
         /// Gets the date.
         /// </summary>
         /// <value>
         /// The date.
         /// </value>
-        private protected EventDate Date { get; set; }
+        private protected EventDate _date;
 
         /// <summary>
         /// Gets the value.
@@ -137,12 +123,8 @@ namespace BudgetExecution
         /// <value>
         /// The value.
         /// </value>
-        private protected DateTime Day { get; set; }
-
-        // **************************************************************************************************************************
-        // ********************************************      METHODS    *************************************************************
-        // **************************************************************************************************************************
-
+        private protected DateTime _day;
+        
         /// <summary>
         /// Gets the time.
         /// </summary>
@@ -151,8 +133,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.DateTime( Day )
-                    ? Day
+                return Verify.DateTime( _day )
+                    ? _day
                     : default( DateTime );
             }
             catch( Exception ex )
@@ -170,8 +152,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( EventDate ), Date )
-                    ? Date.ToString()
+                return Enum.IsDefined( typeof( EventDate ), _date )
+                    ? _date.ToString()
                     : EventDate.NS.ToString();
             }
             catch( Exception ex )
@@ -189,9 +171,9 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( EventDate ), Date ) 
-                    && Verify.EventDate( Date )
-                        ? $"{Name} = {Day}"
+                return Enum.IsDefined( typeof( EventDate ), _date ) 
+                    && Verify.EventDate( _date )
+                        ? $"{_name} = {_day}"
                         : string.Empty;
             }
             catch( Exception ex )
@@ -209,8 +191,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( EventDate ), Date )
-                    ? Date
+                return Enum.IsDefined( typeof( EventDate ), _date )
+                    ? _date
                     : EventDate.NS;
             }
             catch( Exception ex )
@@ -230,8 +212,8 @@ namespace BudgetExecution
         {
             try
             {
-                return !Verify.DateTime( Day )
-                    ? Name + " = " + Day
+                return !Verify.DateTime( _day )
+                    ? _name + " = " + _day
                     : string.Empty;
             }
             catch( Exception ex )
@@ -262,8 +244,8 @@ namespace BudgetExecution
             {
                 try
                 {
-                    if( day?.GetValue()?.Equals( Day ) == true
-                        && day?.GetName() == Name )
+                    if( day?.GetValue()?.Equals( _day ) == true
+                        && day?.GetName() == _name )
                     {
                         return true;
                     }

@@ -1,4 +1,4 @@
-﻿// <copyright file = "AllocationData.cs" company = "Terry D. Eppler">
+// <copyright file = "AllocationData.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -107,8 +107,8 @@ namespace BudgetExecution
             try
             {
                 var _builder = GetBuilder();
-                var _boc = _builder?.ProgramElements[ $"{Field.FundCode}" ];
-                var _select = _boc?.Select( f => new Fund( f ) );
+                var _code = _builder?.GetData();
+                var _select = _code?.Select( f => new Fund( f ) );
 
                 return _select?.Any() == true
                     ? _select
@@ -131,7 +131,7 @@ namespace BudgetExecution
             try
             {
                 var _builder = GetBuilder();
-                var _codes = _builder?.ProgramElements[ $"{Field.OrgCode}" ];
+                var _codes = _builder?.GetData();
                 var _select = _codes?.Select( o => new Organization( o ) );
 
                 return _select?.Any() == true
@@ -155,7 +155,7 @@ namespace BudgetExecution
             try
             {
                 var _builder = GetBuilder();
-                var _codes = _builder?.ProgramElements[ $"{Field.BocCode}" ];
+                var _codes = _builder?.GetData();
                 var _select = _codes?.Select( a => new AllowanceHolder( a ) );
 
                 return _select?.Any() == true
@@ -179,7 +179,7 @@ namespace BudgetExecution
             try
             {
                 var builder = GetBuilder();
-                var _codes = builder?.ProgramElements[ $"{Field.BocCode}" ];
+                var _codes = builder?.GetData();
                 var _select = _codes?.Select( b => new BudgetObjectClass( b ) );
 
                 return _select?.Any() == true
@@ -203,7 +203,7 @@ namespace BudgetExecution
             try
             {
                 var _builder = GetBuilder();
-                var _codes = _builder?.ProgramElements[ $"{Field.AccountCode}" ];
+                var _codes = _builder?.GetData();
                 var _select = _codes?.Select( c => new Account( c ) );
 
                 return _select?.Any() == true
@@ -263,10 +263,10 @@ namespace BudgetExecution
             {
                 var _builder = GetBuilder();
 
-                var _boc = _builder?.ProgramElements[ $"{Field.BocCode}" ];
+                var _boc = _builder?.GetData()
+                    ?.Select( b => new BudgetObjectClass() );
 
-                if( _boc?.Any() == true
-                    && _boc.Contains( "17" ) )
+                if( _boc?.Any() == true )
                 {
                     var _args = new Dictionary<string, object>
                     {

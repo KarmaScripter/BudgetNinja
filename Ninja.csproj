@@ -65,8 +65,9 @@
     <Reference Include="BudgetBadger">
       <HintPath>..\Badger\bin\Debug\BudgetBadger.dll</HintPath>
     </Reference>
-    <Reference Include="BudgetData">
-      <HintPath>..\Data\bin\Debug\BudgetData.dll</HintPath>
+    <Reference Include="BudgetData, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BudgetData\bin\Debug\BudgetData.dll</HintPath>
     </Reference>
     <Reference Include="BudgetEnumerations, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
