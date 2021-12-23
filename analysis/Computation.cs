@@ -85,7 +85,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

@@ -62,9 +62,6 @@
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BudgetBadger">
-      <HintPath>..\Badger\bin\Debug\BudgetBadger.dll</HintPath>
-    </Reference>
     <Reference Include="BudgetData, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BudgetData\bin\Debug\BudgetData.dll</HintPath>
@@ -76,8 +73,7 @@
     <Reference Include="BudgetExtensions">
       <HintPath>..\Extensions\bin\Debug\BudgetExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="BudgetStatic, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="BudgetStatic">
       <HintPath>..\BudgetStatic\bin\Debug\BudgetStatic.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -114,12 +110,19 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="VisualPlus">
-      <HintPath>..\Badger\lib\VisualPlus.dll</HintPath>
+    <Reference Include="VisualPlus, Version=0.4.1.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BudgetStatic\lib\VisualPlus.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Error.designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
     <Compile Include="excel\BudgetConfig.cs" />
     <Compile Include="excel\BudgetFactory.cs" />
     <Compile Include="excel\ExcelBase.cs" />
@@ -218,6 +221,12 @@
     <Compile Include="fiscalyear\ITime.cs" />
     <Compile Include="fiscalyear\Time.cs" />
     <Compile Include="fiscalyear\TimeBase.cs" />
+    <Compile Include="Message.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Message.designer.cs">
+      <DependentUpon>Message.cs</DependentUpon>
+    </Compile>
     <Compile Include="outlays\CostAccount.cs" />
     <Compile Include="outlays\Cost.cs" />
     <Compile Include="outlays\Expense.cs" />
@@ -314,6 +323,14 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Message.resx">
+      <DependentUpon>Message.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
