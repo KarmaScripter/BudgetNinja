@@ -4,13 +4,16 @@
 
 namespace BudgetExecution
 {
-    using System.ComponentModel;
-    using System.Windows.Forms;
-    using VisualPlus.Toolkit.Controls.Editors;
-    using VisualPlus.Toolkit.Controls.Interactivity;
-    using VisualPlus.Toolkit.Controls.Layout;
+        using System;
+        using System;
+        using System.ComponentModel;
+        using System.Threading;
+        using System.Windows.Forms;
+        using VisualPlus.Toolkit.Controls.Editors;
+        using VisualPlus.Toolkit.Controls.Interactivity;
+        using VisualPlus.Toolkit.Controls.Layout;
 
-    partial class Message
+        partial class Message
         {
             /// <summary>
             /// Required designer variable.

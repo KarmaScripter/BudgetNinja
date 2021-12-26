@@ -6,6 +6,10 @@ namespace BudgetExecution
 {
     using System.Collections.Generic;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="BudgetExecution.IAuthority" />
     public interface IAllocation : IAuthority
     {
         /// <summary>

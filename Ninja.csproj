@@ -63,7 +63,7 @@
   <ItemGroup>
     <Reference Include="BudgetData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\BudgetData.dll</HintPath>
+      <HintPath>..\BudgetData\bin\Debug\BudgetData.dll</HintPath>
     </Reference>
     <Reference Include="BudgetEnumerations, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

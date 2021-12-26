@@ -42,22 +42,6 @@ namespace BudgetExecution
         public static readonly Time Default = new Time( EventDate.NS );
 
         /// <summary>
-        /// Gets the date.
-        /// </summary>
-        /// <value>
-        /// The date.
-        /// </value>
-        public EventDate Date { get; }
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        /// <value>
-        /// The value.
-        /// </value>
-        public DateTime Day { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Time" /> class.
         /// </summary>
         public Time()
@@ -263,46 +247,6 @@ namespace BudgetExecution
                 {
                     if( day?.GetValue()?.Equals( Day ) == true
                         && day?.GetName() == Name )
-                    {
-                        return true;
-                    }
-                }
-                catch( Exception ex )
-                {
-                    Fail( ex );
-                    return false;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Determines whether the specified primary is equal.
-        /// </summary>
-        /// <param name="first">The primary.</param>
-        /// <param name="second">The secondary.</param>
-        /// <returns>
-        /// <c>
-        /// true
-        /// </c>
-        /// if the specified primary is equal; otherwise,
-        /// <c>
-        /// false
-        /// </c>
-        /// .
-        /// </returns>
-        public static bool IsEqual( ITime first, ITime second )
-        {
-            if( first != null
-                && first != Element.Default
-                && first != null
-                && second != Element.Default )
-            {
-                try
-                {
-                    if( first?.GetValue()?.Equals( second?.GetValue() ) == true
-                        && first?.GetName() == second?.GetName() )
                     {
                         return true;
                     }
