@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Reimbursables;
+        public new Source Source { get; } =  Source.Reimbursables;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reimbursable"/> class.
@@ -46,13 +46,13 @@ namespace BudgetExecution
         public Reimbursable( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.ReimbursableId );
-            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
-            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _expenditures = new Amount( _records, Numeric.Expenditures );
-            _data = _records?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ReimbursableId );
+            AgreementNumber = new Element( Record, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
+            ULO = new Amount( Record, Numeric.ULO );
+            Expenditures = new Amount( Record, Numeric.Expenditures );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace BudgetExecution
         public Reimbursable( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.ReimbursableId );
-            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
-            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _expenditures = new Amount( _records, Numeric.Expenditures );
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ReimbursableId );
+            AgreementNumber = new Element( Record, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
+            ULO = new Amount( Record, Numeric.ULO );
+            Expenditures = new Amount( Record, Numeric.Expenditures );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -82,13 +82,13 @@ namespace BudgetExecution
         public Reimbursable( DataRow dataRow )
             : base( dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.ReimbursableId );
-            _agreementNumber = new Element( _records, Field.ReimbursableAgreementNumber );
-            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _expenditures = new Amount( _records, Numeric.Expenditures );
-            _data = _records?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.ReimbursableId );
+            AgreementNumber = new Element( Record, Field.ReimbursableAgreementNumber );
+            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
+            ULO = new Amount( Record, Numeric.ULO );
+            Expenditures = new Amount( Record, Numeric.Expenditures );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -100,8 +100,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -120,8 +120,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _bfy?.GetValue() )
-                    ? _bfy
+                return Verify.Input( BFY?.GetValue() )
+                    ? BFY
                     : default( IElement );
             }
             catch( Exception ex )
@@ -140,8 +140,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )

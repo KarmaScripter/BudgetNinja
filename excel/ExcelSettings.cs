@@ -4,11 +4,6 @@
 
 namespace BudgetExecution
 {
-    // **************************************************************************************************************************
-    // ******************************   ASSEMBLIES   ****************************************************************************
-    // **************************************************************************************************************************
-
-    using System;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
@@ -28,99 +23,99 @@ namespace BudgetExecution
         /// <summary>
         /// The index
         /// </summary>
-        private protected readonly int _index = 10;
+        public int Index { get; set; } = 10;
 
         /// <summary>
         /// The file path
         /// </summary>
-        private protected readonly string _filePath =
+        public string FilePath { get; set; } =
             ConfigurationManager.AppSettings[ Document.Budget.ToString() ];
 
         /// <summary>
         /// The file name
         /// </summary>
-        private protected readonly string _fileName = @"\<_source>\<name>";
+        public string FileName { get; set; } = @"\<Source>\<name>";
 
         /// <summary>
         /// The background color
         /// </summary>
-        private protected readonly Color _primaryBackColor = Color.FromArgb( 255, 242, 242, 242 );
+        public Color PrimaryBackColor { get; set; } = Color.FromArgb( 255, 242, 242, 242 );
 
         /// <summary>
         /// The secondary back color
         /// </summary>
-        private protected readonly Color _secondaryBackColor = Color.FromArgb( 255, 221, 235, 247 );
+        public Color SecondaryBackColor { get; set; } = Color.FromArgb( 255, 221, 235, 247 );
 
         /// <summary>
         /// The left
         /// </summary>
-        private protected readonly ExcelHorizontalAlignment _left = ExcelHorizontalAlignment.Left;
+        public ExcelHorizontalAlignment Left { get; set; } = ExcelHorizontalAlignment.Left;
 
         /// <summary>
         /// The center
         /// </summary>
-        private protected readonly ExcelHorizontalAlignment _center =
+        public ExcelHorizontalAlignment Center { get; set; } =
             ExcelHorizontalAlignment.CenterContinuous;
 
         /// <summary>
         /// The right
         /// </summary>
-        private protected readonly ExcelHorizontalAlignment _right = ExcelHorizontalAlignment.Right;
+        public ExcelHorizontalAlignment Right { get; set; } = ExcelHorizontalAlignment.Right;
 
         /// <summary>
         /// The row height
         /// </summary>
-        private protected readonly double _rowHeight = 0.22;
+        public double RowHeight { get; set; } = 0.22;
 
         /// <summary>
         /// The column width
         /// </summary>
-        private protected readonly double _columnWidth = 0.75;
+        public double ColumnWidth { get; set; } = 0.75;
 
         /// <summary>
         /// The top margin
         /// </summary>
-        private protected readonly int _topMargin = 1;
+        public int TopMargin { get; set; } = 1;
 
         /// <summary>
         /// The bottom marging
         /// </summary>
-        private protected readonly int _bottomMarging = 1;
+        public int BottomMargin { get; set; } = 1;
 
         /// <summary>
         /// The left margin
         /// </summary>
-        private protected readonly decimal _leftMargin = 0.25m;
+        public decimal LeftMargin { get; set; } = 0.25m;
 
         /// <summary>
         /// The right margin
         /// </summary>
-        private protected readonly decimal _rightMargin = 0.25m;
+        public decimal RightMargin { get; set; } = 0.25m;
 
         /// <summary>
         /// The header margin
         /// </summary>
-        private protected readonly decimal _headerMargin = 0.25m;
+        public decimal HeaderMargin { get; set; } = 0.25m;
 
         /// <summary>
         /// The footer margin
         /// </summary>
-        private protected readonly decimal _footerMargin = 0.25m;
+        public decimal FooterMargin { get; set; } = 0.25m;
 
         /// <summary>
         /// The column count
         /// </summary>
-        private protected readonly int _columnCount = 12;
+        public int ColumnCount { get; set; } = 12;
 
         /// <summary>
         /// The row count
         /// </summary>
-        private protected readonly int _rowCount = 55;
+        public int RowCount { get; set; } = 55;
 
         /// <summary>
         /// The zoom level
         /// </summary>
-        private protected readonly int _zoomLevel = 100;
+        public int ZoomLevel { get; set; } = 100;
 
         /// <summary>
         /// 

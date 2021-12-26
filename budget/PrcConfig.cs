@@ -14,7 +14,7 @@ namespace BudgetExecution
     public abstract class PrcConfig : PrcBase
     {
         /// <summary>
-        /// Gets the PRC identifier.
+        /// Gets the ProgramResultCodes identifier.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -22,8 +22,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -42,8 +42,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _level )
-                    ? new BudgetLevel( _level?.GetValue() )
+                return Verify.Element( BudgetLevel )
+                    ? new BudgetLevel( BudgetLevel?.GetValue() )
                     : default( BudgetLevel );
             }
             catch( Exception ex )
@@ -62,8 +62,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _bfy )
-                    ? new BudgetFiscalYear( _bfy?.GetValue() )
+                return Verify.Element( BFY )
+                    ? new BudgetFiscalYear( BFY?.GetValue() )
                     : default( BudgetFiscalYear );
             }
             catch( Exception ex )
@@ -84,7 +84,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _rpioCode?.GetValue()
+                    [ $"{Field.Code}" ] = RpioCode?.GetValue()
                 };
 
                 var _connection = new ConnectionBuilder( Source.ResourcePlanningOffices );
@@ -110,7 +110,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _ahCode?.GetValue()
+                    [ $"{Field.Code}" ] = AhCode?.GetValue()
                 };
 
                 var _builder = new ConnectionBuilder( Source.AllowanceHolders );
@@ -134,8 +134,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _fundCode )
-                    ? new Fund( _fundCode?.GetValue() )
+                return Verify.Element( FundCode )
+                    ? new Fund( FundCode?.GetValue() )
                     : default( Fund );
             }
             catch( Exception ex )
@@ -156,7 +156,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _orgCode?.GetValue()
+                    [ $"{Field.Code}" ] = OrgCode?.GetValue()
                 };
 
                 var _builder = new ConnectionBuilder( Source.Organizations );
@@ -182,7 +182,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _accountCode?.GetValue()
+                    [ $"{Field.Code}" ] = AccountCode?.GetValue()
                 };
 
                 var _builder = new ConnectionBuilder( Source.Accounts );
@@ -208,7 +208,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _bocCode?.GetValue()
+                    [ $"{Field.Code}" ] = BocCode?.GetValue()
                 };
 
                 var _builder = new ConnectionBuilder( Source.BudgetObjectClass );
@@ -234,7 +234,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _rcCode?.GetValue()
+                    [ $"{Field.Code}" ] = RcCode?.GetValue()
                 };
 
                 var _builder = new ConnectionBuilder( Source.ResponsibilityCenters );

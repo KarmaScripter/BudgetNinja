@@ -13,60 +13,60 @@ namespace BudgetExecution
     using System.Windows.Forms;
     using OfficeOpenXml;
 
-    /// <inheritdoc/>
     /// <summary>
+    /// 
     /// </summary>
-    /// <seealso cref = "T:Badger.Query"/>
-    /// <seealso cref = "T:Badger.IQueryBase"/>
     [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "UnassignedReadonlyField" ) ]
     public class ExcelReader
     {
         /// <summary>
-        /// The provider
-        /// </summary>
-        private protected readonly Provider _provider = Provider.Excel;
-
-        /// <summary>
-        /// The XLS
-        /// </summary>
-        private protected readonly string _xls = DataPath.ConnectionString[ "OleDb" ].ToString();
-
-        /// <summary>
-        /// The XLSX
-        /// </summary>
-        private protected readonly string _xlsx = DataPath.ConnectionString[ "Excel" ].ToString();
-
-        /// <summary>
-        /// The CSV
-        /// </summary>
-        private protected readonly string _csv = DataPath.ConnectionString[ "CSV" ].ToString();
-
-        /// <summary>
-        /// The accdb
-        /// </summary>
-        private protected readonly string _accdb = DataPath.ConnectionString[ "Access" ].ToString();
-
-        /// <summary>
-        /// The MDB
-        /// </summary>
-        private protected readonly string _mdb = DataPath.ConnectionString[ "OleDb" ].ToString();
-        
-        /// <summary>
-        /// Gets or sets the r6.
+        /// Gets the provider.
         /// </summary>
         /// <value>
-        /// The r6.
+        /// The provider.
         /// </value>
-        private protected readonly DataSet _dataSet;
+        public Provider Provider { get; } = Provider.Excel;
 
         /// <summary>
-        /// Gets or sets the dataTable.
+        /// Gets the XLS.
         /// </summary>
         /// <value>
-        /// The dataTable.
+        /// The XLS.
         /// </value>
-        private protected readonly DataTable _table;
+        public string XLS { get; } = DataPath.ConnectionString[ "OleDb" ].ToString();
+
+        /// <summary>
+        /// Gets the XLSX.
+        /// </summary>
+        /// <value>
+        /// The XLSX.
+        /// </value>
+        public string XLSX { get; } = DataPath.ConnectionString[ "Excel" ].ToString();
+
+        /// <summary>
+        /// Gets the CSV.
+        /// </summary>
+        /// <value>
+        /// The CSV.
+        /// </value>
+        public string CSV { get; } = DataPath.ConnectionString[ "CSV" ].ToString();
+
+        /// <summary>
+        /// Gets the accdb.
+        /// </summary>
+        /// <value>
+        /// The accdb.
+        /// </value>
+        public string ACCDB { get; } = DataPath.ConnectionString[ "Access" ].ToString();
+
+        /// <summary>
+        /// Gets the MDB.
+        /// </summary>
+        /// <value>
+        /// The MDB.
+        /// </value>
+        public string MDB { get; } = DataPath.ConnectionString[ "OleDb" ].ToString();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExcelReader"/> class.
@@ -83,13 +83,11 @@ namespace BudgetExecution
         public ExcelReader( string filePath, IDictionary<string, object> dict )
         {
         }
-        
+
         /// <summary>
         /// Saves the file.
         /// </summary>
-        /// <dict name = "workbook" >
-        /// The workbook.
-        /// </dict>
+        /// <param name="excelPackage">The excel package.</param>
         public void SaveFile( ExcelPackage excelPackage )
         {
             if( excelPackage != null )
@@ -118,11 +116,10 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Exports to excelPackage.
+        /// Exports to excel.
         /// </summary>
-        /// <dict name = "dataTable" >
-        /// The dataTable.
-        /// </dict>
+        /// <param name="dataTable">The Data table.</param>
+        /// <param name="filePath">The file path.</param>
         public void ExportToExcel( DataTable dataTable, string filePath )
         {
             if( dataTable?.Columns?.Count > 0 
@@ -158,13 +155,10 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Creates the excelPackage file.
+        /// Creates the excel file.
         /// </summary>
-        /// <param name = "filePath" >
-        /// The filePath.
-        /// </param>
-        /// <returns>
-        /// </returns>
+        /// <param name="filePath">The file path.</param>
+        /// <returns></returns>
         private ExcelPackage CreateExcelFile( string filePath )
         {
             if( Verify.Input( filePath ) )
@@ -185,10 +179,9 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the file path.
+        /// Gets the excel file.
         /// </summary>
-        /// <returns>
-        /// </returns>
+        /// <returns></returns>
         public string GetExcelFile()
         {
             try
@@ -221,13 +214,10 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data dataTable from excelPackage file.
+        /// Imports the excel file.
         /// </summary>
-        /// <dict name = "sheetName" >
-        /// The sheetName.
-        /// </dict>
-        /// <returns>
-        /// </returns>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <returns></returns>
         public DataTable ImportExcelFile( ref string sheetName )
         {
             if( Verify.Input( sheetName ) )
@@ -235,7 +225,7 @@ namespace BudgetExecution
                 try
                 {
                     using var _dataset = new DataSet();
-                    using var _connection = new OleDbConnection( _xlsx );
+                    using var _connection = new OleDbConnection( XLSX );
                     _connection?.Open();
                     var _sql = "SELECT * FROM [" + sheetName + "]";
                     var _schema = _connection?.GetOleDbSchemaTable( OleDbSchemaGuid.Tables, null );
@@ -267,16 +257,11 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data dataTable from CSV file.
+        /// CSVs the import.
         /// </summary>
-        /// <dict name = "fileName" >
-        /// The fileName.
-        /// </dict>
-        /// <dict name = "sheetName" >
-        /// The sheetName.
-        /// </dict>
-        /// <returns>
-        /// </returns>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <returns></returns>
         public DataTable CsvImport( string fileName, ref string sheetName )
         {
             if( Verify.Input( fileName )
@@ -288,7 +273,7 @@ namespace BudgetExecution
                     var _sql = "SELECT * FROM [" + sheetName + "]";
 
                     var _connectionString =
-                        $@"Provider=Microsoft.Jet.OLEDB.4.0;_dataRow _source={Path.GetDirectoryName( fileName )};"
+                        $@"Provider=Microsoft.Jet.OLEDB.4.0;_dataRow Source={Path.GetDirectoryName( fileName )};"
                         + @"Extended Properties='Text;HDR=YES;FMT=Delimited'";
 
                     using var _connection = new OleDbConnection( _connectionString );
@@ -323,11 +308,10 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Imports to data grid view.
+        /// Imports to Data grid.
         /// </summary>
-        /// <dict name = "dataGrid" >
-        /// The dataGrid.
-        /// </dict>
+        /// <param name="dataGrid">The Data grid.</param>
+        /// <param name="location">The location.</param>
         private void ImportToDataGrid( DataGridView dataGrid, string location )
         {
             if( dataGrid?.DataSource != null )
@@ -365,16 +349,11 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Checks if sheet name exists.
+        /// Sheets the exists.
         /// </summary>
-        /// <dict name = "sheetName" >
-        /// _name of the sheet.
-        /// </dict>
-        /// <dict name = "dataTable" >
-        /// The dt dataTable.
-        /// </dict>
-        /// <returns>
-        /// </returns>
+        /// <param name="sheetName">Name of the sheet.</param>
+        /// <param name="dataTable">The Data table.</param>
+        /// <returns></returns>
         private bool SheetExists( string sheetName, DataTable dataTable )
         {
             if( Verify.Input( sheetName ) 
@@ -405,13 +384,13 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Get Error Dialog.
+        /// Fails the specified ex.
         /// </summary>
         /// <param name="ex">The ex.</param>
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

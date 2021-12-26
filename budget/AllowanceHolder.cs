@@ -29,7 +29,7 @@ namespace BudgetExecution
     /// Holder. Note there is a separate allotment for every appropriation (Treasury
     /// account symbol) for every fiscal year. The OB Director retains the original
     /// signed apportionment documents on behalf of the agency. This is the agency’s
-    /// formal designation regarding “Administrative Subdivisions of _funds.” The agency
+    /// formal designation regarding “Administrative Subdivisions of Funds.” The agency
     /// does not have sub-allotments. The one restriction on the agency’s allotment is
     /// that it cannot exceed the amount of the apportionment. At the Regional level,
     /// Allowance Holder's further divide the Agency's funding with the Regional
@@ -51,7 +51,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private const Source _source = Source.AllowanceHolders;
+        public Source Source { get; } =  Source.AllowanceHolders;
 
         /// <summary>
         /// Gets or sets the dict.
@@ -59,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The dict.
         /// </value>
-        private readonly DataRow _record;
+        public DataRow Record { get;  } 
 
         /// <summary>
         /// Gets the arguments.
@@ -67,7 +67,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private readonly IDictionary<string, object> _data;
+        public IDictionary<string, object> Data { get;  } 
 
         /// <summary>
         /// Gets the code.
@@ -75,7 +75,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private readonly IElement _code;
+        public IElement Code { get;  } 
 
         /// <summary>
         /// Gets the allowance holder identifier.
@@ -83,7 +83,7 @@ namespace BudgetExecution
         /// <value>
         /// The allowance holder identifier.
         /// </value>
-        private readonly IKey _id;
+        public IKey ID { get;  } 
 
         /// <summary>
         /// Gets the name.
@@ -91,74 +91,79 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private readonly IElement _name;
+        public IElement Name { get;  } 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "AllowanceHolder"/> class.
         /// </summary>
         public AllowanceHolder()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "AllowanceHolder"/> class.
         /// </summary>
         /// <param name = "dataBuilder" >
         /// The dataBuilder.
         /// </param>
         public AllowanceHolder( IBuilder dataBuilder )
         {
-            _record = dataBuilder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = dataBuilder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "AllowanceHolder"/> class.
         /// </summary>
         /// <param name = "query" >
         /// The query.
         /// </param>
         public AllowanceHolder( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "AllowanceHolder"/> class.
         /// </summary>
         /// <param name = "data" >
-        /// The data.
+        /// The Data.
         /// </param>
         public AllowanceHolder( DataRow data )
             : this()
         {
-            _record = data;
-            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = data;
+            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "AllowanceHolder"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "AllowanceHolder"/> class.
         /// </summary>
         /// <param name = "ahcode" >
         /// The ahcode.
         /// </param>
         public AllowanceHolder( string ahcode )
         {
-            _record = new DataBuilder( _source, SetArgs( ahcode ) )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AllowanceHolderId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( Source, SetArgs( ahcode ) )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.AllowanceHolderId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -195,15 +200,15 @@ namespace BudgetExecution
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref = "T:_system.String"/> that represents this instance.
+        /// A <see cref = "T:System.String"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {
-            if( Verify.Input( _code.GetValue() ) )
+            if( Verify.Input( Code.GetValue() ) )
             {
                 try
                 {
-                    return _code.GetValue();
+                    return Code.GetValue();
                 }
                 catch( Exception ex )
                 {
@@ -224,8 +229,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -244,8 +249,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -264,8 +269,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _code.GetValue() )
-                    ? _code
+                return Verify.Input( Code.GetValue() )
+                    ? Code
                     : default( IElement );
             }
             catch( Exception ex )
@@ -284,8 +289,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _name.GetValue() )
-                    ? _name
+                return Verify.Input( Name.GetValue() )
+                    ? Name
                     : default( IElement );
             }
             catch( Exception ex )
@@ -322,8 +327,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -340,7 +345,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

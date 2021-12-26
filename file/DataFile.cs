@@ -1,4 +1,4 @@
-﻿// <copyright file = "_dataFile.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "DataFile.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -33,15 +33,15 @@ namespace BudgetExecution
         /// <param name="input">The input.</param>
         public DataFile( string input )
         {
-            _path = new DataPath( input );
-            _fileInfo = new FileInfo( _path.GetFullPath() );
-            _fullName = _fileInfo.FullName;
-            _hasParent = CheckParent();
-            _length = _fileInfo.Length;
-            _attributes = _fileInfo.Attributes;
-            _security = _fileInfo.GetAccessControl();
-            _creationDate = _fileInfo.CreationTime;
-            _changedDate = _fileInfo.LastWriteTime;
+            Path = new DataPath( input );
+            FileInfo = new FileInfo( Path.GetFullPath() );
+            FullName = FileInfo.FullName;
+            HasParent = CheckParent();
+            Length = FileInfo.Length;
+            Attributes = FileInfo.Attributes;
+            FileSecurity = FileInfo.GetAccessControl();
+            CreationDate = FileInfo.CreationTime;
+            ChangeDate = FileInfo.LastWriteTime;
         }
 
         /// <summary>
@@ -50,15 +50,15 @@ namespace BudgetExecution
         /// <param name="path">The path.</param>
         public DataFile( IPath path )
         {
-            _path = path;
-            _fileInfo = new FileInfo( _path.GetFullPath() );
-            _fullName = _fileInfo.FullName;
-            _hasParent = CheckParent();
-            _length = _fileInfo.Length;
-            _attributes = _fileInfo.Attributes;
-            _security = _fileInfo.GetAccessControl();
-            _creationDate = _fileInfo.CreationTime;
-            _changedDate = _fileInfo.LastWriteTime;
+            Path = path;
+            FileInfo = new FileInfo( Path.GetFullPath() );
+            FullName = FileInfo.FullName;
+            HasParent = CheckParent();
+            Length = FileInfo.Length;
+            Attributes = FileInfo.Attributes;
+            FileSecurity = FileInfo.GetAccessControl();
+            CreationDate = FileInfo.CreationTime;
+            ChangeDate = FileInfo.LastWriteTime;
         }
 
         /// <summary>
@@ -97,9 +97,9 @@ namespace BudgetExecution
 
             try
             {
-                foreach( var fileinfo in folder?.GetFiles() )
+                foreach( var _fileInfo in folder?.GetFiles() )
                 {
-                    Directory.Move( fileinfo.FullName, folder.Name );
+                    Directory.Move( _fileInfo.FullName, folder.Name );
                 }
             }
             catch( IOException ex )
@@ -119,7 +119,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _input = _path?.GetFullPath();
+                var _input = Path?.GetFullPath();
 
                 if( Verify.Input( _input )
                     && File.Exists( _input ) )
@@ -162,7 +162,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var _input = _path?.GetFullPath();
+                    var _input = Path?.GetFullPath();
 
                     if( Verify.Input( _input )
                         && File.Exists( _input ) )
@@ -200,8 +200,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fullName )
-                    ? _fullName
+                return Verify.Input( FullName )
+                    ? FullName
                     : string.Empty;
             }
             catch( IOException ex )
@@ -219,8 +219,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fullName )
-                    ? _fullName
+                return Verify.Input( FullName )
+                    ? FullName
                     : default( string );
             }
             catch( Exception ex )
@@ -231,15 +231,15 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data path.
+        /// Gets the Data path.
         /// </summary>
         /// <returns></returns>
         public IPath GetDataPath()
         {
             try
             {
-                return File.Exists( _path?.GetFullPath() )
-                    ? _path
+                return File.Exists( Path?.GetFullPath() )
+                    ? Path
                     : default( IPath );
             }
             catch( Exception ex )
@@ -257,7 +257,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _extension = _path?.GetFileExtension();
+                var _extension = Path?.GetFileExtension();
 
                 return Verify.Input( _extension )
                     ? _extension
@@ -278,7 +278,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _input = _path?.GetFullPath();
+                var _input = Path?.GetFullPath();
 
                 return Verify.Input( _input )
                     ? _input
@@ -318,9 +318,12 @@ namespace BudgetExecution
         {
             try
             {
-                var _dialog = new OpenFileDialog();
-                _dialog.CheckFileExists = true;
-                _dialog.CheckPathExists = true;
+                var _dialog = new OpenFileDialog
+                {
+                    CheckFileExists = true,
+                    CheckPathExists = true
+                };
+
                 var _file = new DataFile( _dialog?.FileName );
 
                 return File.Exists( _file?.GetFilePath() )

@@ -18,7 +18,7 @@ namespace BudgetExecution
         /// <summary>
         /// The grid
         /// </summary>
-        private readonly IGrid _grid;
+        public IGrid Grid { get; set; }
         
         /// <summary>
         /// Gets or sets from.
@@ -67,10 +67,10 @@ namespace BudgetExecution
         public Section( IGrid grid )
 
         {
-            _grid = grid;
-            _worksheet = _grid.GetWorksheet();
-            _range = _grid.GetRange();
-            _address = _grid.GetAddress();
+            Grid = grid;
+            _worksheet = Grid.GetWorksheet();
+            _range = Grid.GetRange();
+            _address = Grid.GetAddress();
             _from = ( _range.Start.Row, _range.Start.Column );
             _to = ( _range.End.Row, _range.End.Column );
             Span = _range.Columns;

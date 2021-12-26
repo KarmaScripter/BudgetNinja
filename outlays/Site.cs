@@ -1,6 +1,6 @@
-﻿// // <copyright file = "Site.cs" company = "Terry D. Eppler">
-// // Copyright (c) Terry D. Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file = "Site.cs" company = "Terry D. Eppler">
+// Copyright (c) Terry D. Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -23,7 +23,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Sites;
+        public new Source Source { get;  } = Source.Sites;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Site"/> class.
@@ -42,32 +42,32 @@ namespace BudgetExecution
         public Site( IQuery query )
             : base( query )
         {
-            _records = new Builder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.SiteId );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _dcn = new Element( _records, Field.DCN );
-            EpaSiteId = new Element( _records, Field.EpaSiteId );
-            SiteName = new Element( _records, Field.SiteName );
-            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
-            SiteProjectName = new Element( _records, Field.SiteProjectName );
-            City = new Element( _records, Field.City );
-            District = new Element( _records, Field.District );
-            County = new Element( _records, Field.County );
-            StateCode = new Element( _records, Field.StateCode );
-            StateName = new Element( _records, Field.StateName );
-            StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
-            ZipCode = new Element( _records, Field.ZipCode );
-            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
-            LastActionDate = new Time( _records, EventDate.LastActionDate );
-            _commitments = new Amount( _records, Numeric.Commitments );
-            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
-            _obligations = new Amount( _records, Numeric.Obligations );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _deobligations = new Amount( _records, Numeric.Deobligations );
-            _expenditures = new Amount( _records, Numeric.Expenditures );
-            _data = _records?.ToDictionary();
+            Record = new Builder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.SiteId );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            FocCode = new Element( Record, Field.FocCode );
+            DCN = new Element( Record, Field.DCN );
+            EpaSiteId = new Element( Record, Field.EpaSiteId );
+            SiteName = new Element( Record, Field.SiteName );
+            SiteProjectCode = new Element( Record, Field.SiteProjectCode );
+            SiteProjectName = new Element( Record, Field.SiteProjectName );
+            City = new Element( Record, Field.City );
+            District = new Element( Record, Field.District );
+            County = new Element( Record, Field.County );
+            StateCode = new Element( Record, Field.StateCode );
+            StateName = new Element( Record, Field.StateName );
+            StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
+            ZipCode = new Element( Record, Field.ZipCode );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( Record, EventDate.LastActionDate );
+            Commitments = new Amount( Record, Numeric.Commitments );
+            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
+            Obligations = new Amount( Record, Numeric.Obligations );
+            ULO = new Amount( Record, Numeric.ULO );
+            Deobligations = new Amount( Record, Numeric.Deobligations );
+            Expenditures = new Amount( Record, Numeric.Expenditures );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -79,32 +79,32 @@ namespace BudgetExecution
         public Site( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.SiteId );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _dcn = new Element( _records, Field.DCN );
-            EpaSiteId = new Element( _records, Field.EpaSiteId );
-            SiteName = new Element( _records, Field.SiteName );
-            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
-            SiteProjectName = new Element( _records, Field.SiteProjectName );
-            City = new Element( _records, Field.City );
-            District = new Element( _records, Field.District );
-            County = new Element( _records, Field.County );
-            StateCode = new Element( _records, Field.StateCode );
-            StateName = new Element( _records, Field.StateName );
-            StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
-            ZipCode = new Element( _records, Field.ZipCode );
-            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
-            LastActionDate = new Time( _records, EventDate.LastActionDate );
-            _commitments = new Amount( _records, Numeric.Commitments );
-            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
-            _obligations = new Amount( _records, Numeric.Obligations );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _deobligations = new Amount( _records, Numeric.Deobligations );
-            _expenditures = new Amount( _records, Numeric.Expenditures );
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.SiteId );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            FocCode = new Element( Record, Field.FocCode );
+            DCN = new Element( Record, Field.DCN );
+            EpaSiteId = new Element( Record, Field.EpaSiteId );
+            SiteName = new Element( Record, Field.SiteName );
+            SiteProjectCode = new Element( Record, Field.SiteProjectCode );
+            SiteProjectName = new Element( Record, Field.SiteProjectName );
+            City = new Element( Record, Field.City );
+            District = new Element( Record, Field.District );
+            County = new Element( Record, Field.County );
+            StateCode = new Element( Record, Field.StateCode );
+            StateName = new Element( Record, Field.StateName );
+            StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
+            ZipCode = new Element( Record, Field.ZipCode );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( Record, EventDate.LastActionDate );
+            Commitments = new Amount( Record, Numeric.Commitments );
+            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
+            Obligations = new Amount( Record, Numeric.Obligations );
+            ULO = new Amount( Record, Numeric.ULO );
+            Deobligations = new Amount( Record, Numeric.Deobligations );
+            Expenditures = new Amount( Record, Numeric.Expenditures );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -115,32 +115,32 @@ namespace BudgetExecution
         /// </param>
         public Site( DataRow dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.SiteId );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _dcn = new Element( _records, Field.DCN );
-            EpaSiteId = new Element( _records, Field.EpaSiteId );
-            SiteName = new Element( _records, Field.SiteName );
-            _siteProjectCode = new Element( _records, Field.SiteProjectCode );
-            SiteProjectName = new Element( _records, Field.SiteProjectName );
-            City = new Element( _records, Field.City );
-            District = new Element( _records, Field.District );
-            County = new Element( _records, Field.County );
-            StateCode = new Element( _records, Field.StateCode );
-            StateName = new Element( _records, Field.StateName );
-            StreetAddressLine1 = new Element( _records, Field.StreetAddressLine1 );
-            StreetAddressLine2 = new Element( _records, Field.StreetAddressLine2 );
-            ZipCode = new Element( _records, Field.ZipCode );
-            _originalActionDate = new Time( _records, EventDate.OriginalActionDate );
-            LastActionDate = new Time( _records, EventDate.LastActionDate );
-            _commitments = new Amount( _records, Numeric.Commitments );
-            _openCommitments = new Amount( _records, Numeric.OpenCommitments );
-            _obligations = new Amount( _records, Numeric.Obligations );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _deobligations = new Amount( _records, Numeric.Deobligations );
-            _expenditures = new Amount( _records, Numeric.Expenditures );
-            _data = _records?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.SiteId );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            FocCode = new Element( Record, Field.FocCode );
+            DCN = new Element( Record, Field.DCN );
+            EpaSiteId = new Element( Record, Field.EpaSiteId );
+            SiteName = new Element( Record, Field.SiteName );
+            SiteProjectCode = new Element( Record, Field.SiteProjectCode );
+            SiteProjectName = new Element( Record, Field.SiteProjectName );
+            City = new Element( Record, Field.City );
+            District = new Element( Record, Field.District );
+            County = new Element( Record, Field.County );
+            StateCode = new Element( Record, Field.StateCode );
+            StateName = new Element( Record, Field.StateName );
+            StreetAddressLine1 = new Element( Record, Field.StreetAddressLine1 );
+            StreetAddressLine2 = new Element( Record, Field.StreetAddressLine2 );
+            ZipCode = new Element( Record, Field.ZipCode );
+            OriginalActionDate = new Time( Record, EventDate.OriginalActionDate );
+            LastActionDate = new Time( Record, EventDate.LastActionDate );
+            Commitments = new Amount( Record, Numeric.Commitments );
+            OpenCommitments = new Amount( Record, Numeric.OpenCommitments );
+            Obligations = new Amount( Record, Numeric.Obligations );
+            ULO = new Amount( Record, Numeric.ULO );
+            Deobligations = new Amount( Record, Numeric.Deobligations );
+            Expenditures = new Amount( Record, Numeric.Expenditures );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -152,8 +152,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -392,8 +392,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )

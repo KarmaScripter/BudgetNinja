@@ -19,7 +19,7 @@ namespace BudgetExecution
         /// <value>
         /// The record.
         /// </value>
-        private protected DataRow _record;
+        public DataRow Record { get; set; }
 
         /// <summary>
         /// Gets the arguments.
@@ -27,7 +27,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> _data;
+        public IDictionary<string, object> Data { get; set; }
 
         /// <summary>
         /// Gets the program project identifier.
@@ -35,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The program project identifier.
         /// </value>
-        private protected IKey _id;
+        public IKey ID { get; set; }
 
         /// <summary>
         /// Gets the code.
@@ -43,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private protected IElement _code;
+        public IElement Code { get; set; }
 
         /// <summary>
         /// Gets the name.
@@ -51,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected IElement _name;
+        public IElement Name { get; set; }
 
         /// <summary>
         /// Gets the definition.
@@ -59,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The definition.
         /// </value>
-        private protected IElement _definition;
+        public IElement Definition { get; set; }
 
         /// <summary>
         /// Gets the laws.
@@ -67,7 +67,7 @@ namespace BudgetExecution
         /// <value>
         /// The laws.
         /// </value>
-        private protected IElement _laws;
+        public IElement Laws { get; set; }
 
         /// <summary>
         /// Gets the title.
@@ -75,7 +75,7 @@ namespace BudgetExecution
         /// <value>
         /// The title.
         /// </value>
-        private protected IElement _title;
+        public IElement Title { get; set; }
 
         /// <summary>
         /// Gets the narrative.
@@ -83,7 +83,7 @@ namespace BudgetExecution
         /// <value>
         /// The narrative.
         /// </value>
-        private protected IElement _narrative;
+        public IElement Narrative { get; set; }
 
         /// <summary>
         /// Gets the program area code.
@@ -91,7 +91,7 @@ namespace BudgetExecution
         /// <value>
         /// The program area code.
         /// </value>
-        private protected IElement _programAreaCode;
+        public IElement ProgramAreaCode { get; set; }
 
         /// <summary>
         /// Gets the name of the program area.
@@ -99,7 +99,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the program area.
         /// </value>
-        private protected IElement _programAreaName;
+        public IElement ProgramAreaName { get; set; }
         
         /// <summary>
         /// Get Error Dialog.
@@ -108,7 +108,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

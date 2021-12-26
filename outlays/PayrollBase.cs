@@ -16,12 +16,12 @@ namespace BudgetExecution
     public abstract class PayrollBase : IPayrollBase, IPerson
     {
         /// <summary>
-        /// Gets or sets the data.
+        /// Gets or sets the Data.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The Data.
         /// </value>
-        private protected DataRow _records;
+        public DataRow Record { get; set; }
 
         /// <summary>
         /// Gets or sets the arguments.
@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> _args;
+        public IDictionary<string, object> Args { get; set; }
 
         /// <summary>
         /// Gets or sets the payroll hours identifier.
@@ -37,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The payroll hours identifier.
         /// </value>
-        private protected IKey _id;
+        public IKey ID { get; set; }
 
         /// <summary>
         /// Gets or sets the rpio code.
@@ -45,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The rpio code.
         /// </value>
-        private protected IElement _rpioCode;
+        public IElement RpioCode { get; set; }
 
         /// <summary>
         /// Gets or sets the calendar date.
@@ -53,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The calendar date.
         /// </value>
-        private protected ITime _calendarDate;
+        public ITime CalendarDate { get; set; }
 
         /// <summary>
         /// Gets or sets the pay period.
@@ -61,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The pay period.
         /// </value>
-        private protected IElement _payPeriod;
+        public IElement PayPeriod { get; set; }
 
         /// <summary>
         /// Gets or sets the start date.
@@ -69,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The start date.
         /// </value>
-        private protected ITime _startDate;
+        public ITime StartDate { get; set; }
 
         /// <summary>
         /// Gets or sets the end date.
@@ -77,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The end date.
         /// </value>
-        private protected ITime _endDate;
+        public ITime EndDate { get; set; }
 
         /// <summary>
         /// Gets or sets the employee number.
@@ -85,7 +85,7 @@ namespace BudgetExecution
         /// <value>
         /// The employee number.
         /// </value>
-        private protected IElement _employeeNumber;
+        public IElement EmployeeNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the first name.
@@ -93,7 +93,7 @@ namespace BudgetExecution
         /// <value>
         /// The first name.
         /// </value>
-        private protected IElement _firstName;
+        public IElement FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the last name.
@@ -101,7 +101,7 @@ namespace BudgetExecution
         /// <value>
         /// The last name.
         /// </value>
-        private protected IElement _lastName;
+        public IElement LastName { get; set; }
 
         /// <summary>
         /// Gets or sets the human resource organization code.
@@ -109,7 +109,7 @@ namespace BudgetExecution
         /// <value>
         /// The human resource organization code.
         /// </value>
-        private protected IElement _humanResourceOrganizationCode;
+        public IElement HrOrgCode { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the human resource organization.
@@ -117,7 +117,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the human resource organization.
         /// </value>
-        private protected IElement _humanResourceOrganizationName;
+        public IElement HrOrgName { get; set; }
 
         /// <summary>
         /// Gets or sets the reporting code.
@@ -125,7 +125,7 @@ namespace BudgetExecution
         /// <value>
         /// The reporting code.
         /// </value>
-        private protected IElement _reportingCode;
+        public IElement ReportingCode { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the reporting code.
@@ -133,7 +133,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the reporting code.
         /// </value>
-        private protected IElement _reportingCodeName;
+        public IElement ReportingCodeName { get; set; }
 
         /// <summary>
         /// Gets or sets the work code.
@@ -141,7 +141,7 @@ namespace BudgetExecution
         /// <value>
         /// The work code.
         /// </value>
-        private protected IElement _workCode;
+        public IElement WorkCode { get; set; }
 
         /// <summary>
         /// Gets or sets the hours.
@@ -149,7 +149,7 @@ namespace BudgetExecution
         /// <value>
         /// The hours.
         /// </value>
-        private protected IAmount _hours;
+        public IAmount Hours { get; set; }
         
         /// <summary>
         /// Gets the payroll hours identifier.
@@ -160,8 +160,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -180,8 +180,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _rpioCode )
-                    ? _rpioCode
+                return Verify.Element( RpioCode )
+                    ? RpioCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -200,8 +200,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _payPeriod )
-                    ? _payPeriod
+                return Verify.Element( PayPeriod )
+                    ? PayPeriod
                     : Element.Default;
             }
             catch( Exception ex )
@@ -220,8 +220,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( _calendarDate )
-                    ? _calendarDate
+                return Verify.Time( CalendarDate )
+                    ? CalendarDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -240,8 +240,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( _startDate )
-                    ? _startDate
+                return Verify.Time( StartDate )
+                    ? StartDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -260,8 +260,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( _endDate )
-                    ? _endDate
+                return Verify.Time( EndDate )
+                    ? EndDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -280,8 +280,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _employeeNumber )
-                    ? _employeeNumber
+                return Verify.Element( EmployeeNumber )
+                    ? EmployeeNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -300,8 +300,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _firstName )
-                    ? _firstName
+                return Verify.Element( FirstName )
+                    ? FirstName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -320,8 +320,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _lastName )
-                    ? _lastName
+                return Verify.Element( LastName )
+                    ? LastName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -340,8 +340,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _humanResourceOrganizationCode )
-                    ? _humanResourceOrganizationCode
+                return Verify.Element( HrOrgCode )
+                    ? HrOrgCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -361,8 +361,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _humanResourceOrganizationName )
-                    ? _humanResourceOrganizationName
+                return Verify.Element( HrOrgName )
+                    ? HrOrgName
                     : default( IElement );
             }
             catch( Exception ex )
@@ -381,8 +381,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _workCode )
-                    ? _workCode
+                return Verify.Element( WorkCode )
+                    ? WorkCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -401,8 +401,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _reportingCode )
-                    ? _reportingCode
+                return Verify.Element( ReportingCode )
+                    ? ReportingCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -421,8 +421,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _reportingCodeName )
-                    ? _reportingCodeName
+                return Verify.Element( ReportingCodeName )
+                    ? ReportingCodeName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -441,8 +441,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Amount( _hours )
-                    ? _hours
+                return Verify.Amount( Hours )
+                    ? Hours
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -461,8 +461,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _args )
-                    ? _args
+                return Verify.Map( Args )
+                    ? Args
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -479,7 +479,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

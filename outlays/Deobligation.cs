@@ -25,14 +25,14 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Deobligations;
+        public new Source Source { get; } = Source.Deobligations;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Deobligation"/> class.
         /// </summary>
         public Deobligation()
         {
-            _type = OutlayType.Deobligation;
+            Type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -41,12 +41,12 @@ namespace BudgetExecution
         public Deobligation( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.DeobligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _amount = GetDeobligations();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Deobligation;
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.DeobligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            Amount = GetDeobligations();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -58,12 +58,12 @@ namespace BudgetExecution
         public Deobligation( IBuilder db )
             : base( db )
         {
-            _records = db.GetRecord();
-            _id = new Key( _records, PrimaryKey.DeobligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _amount = GetDeobligations();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Deobligation;
+            Record = db.GetRecord();
+            ID = new Key( Record, PrimaryKey.DeobligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            Amount = GetDeobligations();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Deobligation;
         }
 
         /// <summary>
@@ -75,12 +75,12 @@ namespace BudgetExecution
         public Deobligation( DataRow dataRow )
             : base( dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.DeobligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _amount = GetDeobligations();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Deobligation;
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.DeobligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            Amount = GetDeobligations();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Deobligation;
         }
         
         /// <summary>
@@ -92,8 +92,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id 
+                return Verify.Key( ID )
+                    ? ID 
                     : default( IKey );
             }
             catch( Exception ex )
@@ -113,8 +113,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _deobligations.GetFunding() > -1.0D
-                    ? _deobligations
+                return Deobligations.GetFunding() > -1.0D
+                    ? Deobligations
                     : default( IAmount );
             }
             catch( Exception ex )

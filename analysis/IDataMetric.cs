@@ -4,7 +4,6 @@
 
 namespace BudgetExecution
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
 
@@ -13,6 +12,14 @@ namespace BudgetExecution
     /// </summary>
     public interface IDataMetric : IMetric, ISource
     {
+        /// <summary>
+        /// Gets or sets the data.
+        /// </summary>
+        /// <value>
+        /// The data.
+        /// </value>
+        IEnumerable<DataRow> Data { get; set; }
+
         /// <summary>
         /// Calculates the deviation.
         /// </summary>

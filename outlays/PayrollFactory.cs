@@ -48,7 +48,7 @@ namespace BudgetExecution
         /// Initializes a new instance of the <see cref = "PayrollFactory"/> class.
         /// </summary>
         /// <param name = "data" >
-        /// The data.
+        /// The Data.
         /// </param>
         public PayrollFactory( DataRow data )
         {

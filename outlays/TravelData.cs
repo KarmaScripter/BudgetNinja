@@ -19,7 +19,7 @@ namespace BudgetExecution
         /// <value>
         /// The destination.
         /// </value>
-        private protected IElement _destination;
+        public IElement Destination { get; set; } 
 
         /// <summary>
         /// Gets the first name.
@@ -27,7 +27,7 @@ namespace BudgetExecution
         /// <value>
         /// The first name.
         /// </value>
-        private protected IElement _firstName;
+        public IElement FirstName { get; set; } 
 
         /// <summary>
         /// Gets the name of the middle.
@@ -35,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the middle.
         /// </value>
-        private protected IElement _middleName;
+        public IElement MiddleName { get; set; } 
 
         /// <summary>
         /// Gets the last name.
@@ -43,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The last name.
         /// </value>
-        private protected IElement _lastName;
+        public IElement LastName { get; set; } 
 
         /// <summary>
         /// Gets the email.
@@ -51,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The email.
         /// </value>
-        private protected IElement _email;
+        public IElement Email { get; set; } 
 
         /// <summary>
         /// Gets the start date.
@@ -59,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The start date.
         /// </value>
-        private protected ITime _startDate;
+        public ITime StartDate { get; set; } 
 
         /// <summary>
         /// Gets the end date.
@@ -67,7 +67,7 @@ namespace BudgetExecution
         /// <value>
         /// The end date.
         /// </value>
-        private protected ITime _endDate;
+        public ITime EndDate { get; set; } 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TravelData"/> class.

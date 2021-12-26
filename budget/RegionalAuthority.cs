@@ -20,7 +20,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected readonly new Source _source = Source.RegionAuthority;
+        public new Source Source { get; } = Source.RegionAuthority;
 
         /// <summary>
         /// Initializes a new instance of the <see/> class.
@@ -44,23 +44,23 @@ namespace BudgetExecution
         public RegionalAuthority( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _budgetFiscalYear = new BudgetFiscalYear( _records.GetField( Field.BFY ) );
-            _data = _records?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the <see/> class.
         /// </summary>
         /// <param name = "builder" >
-        /// The data.
+        /// The Data.
         /// </param>
         public RegionalAuthority( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _budgetFiscalYear = new BudgetFiscalYear( _records.GetField( Field.BFY ) );
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>

@@ -41,7 +41,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Activity;
+        public Source Source { get; } = Source.Activity;
 
         /// <summary>
         /// Gets the dataRow.
@@ -49,7 +49,7 @@ namespace BudgetExecution
         /// <value>
         /// The dataRow.
         /// </value>
-        private readonly DataRow _record;
+        public DataRow Record { get;  }
 
         /// <summary>
         /// Gets the activity identifier.
@@ -57,7 +57,7 @@ namespace BudgetExecution
         /// <value>
         /// The activity identifier.
         /// </value>
-        private readonly IKey _id;
+        public IKey ID { get;  }
 
         /// <summary>
         /// Gets the code.
@@ -65,7 +65,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private readonly IElement _code;
+        public IElement Code { get;  }
 
         /// <summary>
         /// Gets the name.
@@ -73,7 +73,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private readonly IElement _name;
+        public IElement Name { get;  }
 
         /// <summary>
         /// Gets the arguments.
@@ -81,7 +81,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private readonly IDictionary<string, object> _data;
+        public IDictionary<string, object> Data { get;  }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Activity"/> class.
@@ -98,11 +98,11 @@ namespace BudgetExecution
         /// </param>
         public Activity( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ActivityId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ActivityId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -113,11 +113,11 @@ namespace BudgetExecution
         /// </param>
         public Activity( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ActivityId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ActivityId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <inheritdoc/>
@@ -131,11 +131,11 @@ namespace BudgetExecution
         public Activity( DataRow dataRow )
             : this()
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.ActivityId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.ActivityId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -146,11 +146,11 @@ namespace BudgetExecution
         /// </param>
         public Activity( string code )
         {
-            _record = new DataBuilder( _source, SetArgs( code ) )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ActivityId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ActivityId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -161,7 +161,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private IDictionary<string, object> SetArgs( string code )
+        private IDictionary<string, object> GetArgs( string code )
         {
             if( Verify.Input( code ) )
             {
@@ -187,15 +187,15 @@ namespace BudgetExecution
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref = "T:_system.String"/> that represents this instance.
+        /// A <see cref = "T:System.String"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {
-            if( Verify.Input( _name?.GetValue() ) )
+            if( Verify.Input( Name?.GetValue() ) )
             {
                 try
                 {
-                    return _name?.GetValue();
+                    return Name?.GetValue();
                 }
                 catch( Exception ex )
                 {
@@ -216,8 +216,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -236,8 +236,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -256,8 +256,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _code )
-                    ? _code
+                return Verify.Element( Code )
+                    ? Code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -276,8 +276,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _name )
-                    ? _name
+                return Verify.Element( Name )
+                    ? Name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -314,8 +314,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -332,7 +332,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

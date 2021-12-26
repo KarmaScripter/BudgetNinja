@@ -16,12 +16,12 @@ namespace BudgetExecution
     public abstract class AccountBase
     {
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The Data.
         /// </value>
-        private protected DataRow _record;
+        public DataRow Record { get; set; }
 
         /// <summary>
         /// Gets the account identifier.
@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The account identifier.
         /// </value>
-        private protected IKey _id;
+        public IKey ID { get; set; }
 
         /// <summary>
         /// Gets the NPM code.
@@ -37,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The NPM code.
         /// </value>
-        private protected IElement _npmCode;
+        public IElement NpmCode { get; set; }
 
         /// <summary>
         /// Gets the account code.
@@ -45,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The account code.
         /// </value>
-        private protected IElement _code;
+        public IElement Code { get; set; }
 
         /// <summary>
         /// Gets the program project code.
@@ -53,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The program project code.
         /// </value>
-        private protected IElement _programProjectCode;
+        public IElement ProgramProjectCode { get; set; }
 
         /// <summary>
         /// Gets the program area code.
@@ -61,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The program area code.
         /// </value>
-        private protected IElement _programAreaCode;
+        public IElement ProgramAreaCode { get; set; }
 
         /// <summary>
         /// Gets the goal code.
@@ -69,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The goal code.
         /// </value>
-        private protected IElement _goalCode;
+        public IElement GoalCode { get; set; }
 
         /// <summary>
         /// Gets the objective code.
@@ -77,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The objective code.
         /// </value>
-        private protected IElement _objectiveCode;
+        public IElement ObjectiveCode { get; set; }
 
         /// <summary>
         /// Gets the activity code.
@@ -85,7 +85,7 @@ namespace BudgetExecution
         /// <value>
         /// The activity code.
         /// </value>
-        private protected IElement _activityCode;
+        public IElement ActivityCode { get; set; }
 
         /// <summary>
         /// Gets the arguments.
@@ -93,7 +93,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> _data;
+        public IDictionary<string, object> Data { get; set; }
         
         /// <summary>
         /// Sets the arguments.
@@ -111,7 +111,7 @@ namespace BudgetExecution
                 {
                     return new Dictionary<string, object>
                     {
-                        [ $"{Field.Code}" ] = code
+                        [ $"{ Field.Code }" ] = code
                     };
                 }
                 catch( Exception ex )
@@ -133,8 +133,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -153,8 +153,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _code?.GetValue() )
-                    ? _code
+                return Verify.Input( Code?.GetValue() )
+                    ? Code
                     : default( IElement );
             }
             catch( SystemException ex )
@@ -171,7 +171,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error.SetText();
+            _error?.SetText( ex.Message );
             _error.ShowDialog();
         }
     }

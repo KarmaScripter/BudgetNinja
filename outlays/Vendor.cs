@@ -27,7 +27,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private protected new Source _source = Source.Vendors;
+        public new Source Source { get; } = Source.Vendors;
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Vendor"/> class.
@@ -45,23 +45,23 @@ namespace BudgetExecution
         public Vendor( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.VendorId );
-            Code = new Element( _records, Field.Code );
-            Name = new Element( _records, Field.Name );
-            DunsNumber = new Element( _records, Field.DunsNumber );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _focName = new Element( _records, Field.FocName );
-            _documentType = new Element( _records, Field.DocumentType );
-            DocumentNumber = new Element( _records, Field.DocumentNumber );
-            StartDate = new Time( _records, EventDate.StartDate );
-            EndDate = new Time( _records, EventDate.EndDate );
-            ClosedDate = new Time( _records, EventDate.ClosedDate );
-            _amount = new Amount( _records, Numeric.Amount );
-            Expended = new Amount( _records, Numeric.Expended );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _data = _records?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.VendorId );
+            Code = new Element( Record, Field.Code );
+            Name = new Element( Record, Field.Name );
+            DunsNumber = new Element( Record, Field.DunsNumber );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            FocCode = new Element( Record, Field.FocCode );
+            FocName = new Element( Record, Field.FocName );
+            DocPrefix = new Element( Record, Field.DocumentType );
+            DocumentNumber = new Element( Record, Field.DocumentNumber );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
+            ClosedDate = new Time( Record, EventDate.ClosedDate );
+            Amount = new Amount( Record, Numeric.Amount );
+            Expended = new Amount( Record, Numeric.Expended );
+            ULO = new Amount( Record, Numeric.ULO );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -73,23 +73,23 @@ namespace BudgetExecution
         public Vendor( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.VendorId );
-            Code = new Element( _records, Field.Code );
-            Name = new Element( _records, Field.Name );
-            DunsNumber = new Element( _records, Field.DunsNumber );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _focName = new Element( _records, Field.FocName );
-            _documentType = new Element( _records, Field.DocumentType );
-            DocumentNumber = new Element( _records, Field.DocumentNumber );
-            StartDate = new Time( _records, EventDate.StartDate );
-            EndDate = new Time( _records, EventDate.EndDate );
-            ClosedDate = new Time( _records, EventDate.ClosedDate );
-            _amount = new Amount( _records, Numeric.Amount );
-            Expended = new Amount( _records, Numeric.Expended );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.VendorId );
+            Code = new Element( Record, Field.Code );
+            Name = new Element( Record, Field.Name );
+            DunsNumber = new Element( Record, Field.DunsNumber );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            FocCode = new Element( Record, Field.FocCode );
+            FocName = new Element( Record, Field.FocName );
+            DocPrefix = new Element( Record, Field.DocumentType );
+            DocumentNumber = new Element( Record, Field.DocumentNumber );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
+            ClosedDate = new Time( Record, EventDate.ClosedDate );
+            Amount = new Amount( Record, Numeric.Amount );
+            Expended = new Amount( Record, Numeric.Expended );
+            ULO = new Amount( Record, Numeric.ULO );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -101,23 +101,23 @@ namespace BudgetExecution
         public Vendor( DataRow datarow )
             : this()
         {
-            _records = datarow;
-            _id = new Key( _records, PrimaryKey.VendorId );
-            Code = new Element( _records, Field.Code );
-            Name = new Element( _records, Field.Name );
-            DunsNumber = new Element( _records, Field.DunsNumber );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _focName = new Element( _records, Field.FocName );
-            _documentType = new Element( _records, Field.DocumentType );
-            DocumentNumber = new Element( _records, Field.DocumentNumber );
-            StartDate = new Time( _records, EventDate.StartDate );
-            EndDate = new Time( _records, EventDate.EndDate );
-            ClosedDate = new Time( _records, EventDate.ClosedDate );
-            _amount = new Amount( _records, Numeric.Amount );
-            Expended = new Amount( _records, Numeric.Expended );
-            _ulo = new Amount( _records, Numeric.ULO );
-            _data = _records?.ToDictionary();
+            Record = datarow;
+            ID = new Key( Record, PrimaryKey.VendorId );
+            Code = new Element( Record, Field.Code );
+            Name = new Element( Record, Field.Name );
+            DunsNumber = new Element( Record, Field.DunsNumber );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            FocCode = new Element( Record, Field.FocCode );
+            FocName = new Element( Record, Field.FocName );
+            DocPrefix = new Element( Record, Field.DocumentType );
+            DocumentNumber = new Element( Record, Field.DocumentNumber );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
+            ClosedDate = new Time( Record, EventDate.ClosedDate );
+            Amount = new Amount( Record, Numeric.Amount );
+            Expended = new Amount( Record, Numeric.Expended );
+            ULO = new Amount( Record, Numeric.ULO );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -129,8 +129,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -330,8 +330,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Amount( _ulo )
-                    ? _ulo
+                return Verify.Amount( ULO )
+                    ? ULO
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -350,8 +350,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )

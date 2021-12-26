@@ -30,13 +30,13 @@ namespace BudgetExecution
         DirectoryInfo CreateSubDirectory( string folderName );
 
         /// <summary>
-        /// Gets the path data.
+        /// Gets the path Data.
         /// </summary>
         /// <returns></returns>
         IEnumerable<IPath> GetDataPaths();
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <returns></returns>
         IEnumerable<IFile> GetDataFiles();
@@ -102,7 +102,7 @@ namespace BudgetExecution
         IEnumerable<string> GetFileNames();
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <returns></returns>
         IEnumerable<FileInfo> GetStreamData();

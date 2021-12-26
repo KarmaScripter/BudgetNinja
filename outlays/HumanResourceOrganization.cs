@@ -24,8 +24,47 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private readonly static Source _source = Source.HumanResourceOrganizations;
-        
+        public Source Source { get; } = Source.HumanResourceOrganizations;
+        /// <summary>
+        /// Gets the Data.
+        /// </summary>
+        /// <value>
+        /// The Data.
+        /// </value>
+        public DataRow Record { get; set; }
+
+        /// <summary>
+        /// Gets the arguments.
+        /// </summary>
+        /// <value>
+        /// The arguments.
+        /// </value>
+        public IDictionary<string, object> Args { get; set; }
+
+        /// <summary>
+        /// Gets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        public IElement Code { get; set; }
+
+        /// <summary>
+        /// Gets the human resource organization identifier.
+        /// </summary>
+        /// <value>
+        /// The human resource organization identifier.
+        /// </value>
+        public IKey ID { get; set; }
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
+        public IElement Name { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref = "HumanResourceOrganization"/>
         /// class.
@@ -43,11 +82,11 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( IQuery query )
         {
-            _records = new Builder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.HumanResourceOrganizationId );
-            _name = new Element( _records, Field.Name );
-            _code = new Element( _records, Field.Code );
-            _args = _records?.ToDictionary();
+            Record = new Builder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.HumanResourceOrganizationId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Args = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -59,11 +98,11 @@ namespace BudgetExecution
         /// </param>
         public HumanResourceOrganization( IBuilder builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.HumanResourceOrganizationId );
-            _name = new Element( _records, Field.Name );
-            _code = new Element( _records, Field.Code );
-            _args = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.HumanResourceOrganizationId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Args = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -71,57 +110,17 @@ namespace BudgetExecution
         /// class.
         /// </summary>
         /// <param name = "data" >
-        /// The data.
+        /// The Data.
         /// </param>
         public HumanResourceOrganization( DataRow data )
         {
-            _records = data;
-            _id = new Key( _records, PrimaryKey.HumanResourceOrganizationId );
-            _name = new Element( _records, Field.Name );
-            _code = new Element( _records, Field.Code );
-            _args = _records?.ToDictionary();
+            Record = data;
+            ID = new Key( Record, PrimaryKey.HumanResourceOrganizationId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Args = Record?.ToDictionary();
         }
 
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        private readonly DataRow _records;
-
-        /// <summary>
-        /// Gets the arguments.
-        /// </summary>
-        /// <value>
-        /// The arguments.
-        /// </value>
-        private readonly IDictionary<string, object> _args;
-
-        /// <summary>
-        /// Gets the code.
-        /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        private readonly IElement _code;
-
-        /// <summary>
-        /// Gets the human resource organization identifier.
-        /// </summary>
-        /// <value>
-        /// The human resource organization identifier.
-        /// </value>
-        private readonly IKey _id;
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        private readonly IElement _name;
-        
         /// <summary>
         /// Gets the human resource organization identifier.
         /// </summary>
@@ -131,8 +130,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -151,8 +150,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _code )
-                    ? _code
+                return Verify.Element( Code )
+                    ? Code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -171,8 +170,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _name )
-                    ? _name
+                return Verify.Element( Name )
+                    ? Name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -207,11 +206,11 @@ namespace BudgetExecution
         /// </returns>
         public IEnumerable<IHumanResourceOrganization> GetHumanResourceOrganizations()
         {
-            if( Verify.Map( _args ) )
+            if( Verify.Map( Args ) )
             {
                 try
                 {
-                    var _rows = new Builder( _source, _args )
+                    var _rows = new Builder( Source, Args )
                         ?.GetData()
                         ?.Select( r => r );
 
@@ -242,8 +241,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _code )
-                    ? _code.GetValue()
+                return Verify.Element( Code )
+                    ? Code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -262,8 +261,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _args.Any()
-                    ? _args
+                return Args.Any()
+                    ? Args
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -281,7 +280,7 @@ namespace BudgetExecution
         /// </param>
         /// <returns>
         /// </returns>
-        private IDictionary<string, object> SetArgs( string hrOrgCode )
+        private IDictionary<string, object> GetArgs( string hrOrgCode )
         {
             if( Verify.Input( hrOrgCode ) )
             {
@@ -311,8 +310,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -329,7 +328,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

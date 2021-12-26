@@ -1,4 +1,4 @@
-﻿// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
+﻿// <copyright file=" <File Name> .cs" company="Terry D. Eppler">
 // Copyright (c) Terry Eppler. All rights reserved.
 // </copyright>
 
@@ -19,19 +19,19 @@ namespace BudgetExecution
     public class FileReader
     {
         /// <summary>
-        /// The data file
+        /// The Data file
         /// </summary>
-        private protected readonly IFile _dataFile;
+        public IFile DataFile { get; set; }
 
         /// <summary>
         /// The file information
         /// </summary>
-        private protected readonly FileInfo _fileInfo;
+        public FileInfo FileInfo { get; set; }
 
         /// <summary>
         /// The file stream
         /// </summary>
-        private protected FileStream _fileStream;
+        public FileStream FileStream { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileReader"/> class.
@@ -46,8 +46,8 @@ namespace BudgetExecution
         /// <param name="file">The file.</param>
         public FileReader( IFile file )
         {
-            _dataFile = file;
-            _fileInfo = _dataFile.GetFileInfo();
+            DataFile = file;
+            FileInfo = DataFile.GetFileInfo();
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _file = _fileInfo?.FullName;
+                var _file = FileInfo?.FullName;
 
                 if( _file != null )
                 {
@@ -86,7 +86,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _file = _fileInfo?.FullName;
+                var _file = FileInfo?.FullName;
 
                 if( _file != null )
                 {
@@ -114,7 +114,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _file = _fileInfo?.FullName;
+                var _file = FileInfo?.FullName;
 
                 if( Verify.Input( _file ) )
                 {
@@ -142,7 +142,7 @@ namespace BudgetExecution
         {
             try
             {
-                using var _reader = _fileInfo?.OpenText();
+                using var _reader = FileInfo?.OpenText();
                 var _result = _reader?.ReadToEnd();
 
                 return Verify.Input( _result )
@@ -163,9 +163,9 @@ namespace BudgetExecution
         {
             try
             {
-                var _bytes = File.ReadAllBytes( _fileInfo.FullName );
+                var _bytes = File.ReadAllBytes( FileInfo.FullName );
                 var _length = _bytes.Length;
-                using var _stream = new GZipStream( _fileStream, CompressionMode.Decompress );
+                using var _stream = new GZipStream( FileStream, CompressionMode.Decompress );
                 _stream?.Read( _bytes, 0, _length );
             }
             catch( IOException ex )
@@ -181,7 +181,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

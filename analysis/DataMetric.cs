@@ -25,7 +25,7 @@ namespace BudgetExecution
         /// <value>
         /// The variance.
         /// </value>
-        private readonly double _variance;
+        public double Variance { get; set; }
 
         /// <summary>
         /// Gets the deviation.
@@ -33,7 +33,7 @@ namespace BudgetExecution
         /// <value>
         /// The deviation.
         /// </value>
-        private readonly double _deviation;
+        public double Deviation { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "DataMetric"/> class.
@@ -53,14 +53,14 @@ namespace BudgetExecution
         /// </param>
         public DataMetric( IEnumerable<DataRow> dataRow, Numeric numeric = Numeric.Amount )
         {
-            _data = dataRow;
-            _field = Field.NS;
-            _numeric = numeric;
-            _count = _data.Count();
-            _total = CalculateTotals( _data, _numeric );
-            _average = CalculateAverage( _data, _numeric );
-            _variance = CalculateVariance( _data, _numeric );
-            _deviation = CalculateDeviation( _data, _numeric );
+            Data = dataRow;
+            Field = Field.NS;
+            Numeric = numeric;
+            Count = Data.Count();
+            Total = CalculateTotals( Data, Numeric );
+            Average = CalculateAverage( Data, Numeric );
+            Variance = CalculateVariance( Data, Numeric );
+            Deviation = CalculateDeviation( Data, Numeric );
         }
 
         /// <summary>
@@ -77,15 +77,15 @@ namespace BudgetExecution
         /// </param>
         public DataMetric( IEnumerable<DataRow> dataRow, Field field, Numeric numeric = Numeric.Amount )
         {
-            _field = field;
-            _numeric = numeric;
-            _data = dataRow;
-            _count = _data.Count();
-            _total = CalculateTotals( _data, _numeric );
-            _average = CalculateAverage( _data, _numeric );
-            _variance = CalculateVariance( _data, _numeric );
-            _deviation = CalculateDeviation( _data, _numeric );
-            _statistics = CalculateStatistics( _data, _field, _numeric );
+            Field = field;
+            Numeric = numeric;
+            Data = dataRow;
+            Count = Data.Count();
+            Total = CalculateTotals( Data, Numeric );
+            Average = CalculateAverage( Data, Numeric );
+            Variance = CalculateVariance( Data, Numeric );
+            Deviation = CalculateDeviation( Data, Numeric );
+            Statistics = CalculateStatistics( Data, Field, Numeric );
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _source = _data
+                var _source = Data
                     ?.Select( r => r )
                     ?.FirstOrDefault();
 
@@ -253,7 +253,7 @@ namespace BudgetExecution
         {
             try
             {
-                return _statistics;
+                return Statistics;
             }
             catch( Exception ex )
             {

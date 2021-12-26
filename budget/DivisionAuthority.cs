@@ -19,7 +19,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.DivisionAuthority;
+        public new Source Source { get; } = Source.DivisionAuthority;
 
         /// <summary>
         /// Gets or sets the total.
@@ -27,7 +27,7 @@ namespace BudgetExecution
         /// <value>
         /// The total.
         /// </value>
-        public double _total;
+        public double Total { get; set; }
 
         /// <summary>
         /// Gets or sets the average.
@@ -35,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The average.
         /// </value>
-        public double _average;
+        public double Average { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the  class.
@@ -46,23 +46,23 @@ namespace BudgetExecution
         public DivisionAuthority( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _budgetFiscalYear = new BudgetFiscalYear( _records.GetField( Field.BFY ) );
-            _data = _records?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
         /// Initializes a new instance of the  class.
         /// </summary>
         /// <param name = "builder" >
-        /// The data.
+        /// The Data.
         /// </param>
         public DivisionAuthority( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _budgetFiscalYear = new BudgetFiscalYear( _records.GetField( Field.BFY ) );
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            BudgetFiscalYear = new BudgetFiscalYear( Record.GetField( Field.BFY ) );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>

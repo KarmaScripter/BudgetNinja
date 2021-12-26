@@ -28,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Supplemental;
+        public new Source Source { get; } =  Source.Supplemental;
 
         /// <summary>
         /// Gets or sets the type.
@@ -36,7 +36,7 @@ namespace BudgetExecution
         /// <value>
         /// The type.
         /// </value>
-        private protected IElement _type;
+        public IElement Type { get; set; }
 
         /// <summary>
         /// Gets or sets the boc.
@@ -44,7 +44,7 @@ namespace BudgetExecution
         /// <value>
         /// The boc.
         /// </value>
-        private protected IElement _boc;
+        public IElement BOC { get; set; }
         
         /// <summary>
         /// Gets the type of the supplemental.
@@ -55,8 +55,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _type?.GetValue() )
-                    ? _type
+                return Verify.Input( Type?.GetValue() )
+                    ? Type
                     : Element.Default;
             }
             catch( Exception ex )
@@ -67,7 +67,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data builder.
+        /// Gets the Data builder.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -75,8 +75,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? new Builder( _source, _data )
+                return Verify.Map( Data )
+                    ? new Builder( Source, Data )
                     : default( Builder );
             }
             catch( Exception ex )
@@ -96,7 +96,7 @@ namespace BudgetExecution
         {
             try
             {
-                return _type + _amount?.GetFunding().ToString( "c" );
+                return Type + Amount?.GetFunding().ToString( "c" );
             }
             catch( Exception ex )
             {
@@ -114,8 +114,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( AwardType ), _type )
-                    ? new Element( _records, Field.Type )
+                return Enum.IsDefined( typeof( AwardType ), Type )
+                    ? new Element( Record, Field.Type )
                     : default( Element );
             }
             catch( Exception ex )

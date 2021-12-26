@@ -48,7 +48,7 @@ namespace BudgetExecution
         string GetFullName();
 
         /// <summary>
-        /// Gets the data path.
+        /// Gets the Data path.
         /// </summary>
         /// <returns></returns>
         IPath GetDataPath();

@@ -35,7 +35,7 @@ namespace BudgetExecution
     [ SuppressMessage( "ReSharper", "MemberCanBeMadeStatic.Global" ) ]
     [ SuppressMessage( "ReSharper", "AccessToStaticMemberViaDerivedType" ) ]
     [ SuppressMessage( "ReSharper", "AssignNullToNotNullAttribute" ) ]
-    public class Authority : ProgramResultsCode, IAuthority
+    public class Authority : ProgramResultsCode 
     {
         /// <summary>
         /// Gets or sets the rpio.
@@ -43,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The rpio.
         /// </value>
-        private protected IResourcePlanningOffice _rpio;
+        public IResourcePlanningOffice RPIO { get; } 
 
         /// <summary>
         /// Gets the fiscal year.
@@ -51,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The fiscal year.
         /// </value>
-        private protected IBudgetFiscalYear _budgetFiscalYear;
+        public IBudgetFiscalYear BudgetFiscalYear { get; set; }
 
         /// <summary>
         /// Gets or sets the fund.
@@ -59,23 +59,15 @@ namespace BudgetExecution
         /// <value>
         /// The fund.
         /// </value>
-        private protected IFund _fund;
-
-        /// <summary>
-        /// Gets or sets the budget level.
-        /// </summary>
-        /// <value>
-        /// The budget level.
-        /// </value>
-        private protected readonly IBudgetLevel _budgetLevel;
-
+        public IFund Fund { get; } 
+        
         /// <summary>
         /// Gets or sets the allowance holder.
         /// </summary>
         /// <value>
         /// The allowance holder.
         /// </value>
-        private protected IAllowanceHolder _allowanceHolder;
+        public IAllowanceHolder AllowanceHolder { get; } 
 
         /// <summary>
         /// Gets or sets the organization.
@@ -83,7 +75,7 @@ namespace BudgetExecution
         /// <value>
         /// The organization.
         /// </value>
-        private protected IOrganization _organization;
+        public IOrganization Organization { get; } 
 
         /// <summary>
         /// Gets or sets the account.
@@ -91,7 +83,7 @@ namespace BudgetExecution
         /// <value>
         /// The account.
         /// </value>
-        private protected IAccount _account;
+        public IAccount Account { get; } 
 
         /// <summary>
         /// Gets or sets the responsibility center.
@@ -99,7 +91,7 @@ namespace BudgetExecution
         /// <value>
         /// The responsibility center.
         /// </value>
-        private protected IResponsibilityCenter _responsibilityCenter;
+        public IResponsibilityCenter ResponsibilityCenter { get; } 
 
         /// <summary>
         /// Gets the activity.
@@ -107,20 +99,12 @@ namespace BudgetExecution
         /// <value>
         /// The activity.
         /// </value>
-        private protected IActivity _activity;
-
-        /// <summary>
-        /// Gets the metric.
-        /// </summary>
-        /// <value>
-        /// The metric.
-        /// </value>
-        private protected IDataMetric _metric;
+        public IActivity Activity { get; }
 
         /// <summary>
         /// The source
         /// </summary>
-        private readonly Source _source;
+        public new Source Source { get; } = Source.Allocations;
 
         /// <summary>
         /// Initializes a new instance of the <see/> class.
@@ -138,17 +122,17 @@ namespace BudgetExecution
         public Authority( IQuery query )
             : base( query )
         {
-            _source = query.GetSource();
-            _records = new DataBuilder( query )?.GetRecord();
-            _budgetFiscalYear = GetBudgetFiscalYear();
-            _rpio = GetResourcePlanningOffice();
-            _fund = GetFund();
-            _budgetLevel = GetBudgetLevel();
-            _allowanceHolder = GetAllowanceHolder();
-            _organization = GetOrganization();
-            _account = GetAccount();
-            _responsibilityCenter = GetResponsibilityCenter();
-            _data = _records?.ToDictionary();
+            Source = query.GetSource();
+            Record = new DataBuilder( query )?.GetRecord();
+            BudgetFiscalYear = GetBudgetFiscalYear();
+            RPIO = GetResourcePlanningOffice();
+            Fund = GetFund();
+            BudgetLevel = new Element( Record, Field.BudgetLevel );
+            AllowanceHolder = GetAllowanceHolder();
+            Organization = GetOrganization();
+            Account = GetAccount();
+            ResponsibilityCenter = GetResponsibilityCenter();
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -160,18 +144,18 @@ namespace BudgetExecution
         public Authority( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _source = GetSource( _records );
-            _budgetFiscalYear = GetBudgetFiscalYear();
-            _rpio = GetResourcePlanningOffice();
-            _fund = GetFund();
-            _budgetLevel = GetBudgetLevel();
-            _allowanceHolder = GetAllowanceHolder();
-            _organization = GetOrganization();
-            _account = GetAccount();
-            _responsibilityCenter = GetResponsibilityCenter();
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            Source = GetSource( Record );
+            BudgetFiscalYear = GetBudgetFiscalYear();
+            RPIO = GetResourcePlanningOffice();
+            Fund = GetFund();
+            BudgetLevel = new Element( Record, Field.BudgetLevel );
+            AllowanceHolder = GetAllowanceHolder();
+            Organization = GetOrganization();
+            Account = GetAccount();
+            ResponsibilityCenter = GetResponsibilityCenter();
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -183,19 +167,19 @@ namespace BudgetExecution
         public Authority( DataRow dataRow )
             : base( dataRow )
         {
-            _records = dataRow;
-            _source = GetSource( _records );
-            _budgetFiscalYear = GetBudgetFiscalYear();
-            _rpio = GetResourcePlanningOffice();
-            _fund = GetFund();
-            _budgetLevel = GetBudgetLevel();
-            _allowanceHolder = GetAllowanceHolder();
-            _organization = GetOrganization();
-            _account = GetAccount();
-            _responsibilityCenter = GetResponsibilityCenter();
-            _activity = GetActivity();
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = dataRow;
+            Source = GetSource( Record );
+            BudgetFiscalYear = GetBudgetFiscalYear();
+            RPIO = GetResourcePlanningOffice();
+            Fund = GetFund();
+            BudgetLevel = new Element( Record, Field.BudgetLevel );
+            AllowanceHolder = GetAllowanceHolder();
+            Organization = GetOrganization();
+            Account = GetAccount();
+            ResponsibilityCenter = GetResponsibilityCenter();
+            Activity = Account.GetActivity();
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -243,12 +227,12 @@ namespace BudgetExecution
         /// </returns>
         public IBuilder GetBuilder()
         {
-            if( Validate.Source( _source )
-                && Verify.Map( _data ) )
+            if( Validate.Source( Source )
+                && Verify.Map( Data ) )
             {
                 try
                 {
-                    var _builder = new Builder( _source, _data );
+                    var _builder = new Builder( Source, Data );
 
                     return Verify.Rows( _builder?.GetData() )
                         ? _builder
@@ -265,36 +249,18 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the allocation.
-        /// </summary>
-        /// <returns>
-        /// </returns>
-        public IAllocation GetAllocation()
-        {
-            try
-            {
-                return new Allocation( this );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( IAllocation );
-            }
-        }
-
-        /// <summary>
         /// Gets the dataRow.
         /// </summary>
         /// <returns>
         /// </returns>
         public IEnumerable<DataRow> GetData()
         {
-            if( Validate.Source( _source )
-                && Verify.Map( _data ) )
+            if( Validate.Source( Source )
+                && Verify.Map( Data ) )
             {
                 try
                 {
-                    var _rows = new DataBuilder( _source, _data )
+                    var _rows = new DataBuilder( Source, Data )
                         ?.GetData();
 
                     return Verify.Rows( _rows )
@@ -328,7 +294,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var _rows = new DataBuilder( _source, _data )
+                    var _rows = new DataBuilder( Source, Data )
                         ?.GetData();
 
                     var _filter = _rows
@@ -357,7 +323,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _element = _budgetFiscalYear
+                var _element = BudgetFiscalYear
                     ?.GetAvailability();
 
                 if( Verify.Element( _element ) )

@@ -18,7 +18,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.PayrollObligations;
+        public new Source Source { get; } =  Source.PayrollObligations;
 
         /// <summary>
         /// Gets the allocation percentage.
@@ -26,7 +26,7 @@ namespace BudgetExecution
         /// <value>
         /// The allocation percentage.
         /// </value>
-        private readonly IAmount _allocationPercentage;
+        public IAmount AllocationPercentage { get;  }
 
         /// <summary>
         /// Gets the hours.
@@ -34,7 +34,7 @@ namespace BudgetExecution
         /// <value>
         /// The hours.
         /// </value>
-        private readonly IAmount _hours;
+        public IAmount Hours { get;  }
 
         /// <summary>
         /// Gets the annual base paid.
@@ -42,7 +42,7 @@ namespace BudgetExecution
         /// <value>
         /// The annual base paid.
         /// </value>
-        private readonly IAmount _annualBasePaid;
+        public IAmount AnnualBasePaid { get;  }
 
         /// <summary>
         /// Gets the annual base hours.
@@ -50,7 +50,7 @@ namespace BudgetExecution
         /// <value>
         /// The annual base hours.
         /// </value>
-        private readonly IAmount _annualBaseHours;
+        public IAmount AnnualBaseHours { get;  }
 
         /// <summary>
         /// Gets the cumulative benefits.
@@ -58,7 +58,7 @@ namespace BudgetExecution
         /// <value>
         /// The cumulative benefits.
         /// </value>
-        private readonly IAmount _cumulativeBenefits;
+        public IAmount CumulativeBenefits { get;  }
 
         /// <summary>
         /// Gets the annual other hours.
@@ -66,7 +66,7 @@ namespace BudgetExecution
         /// <value>
         /// The annual other hours.
         /// </value>
-        private readonly IAmount _annualOtherHours;
+        public IAmount AnnualOtherHours { get;  }
 
         /// <summary>
         /// Gets the annual other paid.
@@ -74,7 +74,7 @@ namespace BudgetExecution
         /// <value>
         /// The annual other paid.
         /// </value>
-        private readonly IAmount _annualOtherPaid;
+        public IAmount AnnualOtherPaid { get;  }
 
         /// <summary>
         /// Gets the annual overtime paid.
@@ -82,7 +82,7 @@ namespace BudgetExecution
         /// <value>
         /// The annual overtime paid.
         /// </value>
-        private readonly IAmount _annualOvertimePaid;
+        public IAmount AnnualOvertimePaid { get;  }
 
         /// <summary>
         /// Gets the annual overtime hours.
@@ -90,7 +90,7 @@ namespace BudgetExecution
         /// <value>
         /// The annual overtime hours.
         /// </value>
-        private readonly IAmount _annualOvertimeHours;
+        public IAmount AnnualOvertimeHours { get;  }
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "PayrollObligation"/> class.
@@ -108,30 +108,30 @@ namespace BudgetExecution
         public PayrollObligation( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.PayrollObligationId );
-            _rpioCode = new Element( _records, Field.RpioCode );
-            _fundCode = new Element( _records, Field.FundCode );
-            _ahCode = new Element( _records, Field.AhCode );
-            _orgCode = new Element( _records, Field.OrgCode );
-            _rcCode = new Element( _records, Field.RcCode );
-            _accountCode = new Element( _records, Field.AccountCode );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _hrOrgCode = new Element( _records, Field.HrOrgCode );
-            _workCode = new Element( _records, Field.WorkCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _payPeriod = new Element( _records, Field.PayPeriod );
-            _amount = new Amount( _records, Numeric.Amount );
-            _hours = new Amount( _records, Numeric.Hours );
-            _allocationPercentage = new Amount( _records, Numeric.AllocationPercentage );
-            _annualBaseHours = new Amount( _records, Numeric.AnnualBaseHours );
-            _annualBasePaid = new Amount( _records, Numeric.AnnualBasePaid );
-            _cumulativeBenefits = new Amount( _records, Numeric.CumulativeBenefits );
-            _annualOtherHours = new Amount( _records, Numeric.AnnualOtherHours );
-            _annualOtherPaid = new Amount( _records, Numeric.AnnualOtherPaid );
-            _annualOvertimeHours = new Amount( _records, Numeric.AnnualOvertimePaid );
-            _annualOvertimePaid = new Amount( _records, Numeric.AnnualOvertimePaid );
-            _data = _records?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.PayrollObligationId );
+            RpioCode = new Element( Record, Field.RpioCode );
+            FundCode = new Element( Record, Field.FundCode );
+            AhCode = new Element( Record, Field.AhCode );
+            OrgCode = new Element( Record, Field.OrgCode );
+            RcCode = new Element( Record, Field.RcCode );
+            AccountCode = new Element( Record, Field.AccountCode );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            HrOrgCode = new Element( Record, Field.HrOrgCode );
+            WorkCode = new Element( Record, Field.WorkCode );
+            FocCode = new Element( Record, Field.FocCode );
+            PayPeriod = new Element( Record, Field.PayPeriod );
+            Amount = new Amount( Record, Numeric.Amount );
+            Hours = new Amount( Record, Numeric.Hours );
+            AllocationPercentage = new Amount( Record, Numeric.AllocationPercentage );
+            AnnualBaseHours = new Amount( Record, Numeric.AnnualBaseHours );
+            AnnualBasePaid = new Amount( Record, Numeric.AnnualBasePaid );
+            CumulativeBenefits = new Amount( Record, Numeric.CumulativeBenefits );
+            AnnualOtherHours = new Amount( Record, Numeric.AnnualOtherHours );
+            AnnualOtherPaid = new Amount( Record, Numeric.AnnualOtherPaid );
+            AnnualOvertimeHours = new Amount( Record, Numeric.AnnualOvertimePaid );
+            AnnualOvertimePaid = new Amount( Record, Numeric.AnnualOvertimePaid );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -143,31 +143,31 @@ namespace BudgetExecution
         public PayrollObligation( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.PayrollObligationId );
-            _rpioCode = new Element( _records, Field.RpioCode );
-            _fundCode = new Element( _records, Field.FundCode );
-            _ahCode = new Element( _records, Field.AhCode );
-            _orgCode = new Element( _records, Field.OrgCode );
-            _rcCode = new Element( _records, Field.RcCode );
-            _accountCode = new Element( _records, Field.AccountCode );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _hrOrgCode = new Element( _records, Field.HrOrgCode );
-            _workCode = new Element( _records, Field.WorkCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _payPeriod = new Element( _records, Field.PayPeriod );
-            _amount = new Amount( _records, Numeric.Amount );
-            _hours = new Amount( _records, Numeric.Hours );
-            _allocationPercentage = new Amount( _records, Numeric.AllocationPercentage );
-            _annualBaseHours = new Amount( _records, Numeric.AnnualBaseHours );
-            _annualBasePaid = new Amount( _records, Numeric.AnnualBasePaid );
-            _cumulativeBenefits = new Amount( _records, Numeric.CumulativeBenefits );
-            _annualOtherHours = new Amount( _records, Numeric.AnnualOtherHours );
-            _annualOtherPaid = new Amount( _records, Numeric.AnnualOtherPaid );
-            _annualOvertimeHours = new Amount( _records, Numeric.AnnualOvertimePaid );
-            _annualOvertimePaid = new Amount( _records, Numeric.AnnualOvertimePaid );
-            _type = OutlayType.Obligation;
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.PayrollObligationId );
+            RpioCode = new Element( Record, Field.RpioCode );
+            FundCode = new Element( Record, Field.FundCode );
+            AhCode = new Element( Record, Field.AhCode );
+            OrgCode = new Element( Record, Field.OrgCode );
+            RcCode = new Element( Record, Field.RcCode );
+            AccountCode = new Element( Record, Field.AccountCode );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            HrOrgCode = new Element( Record, Field.HrOrgCode );
+            WorkCode = new Element( Record, Field.WorkCode );
+            FocCode = new Element( Record, Field.FocCode );
+            PayPeriod = new Element( Record, Field.PayPeriod );
+            Amount = new Amount( Record, Numeric.Amount );
+            Hours = new Amount( Record, Numeric.Hours );
+            AllocationPercentage = new Amount( Record, Numeric.AllocationPercentage );
+            AnnualBaseHours = new Amount( Record, Numeric.AnnualBaseHours );
+            AnnualBasePaid = new Amount( Record, Numeric.AnnualBasePaid );
+            CumulativeBenefits = new Amount( Record, Numeric.CumulativeBenefits );
+            AnnualOtherHours = new Amount( Record, Numeric.AnnualOtherHours );
+            AnnualOtherPaid = new Amount( Record, Numeric.AnnualOtherPaid );
+            AnnualOvertimeHours = new Amount( Record, Numeric.AnnualOvertimePaid );
+            AnnualOvertimePaid = new Amount( Record, Numeric.AnnualOvertimePaid );
+            Type = OutlayType.Obligation;
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -178,31 +178,31 @@ namespace BudgetExecution
         /// </param>
         public PayrollObligation( DataRow datarow )
         {
-            _records = datarow;
-            _id = new Key( _records, PrimaryKey.PayrollObligationId );
-            _rpioCode = new Element( _records, Field.RpioCode );
-            _fundCode = new Element( _records, Field.FundCode );
-            _ahCode = new Element( _records, Field.AhCode );
-            _orgCode = new Element( _records, Field.OrgCode );
-            _rcCode = new Element( _records, Field.RcCode );
-            _accountCode = new Element( _records, Field.AccountCode );
-            _programProjectCode = new Element( _records, Field.ProgramProjectCode );
-            _hrOrgCode = new Element( _records, Field.HrOrgCode );
-            _workCode = new Element( _records, Field.WorkCode );
-            _focCode = new Element( _records, Field.FocCode );
-            _payPeriod = new Element( _records, Field.PayPeriod );
-            _amount = new Amount( _records, Numeric.Amount );
-            _hours = new Amount( _records, Numeric.Hours );
-            _allocationPercentage = new Amount( _records, Numeric.AllocationPercentage );
-            _annualBaseHours = new Amount( _records, Numeric.AnnualBaseHours );
-            _annualBasePaid = new Amount( _records, Numeric.AnnualBasePaid );
-            _cumulativeBenefits = new Amount( _records, Numeric.CumulativeBenefits );
-            _annualOtherHours = new Amount( _records, Numeric.AnnualOtherHours );
-            _annualOtherPaid = new Amount( _records, Numeric.AnnualOtherPaid );
-            _annualOvertimeHours = new Amount( _records, Numeric.AnnualOvertimePaid );
-            _annualOvertimePaid = new Amount( _records, Numeric.AnnualOvertimePaid );
-            _type = OutlayType.Obligation;
-            _data = _records?.ToDictionary();
+            Record = datarow;
+            ID = new Key( Record, PrimaryKey.PayrollObligationId );
+            RpioCode = new Element( Record, Field.RpioCode );
+            FundCode = new Element( Record, Field.FundCode );
+            AhCode = new Element( Record, Field.AhCode );
+            OrgCode = new Element( Record, Field.OrgCode );
+            RcCode = new Element( Record, Field.RcCode );
+            AccountCode = new Element( Record, Field.AccountCode );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            HrOrgCode = new Element( Record, Field.HrOrgCode );
+            WorkCode = new Element( Record, Field.WorkCode );
+            FocCode = new Element( Record, Field.FocCode );
+            PayPeriod = new Element( Record, Field.PayPeriod );
+            Amount = new Amount( Record, Numeric.Amount );
+            Hours = new Amount( Record, Numeric.Hours );
+            AllocationPercentage = new Amount( Record, Numeric.AllocationPercentage );
+            AnnualBaseHours = new Amount( Record, Numeric.AnnualBaseHours );
+            AnnualBasePaid = new Amount( Record, Numeric.AnnualBasePaid );
+            CumulativeBenefits = new Amount( Record, Numeric.CumulativeBenefits );
+            AnnualOtherHours = new Amount( Record, Numeric.AnnualOtherHours );
+            AnnualOtherPaid = new Amount( Record, Numeric.AnnualOtherPaid );
+            AnnualOvertimeHours = new Amount( Record, Numeric.AnnualOvertimePaid );
+            AnnualOvertimePaid = new Amount( Record, Numeric.AnnualOvertimePaid );
+            Type = OutlayType.Obligation;
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -214,8 +214,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _hrOrgCode?.GetValue() )
-                    ? _hrOrgCode
+                return Verify.Input( HrOrgCode?.GetValue() )
+                    ? HrOrgCode
                     : default( IElement );
             }
             catch( SystemException ex )
@@ -234,8 +234,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _annualBasePaid?.GetFunding() > -1.0
-                    ? _annualBasePaid
+                return AnnualBasePaid?.GetFunding() > -1.0
+                    ? AnnualBasePaid
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -254,8 +254,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _annualBaseHours.GetFunding() > -1.0
-                    ? _annualBaseHours
+                return AnnualBaseHours.GetFunding() > -1.0
+                    ? AnnualBaseHours
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -274,8 +274,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _cumulativeBenefits.GetFunding() > -1.0
-                    ? _cumulativeBenefits
+                return CumulativeBenefits.GetFunding() > -1.0
+                    ? CumulativeBenefits
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -294,8 +294,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _annualOtherHours?.GetFunding() > -1.0
-                    ? _annualOtherHours
+                return AnnualOtherHours?.GetFunding() > -1.0
+                    ? AnnualOtherHours
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -314,8 +314,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _annualOtherPaid?.GetFunding() > -1.0
-                    ? _annualOtherPaid
+                return AnnualOtherPaid?.GetFunding() > -1.0
+                    ? AnnualOtherPaid
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -334,8 +334,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _annualOvertimeHours?.GetFunding() > -1.0
-                    ? _annualOvertimeHours
+                return AnnualOvertimeHours?.GetFunding() > -1.0
+                    ? AnnualOvertimeHours
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -354,8 +354,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _annualOvertimePaid?.GetFunding() > -1.0
-                    ? _annualOvertimePaid
+                return AnnualOvertimePaid?.GetFunding() > -1.0
+                    ? AnnualOvertimePaid
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -374,8 +374,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _allocationPercentage?.GetFunding() > -0.001
-                    ? _allocationPercentage
+                return AllocationPercentage?.GetFunding() > -0.001
+                    ? AllocationPercentage
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -394,8 +394,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _hours?.GetFunding() > -1.0
-                    ? _hours
+                return Hours?.GetFunding() > -1.0
+                    ? Hours
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -414,8 +414,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _amount?.GetFunding() > -1
-                    ? _amount
+                return Amount?.GetFunding() > -1
+                    ? Amount
                     : default( IAmount );
             }
             catch( Exception ex )

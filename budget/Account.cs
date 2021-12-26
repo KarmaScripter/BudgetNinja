@@ -21,7 +21,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private const Source _source = Source.Accounts;
+        public Source Source { get; } = Source.Accounts;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "Account"/> class.
@@ -38,16 +38,16 @@ namespace BudgetExecution
         /// </param>
         public Account( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AccountId );
-            _code = new Element( _record, Field.Code );
-            _npmCode = new Element( _record, Field.NpmCode );
-            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _goalCode = new Element( _record, Field.GoalCode );
-            _objectiveCode = new Element( _record, Field.ObjectiveCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.AccountId );
+            Code = new Element( Record, Field.Code );
+            NpmCode = new Element( Record, Field.NpmCode );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            GoalCode = new Element( Record, Field.GoalCode );
+            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
+            ActivityCode = new Element( Record, Field.ActivityCode );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -58,16 +58,16 @@ namespace BudgetExecution
         /// </param>
         public Account( IBuilder dataBuilder )
         {
-            _record = dataBuilder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AccountId );
-            _code = new Element( _record, Field.Code );
-            _npmCode = new Element( _record, Field.NpmCode );
-            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _goalCode = new Element( _record, Field.GoalCode );
-            _objectiveCode = new Element( _record, Field.ObjectiveCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _data = _record?.ToDictionary();
+            Record = dataBuilder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.AccountId );
+            Code = new Element( Record, Field.Code );
+            NpmCode = new Element( Record, Field.NpmCode );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            GoalCode = new Element( Record, Field.GoalCode );
+            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
+            ActivityCode = new Element( Record, Field.ActivityCode );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -78,16 +78,16 @@ namespace BudgetExecution
         /// </param>
         public Account( DataRow dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.AccountId );
-            _code = new Element( _record, Field.Code );
-            _npmCode = new Element( _record, Field.NpmCode );
-            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _goalCode = new Element( _record, Field.GoalCode );
-            _objectiveCode = new Element( _record, Field.ObjectiveCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _data = _record?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.AccountId );
+            Code = new Element( Record, Field.Code );
+            NpmCode = new Element( Record, Field.NpmCode );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            GoalCode = new Element( Record, Field.GoalCode );
+            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
+            ActivityCode = new Element( Record, Field.ActivityCode );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -98,16 +98,16 @@ namespace BudgetExecution
         /// </param>
         public Account( string code )
         {
-            _record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.AccountId );
-            _code = new Element( _record, Field.Code );
-            _npmCode = new Element( _record, Field.NpmCode );
-            _programProjectCode = new Element( _record, Field.ProgramProjectCode );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _goalCode = new Element( _record, Field.GoalCode );
-            _objectiveCode = new Element( _record, Field.ObjectiveCode );
-            _activityCode = new Element( _record, Field.ActivityCode );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.AccountId );
+            Code = new Element( Record, Field.Code );
+            NpmCode = new Element( Record, Field.NpmCode );
+            ProgramProjectCode = new Element( Record, Field.ProgramProjectCode );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            GoalCode = new Element( Record, Field.GoalCode );
+            ObjectiveCode = new Element( Record, Field.ObjectiveCode );
+            ActivityCode = new Element( Record, Field.ActivityCode );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -135,13 +135,13 @@ namespace BudgetExecution
         /// </returns>
         public IActivity GetActivity()
         {
-            if( Verify.Input( _activityCode.GetValue() ) )
+            if( Verify.Input( ActivityCode.GetValue() ) )
             {
                 try
                 {
                     var _dictionary = new Dictionary<string, object>
                     {
-                        [ $"{Field.ActivityCode}" ] = _activityCode.GetValue()
+                        [ $"{Field.ActivityCode}" ] = ActivityCode.GetValue()
                     };
 
                     var _connection = new ConnectionBuilder( Source.Activity, Provider.SQLite );
@@ -170,7 +170,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.NpmCode}" ] = _npmCode
+                    [ $"{Field.NpmCode}" ] = NpmCode
                 };
 
                 var _connection = new ConnectionBuilder( Source.NationalPrograms, Provider.SQLite );
@@ -196,7 +196,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _goalCode
+                    [ $"{Field.Code}" ] = GoalCode
                 };
 
                 var _connection = new ConnectionBuilder( Source.Goals, Provider.SQLite );
@@ -222,7 +222,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _objectiveCode
+                    [ $"{Field.Code}" ] = ObjectiveCode
                 };
 
                 var _connection = new ConnectionBuilder( Source.Objectives, Provider.SQLite );
@@ -248,7 +248,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _programProjectCode
+                    [ $"{Field.Code}" ] = ProgramProjectCode
                 };
 
                 var _connection = new ConnectionBuilder( Source.ProgramProjects, Provider.SQLite );
@@ -274,7 +274,7 @@ namespace BudgetExecution
             {
                 var _dictionary = new Dictionary<string, object>
                 {
-                    [ $"{Field.Code}" ] = _programAreaCode
+                    [ $"{Field.Code}" ] = ProgramAreaCode
                 };
 
                 var _connection = new ConnectionBuilder( Source.ProgramAreas, Provider.SQLite );
@@ -299,8 +299,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _code?.GetValue() )
-                    ? _code?.GetValue()
+                return Verify.Input( Code?.GetValue() )
+                    ? Code?.GetValue()
                     : string.Empty;
             }
             catch( SystemException ex )
@@ -319,8 +319,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -339,8 +339,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

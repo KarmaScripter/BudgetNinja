@@ -23,42 +23,42 @@ namespace BudgetExecution
         /// <summary>
         /// The font color
         /// </summary>
-        private protected Color _fontColor = Color.Black;
+        private protected Color _fontColor { get; set; } = Color.Black;
 
         /// <summary>
-        /// The data font
+        /// The Data font
         /// </summary>
-        private protected readonly Font _dataFont = new Font( "Consolas", 8, FontStyle.Regular );
+        public Font DataFont { get; set; } = new Font( "Consolas", 8, FontStyle.Regular );
 
         /// <summary>
         /// The header font
         /// </summary>
-        private protected readonly Font _headerFont = new Font( "Consolas", 10, FontStyle.Bold );
+        public Font HeaderFont { get; set; } = new Font( "Consolas", 10, FontStyle.Bold );
 
         /// <summary>
         /// The title font
         /// </summary>
-        private protected readonly Font _titleFont = new Font( "Consolas", 12, FontStyle.Bold );
+        public Font TitleFont { get; set; } = new Font( "Consolas", 12, FontStyle.Bold );
 
         /// <summary>
         /// The header image width
         /// </summary>
-        private protected readonly double _headerImageWidth = 1.75;
+        public double HeaderImageWidth { get; set; } = 1.75;
 
         /// <summary>
         /// The header image height
         /// </summary>
-        private protected readonly double _headerImageHeight = 0.85;
+        public double HeaderImageHeight { get; set; } = 0.85;
 
         /// <summary>
         /// The footer image width
         /// </summary>
-        private protected readonly double _footerImageWidth = 2.04;
+        public double FooterImageWidth { get; set; } = 2.04;
 
         /// <summary>
         /// The footer image height
         /// </summary>
-        private protected readonly double _footerImageHeight = 0.70;
+        public double FooterImageHeight { get; set; } = 0.70;
         
         /// <summary>
         /// Gets or sets the header image.
@@ -88,10 +88,10 @@ namespace BudgetExecution
             {
                 try
                 {
-                    using var _font = _dataFont;
+                    using var _font = DataFont;
                     SetFontColor( grid, _fontColor );
-                    SetBackgroudColor( grid, _primaryBackColor );
-                    SetHorizontalAligment( grid, _left );
+                    SetBackgroudColor( grid, PrimaryBackColor );
+                    SetHorizontalAligment( grid, Left );
                 }
                 catch( Exception ex )
                 {
@@ -113,8 +113,8 @@ namespace BudgetExecution
                 try
                 {
                     SetFontColor( grid, _fontColor );
-                    SetBackgroudColor( grid, _primaryBackColor );
-                    SetHorizontalAligment( grid, _left );
+                    SetBackgroudColor( grid, PrimaryBackColor );
+                    SetHorizontalAligment( grid, Left );
                 }
                 catch( Exception ex )
                 {
@@ -137,11 +137,11 @@ namespace BudgetExecution
                 {
                     using var _range = grid.GetRange();
                     _range.Style.Font.Color.SetColor( Color.Black );
-                    using var _font = _dataFont;
-                    _range.Style.Font.SetFromFont( _dataFont );
+                    using var _font = DataFont;
+                    _range.Style.Font.SetFromFont( DataFont );
                     _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    _range.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
-                    _range.Style.HorizontalAlignment = _center;
+                    _range.Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
+                    _range.Style.HorizontalAlignment = Center;
                     _range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
                 }
                 catch( Exception ex )
@@ -165,11 +165,11 @@ namespace BudgetExecution
                 {
                     using var _range = grid.GetRange();
                     _range.Style.Font.Color.SetColor( _fontColor );
-                    using var _font = _dataFont;
-                    _range.Style.Font.SetFromFont( _dataFont );
+                    using var _font = DataFont;
+                    _range.Style.Font.SetFromFont( DataFont );
                     _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     _range.Style.Fill.BackgroundColor.SetColor( Color.White );
-                    _range.Style.HorizontalAlignment = _center;
+                    _range.Style.HorizontalAlignment = Center;
                     _range.Style.Border.Bottom.Style = ExcelBorderStyle.Hair;
                 }
                 catch( Exception ex )
@@ -260,12 +260,12 @@ namespace BudgetExecution
                 {
                     using var _range = grid.GetRange();
                     SetCaptionFormat( grid );
-                    using var _font = _headerFont;
+                    using var _font = HeaderFont;
                     _range.Style.Font.SetFromFont( font );
                     _range.Style.Border.BorderAround( borderstyle );
                     _range.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    _range.Style.Fill.BackgroundColor.SetColor( _primaryBackColor );
-                    _range.Style.HorizontalAlignment = _center;
+                    _range.Style.Fill.BackgroundColor.SetColor( PrimaryBackColor );
+                    _range.Style.HorizontalAlignment = Center;
                 }
                 catch( Exception ex )
                 {
@@ -293,7 +293,7 @@ namespace BudgetExecution
                         _range.Start.Row, _range.Start.Column + 6 ];
 
                     _total.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    _total?.Style?.Fill?.BackgroundColor?.SetColor( _primaryBackColor );
+                    _total?.Style?.Fill?.BackgroundColor?.SetColor( PrimaryBackColor );
 
                     var data = _excelWorksheet.Cells[ _range.Start.Row, _range.Start.Column + 1, _range.Start.Row,
                         _range.Start.Column + 6 ];

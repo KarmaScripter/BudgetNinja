@@ -1,4 +1,4 @@
-﻿// <copyright file = "_overtime.cs" company = "Terry D. Eppler">
+﻿// <copyright file = "Overtime.cs" company = "Terry D. Eppler">
 // Copyright (c) Terry D. Eppler. All rights reserved.
 // </copyright>
 
@@ -41,7 +41,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Overtime;
+        public new Source Source { get; } = Source.Overtime;
 
         /// <summary>
         /// 
@@ -58,12 +58,12 @@ namespace BudgetExecution
         /// </param>
         public Overtime( IQuery query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.OvertimeId );
-            _fundCode = new Element( _records, Field.FundCode );
-            _boc = new Element( _records, Field.BocCode );
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.OvertimeId );
+            FundCode = new Element( Record, Field.FundCode );
+            BOC = new Element( Record, Field.BocCode );
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -74,12 +74,12 @@ namespace BudgetExecution
         /// </param>
         public Overtime( IBuilder dataBuilder )
         {
-            _records = dataBuilder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.OvertimeId );
-            _fundCode = new Element( _records, Field.FundCode );
-            _boc = new Element( _records, Field.BocCode );
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = dataBuilder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.OvertimeId );
+            FundCode = new Element( Record, Field.FundCode );
+            BOC = new Element( Record, Field.BocCode );
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -90,11 +90,11 @@ namespace BudgetExecution
         /// </param>
         public Overtime( DataRow dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.OvertimeId );
-            _fundCode = new Element( _records, Field.FundCode );
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.OvertimeId );
+            FundCode = new Element( Record, Field.FundCode );
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -103,11 +103,11 @@ namespace BudgetExecution
         /// <returns></returns>
         public IEnumerable<DataRow> GetData()
         {
-            if( Verify.Map( _data ) )
+            if( Verify.Map( Data ) )
             {
                 try
                 {
-                    var _select = new Builder( _source, _data )
+                    var _select = new Builder( Source, Data )
                         ?.GetDataTable()
                         ?.AsEnumerable()
                         ?.Where( a => a.Field<string>( $"{Field.Type}" ).Equals( $"{Source.Overtime}" ) )
@@ -137,8 +137,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -157,8 +157,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _type?.GetValue() )
-                    ? _type
+                return Verify.Input( Type?.GetValue() )
+                    ? Type
                     : default( IElement );
             }
             catch( Exception ex )

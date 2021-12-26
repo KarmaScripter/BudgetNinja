@@ -58,27 +58,24 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>BlueNinja.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BudgetBadger">
-      <HintPath>..\Badger\bin\Debug\BudgetBadger.dll</HintPath>
-    </Reference>
-    <Reference Include="BudgetData, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="BudgetData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BudgetData\bin\Debug\BudgetData.dll</HintPath>
+      <HintPath>bin\Debug\BudgetData.dll</HintPath>
     </Reference>
     <Reference Include="BudgetEnumerations, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BudgetEnumerations\bin\Debug\BudgetEnumerations.dll</HintPath>
     </Reference>
-    <Reference Include="BudgetExtensions">
-      <HintPath>..\Extensions\bin\Debug\BudgetExtensions.dll</HintPath>
+    <Reference Include="BudgetExtensions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BudgetStatic\bin\Debug\BudgetExtensions.dll</HintPath>
     </Reference>
     <Reference Include="BudgetStatic, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\BudgetStatic\bin\Debug\BudgetStatic.dll</HintPath>
+      <HintPath>..\BudgetExtensions\lib\BudgetStatic.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
@@ -106,6 +103,9 @@
     </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -120,10 +120,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Error.designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
     <Compile Include="excel\BudgetConfig.cs" />
-    <Compile Include="excel\BudgetFactory.cs" />
     <Compile Include="excel\ExcelBase.cs" />
-    <Compile Include="excel\ExcelBudget.cs" />
     <Compile Include="excel\ExcelConfig.cs" />
     <Compile Include="excel\ExcelSettings.cs" />
     <Compile Include="excel\Grid.cs" />
@@ -136,7 +140,6 @@
     <Compile Include="file\DataFile.cs" />
     <Compile Include="file\FileBase.cs" />
     <Compile Include="file\IFile.cs" />
-    <Compile Include="analysis\Computation.cs" />
     <Compile Include="analysis\DataMetric.cs" />
     <Compile Include="analysis\IDataFilter.cs" />
     <Compile Include="analysis\IDataMetric.cs" />
@@ -147,8 +150,6 @@
     <Compile Include="budget\IFullTimeEquivalent.cs" />
     <Compile Include="budget\IProgramResultsCode.cs" />
     <Compile Include="budget\ProgramResultsCode.cs" />
-    <Compile Include="budget\Allocation.cs" />
-    <Compile Include="budget\AllocationData.cs" />
     <Compile Include="budget\IAllocation.cs" />
     <Compile Include="budget\Authority.cs" />
     <Compile Include="budget\DivisionAuthority.cs" />
@@ -195,15 +196,7 @@
     <Compile Include="budget\ISupplemental.cs" />
     <Compile Include="budget\Overtime.cs" />
     <Compile Include="budget\Supplemental.cs" />
-    <Compile Include="budget\TimeOff.cs" />
-    <Compile Include="division\Division.cs" />
-    <Compile Include="division\DivisionBase.cs" />
-    <Compile Include="division\IDivision.cs" />
     <Compile Include="excel\IExcelOp.cs" />
-    <Compile Include="excel\BudgetNumber.cs" />
-    <Compile Include="excel\ControlInfo.cs" />
-    <Compile Include="excel\ControlNumber.cs" />
-    <Compile Include="excel\IControlNumber.cs" />
     <Compile Include="excel\ExcelReport.cs" />
     <Compile Include="excel\ReportContent.cs" />
     <Compile Include="excel\ReportFormat.cs" />
@@ -218,25 +211,25 @@
     <Compile Include="fiscalyear\ITime.cs" />
     <Compile Include="fiscalyear\Time.cs" />
     <Compile Include="fiscalyear\TimeBase.cs" />
+    <Compile Include="Message.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Message.designer.cs">
+      <DependentUpon>Message.cs</DependentUpon>
+    </Compile>
     <Compile Include="outlays\CostAccount.cs" />
     <Compile Include="outlays\Cost.cs" />
     <Compile Include="outlays\Expense.cs" />
     <Compile Include="outlays\ICostAccount.cs" />
     <Compile Include="outlays\ICostBase.cs" />
     <Compile Include="outlays\IExpense.cs" />
-    <Compile Include="outlays\BenefitFactory.cs" />
     <Compile Include="outlays\ILeave.cs" />
-    <Compile Include="outlays\Leave.cs" />
-    <Compile Include="outlays\LeaveBase.cs" />
     <Compile Include="outlays\Employee.cs" />
-    <Compile Include="outlays\EmployeeBase.cs" />
     <Compile Include="outlays\IEmployee.cs" />
     <Compile Include="outlays\IPerson.cs" />
-    <Compile Include="outlays\ContactFactory.cs" />
     <Compile Include="outlays\EmploymentBase.cs" />
     <Compile Include="outlays\IEmploymentInfo.cs" />
     <Compile Include="outlays\IHumanResourceData.cs" />
-    <Compile Include="outlays\Personnel.cs" />
     <Compile Include="outlays\HumanResourceData.cs" />
     <Compile Include="outlays\Commitment.cs" />
     <Compile Include="outlays\Deobligation.cs" />
@@ -253,14 +246,8 @@
     <Compile Include="outlays\UnliquidatedObligation.cs" />
     <Compile Include="outlays\IPurchase.cs" />
     <Compile Include="outlays\IVendor.cs" />
-    <Compile Include="outlays\Payment.cs" />
     <Compile Include="outlays\PayrollObligation.cs" />
-    <Compile Include="outlays\Procurement.cs" />
-    <Compile Include="outlays\ProcurementData.cs" />
-    <Compile Include="outlays\Purchase.cs" />
     <Compile Include="outlays\Reimbursable.cs" />
-    <Compile Include="outlays\Requisition.cs" />
-    <Compile Include="outlays\RequisitionData.cs" />
     <Compile Include="outlays\Site.cs" />
     <Compile Include="outlays\SiteData.cs" />
     <Compile Include="outlays\TravelData.cs" />
@@ -284,6 +271,8 @@
     <Compile Include="transfer\FundTransfer.cs" />
     <Compile Include="transfer\IReprogramming.cs" />
     <Compile Include="transfer\Reprogramming.cs" />
+    <Compile Include="Unit.cs" />
+    <Compile Include="UnitBase.cs" />
     <Compile Include="watcher\BudgetFileWatcher.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -298,6 +287,7 @@
   <ItemGroup>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <Content Include="BlueNinja.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="etc\" />
@@ -314,6 +304,14 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Message.resx">
+      <DependentUpon>Message.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

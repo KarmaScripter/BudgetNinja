@@ -23,7 +23,7 @@ namespace BudgetExecution
     /// from unexpended balances of prior-year budgetary resources and in part from
     /// budgetary resources provided for the year in which the money is spent. Outlays
     /// are stated both gross and net of offsetting collections. (See Offsetting
-    /// Collections under Collections.) _total government outlays include outlays of off
+    /// Collections under Collections.) Total government outlays include outlays of off
     /// budget federal entities. (See also Expenditure; Expense.)
     /// </summary>
     /// <seealso cref = "IDataBuilder"/>
@@ -39,12 +39,12 @@ namespace BudgetExecution
     public abstract class Outlay : Cost
     {
         /// <summary>
-        /// Gets or sets the authority data.
+        /// Gets or sets the authority Data.
         /// </summary>
         /// <value>
-        /// The authority data.
+        /// The authority Data.
         /// </value>
-        private protected CostAccount _prc;
+        public CostAccount PRC { get; set; }
         
         /// <summary>
         /// Gets the outlay identifier.
@@ -55,8 +55,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -70,14 +70,14 @@ namespace BudgetExecution
         /// Converts to string.
         /// </summary>
         /// <returns>
-        /// A <see cref = "T:_system.String"/> that represents this instance.
+        /// A <see cref = "T:System.String"/> that represents this instance.
         /// </returns>
         public override string ToString()
         {
             try
             {
-                return Verify.Input( _accountCode?.GetValue() )
-                    ? _accountCode?.GetValue()
+                return Verify.Input( AccountCode?.GetValue() )
+                    ? AccountCode?.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -88,7 +88,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data builder.
+        /// Gets the Data builder.
         /// </summary>
         /// <returns>
         /// </returns>

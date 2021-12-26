@@ -19,17 +19,17 @@ namespace BudgetExecution
     public abstract class FolderBase
     {
         /// <summary>
-        /// Gets or sets the data file.
+        /// Gets or sets the Data file.
         /// </summary>
         /// <value>
-        /// The data file.
+        /// The Data file.
         /// </value>
-        private protected IFile _dataFile;
+        public IFile DataFile { get; set; }
 
         /// <summary>
         /// The base stream
         /// </summary>
-        private protected DirectoryInfo _directoryInfo;
+        public DirectoryInfo DirectoryInfo { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -37,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected string _fileName;
+        public string FileName { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -45,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected string _folderName;
+        public string FolderName { get; set; }
 
         /// <summary>
         /// Gets the folder path.
@@ -53,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The folder path.
         /// </value>
-        private protected string _folderPath;
+        public string FolderPath { get; set; }
 
         /// <summary>
         /// Gets or sets the files.
@@ -61,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The files.
         /// </value>
-        private protected IEnumerable<string> _files;
+        public IEnumerable<string> Files { get; set; }
 
         /// <summary>
         /// Gets the file security.
@@ -69,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The attributes.
         /// </value>
-        private protected DirectorySecurity _directorySecurity;
+        public DirectorySecurity DirectorySecurity { get; set; }
 
         /// <summary>
         /// Gets or sets the creation date.
@@ -77,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The creation date.
         /// </value>
-        private protected DateTime _creationDate;
+        public DateTime CreationDate { get; set; }
 
         /// <summary>
         /// Gets or sets the changed date.
@@ -85,7 +85,7 @@ namespace BudgetExecution
         /// <value>
         /// The changed date.
         /// </value>
-        private protected DateTime _changedDate;
+        public DateTime ChangeDate { get; set; }
         
         /// <summary>
         /// Gets the name.
@@ -95,8 +95,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _folderName )
-                    ? _folderName
+                return Verify.Input( FolderName )
+                    ? FolderName
                     : string.Empty;
             }
             catch( IOException ex )
@@ -114,8 +114,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _folderPath )
-                    ? _folderPath
+                return Verify.Input( FolderPath )
+                    ? FolderPath
                     : string.Empty;
             }
             catch( Exception ex )
@@ -133,7 +133,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _file = _dataFile
+                var _file = DataFile
                     ?.GetFileInfo()
                     ?.Directory;
 
@@ -156,8 +156,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.DateTime( _creationDate ) 
-                    ? _creationDate 
+                return Verify.DateTime( CreationDate ) 
+                    ? CreationDate 
                     : default( DateTime );
             }
             catch( IOException ex )
@@ -175,8 +175,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.DateTime( _changedDate )
-                    ? _changedDate
+                return Verify.DateTime( ChangeDate )
+                    ? ChangeDate
                     : default( DateTime );
             }
             catch( IOException ex )
@@ -194,8 +194,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _files?.Any() == true
-                    ? _files
+                return Files?.Any() == true
+                    ? Files
                     : default( IEnumerable<string> );
             }
             catch( IOException ex )
@@ -206,14 +206,14 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<FileInfo> GetStreamData()
         {
             try
             {
-                var _enumerable = _directoryInfo?.EnumerateFiles( _folderPath );
+                var _enumerable = DirectoryInfo?.EnumerateFiles( FolderPath );
 
                 return Verify.Sequence(  _enumerable )
                     ? _enumerable
@@ -255,7 +255,7 @@ namespace BudgetExecution
         {
             try
             {
-                var _folders = _directoryInfo?.GetDirectories();
+                var _folders = DirectoryInfo?.GetDirectories();
 
                 return _folders?.Any() != true
                     ? _folders
@@ -296,7 +296,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

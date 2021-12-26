@@ -17,12 +17,12 @@ namespace BudgetExecution
     public abstract class CalendarYear : ICalendarYear
     {
         /// <summary>
-        /// Gets or sets the data.
+        /// Gets or sets the Data.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The Data.
         /// </value>
-        private protected DataRow _record;
+        public DataRow Record { get; set; } 
 
         /// <summary>
         /// Gets or sets the work days.
@@ -30,7 +30,7 @@ namespace BudgetExecution
         /// <value>
         /// The work days.
         /// </value>
-        private protected IElement _workDays;
+        public IElement WorkDays { get; set; } 
 
         /// <summary>
         /// Gets or sets the week days.
@@ -38,7 +38,7 @@ namespace BudgetExecution
         /// <value>
         /// The week days.
         /// </value>
-        private protected IElement _weekDays;
+        public IElement WeekDays { get; set; } 
 
         /// <summary>
         /// Gets or sets the week ends.
@@ -46,7 +46,7 @@ namespace BudgetExecution
         /// <value>
         /// The week ends.
         /// </value>
-        private protected IElement _weekEnds;
+        public IElement WeekEnds { get; set; } 
 
         /// <summary>
         /// Gets the current date.
@@ -54,7 +54,7 @@ namespace BudgetExecution
         /// <value>
         /// The current date.
         /// </value>
-        private protected DateTime _currentDate = DateTime.Today;
+        public DateTime CurrentDate = DateTime.Today;
 
         /// <summary>
         /// Gets the current month.
@@ -62,7 +62,7 @@ namespace BudgetExecution
         /// <value>
         /// The current month.
         /// </value>
-        private protected readonly int _currentMonth = DateTime.Now.Month;
+        public readonly int CurrentMonth = DateTime.Now.Month;
 
         /// <summary>
         /// Gets the current day.
@@ -70,7 +70,7 @@ namespace BudgetExecution
         /// <value>
         /// The current day.
         /// </value>
-        private protected readonly int _currentDay = DateTime.Now.Day;
+        public readonly int CurrentDay = DateTime.Now.Day;
 
         /// <summary>
         /// Gets the current year.
@@ -78,7 +78,7 @@ namespace BudgetExecution
         /// <value>
         /// The current year.
         /// </value>
-        private protected readonly int _currentYear = DateTime.Now.Year;
+        public readonly int CurrentYear = DateTime.Now.Year;
         
         /// <summary>
         /// Gets the current date.
@@ -89,7 +89,7 @@ namespace BudgetExecution
         {
             try
             {
-                return _currentDate;
+                return CurrentDate;
             }
             catch( Exception ex )
             {
@@ -107,7 +107,7 @@ namespace BudgetExecution
         {
             try
             {
-                return _currentMonth;
+                return CurrentMonth;
             }
             catch( Exception ex )
             {
@@ -125,7 +125,7 @@ namespace BudgetExecution
         {
             try
             {
-                return _currentYear;
+                return CurrentYear;
             }
             catch( Exception ex )
             {
@@ -143,7 +143,7 @@ namespace BudgetExecution
         {
             try
             {
-                return _currentDay;
+                return CurrentDay;
             }
             catch( Exception ex )
             {
@@ -161,7 +161,7 @@ namespace BudgetExecution
         {
             try
             {
-                return new Element( _record, Field.WorkDays );
+                return new Element( Record, Field.WorkDays );
             }
             catch( Exception ex )
             {
@@ -179,7 +179,7 @@ namespace BudgetExecution
         {
             try
             {
-                return new Element( _record, Field.WeekDays );
+                return new Element( Record, Field.WeekDays );
             }
             catch( Exception ex )
             {
@@ -197,7 +197,7 @@ namespace BudgetExecution
         {
             try
             {
-                return new Element( _record, Field.WeekEnds );
+                return new Element( Record, Field.WeekEnds );
             }
             catch( Exception ex )
             {
@@ -213,7 +213,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

@@ -1,6 +1,6 @@
-﻿// // <copyright file=" <File _name> .cs" company="Terry D. Eppler">
-// // Copyright (c) Terry Eppler. All rights reserved.
-// // </copyright>
+﻿// <copyright file=" <File Name> .cs" company="Terry D. Eppler">
+// Copyright (c) Terry Eppler. All rights reserved.
+// </copyright>
 
 namespace BudgetExecution
 {
@@ -14,55 +14,82 @@ namespace BudgetExecution
     /// 
     /// </summary>
     /// <seealso cref="BudgetExecution.IPath" />
-    [SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
+    [ SuppressMessage( "ReSharper", "MemberCanBePrivate.Global" ) ]
     [ SuppressMessage( "ReSharper", "AutoPropertyCanBeMadeGetOnly.Global" ) ]
     [ SuppressMessage( "ReSharper", "ArrangeModifiersOrder" ) ]
     public class DataPath : IPath
     {
         /// <summary>
-        /// The full name
+        /// Gets or sets the full nae.
         /// </summary>
-        private protected readonly string _fullName;
+        /// <value>
+        /// The full nae.
+        /// </value>
+        public string FullNae { get; set; }
 
         /// <summary>
-        /// The file name
+        /// Gets or sets the name of the file.
         /// </summary>
-        private protected readonly string _fileName;
+        /// <value>
+        /// The name of the file.
+        /// </value>
+        public string FileName { get; set; }
 
         /// <summary>
-        /// The full path
+        /// Gets or sets the full path.
         /// </summary>
-        private protected readonly string _fullPath;
+        /// <value>
+        /// The full path.
+        /// </value>
+        public string FullPath { get; set; }
 
         /// <summary>
-        /// The file extension
+        /// Gets or sets the file extension.
         /// </summary>
-        private protected readonly string _fileExtension;
+        /// <value>
+        /// The file extension.
+        /// </value>
+        public string FileExtension { get; set; }
 
         /// <summary>
-        /// The path root
+        /// Gets or sets the path root.
         /// </summary>
-        private protected readonly string _pathRoot;
+        /// <value>
+        /// The path root.
+        /// </value>
+        public string PathRoot { get; set; }
 
         /// <summary>
-        /// The input
+        /// Gets or sets the input.
         /// </summary>
-        private protected readonly string _input;
+        /// <value>
+        /// The input.
+        /// </value>
+        public string Input { get; set; }
 
         /// <summary>
-        /// The current directory
+        /// Gets or sets the current directory.
         /// </summary>
-        public static readonly string CurrentDirectory = Directory.GetCurrentDirectory();
+        /// <value>
+        /// The current directory.
+        /// </value>
+        public static string CurrentDirectory { get; set; } = Directory.GetCurrentDirectory();
 
         /// <summary>
-        /// The base directory
+        /// Gets or sets the base directory.
         /// </summary>
-        public static readonly string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        /// <value>
+        /// The base directory.
+        /// </value>
+        public static string BaseDirectory { get; set; } = AppDomain.CurrentDomain.BaseDirectory;
 
         /// <summary>
-        /// The connection string
+        /// Gets or sets the connection string.
         /// </summary>
-        public static readonly ConnectionStringSettingsCollection ConnectionString =
+        /// <value>
+        /// The connection string.
+        /// </value>
+        public static ConnectionStringSettingsCollection ConnectionString { get; set; } =
             ConfigurationManager.ConnectionStrings;
 
         /// <summary>
@@ -78,12 +105,12 @@ namespace BudgetExecution
         /// <param name="input">The input.</param>
         public DataPath( string input )
         {
-            _input = input;
-            _fullName = Path.GetFileNameWithoutExtension( _input );
-            _fileName = Path.GetFileName( _input );
-            _fullPath = Path.GetFullPath( _input );
-            _fileExtension = Path.GetExtension( _input );
-            _pathRoot = Path.GetPathRoot( _input );
+            Input = input;
+            FullNae = Path.GetFileNameWithoutExtension( Input );
+            FileName = Path.GetFileName( Input );
+            FullPath = Path.GetFullPath( Input );
+            FileExtension = Path.GetExtension( Input );
+            PathRoot = Path.GetPathRoot( Input );
         }
 
         /// <summary>
@@ -94,8 +121,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fullName )
-                    ? _fullName
+                return Verify.Input( FullNae )
+                    ? FullNae
                     : string.Empty;
             }
             catch( Exception ex )
@@ -113,8 +140,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fileName )
-                    ? _fileName
+                return Verify.Input( FileName )
+                    ? FileName
                     : string.Empty;
             }
             catch( Exception ex )
@@ -132,8 +159,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fileExtension )
-                    ? _fileExtension
+                return Verify.Input( FileExtension )
+                    ? FileExtension
                     : string.Empty;
             }
             catch( Exception ex )
@@ -151,8 +178,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _pathRoot )
-                    ? _pathRoot
+                return Verify.Input( PathRoot )
+                    ? PathRoot
                     : string.Empty;
             }
             catch( Exception ex )
@@ -170,8 +197,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fullPath )
-                    ? _fullPath
+                return Verify.Input( FullPath )
+                    ? FullPath
                     : string.Empty;
             }
             catch( Exception ex )
@@ -192,7 +219,7 @@ namespace BudgetExecution
             {
                 return Verify.Input( ext ) 
                     && Enum.GetNames( typeof( EXT ) ).Contains( ext )
-                        ? Path.ChangeExtension( _fullPath, ext )
+                        ? Path.ChangeExtension( FullPath, ext )
                         : string.Empty;
             }
             catch( Exception ex )
@@ -234,8 +261,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fullPath )
-                    ? _fullPath
+                return Verify.Input( FullPath )
+                    ? FullPath
                     : string.Empty;
             }
             catch( IOException ex )
@@ -252,7 +279,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

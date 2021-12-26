@@ -112,7 +112,7 @@ namespace BudgetExecution
         /// Initializes a new instance of the
         /// <see cref="ResponsibilityCenter"/> class.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="data">The Data.</param>
         public ResponsibilityCenter( DataRow data )
             : this()
         {
@@ -314,7 +314,7 @@ namespace BudgetExecution
         private static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

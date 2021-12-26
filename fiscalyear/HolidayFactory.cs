@@ -17,10 +17,10 @@ namespace BudgetExecution
     public class HolidayFactory : IFederalHoliday
     {
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The Data.
         /// </value>
         private protected readonly DataRow _record;
 
@@ -426,7 +426,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

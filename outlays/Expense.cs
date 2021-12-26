@@ -24,7 +24,7 @@ namespace BudgetExecution
         /// <value>
         /// The original action date.
         /// </value>
-        private protected ITime _originalActionDate;
+        public ITime OriginalActionDate { get; set; } 
 
         /// <summary>
         /// Gets or sets the hr org code.
@@ -32,7 +32,7 @@ namespace BudgetExecution
         /// <value>
         /// The hr org code.
         /// </value>
-        private protected IElement _hrOrgCode;
+        public IElement HrOrgCode { get; set; } 
 
         /// <summary>
         /// Gets or sets the work code.
@@ -40,7 +40,7 @@ namespace BudgetExecution
         /// <value>
         /// The work code.
         /// </value>
-        private protected IElement _workCode;
+        public IElement WorkCode { get; set; } 
 
         /// <summary>
         /// Gets or sets the type.
@@ -48,7 +48,7 @@ namespace BudgetExecution
         /// <value>
         /// The type.
         /// </value>
-        private protected OutlayType _type;
+        public OutlayType Type { get; set; } 
 
         /// <summary>
         /// Gets or sets the pay period.
@@ -56,7 +56,7 @@ namespace BudgetExecution
         /// <value>
         /// The pay period.
         /// </value>
-        private protected IElement _payPeriod;
+        public IElement PayPeriod { get; set; } 
 
         /// <summary>
         /// Gets or sets the commitments.
@@ -64,7 +64,7 @@ namespace BudgetExecution
         /// <value>
         /// The commitments.
         /// </value>
-        private protected IAmount _commitments;
+        public IAmount Commitments { get; set; } 
 
         /// <summary>
         /// Gets or sets the open commitments.
@@ -72,7 +72,7 @@ namespace BudgetExecution
         /// <value>
         /// The open commitments.
         /// </value>
-        private protected IAmount _openCommitments;
+        public IAmount OpenCommitments { get; set; } 
 
         /// <summary>
         /// Gets or sets the ulo.
@@ -80,7 +80,7 @@ namespace BudgetExecution
         /// <value>
         /// The ulo.
         /// </value>
-        private protected IAmount _ulo;
+        public IAmount ULO { get; set; } 
 
         /// <summary>
         /// Gets or sets the obligations.
@@ -88,7 +88,7 @@ namespace BudgetExecution
         /// <value>
         /// The obligations.
         /// </value>
-        private protected IAmount _obligations;
+        public IAmount Obligations { get; set; } 
 
         /// <summary>
         /// Gets or sets the deobligations.
@@ -96,7 +96,7 @@ namespace BudgetExecution
         /// <value>
         /// The deobligations.
         /// </value>
-        private protected IAmount _deobligations;
+        public IAmount Deobligations { get; set; } 
 
         /// <summary>
         /// Gets or sets the expenditures.
@@ -104,7 +104,7 @@ namespace BudgetExecution
         /// <value>
         /// The expenditures.
         /// </value>
-        private protected IAmount _expenditures;
+        public IAmount Expenditures { get; set; } 
 
         /// <summary>
         /// Gets the available balance.
@@ -112,7 +112,7 @@ namespace BudgetExecution
         /// <value>
         /// The available balance.
         /// </value>
-        private protected IAmount _balance;
+        public IAmount Balance { get; set; } 
         
         /// <summary>
         /// Gets the original action date.
@@ -123,8 +123,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _originalActionDate.GetValue() )
-                    ? _originalActionDate
+                return Verify.Input( OriginalActionDate.GetValue() )
+                    ? OriginalActionDate
                     : default( ITime );
             }
             catch( Exception ex )
@@ -153,41 +153,41 @@ namespace BudgetExecution
                     {
                         case OutlayType.Obligation:
                         {
-                            _obligations = new Amount( _records, Numeric.Obligations );
+                            Obligations = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.Commitment:
                         {
-                            _commitments = new Amount( _records, Numeric.Obligations );
+                            Commitments = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.OpenCommitment:
                         {
-                            _openCommitments = new Amount( _records, Numeric.Obligations );
+                            OpenCommitments = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.ULO:
                         {
-                            _ulo = new Amount( _records, Numeric.Obligations );
+                            ULO = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.Deobligation:
                         {
-                            _deobligations = new Amount( _records, Numeric.Obligations );
+                            Deobligations = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
                         case OutlayType.All:
                         {
-                            _obligations = new Amount( _records, Numeric.Obligations );
-                            _deobligations = new Amount( _records, Numeric.Obligations );
-                            _commitments = new Amount( _records, Numeric.Obligations );
-                            _openCommitments = new Amount( _records, Numeric.Obligations );
-                            _ulo = new Amount( _records, Numeric.Obligations );
+                            Obligations = new Amount( Record, Numeric.Obligations );
+                            Deobligations = new Amount( Record, Numeric.Obligations );
+                            Commitments = new Amount( Record, Numeric.Obligations );
+                            OpenCommitments = new Amount( Record, Numeric.Obligations );
+                            ULO = new Amount( Record, Numeric.Obligations );
                             break;
                         }
 
@@ -217,8 +217,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Enum.IsDefined( typeof( OutlayType ), _type.ToString() )
-                    ? _type
+                return Enum.IsDefined( typeof( OutlayType ), Type.ToString() )
+                    ? Type
                     : OutlayType.NS;
             }
             catch( Exception ex )
@@ -237,8 +237,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _payPeriod?.GetValue() )
-                    ? _payPeriod
+                return Verify.Input( PayPeriod?.GetValue() )
+                    ? PayPeriod
                     : default( IElement );
             }
             catch( Exception ex )
@@ -257,8 +257,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _hrOrgCode?.GetValue() )
-                    ? _hrOrgCode
+                return Verify.Input( HrOrgCode?.GetValue() )
+                    ? HrOrgCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -277,8 +277,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _workCode?.GetValue() )
-                    ? _workCode
+                return Verify.Input( WorkCode?.GetValue() )
+                    ? WorkCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -297,8 +297,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _commitments?.GetFunding() > -1
-                    ? _commitments
+                return Commitments?.GetFunding() > -1
+                    ? Commitments
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -317,8 +317,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _openCommitments?.GetFunding() > -1
-                    ? _openCommitments
+                return OpenCommitments?.GetFunding() > -1
+                    ? OpenCommitments
                     : Amount.Default;
             }
             catch( Exception ex )
@@ -337,8 +337,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _obligations?.GetFunding() > -1
-                    ? _obligations
+                return Obligations?.GetFunding() > -1
+                    ? Obligations
                     : Amount.Default;
             }
             catch( Exception ex )
@@ -357,8 +357,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _deobligations?.GetFunding() > -1.0
-                    ? _deobligations
+                return Deobligations?.GetFunding() > -1.0
+                    ? Deobligations
                     : Amount.Default;
             }
             catch( Exception ex )
@@ -377,8 +377,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _ulo?.GetFunding() > -1
-                    ? _ulo
+                return ULO?.GetFunding() > -1
+                    ? ULO
                     : Amount.Default;
             }
             catch( Exception ex )
@@ -397,8 +397,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _expenditures?.GetFunding() > -1
-                    ? _expenditures
+                return Expenditures?.GetFunding() > -1
+                    ? Expenditures
                     : Amount.Default;
             }
             catch( Exception ex )
@@ -417,8 +417,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _balance?.GetFunding() > -1
-                    ? _balance
+                return Balance?.GetFunding() > -1
+                    ? Balance
                     : Amount.Default;
             }
             catch( Exception ex )

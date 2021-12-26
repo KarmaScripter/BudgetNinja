@@ -36,23 +36,23 @@ namespace BudgetExecution
         /// </param>
         public PayrollHours( IQuery query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.PayrollHoursId );
-            _rpioCode = new Element( _records, Field.RpioCode );
-            _payPeriod = new Element( _records, Field.PayPeriod );
-            _employeeNumber = new Element( _records, Field.EmployeeNumber );
-            _firstName = new Element( _records, Field.FirstName );
-            _lastName = new Element( _records, Field.LastName );
-            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
-            _reportingCode = new Element( _records, Field.ReportingCode );
-            _reportingCodeName = new Element( _records, Field.ReportingCodeName );
-            _workCode = new Element( _records, Field.WorkCode );
-            _calendarDate = new Time( _records, EventDate.CalendarDate );
-            _startDate = new Time( _records, EventDate.StartDate );
-            _endDate = new Time( _records, EventDate.EndDate );
-            _hours = new Amount( _records, Numeric.Hours );
-            _args = _records?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.PayrollHoursId );
+            RpioCode = new Element( Record, Field.RpioCode );
+            PayPeriod = new Element( Record, Field.PayPeriod );
+            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
+            FirstName = new Element( Record, Field.FirstName );
+            LastName = new Element( Record, Field.LastName );
+            HrOrgCode = new Element( Record, Field.HumanResourceOrganizationCode );
+            HrOrgName = new Element( Record, Field.HumanResourceOrganizationName );
+            ReportingCode = new Element( Record, Field.ReportingCode );
+            ReportingCodeName = new Element( Record, Field.ReportingCodeName );
+            WorkCode = new Element( Record, Field.WorkCode );
+            CalendarDate = new Time( Record, EventDate.CalendarDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
+            Hours = new Amount( Record, Numeric.Hours );
+            Args = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -63,23 +63,23 @@ namespace BudgetExecution
         /// </param>
         public PayrollHours( IBuilder builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.PayrollHoursId );
-            _rpioCode = new Element( _records, Field.RpioCode );
-            _payPeriod = new Element( _records, Field.PayPeriod );
-            _employeeNumber = new Element( _records, Field.EmployeeNumber );
-            _firstName = new Element( _records, Field.FirstName );
-            _lastName = new Element( _records, Field.LastName );
-            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
-            _reportingCode = new Element( _records, Field.ReportingCode );
-            _reportingCodeName = new Element( _records, Field.ReportingCodeName );
-            _workCode = new Element( _records, Field.WorkCode );
-            _calendarDate = new Time( _records, EventDate.CalendarDate );
-            _startDate = new Time( _records, EventDate.StartDate );
-            _endDate = new Time( _records, EventDate.EndDate );
-            _hours = new Amount( _records, Numeric.Hours );
-            _args = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.PayrollHoursId );
+            RpioCode = new Element( Record, Field.RpioCode );
+            PayPeriod = new Element( Record, Field.PayPeriod );
+            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
+            FirstName = new Element( Record, Field.FirstName );
+            LastName = new Element( Record, Field.LastName );
+            HrOrgCode = new Element( Record, Field.HumanResourceOrganizationCode );
+            HrOrgName = new Element( Record, Field.HumanResourceOrganizationName );
+            ReportingCode = new Element( Record, Field.ReportingCode );
+            ReportingCodeName = new Element( Record, Field.ReportingCodeName );
+            WorkCode = new Element( Record, Field.WorkCode );
+            CalendarDate = new Time( Record, EventDate.CalendarDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
+            Hours = new Amount( Record, Numeric.Hours );
+            Args = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -91,23 +91,23 @@ namespace BudgetExecution
         public PayrollHours( DataRow datarow )
             : this()
         {
-            _records = datarow;
-            _id = new Key( _records, PrimaryKey.PayrollHoursId );
-            _rpioCode = new Element( _records, Field.RpioCode );
-            _payPeriod = new Element( _records, Field.PayPeriod );
-            _employeeNumber = new Element( _records, Field.EmployeeNumber );
-            _firstName = new Element( _records, Field.FirstName );
-            _lastName = new Element( _records, Field.LastName );
-            _humanResourceOrganizationCode = new Element( _records, Field.HumanResourceOrganizationCode );
-            _humanResourceOrganizationName = new Element( _records, Field.HumanResourceOrganizationName );
-            _reportingCode = new Element( _records, Field.ReportingCode );
-            _reportingCodeName = new Element( _records, Field.ReportingCodeName );
-            _workCode = new Element( _records, Field.WorkCode );
-            _calendarDate = new Time( _records, EventDate.CalendarDate );
-            _startDate = new Time( _records, EventDate.StartDate );
-            _endDate = new Time( _records, EventDate.EndDate );
-            _hours = new Amount( _records, Numeric.Hours );
-            _args = _records?.ToDictionary();
+            Record = datarow;
+            ID = new Key( Record, PrimaryKey.PayrollHoursId );
+            RpioCode = new Element( Record, Field.RpioCode );
+            PayPeriod = new Element( Record, Field.PayPeriod );
+            EmployeeNumber = new Element( Record, Field.EmployeeNumber );
+            FirstName = new Element( Record, Field.FirstName );
+            LastName = new Element( Record, Field.LastName );
+            HrOrgCode = new Element( Record, Field.HumanResourceOrganizationCode );
+            HrOrgName = new Element( Record, Field.HumanResourceOrganizationName );
+            ReportingCode = new Element( Record, Field.ReportingCode );
+            ReportingCodeName = new Element( Record, Field.ReportingCodeName );
+            WorkCode = new Element( Record, Field.WorkCode );
+            CalendarDate = new Time( Record, EventDate.CalendarDate );
+            StartDate = new Time( Record, EventDate.StartDate );
+            EndDate = new Time( Record, EventDate.EndDate );
+            Hours = new Amount( Record, Numeric.Hours );
+            Args = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -147,8 +147,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _args )
-                    ? _args
+                return Verify.Map( Args )
+                    ? Args
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -167,8 +167,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -187,8 +187,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _rpioCode?.GetValue() )
-                    ? _rpioCode
+                return Verify.Input( RpioCode?.GetValue() )
+                    ? RpioCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -207,8 +207,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _payPeriod?.GetValue() )
-                    ? _payPeriod
+                return Verify.Input( PayPeriod?.GetValue() )
+                    ? PayPeriod
                     : Element.Default;
             }
             catch( Exception ex )
@@ -227,8 +227,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( _calendarDate )
-                    ? _calendarDate
+                return Verify.Time( CalendarDate )
+                    ? CalendarDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -247,8 +247,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( _startDate )
-                    ? _startDate
+                return Verify.Time( StartDate )
+                    ? StartDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -267,8 +267,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Time( _endDate )
-                    ? _endDate
+                return Verify.Time( EndDate )
+                    ? EndDate
                     : Time.Default;
             }
             catch( Exception ex )
@@ -287,8 +287,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _humanResourceOrganizationCode )
-                    ? _humanResourceOrganizationCode
+                return Verify.Element( HrOrgCode )
+                    ? HrOrgCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -308,8 +308,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _humanResourceOrganizationName )
-                    ? _humanResourceOrganizationName
+                return Verify.Element( HrOrgName )
+                    ? HrOrgName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -328,8 +328,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _workCode )
-                    ? _workCode
+                return Verify.Element( WorkCode )
+                    ? WorkCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -348,8 +348,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _reportingCode )
-                    ? _reportingCode
+                return Verify.Element( ReportingCode )
+                    ? ReportingCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -368,8 +368,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _reportingCodeName )
-                    ? _reportingCodeName
+                return Verify.Element( ReportingCodeName )
+                    ? ReportingCodeName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -388,8 +388,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _hours?.GetFunding() > -1.0
-                    ? _hours
+                return Hours?.GetFunding() > -1.0
+                    ? Hours
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -412,7 +412,7 @@ namespace BudgetExecution
         /// </returns>
         private IDictionary<string, object> GetArgs( string firstname, string lastname )
         {
-            if( _records.ToDictionary() != null
+            if( Record.ToDictionary() != null
                 && Verify.Input( firstname )
                 && Verify.Input( lastname ) )
             {

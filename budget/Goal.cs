@@ -24,58 +24,62 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private const Source _source = Source.Goals;
+        public Source Source = Source.Goals;
         
         /// <summary>
-        /// Initializes a new instance of the <see cref = "Goal"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "Goal"/> class.
         /// </summary>
         public Goal()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "Goal"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "Goal"/> class.
         /// </summary>
         /// <param name = "query" >
         /// The query.
         /// </param>
         public Goal( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.GoalId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.GoalId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "Goal"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "Goal"/> class.
         /// </summary>
         /// <param name = "builder" >
         /// The builder.
         /// </param>
         public Goal( IBuilder builder )
         {
-            _record = builder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.GoalId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.GoalId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref = "Goal"/> class.
+        /// Initializes a new instance of the
+        /// <see cref = "Goal"/> class.
         /// </summary>
         /// <param name = "dataRow" >
         /// The dataRow.
         /// </param>
         public Goal( DataRow dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.GoalId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.GoalId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -86,11 +90,11 @@ namespace BudgetExecution
         /// </param>
         public Goal( string code )
         {
-            _record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.GoalId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.GoalId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -99,7 +103,7 @@ namespace BudgetExecution
         /// <value>
         /// The record.
         /// </value>
-        private protected readonly DataRow _record;
+        private protected readonly DataRow Record;
 
         /// <summary>
         /// Gets the arguments.
@@ -107,7 +111,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected readonly IDictionary<string, object> _data;
+        private protected readonly IDictionary<string, object> Data;
 
         /// <summary>
         /// Gets the code.
@@ -115,7 +119,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private protected readonly IElement _code;
+        private protected readonly IElement Code;
 
         /// <summary>
         /// Gets the goal identifier.
@@ -123,7 +127,7 @@ namespace BudgetExecution
         /// <value>
         /// The goal identifier.
         /// </value>
-        private protected readonly IKey _id;
+        private protected readonly IKey ID;
 
         /// <summary>
         /// Gets the name.
@@ -131,7 +135,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected readonly IElement _name;
+        private protected readonly IElement Name;
         
         /// <summary>
         /// Converts to dictionary.
@@ -142,8 +146,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -163,8 +167,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _code )
-                    ? _code?.GetValue()
+                return Verify.Element( Code )
+                    ? Code?.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -220,7 +224,7 @@ namespace BudgetExecution
                 {
                     return new Dictionary<string, object>
                     {
-                        [ "_code" ] = goal.ToString()
+                        [ "Code" ] = goal.ToString()
                     };
                 }
                 catch( SystemException ex )
@@ -242,8 +246,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -262,8 +266,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _code?.GetValue() )
-                    ? _code
+                return Verify.Input( Code?.GetValue() )
+                    ? Code
                     : default( IElement );
             }
             catch( Exception ex )
@@ -282,8 +286,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _name?.GetValue() )
-                    ? _name
+                return Verify.Input( Name?.GetValue() )
+                    ? Name
                     : default( IElement );
             }
             catch( Exception ex )
@@ -320,8 +324,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )
@@ -338,7 +342,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

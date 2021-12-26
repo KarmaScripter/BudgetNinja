@@ -18,7 +18,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private const Source _source = Source.ProgramProjects;
+        public Source Source { get; } = Source.ProgramProjects;
         
         /// <summary>
         /// Initializes a new instance of the <see cref = "ProgramProject"/> class.
@@ -35,17 +35,17 @@ namespace BudgetExecution
         /// </param>
         public ProgramProject( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ProgramProjectId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _title = new Element( _record, Field.Title );
-            _definition = new Element( _record, Field.Definition );
-            _laws = new Element( _record, Field.Laws );
-            _narrative = new Element( _record, Field.Narrative );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _programAreaName = new Element( _record, Field.ProgramAreaName );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ProgramProjectId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Title = new Element( Record, Field.Title );
+            Definition = new Element( Record, Field.Definition );
+            Laws = new Element( Record, Field.Laws );
+            Narrative = new Element( Record, Field.Narrative );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -56,17 +56,17 @@ namespace BudgetExecution
         /// </param>
         public ProgramProject( IBuilder dataBuilder )
         {
-            _record = dataBuilder?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ProgramProjectId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _title = new Element( _record, Field.Title );
-            _definition = new Element( _record, Field.Definition );
-            _laws = new Element( _record, Field.Laws );
-            _narrative = new Element( _record, Field.Narrative );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _programAreaName = new Element( _record, Field.ProgramAreaName );
-            _data = _record?.ToDictionary();
+            Record = dataBuilder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ProgramProjectId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Title = new Element( Record, Field.Title );
+            Definition = new Element( Record, Field.Definition );
+            Laws = new Element( Record, Field.Laws );
+            Narrative = new Element( Record, Field.Narrative );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -77,17 +77,17 @@ namespace BudgetExecution
         /// </param>
         public ProgramProject( DataRow dataRow )
         {
-            _record = dataRow;
-            _id = new Key( _record, PrimaryKey.ProgramProjectId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _title = new Element( _record, Field.Title );
-            _definition = new Element( _record, Field.Definition );
-            _laws = new Element( _record, Field.Laws );
-            _narrative = new Element( _record, Field.Narrative );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _programAreaName = new Element( _record, Field.ProgramAreaName );
-            _data = _record?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.ProgramProjectId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Title = new Element( Record, Field.Title );
+            Definition = new Element( Record, Field.Definition );
+            Laws = new Element( Record, Field.Laws );
+            Narrative = new Element( Record, Field.Narrative );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -98,17 +98,17 @@ namespace BudgetExecution
         /// </param>
         public ProgramProject( string code )
         {
-            _record = new DataBuilder( _source, GetArgs( code ) )?.GetRecord();
-            _id = new Key( _record, PrimaryKey.ProgramProjectId );
-            _name = new Element( _record, Field.Name );
-            _code = new Element( _record, Field.Code );
-            _title = new Element( _record, Field.Title );
-            _definition = new Element( _record, Field.Definition );
-            _laws = new Element( _record, Field.Laws );
-            _narrative = new Element( _record, Field.Narrative );
-            _programAreaCode = new Element( _record, Field.ProgramAreaCode );
-            _programAreaName = new Element( _record, Field.ProgramAreaName );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( Source, GetArgs( code ) )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ProgramProjectId );
+            Name = new Element( Record, Field.Name );
+            Code = new Element( Record, Field.Code );
+            Title = new Element( Record, Field.Title );
+            Definition = new Element( Record, Field.Definition );
+            Laws = new Element( Record, Field.Laws );
+            Narrative = new Element( Record, Field.Narrative );
+            ProgramAreaCode = new Element( Record, Field.ProgramAreaCode );
+            ProgramAreaName = new Element( Record, Field.ProgramAreaName );
+            Data = Record?.ToDictionary();
         }
         
         /// <summary>
@@ -149,8 +149,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _definition )
-                    ? _definition
+                return Verify.Element( Definition )
+                    ? Definition
                     : Element.Default;
             }
             catch( Exception ex )
@@ -169,8 +169,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _laws )
-                    ? _laws
+                return Verify.Element( Laws )
+                    ? Laws
                     : Element.Default;
             }
             catch( Exception ex )
@@ -189,8 +189,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _title )
-                    ? _title
+                return Verify.Element( Title )
+                    ? Title
                     : Element.Default;
             }
             catch( Exception ex )
@@ -209,8 +209,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _narrative )
-                    ? _narrative
+                return Verify.Element( Narrative )
+                    ? Narrative
                     : Element.Default;
             }
             catch( Exception ex )
@@ -229,8 +229,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _programAreaName )
-                    ? _programAreaCode
+                return Verify.Element( ProgramAreaName )
+                    ? ProgramAreaCode
                     : Element.Default;
             }
             catch( Exception ex )
@@ -249,8 +249,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _programAreaName )
-                    ? _programAreaName
+                return Verify.Element( ProgramAreaName )
+                    ? ProgramAreaName
                     : Element.Default;
             }
             catch( Exception ex )
@@ -270,8 +270,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _code )
-                    ? _code.GetValue()
+                return Verify.Element( Code )
+                    ? Code.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -290,8 +290,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -310,8 +310,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -330,8 +330,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _code )
-                    ? _code
+                return Verify.Element( Code )
+                    ? Code
                     : Element.Default;
             }
             catch( Exception ex )
@@ -350,8 +350,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _name )
-                    ? _name
+                return Verify.Element( Name )
+                    ? Name
                     : Element.Default;
             }
             catch( Exception ex )
@@ -380,8 +380,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

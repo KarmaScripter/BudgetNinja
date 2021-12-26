@@ -24,7 +24,7 @@ namespace BudgetExecution
         private protected readonly IFile _dataFile;
         
         /// <summary>
-        /// Gets or sets the data.
+        /// Gets or sets the Data.
         /// </summary>
         private protected readonly FileStream _fileStream;
 
@@ -156,7 +156,7 @@ namespace BudgetExecution
         /// <summary>
         /// Writes the binary.
         /// </summary>
-        /// <param name="data">The data.</param>
+        /// <param name="data">The Data.</param>
         public void WriteData( ref byte[ ] data )
         {
             try
@@ -241,7 +241,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

@@ -4,10 +4,6 @@
 
 namespace BudgetExecution
 {
-    // ******************************************************************************************************************************
-    // ******************************************************   ASSEMBLIES   ********************************************************
-    // ******************************************************************************************************************************
-
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -21,12 +17,20 @@ namespace BudgetExecution
     public class UnliquidatedObligation : Obligation
     {
         /// <summary>
+        /// Gets or sets the source.
+        /// </summary>
+        /// <value>
+        /// The source.
+        /// </value>
+        public new Source Source { get; } = Source.ULO;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref = "UnliquidatedObligation"/> class.
         /// </summary>
         /// <inheritdoc/>
         public UnliquidatedObligation()
         {
-            _type = OutlayType.ULO;
+            Type = OutlayType.ULO;
         }
 
         /// <summary>
@@ -37,11 +41,11 @@ namespace BudgetExecution
         public UnliquidatedObligation( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder()?.GetRecord();
-            _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _ulo = new Amount( _records, Numeric.ULO );
-            _data = _records?.ToDictionary();
+            Record = new DataBuilder()?.GetRecord();
+            ID = new Key( Record, PrimaryKey.UnliquidatedObligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            ULO = new Amount( Record, Numeric.ULO );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -53,11 +57,11 @@ namespace BudgetExecution
         public UnliquidatedObligation( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _ulo = new Amount( _records, Numeric.ULO );
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.UnliquidatedObligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            ULO = new Amount( Record, Numeric.ULO );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -68,20 +72,12 @@ namespace BudgetExecution
         /// </param>
         public UnliquidatedObligation( DataRow datarow )
         {
-            _records = datarow;
-            _id = new Key( _records, PrimaryKey.UnliquidatedObligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _ulo = new Amount( _records, Numeric.ULO );
-            _data = _records?.ToDictionary();
+            Record = datarow;
+            ID = new Key( Record, PrimaryKey.UnliquidatedObligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            ULO = new Amount( Record, Numeric.ULO );
+            Data = Record?.ToDictionary();
         }
-        
-        /// <summary>
-        /// Gets or sets the source.
-        /// </summary>
-        /// <value>
-        /// The source.
-        /// </value>
-        protected new Source _source = Source.ULO;
         
         /// <summary>
         /// Gets the unliquidated obligation identifier.
@@ -92,8 +88,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -112,8 +108,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -132,8 +128,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _ulo.GetFunding() > -1.0
-                    ? _ulo
+                return ULO.GetFunding() > -1.0
+                    ? ULO
                     : default( IAmount );
             }
             catch( Exception ex )

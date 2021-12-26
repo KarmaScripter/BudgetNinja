@@ -31,14 +31,14 @@ namespace BudgetExecution
         /// <param name="file">The file.</param>
         public Folder( IFile file )
         {
-            _dataFile = file;
-            _directoryInfo = GetBaseDirectory();
-            _folderName = _directoryInfo.Name;
-            _folderPath = _directoryInfo.FullName;
-            _files = Directory.GetFiles( _folderPath );
-            _directorySecurity = _directoryInfo.GetAccessControl();
-            _creationDate = _directoryInfo.CreationTime;
-            _changedDate = _directoryInfo.LastWriteTime;
+            DataFile = file;
+            DirectoryInfo = GetBaseDirectory();
+            FolderName = DirectoryInfo.Name;
+            FolderPath = DirectoryInfo.FullName;
+            Files = Directory.GetFiles( FolderPath );
+            DirectorySecurity = DirectoryInfo.GetAccessControl();
+            CreationDate = DirectoryInfo.CreationTime;
+            ChangeDate = DirectoryInfo.LastWriteTime;
         }
         
         /// <summary>
@@ -123,7 +123,7 @@ namespace BudgetExecution
             {
                 return Verify.Input( folderName ) 
                     && !Directory.Exists( folderName )
-                        ? _directoryInfo?.CreateSubdirectory( folderName )
+                        ? DirectoryInfo?.CreateSubdirectory( folderName )
                         : default( DirectoryInfo );
             }
             catch( Exception ex )
@@ -134,14 +134,14 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the path data.
+        /// Gets the path Data.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<IPath> GetDataPaths()
         {
             try
             {
-                var _paths = _files
+                var _paths = Files
                     ?.Select( fd => new DataPath( fd ) )
                     ?.ToArray();
 
@@ -157,14 +157,14 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <returns></returns>
         public IEnumerable<IFile> GetDataFiles()
         {
             try
             {
-                var _paths = _files
+                var _paths = Files
                     ?.Select( f => new DataPath( f ) )
                     ?.ToArray();
 
@@ -194,13 +194,13 @@ namespace BudgetExecution
                 if( Verify.Input( fullName )
                     && !Directory.Exists( fullName ) )
                 {
-                    _directoryInfo?.MoveTo( fullName );
+                    DirectoryInfo?.MoveTo( fullName );
                 }
                 else if( Verify.Input( fullName )
                     && Directory.Exists( fullName ) )
                 {
                     Directory.CreateDirectory( fullName );
-                    _directoryInfo?.MoveTo( fullName );
+                    DirectoryInfo?.MoveTo( fullName );
                 }
             }
             catch( Exception ex )
@@ -219,7 +219,7 @@ namespace BudgetExecution
             {
                 if( Verify.Input( destinationPath ) )
                 {
-                    ZipFile.CreateFromDirectory( _folderPath, destinationPath );
+                    ZipFile.CreateFromDirectory( FolderPath, destinationPath );
                 }
             }
             catch( Exception ex )
@@ -239,7 +239,7 @@ namespace BudgetExecution
                 if( Verify.Input( zipPath )
                     && File.Exists( zipPath ) )
                 {
-                    ZipFile.ExtractToDirectory( zipPath, _folderPath );
+                    ZipFile.ExtractToDirectory( zipPath, FolderPath );
                 }
             }
             catch( Exception ex )
@@ -258,7 +258,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    _directoryInfo?.SetAccessControl( security );
+                    DirectoryInfo?.SetAccessControl( security );
                 }
                 catch( Exception ex )
                 {

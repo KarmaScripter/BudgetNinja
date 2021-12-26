@@ -45,10 +45,10 @@ namespace BudgetExecution
         private readonly string _fileName;
 
         /// <summary>
-        /// Gets the data path.
+        /// Gets the Data path.
         /// </summary>
         /// <value>
-        /// The data path.
+        /// The Data path.
         /// </value>
         private readonly IPath _filePath;
         
@@ -116,7 +116,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
         
@@ -124,7 +124,7 @@ namespace BudgetExecution
         /// Called when [file changed].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event Data.</param>
         public void OnChanged( object sender, EventArgs e )
         {
             try
@@ -142,7 +142,7 @@ namespace BudgetExecution
         /// Called when [file created].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event Data.</param>
         public void OnCreated( object sender, EventArgs e )
         {
             try
@@ -160,7 +160,7 @@ namespace BudgetExecution
         /// Called when [file deleted].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event Data.</param>
         public void OnDeleted( object sender, EventArgs e )
         {
             try
@@ -178,7 +178,7 @@ namespace BudgetExecution
         /// Called when [file error].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event Data.</param>
         public void OnError( object sender, EventArgs e )
         {
             try
@@ -196,7 +196,7 @@ namespace BudgetExecution
         /// Called when [file renamed].
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event Data.</param>
         public void OnRenamed( object sender, EventArgs e )
         {
             try

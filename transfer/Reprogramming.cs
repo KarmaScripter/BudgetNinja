@@ -40,7 +40,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Transfers;
+        public new Source Source { get; } = Source.Transfers;
 
         /// <summary>
         /// Gets the date.
@@ -48,7 +48,7 @@ namespace BudgetExecution
         /// <value>
         /// The date.
         /// </value>
-        private readonly DateTime _date;
+        public  DateTime ProcessedDate { get;  }
 
         /// <summary>
         /// Gets the type of the document.
@@ -56,7 +56,7 @@ namespace BudgetExecution
         /// <value>
         /// The type of the document.
         /// </value>
-        private readonly IElement _docType;
+        public  IElement DocPrefix { get;  }
 
         /// <summary>
         /// Gets from to.
@@ -64,7 +64,7 @@ namespace BudgetExecution
         /// <value>
         /// From to.
         /// </value>
-        private readonly IElement _fromTo;
+        public  IElement FromTo { get;  }
 
         /// <summary>
         /// Gets the document number.
@@ -72,7 +72,7 @@ namespace BudgetExecution
         /// <value>
         /// The document number.
         /// </value>
-        private readonly IElement _documentNumber;
+        public  IElement DocumentNumber { get;  }
 
         /// <summary>
         /// Gets the purpose.
@@ -80,7 +80,7 @@ namespace BudgetExecution
         /// <value>
         /// The purpose.
         /// </value>
-        private readonly IElement _purpose;
+        public  IElement Purpose { get;  }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Reprogramming"/> class.
@@ -98,15 +98,15 @@ namespace BudgetExecution
         public Reprogramming( IQuery query )
             : base( query )
         {
-            _records = new Builder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.TransferId );
-            _docType = new Element( _records, Field.DocType );
-            _documentNumber = new Element( _records, Field.DocumentNumber );
-            _purpose = new Element( _records, Field.Purpose );
-            _fromTo = new Element( _records, Field.FromTo );
-            _date = DateTime.Parse( _records[ $"{Field.DocumentNumber}" ].ToString() );
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = new Builder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.TransferId );
+            DocPrefix = new Element( Record, Field.DocType );
+            DocumentNumber = new Element( Record, Field.DocumentNumber );
+            Purpose = new Element( Record, Field.Purpose );
+            FromTo = new Element( Record, Field.FromTo );
+            ProcessedDate = DateTime.Parse( Record[ $"{Field.DocumentNumber}" ].ToString() );
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -118,15 +118,15 @@ namespace BudgetExecution
         public Reprogramming( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.TransferId );
-            _docType = new Element( _records, Field.DocType );
-            _documentNumber = new Element( _records, Field.DocumentNumber );
-            _purpose = new Element( _records, Field.Purpose );
-            _fromTo = new Element( _records, Field.FromTo );
-            _date = DateTime.Parse( _records?[ $"{Field.DocumentNumber}" ].ToString() );
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.TransferId );
+            DocPrefix = new Element( Record, Field.DocType );
+            DocumentNumber = new Element( Record, Field.DocumentNumber );
+            Purpose = new Element( Record, Field.Purpose );
+            FromTo = new Element( Record, Field.FromTo );
+            ProcessedDate = DateTime.Parse( Record?[ $"{Field.DocumentNumber}" ].ToString() );
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -138,17 +138,17 @@ namespace BudgetExecution
         public Reprogramming( DataRow dataRow )
             : base( dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.TransferId );
-            _docType = new Element( _records, Field.DocType );
-            _documentNumber = new Element( _records, Field.DocumentNumber );
-            _purpose = new Element( _records, Field.Purpose );
-            _fromTo = new Element( _records, Field.FromTo );
-            _date = DateTime.Parse( _records[ $"{Field.DocumentNumber}" ].ToString() );
-            _amount = GetAmount();
-            _data = _records?.ToDictionary();
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.TransferId );
+            DocPrefix = new Element( Record, Field.DocType );
+            DocumentNumber = new Element( Record, Field.DocumentNumber );
+            Purpose = new Element( Record, Field.Purpose );
+            FromTo = new Element( Record, Field.FromTo );
+            ProcessedDate = DateTime.Parse( Record[ $"{Field.DocumentNumber}" ].ToString() );
+            Amount = GetAmount();
+            Data = Record?.ToDictionary();
         }
-        
+
         /// <summary>
         /// Gets the transfer identifier.
         /// </summary>
@@ -158,8 +158,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -179,8 +179,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _documentNumber )
-                    ? _documentNumber.GetValue()
+                return Verify.Element( DocumentNumber )
+                    ? DocumentNumber.GetValue()
                     : string.Empty;
             }
             catch( Exception ex )
@@ -199,8 +199,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.DateTime( _date )
-                    ? _date
+                return Verify.DateTime( ProcessedDate )
+                    ? ProcessedDate
                     : default( DateTime );
             }
             catch( Exception ex )
@@ -219,8 +219,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _docType )
-                    ? _docType
+                return Verify.Element( DocPrefix )
+                    ? DocPrefix
                     : Element.Default;
             }
             catch( Exception ex )
@@ -239,8 +239,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _fromTo.GetValue() )
-                    ? (FromTo)Enum.Parse( typeof( FromTo ), _fromTo.GetValue() )
+                return Verify.Input( FromTo.GetValue() )
+                    ? (FromTo)Enum.Parse( typeof( FromTo ), FromTo.GetValue() )
                     : default( FromTo );
             }
             catch( Exception ex )
@@ -259,8 +259,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _documentNumber )
-                    ? _documentNumber
+                return Verify.Element( DocumentNumber )
+                    ? DocumentNumber
                     : Element.Default;
             }
             catch( Exception ex )
@@ -279,8 +279,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _purpose )
-                    ? _purpose
+                return Verify.Element( Purpose )
+                    ? Purpose
                     : Element.Default;
             }
             catch( Exception ex )
@@ -299,8 +299,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( SystemException ex )

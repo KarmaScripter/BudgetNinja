@@ -26,10 +26,10 @@ namespace BudgetExecution
         private const Source _source = Source.WorkforceData;
         
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The Data.
         /// </value>
         private readonly DataRow _records;
 
@@ -42,10 +42,10 @@ namespace BudgetExecution
         private readonly IDictionary<string, object> _args;
 
         /// <summary>
-        /// Gets the workforce data identifier.
+        /// Gets the workforce Data identifier.
         /// </summary>
         /// <value>
-        /// The workforce data identifier.
+        /// The workforce Data identifier.
         /// </value>
         private readonly IKey _id;
 
@@ -174,7 +174,7 @@ namespace BudgetExecution
         /// Initializes a new instance of the <see cref = "HumanResourceData"/> class.
         /// </summary>
         /// <param name = "data" >
-        /// The data.
+        /// The Data.
         /// </param>
         public HumanResourceData( DataRow data )
             : this()
@@ -250,7 +250,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the workforce data identifier.
+        /// Gets the workforce Data identifier.
         /// </summary>
         /// <returns>
         /// </returns>

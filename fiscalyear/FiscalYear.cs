@@ -24,7 +24,7 @@ namespace BudgetExecution
         /// <value>
         /// The bfy.
         /// </value>
-        private protected BFY _bfy;
+        private protected BFY BFY;
 
         /// <summary>
         /// Gets or sets the fiscal year identifier.
@@ -32,7 +32,7 @@ namespace BudgetExecution
         /// <value>
         /// The fiscal year identifier.
         /// </value>
-        private protected IKey _fiscalYearId;
+        private protected IKey FiscalYearId;
 
         /// <summary>
         /// Gets or sets the bbfy.
@@ -40,7 +40,7 @@ namespace BudgetExecution
         /// <value>
         /// The bbfy.
         /// </value>
-        private protected IElement _bbfy;
+        private protected IElement FirstYear;
 
         /// <summary>
         /// Gets or sets the ebfy.
@@ -48,31 +48,15 @@ namespace BudgetExecution
         /// <value>
         /// The ebfy.
         /// </value>
-        private protected IElement _ebfy;
-
-        /// <summary>
-        /// Gets or sets the first year.
-        /// </summary>
-        /// <value>
-        /// The first year.
-        /// </value>
-        private protected IElement _firstYear;
-
-        /// <summary>
-        /// Gets or sets the last year.
-        /// </summary>
-        /// <value>
-        /// The last year.
-        /// </value>
-        private protected IElement _lastYear;
-
+        private protected IElement LastYear;
+        
         /// <summary>
         /// Gets or sets the expiring year.
         /// </summary>
         /// <value>
         /// The expiring year.
         /// </value>
-        private protected IElement _expiringYear;
+        private protected IElement ExpiringYear;
 
         /// <summary>
         /// Gets or sets the input year.
@@ -80,7 +64,7 @@ namespace BudgetExecution
         /// <value>
         /// The input year.
         /// </value>
-        private protected IElement _inputYear;
+        private protected IElement InputYear;
 
         /// <summary>
         /// Gets or sets the start date.
@@ -88,7 +72,7 @@ namespace BudgetExecution
         /// <value>
         /// The start date.
         /// </value>
-        private protected IElement _startDate;
+        private protected IElement StartDate;
 
         /// <summary>
         /// Gets or sets the end date.
@@ -96,7 +80,7 @@ namespace BudgetExecution
         /// <value>
         /// The end date.
         /// </value>
-        private protected IElement _endDate;
+        private protected IElement EndDate;
 
         /// <summary>
         /// Gets or sets the cancellation date.
@@ -104,7 +88,7 @@ namespace BudgetExecution
         /// <value>
         /// The cancellation date.
         /// </value>
-        private protected IElement _cancellationDate;
+        private protected IElement CancellationDate;
 
         /// <summary>
         /// Gets or sets the arguments.
@@ -112,7 +96,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> _data;
+        private protected IDictionary<string, object> Data;
         
         /// <summary>
         /// Gets the bfy.
@@ -123,8 +107,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.BFY( _bfy )
-                    ? _bfy
+                return Validate.BFY( BFY )
+                    ? BFY
                     : default( BFY );
             }
             catch( Exception ex )
@@ -143,8 +127,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _startDate )
-                    ? _startDate
+                return Verify.Element( StartDate )
+                    ? StartDate
                     : Element.Default;
             }
             catch( Exception ex )
@@ -163,8 +147,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _expiringYear )
-                    ? _expiringYear
+                return Verify.Element( ExpiringYear )
+                    ? ExpiringYear
                     : Element.Default;
             }
             catch( Exception ex )
@@ -183,8 +167,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _cancellationDate )
-                    ? _cancellationDate
+                return Verify.Element( CancellationDate )
+                    ? CancellationDate
                     : Element.Default;
             }
             catch( Exception ex )
@@ -193,38 +177,7 @@ namespace BudgetExecution
                 return default( IElement );
             }
         }
-
-        /// <summary>
-        /// Sets the fiscal year.
-        /// </summary>
-        private protected void SetFiscalYear()
-        {
-            try
-            {
-                if( int.Parse( _startDate.GetValue() ) == GetCurrentYear() )
-                {
-                    _bfy = BFY.Current;
-                    _bbfy = new Element( _record, Field.BBFY );
-                    _firstYear = new Element( _record, Field.FirstYear );
-                    _lastYear = new Element( _record, Field.EBFY );
-                    _expiringYear = new Element( _record, Field.ExpiringYear );
-                }
-
-                if( int.Parse( _startDate.GetValue() ) <= GetCurrentYear() - 1 )
-                {
-                    _bfy = BFY.CarryOver;
-                    _bbfy = new Element( _record, Field.BBFY );
-                    _firstYear = new Element( _record, Field.FirstYear );
-                    _lastYear = new Element( _record, Field.EBFY );
-                    _expiringYear = new Element( _record, Field.ExpiringYear );
-                }
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-            }
-        }
-
+        
         /// <summary>
         /// Determines whether this instance is current.
         /// </summary>
@@ -242,7 +195,7 @@ namespace BudgetExecution
         {
             try
             {
-                return _bfy != 0 && _bfy == BFY.Current;
+                return BFY != 0 && BFY == BFY.Current;
             }
             catch( Exception ex )
             {
@@ -345,8 +298,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )

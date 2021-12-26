@@ -18,7 +18,7 @@ namespace BudgetExecution
     /// incurring new obligations is shorter than the period of availability for making
     /// disbursements, which iscovered by a general law.  The period of availability is
     /// described by the Budget Fiscal Year. The fiscal year of the Treasury begins on
-    /// October 1 of each year and ends on September 30 of the following year. _accounts
+    /// October 1 of each year and ends on September 30 of the following year. Accounts
     /// of receipts and expenditures required under law to be published each year shall
     /// be published for the fiscal year.
     /// </summary>
@@ -34,7 +34,7 @@ namespace BudgetExecution
         /// <summary>
         /// Gets the source.
         /// </summary>
-        private const Source _source = Source.FiscalYears;
+        public Source Source { get; } = Source.FiscalYears;
 
         /// <summary>
         /// Gets the holidays.
@@ -42,7 +42,7 @@ namespace BudgetExecution
         /// <value>
         /// The holidays.
         /// </value>
-        private readonly HolidayFactory _holidays;
+        public HolidayFactory Holidays { get; set; }
 
         /// <summary>
         /// Gets the availablity.
@@ -50,7 +50,7 @@ namespace BudgetExecution
         /// <value>
         /// The availablity.
         /// </value>
-        private readonly IElement _availablity;
+        public IElement Availability { get; set; }
 
         /// <summary>
         /// Gets or sets the federal holidays.
@@ -58,31 +58,29 @@ namespace BudgetExecution
         /// <value>
         /// The federal holidays.
         /// </value>
-        private protected IDictionary<Holiday, DateTime> _federalHolidays;
+        public IDictionary<Holiday, DateTime> FederalHolidays { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "BudgetFiscalYear"/> class.
         /// </summary>
         public BudgetFiscalYear()
         {
-            _record = new DataBuilder( _source, Provider.SQLite, SetArgs( GetCurrentYear().ToString() ) )
+            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( GetCurrentYear().ToString() ) )
                 ?.GetRecord();
 
-            _fiscalYearId = new Key( _record, PrimaryKey.FiscalYearId );
-            _bbfy = new Element( _record, Field.BBFY );
-            _ebfy = new Element( _record, Field.EBFY );
-            _availablity = new Element( _record, Field.Availability );
-            _firstYear = new Element( _record, Field.FirstYear );
-            _lastYear = new Element( _record, Field.LastYear );
-            _holidays = new HolidayFactory( _record );
-            _workDays = new Element( _record, Field.WorkDays );
-            _weekDays = new Element( _record, Field.WeekDays );
-            _weekEnds = new Element( _record, Field.WeekEnds );
-            _expiringYear = new Element( _record, Field.ExpiringYear );
-            _startDate = new Element( _record, Field.StartDate );
-            _endDate = new Element( _record, Field.EndDate );
-            _cancellationDate = new Element( _record, Field.CancellationDate );
-            _data = _record?.ToDictionary();
+            FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
+            FirstYear = new Element( Record, Field.BBFY );
+            LastYear = new Element( Record, Field.EBFY );
+            Availability = new Element( Record, Field.Availability );
+            Holidays = new HolidayFactory( Record );
+            WorkDays = new Element( Record, Field.WorkDays );
+            WeekDays = new Element( Record, Field.WeekDays );
+            WeekEnds = new Element( Record, Field.WeekEnds );
+            ExpiringYear = new Element( Record, Field.ExpiringYear );
+            StartDate = new Element( Record, Field.StartDate );
+            EndDate = new Element( Record, Field.EndDate );
+            CancellationDate = new Element( Record, Field.CancellationDate );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -93,23 +91,21 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( string bfy )
         {
-            _inputYear = new Element( Field.BFY, bfy );
-            _record = new DataBuilder( _source, SetArgs( bfy ) )?.GetRecord();
-            _fiscalYearId = new Key( _record, PrimaryKey.FiscalYearId );
-            _bbfy = new Element( _record, Field.BBFY );
-            _ebfy = new Element( _record, Field.EBFY );
-            _availablity = new Element( _record, Field.Availability );
-            _firstYear = new Element( _record, Field.FirstYear );
-            _lastYear = new Element( _record, Field.LastYear );
-            _holidays = new HolidayFactory( _record );
-            _workDays = new Element( _record, Field.WorkDays );
-            _weekDays = new Element( _record, Field.WeekDays );
-            _weekEnds = new Element( _record, Field.WeekEnds );
-            _expiringYear = new Element( _record, Field.ExpiringYear );
-            _startDate = new Element( _record, Field.StartDate );
-            _endDate = new Element( _record, Field.EndDate );
-            _cancellationDate = new Element( _record, Field.CancellationDate );
-            _data = _record?.ToDictionary();
+            InputYear = new Element( Field.BFY, bfy );
+            Record = new DataBuilder( Source, SetArgs( bfy ) )?.GetRecord();
+            FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
+            FirstYear = new Element( Record, Field.BBFY );
+            LastYear = new Element( Record, Field.EBFY );
+            Availability = new Element( Record, Field.Availability );
+            Holidays = new HolidayFactory( Record );
+            WorkDays = new Element( Record, Field.WorkDays );
+            WeekDays = new Element( Record, Field.WeekDays );
+            WeekEnds = new Element( Record, Field.WeekEnds );
+            ExpiringYear = new Element( Record, Field.ExpiringYear );
+            StartDate = new Element( Record, Field.StartDate );
+            EndDate = new Element( Record, Field.EndDate );
+            CancellationDate = new Element( Record, Field.CancellationDate );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -120,22 +116,20 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( IQuery query )
         {
-            _record = new DataBuilder( query )?.GetRecord();
-            _fiscalYearId = new Key( _record, PrimaryKey.FiscalYearId );
-            _bbfy = new Element( _record, Field.BBFY );
-            _ebfy = new Element( _record, Field.EBFY );
-            _availablity = new Element( _record, Field.Availability );
-            _firstYear = new Element( _record, Field.FirstYear );
-            _lastYear = new Element( _record, Field.LastYear );
-            _holidays = new HolidayFactory( _record );
-            _workDays = new Element( _record, Field.WorkDays );
-            _weekDays = new Element( _record, Field.WeekDays );
-            _weekEnds = new Element( _record, Field.WeekEnds );
-            _expiringYear = new Element( _record, Field.ExpiringYear );
-            _startDate = new Element( _record, Field.StartDate );
-            _endDate = new Element( _record, Field.EndDate );
-            _cancellationDate = new Element( _record, Field.CancellationDate );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( query )?.GetRecord();
+            FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
+            FirstYear = new Element( Record, Field.BBFY );
+            LastYear = new Element( Record, Field.EBFY );
+            Availability = new Element( Record, Field.Availability );
+            Holidays = new HolidayFactory( Record );
+            WorkDays = new Element( Record, Field.WorkDays );
+            WeekDays = new Element( Record, Field.WeekDays );
+            WeekEnds = new Element( Record, Field.WeekEnds );
+            ExpiringYear = new Element( Record, Field.ExpiringYear );
+            StartDate = new Element( Record, Field.StartDate );
+            EndDate = new Element( Record, Field.EndDate );
+            CancellationDate = new Element( Record, Field.CancellationDate );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -146,22 +140,20 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( IBuilder dataBuilder )
         {
-            _record = dataBuilder?.GetRecord();
-            _fiscalYearId = new Key( _record, PrimaryKey.FiscalYearId );
-            _bbfy = new Element( _record, Field.BBFY );
-            _ebfy = new Element( _record, Field.EBFY );
-            _availablity = new Element( _record, Field.Availability );
-            _firstYear = new Element( _record, Field.FirstYear );
-            _lastYear = new Element( _record, Field.LastYear );
-            _holidays = new HolidayFactory( _record );
-            _workDays = new Element( _record, Field.WorkDays );
-            _weekDays = new Element( _record, Field.WeekDays );
-            _weekEnds = new Element( _record, Field.WeekEnds );
-            _expiringYear = new Element( _record, Field.ExpiringYear );
-            _startDate = new Element( _record, Field.StartDate );
-            _endDate = new Element( _record, Field.EndDate );
-            _cancellationDate = new Element( _record, Field.CancellationDate );
-            _data = _record?.ToDictionary();
+            Record = dataBuilder?.GetRecord();
+            FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
+            FirstYear = new Element( Record, Field.BBFY );
+            LastYear = new Element( Record, Field.EBFY );
+            Availability = new Element( Record, Field.Availability );
+            Holidays = new HolidayFactory( Record );
+            WorkDays = new Element( Record, Field.WorkDays );
+            WeekDays = new Element( Record, Field.WeekDays );
+            WeekEnds = new Element( Record, Field.WeekEnds );
+            ExpiringYear = new Element( Record, Field.ExpiringYear );
+            StartDate = new Element( Record, Field.StartDate );
+            EndDate = new Element( Record, Field.EndDate );
+            CancellationDate = new Element( Record, Field.CancellationDate );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -172,22 +164,20 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( BFY fy )
         {
-            _record = new DataBuilder( _source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
-            _fiscalYearId = new Key( _record, PrimaryKey.FiscalYearId );
-            _bbfy = new Element( _record, Field.BBFY );
-            _ebfy = new Element( _record, Field.EBFY );
-            _availablity = new Element( _record, Field.Availability );
-            _firstYear = new Element( _record, Field.FirstYear );
-            _lastYear = new Element( _record, Field.LastYear );
-            _holidays = new HolidayFactory( _record );
-            _workDays = new Element( _record, Field.WorkDays );
-            _weekDays = new Element( _record, Field.WeekDays );
-            _weekEnds = new Element( _record, Field.WeekEnds );
-            _expiringYear = new Element( _record, Field.ExpiringYear );
-            _startDate = new Element( _record, Field.StartDate );
-            _endDate = new Element( _record, Field.EndDate );
-            _cancellationDate = new Element( _record, Field.CancellationDate );
-            _data = _record?.ToDictionary();
+            Record = new DataBuilder( Source, Provider.SQLite, SetArgs( fy ) )?.GetRecord();
+            FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
+            FirstYear = new Element( Record, Field.BBFY );
+            LastYear = new Element( Record, Field.EBFY );
+            Availability = new Element( Record, Field.Availability );
+            Holidays = new HolidayFactory( Record );
+            WorkDays = new Element( Record, Field.WorkDays );
+            WeekDays = new Element( Record, Field.WeekDays );
+            WeekEnds = new Element( Record, Field.WeekEnds );
+            ExpiringYear = new Element( Record, Field.ExpiringYear );
+            StartDate = new Element( Record, Field.StartDate );
+            EndDate = new Element( Record, Field.EndDate );
+            CancellationDate = new Element( Record, Field.CancellationDate );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -198,23 +188,21 @@ namespace BudgetExecution
         /// </param>
         public BudgetFiscalYear( DataRow dataRow )
         {
-            _record = dataRow;
-            _inputYear = new Element( _record, GetCurrentYear().ToString() );
-            _fiscalYearId = new Key( _record, PrimaryKey.FiscalYearId );
-            _bbfy = new Element( _record, Field.BBFY );
-            _ebfy = new Element( _record, Field.EBFY );
-            _availablity = new Element( _record, Field.Availability );
-            _firstYear = new Element( _record, Field.FirstYear );
-            _lastYear = new Element( _record, Field.LastYear );
-            _holidays = new HolidayFactory( _record );
-            _workDays = new Element( _record, Field.WorkDays );
-            _weekDays = new Element( _record, Field.WeekDays );
-            _weekEnds = new Element( _record, Field.WeekEnds );
-            _expiringYear = new Element( _record, Field.ExpiringYear );
-            _startDate = new Element( _record, Field.StartDate );
-            _endDate = new Element( _record, Field.EndDate );
-            _cancellationDate = new Element( _record, Field.CancellationDate );
-            _data = _record?.ToDictionary();
+            Record = dataRow;
+            InputYear = new Element( Record, GetCurrentYear().ToString() );
+            FiscalYearId = new Key( Record, PrimaryKey.FiscalYearId );
+            FirstYear = new Element( Record, Field.BBFY );
+            LastYear = new Element( Record, Field.EBFY );
+            Availability = new Element( Record, Field.Availability );
+            Holidays = new HolidayFactory( Record );
+            WorkDays = new Element( Record, Field.WorkDays );
+            WeekDays = new Element( Record, Field.WeekDays );
+            WeekEnds = new Element( Record, Field.WeekEnds );
+            ExpiringYear = new Element( Record, Field.ExpiringYear );
+            StartDate = new Element( Record, Field.StartDate );
+            EndDate = new Element( Record, Field.EndDate );
+            CancellationDate = new Element( Record, Field.CancellationDate );
+            Data = Record?.ToDictionary();
         }
 
         /// <summary>
@@ -226,8 +214,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _fiscalYearId )
-                    ? _fiscalYearId
+                return Verify.Key( FiscalYearId )
+                    ? FiscalYearId
                     : Key.Default;
             }
             catch( Exception ex )
@@ -246,8 +234,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _firstYear )
-                    ? _firstYear
+                return Verify.Element( FirstYear )
+                    ? FirstYear
                     : Element.Default;
             }
             catch( Exception ex )
@@ -266,8 +254,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _lastYear )
-                    ? _lastYear
+                return Verify.Element( LastYear )
+                    ? LastYear
                     : Element.Default;
             }
             catch( Exception ex )
@@ -286,8 +274,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Element( _availablity )
-                    ? _availablity
+                return Verify.Element( Availability )
+                    ? Availability
                     : Element.Default;
             }
             catch( Exception ex )
@@ -307,7 +295,7 @@ namespace BudgetExecution
             try
             {
                 var _dictionary = new Dictionary<Field, DateTime>();
-                var _factory = new HolidayFactory( _record );
+                var _factory = new HolidayFactory( Record );
                 _dictionary.Add( Field.NewYears, DateTime.Parse( _factory?.GetNewYearsDay()?.GetValue() ) );
                 _dictionary.Add( Field.MartinLutherKing, DateTime.Parse( _factory?.GetMartinLutherKingDay()?.GetValue() ) );
                 _dictionary.Add( Field.Memorial, DateTime.Parse( _factory?.GetMemorialDay()?.GetValue() ) );
@@ -330,19 +318,19 @@ namespace BudgetExecution
             }
         }
 
-        /// <inheritdoc cref = "T:_system.String"/>
+        /// <inheritdoc cref = "T:System.String"/>
         /// <summary>
         /// The ToString
         /// </summary>
         /// <returns>
-        /// The <see cref = "T:_system.String"/>
+        /// The <see cref = "T:System.String"/>
         /// </returns>
         public override string ToString()
         {
             try
             {
-                return Verify.Input( _firstYear?.GetValue() )
-                    ? _firstYear?.GetValue()
+                return Verify.Input( FirstYear?.GetValue() )
+                    ? FirstYear?.GetValue()
                     : default( string );
             }
             catch( Exception ex )
@@ -379,8 +367,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? _source
+                return Validate.Source( Source )
+                    ? Source
                     : Source.NS;
             }
             catch( Exception ex )

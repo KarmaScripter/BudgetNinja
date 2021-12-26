@@ -35,11 +35,11 @@ namespace BudgetExecution
         public OpenCommitment( IQuery query )
             : base( query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.OpenCommitmentId );
-            _originalActionDate = GetOriginalActionDate();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.OpenCommitment;
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.OpenCommitmentId );
+            OriginalActionDate = GetOriginalActionDate();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.OpenCommitment;
         }
 
         /// <summary>
@@ -51,11 +51,11 @@ namespace BudgetExecution
         public OpenCommitment( IBuilder builder )
             : base( builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.OpenCommitmentId );
-            _originalActionDate = GetOriginalActionDate();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.OpenCommitment;
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.OpenCommitmentId );
+            OriginalActionDate = GetOriginalActionDate();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.OpenCommitment;
         }
 
         /// <summary>
@@ -67,11 +67,11 @@ namespace BudgetExecution
         public OpenCommitment( DataRow dataRow )
             : base( dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.OpenCommitmentId );
-            _originalActionDate = GetOriginalActionDate();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.OpenCommitment;
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.OpenCommitmentId );
+            OriginalActionDate = GetOriginalActionDate();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.OpenCommitment;
         }
         
         /// <summary>
@@ -83,8 +83,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -103,8 +103,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -123,8 +123,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _openCommitments.GetFunding() > -1
-                    ? _openCommitments
+                return OpenCommitments.GetFunding() > -1
+                    ? OpenCommitments
                     : default( IAmount );
             }
             catch( Exception ex )

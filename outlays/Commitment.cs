@@ -28,7 +28,7 @@ namespace BudgetExecution
         /// <value>
         /// The source.
         /// </value>
-        private const Source _source = Source.Commitments;
+        public Source Source { get;  } = Source.Commitments;
         
         /// <summary>
         /// Gets or sets the amount.
@@ -36,7 +36,8 @@ namespace BudgetExecution
         /// <value>
         /// The amount.
         /// </value>
-        private protected IAmount _amount;
+        /// 
+        public IAmount Amount { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref = "Commitment"/> class.
@@ -53,11 +54,12 @@ namespace BudgetExecution
         /// </param>
         public Commitment( IQuery query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.CommitmentId );
-            _originalActionDate = GetOriginalActionDate();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Commitment;
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.CommitmentId );
+            OriginalActionDate = GetOriginalActionDate();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Commitment;
+            Amount = new Amount( Record, Numeric.Amount );
         }
 
         /// <summary>
@@ -68,11 +70,12 @@ namespace BudgetExecution
         /// </param>
         public Commitment( IBuilder builder )
         {
-            _records = builder.GetRecord();
-            _id = new Key( _records, PrimaryKey.CommitmentId );
-            _originalActionDate = GetOriginalActionDate();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Commitment;
+            Record = builder.GetRecord();
+            ID = new Key( Record, PrimaryKey.CommitmentId );
+            OriginalActionDate = GetOriginalActionDate();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Commitment;
+            Amount = new Amount( Record, Numeric.Amount );
         }
 
         /// <summary>
@@ -83,11 +86,12 @@ namespace BudgetExecution
         /// </param>
         public Commitment( DataRow dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.CommitmentId );
-            _originalActionDate = GetOriginalActionDate();
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Commitment;
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.CommitmentId );
+            OriginalActionDate = GetOriginalActionDate();
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Commitment;
+            Amount = new Amount( Record, Numeric.Amount );
         }
         
         /// <summary>
@@ -99,8 +103,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -119,8 +123,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -139,8 +143,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _commitments?.GetFunding() > -1
-                    ? _commitments
+                return Commitments?.GetFunding() > -1
+                    ? Commitments
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -156,7 +160,7 @@ namespace BudgetExecution
         /// <returns></returns>
         public override IBuilder GetBuilder()
         {
-            return new Builder( _source, _data );
+            return new Builder( Source, Data );
         }
     }
 }

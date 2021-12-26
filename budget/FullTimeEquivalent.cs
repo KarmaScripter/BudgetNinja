@@ -9,7 +9,7 @@ namespace BudgetExecution
     using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
-    /// Full-time equivalent (FTE) or whole time equivalent (WTE) is a
+    /// Full-time equivalent (FullTimeEquivalents) or whole time equivalent (WTE) is a
     /// unit that indicates the workload of an employed person (or student) in a way
     /// that makes workloads or class loads comparable across various contexts.
     /// FullTimeEquivalent is often used to measure a worker's or student's involvement
@@ -24,7 +24,7 @@ namespace BudgetExecution
         /// <summary>
         /// The source
         /// </summary>
-        private const Source _source = Source.FTE;
+        public new Source Source { get; } =  Source.FTE;
 
         /// <summary>
         /// Initializes a new instance of the
@@ -43,8 +43,8 @@ namespace BudgetExecution
         public FullTimeEquivalent( IQuery query )
             : base( query )
         {
-            _id = new Key( _records, PrimaryKey.PrcId );
-            _amount = new Amount( _records, Numeric.Amount );
+            ID = new Key( Record, PrimaryKey.PrcId );
+            Amount = new Amount( Record, Numeric.Amount );
         }
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace BudgetExecution
         public FullTimeEquivalent( IBuilder builder )
             : base( builder )
         {
-            _id = new Key( _records, PrimaryKey.PrcId );
-            _amount = new Amount( _records, Numeric.Amount );
+            ID = new Key( Record, PrimaryKey.PrcId );
+            Amount = new Amount( Record, Numeric.Amount );
         }
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace BudgetExecution
         public FullTimeEquivalent( DataRow dataRow )
             : base( dataRow )
         {
-            _id = new Key( _records, PrimaryKey.PrcId );
-            _amount = new Amount( _records, Numeric.Amount );
+            ID = new Key( Record, PrimaryKey.PrcId );
+            Amount = new Amount( Record, Numeric.Amount );
         }
         
         /// <summary>
-        /// Gets the PRC identifier.
+        /// Gets the ProgramResultCodes identifier.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -82,8 +82,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : default( IKey );
             }
             catch( Exception ex )
@@ -102,8 +102,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _amount.GetFunding() > -1.0
-                    ? _amount
+                return Amount.GetFunding() > -1.0
+                    ? Amount
                     : default( IAmount );
             }
             catch( Exception ex )

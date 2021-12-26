@@ -12,7 +12,7 @@ namespace BudgetExecution
     /// <summary>
     /// The Cost class is the abstract representation of appropriated resources used in
     /// the execution of the EPA's Strategtic Plan. It ties elements of the Agency's
-    /// Account _code Structure to the Strategic Plan along with their corresponding
+    /// Account Code Structure to the Strategic Plan along with their corresponding
     /// outlays; Costs are implemented in conjunction with the actual expenses
     /// incurred.
     /// </summary>
@@ -27,7 +27,7 @@ namespace BudgetExecution
         /// <value>
         /// The arguments.
         /// </value>
-        private protected IDictionary<string, object> _data;
+        public IDictionary<string, object> Data { get; set; } 
 
         /// <summary>
         /// Gets or sets the program project code.
@@ -35,7 +35,7 @@ namespace BudgetExecution
         /// <value>
         /// The program project code.
         /// </value>
-        private protected IElement _programProjectCode;
+        public IElement ProgramProjectCode { get; set; } 
 
         /// <summary>
         /// Gets or sets the program area code.
@@ -43,7 +43,7 @@ namespace BudgetExecution
         /// <value>
         /// The program area code.
         /// </value>
-        private protected IElement _programAreaCode;
+        public IElement ProgramAreaCode { get; set; } 
 
         /// <summary>
         /// Gets or sets the NPM code.
@@ -51,7 +51,7 @@ namespace BudgetExecution
         /// <value>
         /// The NPM code.
         /// </value>
-        private protected IElement _npmCode;
+        public IElement NpmCode { get; set; } 
 
         /// <summary>
         /// Gets the foc code.
@@ -59,7 +59,7 @@ namespace BudgetExecution
         /// <value>
         /// The foc code.
         /// </value>
-        private protected IElement _focCode;
+        public IElement FocCode { get; set; } 
 
         /// <summary>
         /// Gets the name of the foc.
@@ -67,7 +67,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the foc.
         /// </value>
-        private protected IElement _focName;
+        public IElement FocName { get; set; } 
 
         /// <summary>
         /// Gets the type of the document.
@@ -75,7 +75,7 @@ namespace BudgetExecution
         /// <value>
         /// The type of the document.
         /// </value>
-        private protected IElement _documentType;
+        public IElement DocPrefix { get; set; } 
 
         /// <summary>
         /// Gets the document prefix.
@@ -83,15 +83,15 @@ namespace BudgetExecution
         /// <value>
         /// The document prefix.
         /// </value>
-        private protected IElement _documentPrefix;
+        public IElement DocType { get; set; } 
 
         /// <summary>
-        /// Gets the _dcn.
+        /// Gets the DCN.
         /// </summary>
         /// <value>
-        /// The _dcn.
+        /// The DCN.
         /// </value>
-        private protected IElement _dcn;
+        public IElement DCN { get; set; } 
 
         /// <summary>
         /// Gets the grant number.
@@ -99,7 +99,7 @@ namespace BudgetExecution
         /// <value>
         /// The grant number.
         /// </value>
-        private protected IElement _grantNumber;
+        public IElement GrantNumber { get; set; } 
 
         /// <summary>
         /// Gets the obligating document number.
@@ -107,7 +107,7 @@ namespace BudgetExecution
         /// <value>
         /// The obligating document number.
         /// </value>
-        private protected IElement _obligatingDocumentNumber;
+        public IElement ObligatingDocumentNumber { get; set; } 
 
         /// <summary>
         /// Gets the reimbursable agreement number.
@@ -115,7 +115,7 @@ namespace BudgetExecution
         /// <value>
         /// The reimbursable agreement number.
         /// </value>
-        private protected IElement _agreementNumber;
+        public IElement AgreementNumber { get; set; } 
 
         /// <summary>
         /// Gets the site project code.
@@ -123,7 +123,7 @@ namespace BudgetExecution
         /// <value>
         /// The site project code.
         /// </value>
-        private protected IElement _siteProjectCode;
+        public IElement SiteProjectCode { get; set; } 
 
         /// <summary>
         /// Gets the system.
@@ -131,7 +131,7 @@ namespace BudgetExecution
         /// <value>
         /// The system.
         /// </value>
-        private protected IElement _system;
+        public IElement System { get; set; } 
 
         /// <summary>
         /// Gets the transaction number.
@@ -139,7 +139,7 @@ namespace BudgetExecution
         /// <value>
         /// The transaction number.
         /// </value>
-        private protected IElement _transactionNumber;
+        public IElement TransactionNumber { get; set; } 
 
         /// <summary>
         /// Gets the purchase request.
@@ -147,7 +147,7 @@ namespace BudgetExecution
         /// <value>
         /// The purchase request.
         /// </value>
-        private protected IElement _purchaseRequest;
+        public IElement PurchaseRequest { get; set; } 
         
         /// <summary>
         /// Converts to dictionary.
@@ -158,8 +158,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -178,8 +178,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _focCode?.GetValue() )
-                    ? _focCode
+                return Verify.Input( FocCode?.GetValue() )
+                    ? FocCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -198,8 +198,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _focName?.GetValue() )
-                    ? _focName
+                return Verify.Input( FocName?.GetValue() )
+                    ? FocName
                     : default( IElement );
             }
             catch( Exception ex )
@@ -218,8 +218,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _programProjectCode?.GetValue() )
-                    ? _programProjectCode
+                return Verify.Input( ProgramProjectCode?.GetValue() )
+                    ? ProgramProjectCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -238,8 +238,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _programAreaCode?.GetValue() )
-                    ? _programAreaCode
+                return Verify.Input( ProgramAreaCode?.GetValue() )
+                    ? ProgramAreaCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -258,8 +258,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _npmCode?.GetValue() )
-                    ? _npmCode
+                return Verify.Input( NpmCode?.GetValue() )
+                    ? NpmCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -278,8 +278,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _documentType?.GetValue() )
-                    ? _documentType
+                return Verify.Input( DocPrefix?.GetValue() )
+                    ? DocPrefix
                     : default( IElement );
             }
             catch( Exception ex )
@@ -298,8 +298,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _documentPrefix?.GetValue() )
-                    ? _documentPrefix
+                return Verify.Input( DocType?.GetValue() )
+                    ? DocType
                     : default( IElement );
             }
             catch( Exception ex )
@@ -318,8 +318,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _agreementNumber?.GetValue() )
-                    ? _agreementNumber
+                return Verify.Input( AgreementNumber?.GetValue() )
+                    ? AgreementNumber
                     : default( IElement );
             }
             catch( Exception ex )
@@ -338,8 +338,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _siteProjectCode?.GetValue() )
-                    ? _siteProjectCode
+                return Verify.Input( SiteProjectCode?.GetValue() )
+                    ? SiteProjectCode
                     : default( IElement );
             }
             catch( Exception ex )
@@ -358,8 +358,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _system?.GetValue() )
-                    ? _system
+                return Verify.Input( System?.GetValue() )
+                    ? System
                     : default( IElement );
             }
             catch( Exception ex )
@@ -378,8 +378,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _purchaseRequest?.GetValue() )
-                    ? _purchaseRequest
+                return Verify.Input( PurchaseRequest?.GetValue() )
+                    ? PurchaseRequest
                     : default( IElement );
             }
             catch( Exception ex )
@@ -398,8 +398,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _dcn?.GetValue() )
-                    ? _dcn
+                return Verify.Input( DCN?.GetValue() )
+                    ? DCN
                     : default( IElement );
             }
             catch( Exception ex )
@@ -418,8 +418,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _grantNumber?.GetValue() )
-                    ? _grantNumber
+                return Verify.Input( GrantNumber?.GetValue() )
+                    ? GrantNumber
                     : default( IElement );
             }
             catch( Exception ex )
@@ -438,8 +438,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _obligatingDocumentNumber?.GetValue() )
-                    ? _obligatingDocumentNumber
+                return Verify.Input( ObligatingDocumentNumber?.GetValue() )
+                    ? ObligatingDocumentNumber
                     : default( IElement );
             }
             catch( Exception ex )
@@ -458,8 +458,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _transactionNumber?.GetValue() )
-                    ? _transactionNumber
+                return Verify.Input( TransactionNumber?.GetValue() )
+                    ? TransactionNumber
                     : default( IElement );
             }
             catch( Exception ex )

@@ -1,4 +1,4 @@
-﻿// <copyright file=" <File _name> .cs" company="Terry D. Eppler">
+﻿// <copyright file=" <File Name> .cs" company="Terry D. Eppler">
 // Copyright (c) Terry Eppler. All rights reserved.
 // </copyright>
 
@@ -23,92 +23,37 @@ namespace BudgetExecution
         /// <summary>
         /// The field
         /// </summary>
-        private protected Field _field;
+        public Field Field { get; set; }
 
         /// <summary>
         /// The numeric
         /// </summary>
-        private protected Numeric _numeric;
+        public Numeric Numeric { get; set; }
 
         /// <summary>
         /// The count
         /// </summary>
-        private protected int _count;
+        public int Count { get; set; }
 
         /// <summary>
         /// The dataRow
         /// </summary>
-        private protected IEnumerable<DataRow> _data;
+        public IEnumerable<DataRow> Data { get; set; }
 
         /// <summary>
         /// The total
         /// </summary>
-        private protected double _total;
+        public double Total { get; set; }
 
         /// <summary>
         /// The average
         /// </summary>
-        private protected double _average;
+        public double Average { get; set; }
 
         /// <summary>
         /// The statistics
         /// </summary>
-        private protected IDictionary<string, IEnumerable<double>> _statistics;
-
-        /// <summary>
-        /// Gets the field.
-        /// </summary>
-        /// <returns></returns>
-        public Field GetField()
-        {
-            try
-            {
-                return _field;
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( Field );
-            }
-        }
-
-        /// <summary>
-        /// Gets the numeric.
-        /// </summary>
-        /// <returns></returns>
-        public Numeric GetNumeric()
-        {
-            try
-            {
-                return Validate.Numeric( _numeric ) 
-                    ? _numeric 
-                    : default( Numeric );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( Numeric );
-            }
-        }
-
-        /// <summary>
-        /// Gets the dataRow.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<DataRow> GetData()
-        {
-            try
-            {
-                return Verify.Rows( _data )
-                    ? _data
-                    : default( IEnumerable<DataRow> );
-            }
-            catch( Exception ex )
-            {
-                Fail( ex );
-                return default( IEnumerable<DataRow> );
-            }
-        }
+        public IDictionary<string, IEnumerable<double>> Statistics { get; set; }
 
         /// <summary>
         /// Gets the dataRow.
@@ -123,7 +68,7 @@ namespace BudgetExecution
             {
                 try
                 {
-                    var _query = _data
+                    var _query = Data
                         ?.Where( p => p.Field<string>( $"{field}" ).Equals( filter ) )
                         ?.Select( p => p );
 
@@ -368,7 +313,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

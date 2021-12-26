@@ -16,12 +16,12 @@ namespace BudgetExecution
     public abstract class WorkCodeBase
     {
         /// <summary>
-        /// Gets the data.
+        /// Gets the Data.
         /// </summary>
         /// <value>
-        /// The data.
+        /// The Data.
         /// </value>
-        private protected DataRow _records;
+        public DataRow Record { get; set; }
 
         /// <summary>
         /// Gets or sets the work code identifier.
@@ -29,7 +29,7 @@ namespace BudgetExecution
         /// <value>
         /// The work code identifier.
         /// </value>
-        private protected IKey _id;
+        public IKey ID { get; set; }
 
         /// <summary>
         /// Gets or sets the code.
@@ -37,7 +37,7 @@ namespace BudgetExecution
         /// <value>
         /// The code.
         /// </value>
-        private protected IElement _code;
+        public IElement Code { get; set; }
 
         /// <summary>
         /// Gets or sets the name.
@@ -45,7 +45,7 @@ namespace BudgetExecution
         /// <value>
         /// The name.
         /// </value>
-        private protected IElement _name;
+        public IElement Name { get; set; }
 
         /// <summary>
         /// Gets or sets the short name.
@@ -53,7 +53,7 @@ namespace BudgetExecution
         /// <value>
         /// The short name.
         /// </value>
-        private protected IElement _shortName;
+        public IElement ShortName { get; set; }
 
         /// <summary>
         /// Gets or sets the notifications.
@@ -61,7 +61,7 @@ namespace BudgetExecution
         /// <value>
         /// The notifications.
         /// </value>
-        private protected IElement _notifications;
+        public IElement Notification { get; set; }
 
         /// <summary>
         /// Gets or sets the status.
@@ -69,7 +69,7 @@ namespace BudgetExecution
         /// <value>
         /// The status.
         /// </value>
-        private protected IElement _status;
+        public IElement Status { get; set; }
 
         /// <summary>
         /// Gets or sets the pay period.
@@ -77,7 +77,7 @@ namespace BudgetExecution
         /// <value>
         /// The pay period.
         /// </value>
-        private protected IElement _payPeriod;
+        public IElement PayPeriod { get; set; }
 
         /// <summary>
         /// Gets or sets the bbfy.
@@ -85,7 +85,7 @@ namespace BudgetExecution
         /// <value>
         /// The bbfy.
         /// </value>
-        private protected IElement _bbfy;
+        public IElement BFY { get; set; }
 
         /// <summary>
         /// Gets or sets the fund code.
@@ -93,7 +93,7 @@ namespace BudgetExecution
         /// <value>
         /// The fund code.
         /// </value>
-        private protected IElement _fundCode;
+        public IElement FundCode { get; set; }
 
         /// <summary>
         /// Gets or sets the foc code.
@@ -101,7 +101,7 @@ namespace BudgetExecution
         /// <value>
         /// The foc code.
         /// </value>
-        private protected IElement _focCode;
+        public IElement FocCode { get; set; }
 
         /// <summary>
         /// Gets or sets the approval date.
@@ -109,7 +109,7 @@ namespace BudgetExecution
         /// <value>
         /// The approval date.
         /// </value>
-        private protected DateTime _approvalDate;
+        public DateTime ApprovalDate { get; set; }
 
         /// <summary>
         /// Gets or sets the cost org code.
@@ -117,7 +117,7 @@ namespace BudgetExecution
         /// <value>
         /// The cost org code.
         /// </value>
-        private protected IElement _costOrgCode;
+        public IElement CostOrgCode { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the cost org.
@@ -125,7 +125,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the cost org.
         /// </value>
-        private protected IElement _costOrgName;
+        public IElement CostOrgName { get; set; }
 
         /// <summary>
         /// Gets or sets the rc code.
@@ -133,7 +133,7 @@ namespace BudgetExecution
         /// <value>
         /// The rc code.
         /// </value>
-        private protected IElement _rcCode;
+        public IElement RcCode { get; set; }
 
         /// <summary>
         /// Gets or sets the account code.
@@ -141,7 +141,7 @@ namespace BudgetExecution
         /// <value>
         /// The account code.
         /// </value>
-        private protected IElement _accountCode;
+        public IElement AccountCode { get; set; }
 
         /// <summary>
         /// Gets or sets the project code.
@@ -149,7 +149,7 @@ namespace BudgetExecution
         /// <value>
         /// The project code.
         /// </value>
-        private protected IElement _projectCode;
+        public IElement ProjectCode { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the project code.
@@ -157,7 +157,7 @@ namespace BudgetExecution
         /// <value>
         /// The name of the project code.
         /// </value>
-        private protected IElement _projectCodeName;
+        public IElement ProjectCodeName { get; set; }
         
         /// <summary>
         /// Gets the approval date.
@@ -168,8 +168,8 @@ namespace BudgetExecution
         {
             try
             {
-                return _approvalDate != default( DateTime )
-                    ? _approvalDate
+                return ApprovalDate != default( DateTime )
+                    ? ApprovalDate
                     : default( DateTime );
             }
             catch( Exception ex )
@@ -186,11 +186,11 @@ namespace BudgetExecution
         /// </returns>
         public IElement GetProjectCode()
         {
-            if( Verify.Input( _projectCode?.GetValue() ) )
+            if( Verify.Input( ProjectCode?.GetValue() ) )
             {
                 try
                 {
-                    return _projectCode;
+                    return ProjectCode;
                 }
                 catch( Exception ex )
                 {
@@ -209,11 +209,11 @@ namespace BudgetExecution
         /// </returns>
         public IElement GetProjectCodeName()
         {
-            if( Verify.Input( _projectCodeName?.GetValue() ) )
+            if( Verify.Input( ProjectCodeName?.GetValue() ) )
             {
                 try
                 {
-                    return _projectCodeName;
+                    return ProjectCodeName;
                 }
                 catch( Exception ex )
                 {
@@ -234,8 +234,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id.GetIndex()
+                return Verify.Key( ID )
+                    ? ID.GetIndex()
                     : -1;
             }
             catch( Exception ex )
@@ -276,8 +276,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _name.GetValue() )
-                    ? _name
+                return Verify.Input( Name.GetValue() )
+                    ? Name
                     : default( IElement );
             }
             catch( Exception ex )
@@ -296,8 +296,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _shortName.GetValue() )
-                    ? _shortName
+                return Verify.Input( ShortName.GetValue() )
+                    ? ShortName
                     : default( IElement );
             }
             catch( Exception ex )
@@ -316,8 +316,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Input( _status.GetValue() )
-                    ? _status
+                return Verify.Input( Status.GetValue() )
+                    ? Status
                     : default( IElement );
             }
             catch( Exception ex )
@@ -336,8 +336,8 @@ namespace BudgetExecution
         {
             try
             {
-                return string.IsNullOrEmpty( _notifications.GetValue() )
-                    ? _notifications
+                return string.IsNullOrEmpty( Notification.GetValue() )
+                    ? Notification
                     : default( IElement );
             }
             catch( Exception ex )
@@ -356,8 +356,8 @@ namespace BudgetExecution
         {
             try
             {
-                return string.IsNullOrEmpty( _payPeriod.GetValue() )
-                    ? _payPeriod
+                return string.IsNullOrEmpty( PayPeriod.GetValue() )
+                    ? PayPeriod
                     : default( IElement );
             }
             catch( Exception ex )
@@ -374,7 +374,7 @@ namespace BudgetExecution
         private protected static void Fail( Exception ex )
         {
             using var _error = new Error( ex );
-            _error?.SetText();
+            _error?.SetText( ex.Message );
             _error?.ShowDialog();
         }
     }

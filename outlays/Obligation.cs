@@ -26,12 +26,12 @@ namespace BudgetExecution
         /// <value>
         /// The amount.
         /// </value>
-        private protected IAmount _amount;
+        public IAmount Amount { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
-        private const Source _source = Source.Obligations;
+        public Source Source { get; } = Source.Obligations;
 
         /// <inheritdoc/>
         /// <summary>
@@ -49,12 +49,12 @@ namespace BudgetExecution
         /// </param>
         public Obligation( IQuery query )
         {
-            _records = new DataBuilder( query )?.GetRecord();
-            _id = new Key( _records, PrimaryKey.ObligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _amount = new Amount( _records, Numeric.Obligations );
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Obligation;
+            Record = new DataBuilder( query )?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ObligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            Amount = new Amount( Record, Numeric.Obligations );
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -65,12 +65,12 @@ namespace BudgetExecution
         /// </param>
         public Obligation( IBuilder builder )
         {
-            _records = builder?.GetRecord();
-            _id = new Key( _records, PrimaryKey.ObligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _amount = new Amount( _records, Numeric.Obligations );
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Obligation;
+            Record = builder?.GetRecord();
+            ID = new Key( Record, PrimaryKey.ObligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            Amount = new Amount( Record, Numeric.Obligations );
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Obligation;
         }
 
         /// <summary>
@@ -82,12 +82,12 @@ namespace BudgetExecution
         /// </param>
         public Obligation( DataRow dataRow )
         {
-            _records = dataRow;
-            _id = new Key( _records, PrimaryKey.ObligationId );
-            _originalActionDate = GetOriginalActionDate();
-            _amount = new Amount( _records, Numeric.Obligations );
-            _data = _records?.ToDictionary();
-            _type = OutlayType.Obligation;
+            Record = dataRow;
+            ID = new Key( Record, PrimaryKey.ObligationId );
+            OriginalActionDate = GetOriginalActionDate();
+            Amount = new Amount( Record, Numeric.Obligations );
+            Data = Record?.ToDictionary();
+            Type = OutlayType.Obligation;
         }
         
         /// <summary>
@@ -99,8 +99,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Key( _id )
-                    ? _id
+                return Verify.Key( ID )
+                    ? ID
                     : Key.Default;
             }
             catch( Exception ex )
@@ -119,8 +119,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Map( _data )
-                    ? _data
+                return Verify.Map( Data )
+                    ? Data
                     : default( IDictionary<string, object> );
             }
             catch( Exception ex )
@@ -139,8 +139,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Verify.Amount( _amount )
-                    ? _amount
+                return Verify.Amount( Amount )
+                    ? Amount
                     : default( IAmount );
             }
             catch( Exception ex )
@@ -151,7 +151,7 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Gets the data builder.
+        /// Gets the Data builder.
         /// </summary>
         /// <returns>
         /// </returns>
@@ -159,8 +159,8 @@ namespace BudgetExecution
         {
             try
             {
-                return Validate.Source( _source )
-                    ? new Builder( _source, _data )
+                return Validate.Source( Source )
+                    ? new Builder( Source, Data )
                     : default( Builder );
             }
             catch( Exception ex )
