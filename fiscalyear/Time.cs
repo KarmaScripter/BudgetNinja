@@ -21,6 +21,22 @@ namespace BudgetExecution
     public class Time : TimeBase, ITime
     {
         /// <summary>
+        /// Gets the date.
+        /// </summary>
+        /// <value>
+        /// The date.
+        /// </value>
+        public EventDate Date { get; set; }
+
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <value>
+        /// The value.
+        /// </value>
+        public DateTime Day { get; set; }
+
+        /// <summary>
         /// The default
         /// </summary>
         public static readonly Time Default = new Time( EventDate.NS );
@@ -87,7 +103,8 @@ namespace BudgetExecution
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Time" /> class.
+        /// Initializes a new instance of the
+        /// <see cref="Time" /> class.
         /// </summary>
         /// <param name="dataRow">The Data.</param>
         /// <param name="date">The date.</param>
